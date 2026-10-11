@@ -81,6 +81,7 @@ export const CardsBlock: Block = {
             { label: 'Grande lettre (Bio, Bâti, Bois)', value: 'letter' },
             { label: 'Photo en haut', value: 'photo' },
             { label: 'Numérotées (01, 02…)', value: 'numbered' },
+            { label: 'Index éditorial (lignes numérotées entre deux filets)', value: 'index' },
             { label: 'Texte seul', value: 'plain' },
           ],
           admin: { width: '50%' },
@@ -360,6 +361,13 @@ export const QuoteBlock: Block = {
   interfaceName: 'QuoteBlock',
   labels: { singular: 'Citation', plural: 'Citations' },
   fields: [
+    {
+      name: 'lead',
+      type: 'text',
+      label: 'Phrase d’introduction (facultatif)',
+      maxLength: 120,
+      admin: { description: 'Petite ligne au-dessus de la citation. Ex. : « Ce qui compte pour lui ? »' },
+    },
     { name: 'text', type: 'textarea', label: 'Citation', required: true, maxLength: 500 },
     {
       type: 'row',

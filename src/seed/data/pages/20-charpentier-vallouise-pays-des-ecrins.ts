@@ -12,7 +12,7 @@ export const page: SeedPage = {
     image: 'refection-d-une-charpente-a-l-argentiere-la-bessee/lucarne en cours de levage.JPG',
   },
   hero: {
-    variant: 'collage',
+    variant: 'map',
     kicker: 'Charpente · Isolation · Réemploi · Balcons',
     title: "Charpentier à **L'Argentière-la-Bessée**, en Vallouise et dans le Pays des Écrins",
     text: "3B Charpente est installée au 5 rue Saint-Michel, à L'Argentière-la-Bessée, là où la Gyronde rejoint la Durance. C'est ici, dans le Pays des Écrins, que se trouve la moitié de nos chantiers publiés : charpentes, toitures, chalets, balcons et abris. Nous travaillons le **bois des Hautes-Alpes** et des **isolants biosourcés**.",
@@ -123,7 +123,7 @@ export const page: SeedPage = {
     // Section 6 — Nos prestations dans le Pays des Écrins
     {
       type: 'cards',
-      variant: 'icon',
+      variant: 'index',
       columns: 3,
       kicker: 'Ce que nous faisons',
       title: 'Nos **prestations** en Vallouise et autour',
@@ -200,27 +200,24 @@ export const page: SeedPage = {
     },
     // Section 8 — Communes desservies
     {
-      type: 'list',
-      style: 'pills',
+      type: 'serviceArea',
+      tone: 'cream',
       kicker: 'Où nous intervenons',
       title: 'Tout le **Pays des Écrins**',
-      text: "Nous intervenons dans les communes du Pays des Écrins, autour de notre base de L'Argentière-la-Bessée :",
-      items: [
-        { title: "L'Argentière-la-Bessée" },
-        { title: 'Vallouise-Pelvoux (Vallouise, Pelvoux)' },
-        { title: 'Saint-Martin-de-Queyrières (dont Prelles)' },
-        { title: 'Champcella' },
-        { title: 'La Roche-de-Rame' },
-        { title: 'et les communes voisines' },
+      text: "Nous intervenons dans les communes du Pays des Écrins, autour de notre base de L'Argentière-la-Bessée : L'Argentière-la-Bessée, Vallouise-Pelvoux (Vallouise, Pelvoux), Saint-Martin-de-Queyrières (dont Prelles), Champcella, La Roche-de-Rame et les communes voisines. Plus largement, « nous intervenons dans les Hautes-Alpes mais aussi en région PACA et Rhône-Alpes ».",
+      sectors: [
+        {
+          title: 'Charpentier à Briançon',
+          text: 'Plus au nord, Briançon et les communes autour.',
+          link: { label: 'Nos chantiers à Briançon', href: '/charpentier-briancon/' },
+        },
+        {
+          title: 'Charpentier à Serre Chevalier',
+          text: 'Saint-Chaffrey, La Salle-les-Alpes, Le Monêtier-les-Bains.',
+          link: { label: 'Nos chantiers à Serre Chevalier', href: '/charpentier-serre-chevalier/' },
+        },
       ],
-    },
-    {
-      type: 'textImage',
-      text: 'Plus au nord, nous travaillons à Briançon et dans la vallée de Serre Chevalier. Plus largement, « nous intervenons dans les Hautes-Alpes mais aussi en région PACA et Rhône-Alpes ».',
-      links: [
-        { label: 'Charpentier à Briançon', href: '/charpentier-briancon/' },
-        { label: 'Charpentier à Serre Chevalier', href: '/charpentier-serre-chevalier/' },
-      ],
+      showMap: false,
     },
     // Section 9 — FAQ
     {
@@ -238,7 +235,7 @@ export const page: SeedPage = {
     // Section 10 — Appel à l'action, coordonnées et plan d'accès
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       title: 'Un projet près de **chez nous** ?',
       text: "Chaque projet chez 3B Charpente débute par une étude sur mesure. Nous sommes à L'Argentière-la-Bessée : parlons du vôtre.",
       primary: { label: 'Demander mon devis', href: '/contact/' },

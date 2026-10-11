@@ -23,7 +23,9 @@ export async function ServicesGrid({ block, context }: BlockProps<Data>) {
   const services =
     block.mode === 'manual'
       ? (block.services ?? [])
-          .map((item) => all.find((service) => service.id === (typeof item === 'object' ? item.id : item)))
+          .map((item) =>
+            all.find((service) => service.id === (typeof item === 'object' ? item.id : item)),
+          )
           .filter((service): service is Service => Boolean(service))
       : all
   const current = context.path
@@ -50,22 +52,42 @@ export async function ServicesGrid({ block, context }: BlockProps<Data>) {
               data-reveal=""
               style={{ ['--reveal-delay' as string]: `${(index % 3) * 80}ms` }}
             >
-              <span className={styles.icon}>
-                <Icon name={service.icon} size={22} />
-              </span>
-              <h3 className={styles.cardTitle}>
-                <Link href={pathFor('services', service) ?? '/'} className={styles.stretched}>
-                  {service.title}
-                </Link>
-              </h3>
-              <Icon name="arrowRight" size={18} className={styles.cardArrow} />
+              <div className={styles.cardPhoto}>
+                {service.image ? (
+                  <Media
+                    media={service.image}
+                    fill
+                    sizes="(min-width: 1100px) 400px, (min-width: 700px) 45vw, 40vw"
+                  />
+                ) : (
+                  <span className={styles.icon}>
+                    <Icon name={service.icon} size={26} />
+                  </span>
+                )}
+              </div>
+              <div className={styles.cardBody}>
+                <h3 className={styles.cardTitle}>
+                  <Link href={pathFor('services', service) ?? '/'} className={styles.stretched}>
+                    {service.cardTitle || service.title}
+                  </Link>
+                </h3>
+                {service.cardText ? <p className={styles.cardText}>{service.cardText}</p> : null}
+                <span className={styles.cardMore} aria-hidden="true">
+                  {service.cardLinkLabel || context.texts.general.serviceCardLink}
+                  <Icon name="arrowRight" size={16} />
+                </span>
+              </div>
             </li>
           ))}
         </ul>
       ) : (
         <ol className={styles.index}>
           {visible.map((service, index) => (
-            <li key={service.id} data-reveal="" style={{ ['--reveal-delay' as string]: `${Math.min(index, 4) * 50}ms` }}>
+            <li
+              key={service.id}
+              data-reveal=""
+              style={{ ['--reveal-delay' as string]: `${Math.min(index, 4) * 50}ms` }}
+            >
               <Link href={pathFor('services', service) ?? '/'} className={styles.row}>
                 <span className={styles.num} aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}

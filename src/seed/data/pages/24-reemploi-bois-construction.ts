@@ -316,7 +316,7 @@ Le réemploi se décide tôt. Une fois la démolition calée, il est souvent tro
     // 3.12 Appel à l'action
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       badge: '3B Récup’',
       title: 'Un bâtiment, une grange, un projet ? **Parlons-en**',
       text: "3B Récup' accompagne les architectes, les maîtres d'ouvrage, les collectivités, les entreprises et les particuliers, de la dépose à la repose. Chaque projet débute par une étude sur mesure.",

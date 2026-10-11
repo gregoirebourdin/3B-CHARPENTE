@@ -1,6 +1,6 @@
 .breadcrumbs {
-  margin-bottom: var(--space-6);
-  font-size: var(--fs-xs);
+  margin-bottom: 22px;
+  font-size: 0.875rem;
   color: var(--fg-muted);
 }
 
@@ -20,11 +20,13 @@
 }
 
 .breadcrumbs li + li::before {
-  content: '›';
+  content: '/';
   color: var(--c-stone);
 }
 
 .breadcrumbs a {
+  display: inline-block;
+  padding-block: 3px;
   color: inherit;
   text-decoration: none;
 }
@@ -36,7 +38,7 @@
 
 .breadcrumbs [aria-current] {
   color: var(--fg);
-  font-weight: 550;
+  font-weight: 600;
 }
 
 .inverse,

@@ -315,7 +315,7 @@ L'isolation avec des matériaux biosourcés peut bénéficier d'aides publiques 
     // 3.16 Appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       kicker: 'Votre projet',
       title: "Besoin d'un avis **sur votre maison** ?",
       text: `Chaque projet chez 3B Charpente débute par une étude sur mesure. Nous venons voir vos parois, nous vous expliquons quel isolant convient à chacune et nous vous proposons un devis détaillé.

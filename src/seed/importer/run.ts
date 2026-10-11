@@ -6,12 +6,18 @@ import type { CollectionSlug, Payload } from 'payload'
 
 import { SITE_TEXT_DEFAULTS } from '../../payload/globals/siteTextDefaults'
 import { slugify } from '../../payload/utilities/routes'
-import { communes as seedCommunes } from '../data/communes'
-import { contactForm } from '../data/forms'
-import * as settings from '../data/settings'
+import { communes as rawCommunes } from '../data/communes'
+import { contactForm as rawContactForm } from '../data/forms'
+import * as rawSettings from '../data/settings'
 import type { SeedArticle, SeedFaq, SeedPage, SeedProject, SeedService, SeedValidationPoint } from '../types'
 import { createContext, nfc, photoIndex, resolvePath, type SeedContext } from './context'
+import { typeset } from './typography'
 import { block, hero, link, parseTitle, photo, photos, richText } from './convert'
+
+// Every text of the initial content, in French typography (’, non-breaking spaces).
+const seedCommunes = typeset(rawCommunes)
+const contactForm = typeset(rawContactForm)
+const settings = typeset({ ...rawSettings })
 
 type Doc = SeedPage | SeedService | SeedArticle
 type Json = Record<string, unknown>
@@ -55,7 +61,7 @@ async function loadModules<T>(dir: string, key: string): Promise<{ file: string;
   for (const file of files) {
     const mod = (await import(pathToFileURL(path.join(dir, file)).href)) as Record<string, T>
     const data = mod[key] ?? (Object.values(mod).find((value) => value && typeof value === 'object') as T)
-    if (data) out.push({ file, data })
+    if (data) out.push({ file, data: typeset(data) })
   }
   return out
 }
@@ -503,12 +509,34 @@ async function importTeam(ctx: SeedContext) {
 }
 
 async function importValidationPoints(ctx: SeedContext, entries: (SeedValidationPoint & { page: string })[]) {
+  // Same point whatever the typography (straight or curly apostrophe, plain or non-breaking space).
+  const plain = (text: string) => text.replace(/’/g, "'").replace(/\u00a0/g, ' ')
+  const keyOf = (page: string, question: string) => `${plain(page)}|${plain(question)}`
+  const { docs } = await ctx.payload.find({ collection: 'validation-points', limit: 5000, depth: 0, pagination: false, sort: 'id' })
+  const existing = new Map<string, { id: number; page: string; question: string }>()
+  let removed = 0
+  for (const doc of docs as unknown as { id: number; page: string; question: string }[]) {
+    const key = keyOf(doc.page, doc.question)
+    if (existing.has(key)) {
+      // A duplicate left by an earlier import: keep the oldest (it may hold Jean's answer).
+      await ctx.payload.delete({ collection: 'validation-points', id: doc.id, context: ctx.opContext })
+      removed += 1
+    } else existing.set(key, doc)
+  }
   let created = 0
   for (const entry of entries) {
-    const exists = await findOne(ctx.payload, 'validation-points', {
-      and: [{ page: { equals: entry.page } }, { question: { equals: entry.question } }],
-    })
-    if (exists) continue
+    const found = existing.get(keyOf(entry.page, entry.question))
+    if (found) {
+      if (found.page !== entry.page || found.question !== entry.question) {
+        await ctx.payload.update({
+          collection: 'validation-points',
+          id: found.id,
+          data: { page: entry.page, question: entry.question, decision: entry.decision },
+          context: ctx.opContext,
+        })
+      }
+      continue
+    }
     await ctx.payload.create({
       collection: 'validation-points',
       data: { page: entry.page, question: entry.question, decision: entry.decision, priority: entry.priority ?? 'normal', status: 'open' },
@@ -516,7 +544,7 @@ async function importValidationPoints(ctx: SeedContext, entries: (SeedValidation
     })
     created += 1
   }
-  ctx.log(`✓ Points à valider : ${entries.length} (${created} nouveaux)`)
+  ctx.log(`✓ Points à valider : ${entries.length} (${created} nouveaux${removed ? `, ${removed} doublons retirés` : ''})`)
 }
 
 async function importUsers(ctx: SeedContext, options: SeedOptions) {

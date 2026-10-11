@@ -3,6 +3,7 @@ import type { Field, GlobalConfig, Tab } from 'payload'
 import { isTeam } from '../access'
 import { revalidateGlobal } from '../hooks/revalidate'
 import { SITE_TEXT_DEFAULTS } from './siteTextDefaults'
+import { SITE_TEXT_LABELS } from './siteTextLabels'
 
 const LABELS: Record<string, string> = {
   general: 'Général',
@@ -13,11 +14,9 @@ const LABELS: Record<string, string> = {
   notFound: 'Page introuvable (404)',
 }
 
-const pretty = (key: string) =>
-  key
-    .replace(/([A-Z])/g, ' $1')
-    .replace(/^./, (c) => c.toUpperCase())
-    .trim()
+/** Where the sentence shows, in French; failing that, the default wording itself. */
+const labelFor = (group: string, key: string, value: string) =>
+  SITE_TEXT_LABELS[`${group}.${key}`] ?? `« ${value.replace(/\*\*/g, '').slice(0, 48)}${value.length > 48 ? '…' : ''} »`
 
 /** One tab per template, one text field per sentence, pre-filled with the defaults. */
 const tabs: Tab[] = Object.entries(SITE_TEXT_DEFAULTS).map(([group, values]) => ({
@@ -28,9 +27,9 @@ const tabs: Tab[] = Object.entries(SITE_TEXT_DEFAULTS).map(([group, values]) => 
       ({
         name: key,
         type: value.length > 90 ? 'textarea' : 'text',
-        label: pretty(key),
+        label: labelFor(group, key, value),
         defaultValue: value,
-        admin: { description: `Par défaut : ${value}` },
+        admin: { description: `Texte d’origine : ${value}` },
       }) as Field,
   ),
 }))

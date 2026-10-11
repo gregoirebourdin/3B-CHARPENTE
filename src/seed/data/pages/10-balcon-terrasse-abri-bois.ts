@@ -226,7 +226,7 @@ export const service: SeedService = {
     // 3.9 3B Récup'
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       badge: '3B Récup’',
       kicker: "3B Récup'",
       title: 'Un garde-corps **en bois de réemploi** ?',
@@ -264,7 +264,7 @@ export const service: SeedService = {
     // 3.11 Appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       kicker: 'Votre projet',
       title: 'Prêt à transformer **votre extérieur** ?',
       text: md(

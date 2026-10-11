@@ -12,7 +12,7 @@ export const page: SeedPage = {
     image: 'renovation-d-une-copropriete-a-briancon/7 Paysage Briançonnais.jpeg',
   },
   hero: {
-    variant: 'collage',
+    variant: 'map',
     kicker: 'Charpente · Toiture · Isolation · Ossature bois',
     title: 'Charpentier à **Briançon** et dans le Briançonnais',
     text: "3B Charpente reprend, isole et surélève les toitures et les maisons de Briançon avec du **bois des Hautes-Alpes** et des **isolants biosourcés**. Nous sommes installés depuis 2007 à L'Argentière-la-Bessée, un peu plus bas dans la vallée de la Durance.",
@@ -81,7 +81,7 @@ export const page: SeedPage = {
     // Section 5 — Nos prestations dans le Briançonnais
     {
       type: 'cards',
-      variant: 'icon',
+      variant: 'index',
       columns: 3,
       kicker: 'Ce que nous faisons',
       title: 'Nos **prestations** à Briançon',
@@ -187,23 +187,24 @@ export const page: SeedPage = {
     },
     // Section 8 — Communes desservies
     {
-      type: 'list',
-      style: 'pills',
+      type: 'serviceArea',
+      tone: 'cream',
       kicker: 'Où nous intervenons',
       title: 'Briançon et les **communes voisines**',
-      text: "Depuis L'Argentière-la-Bessée, nous intervenons à Briançon et dans les communes autour :",
-      items: [{ title: 'Briançon' }, { title: 'et les communes voisines' }],
-    },
-    {
-      type: 'textImage',
-      text: "Nous travaillons aussi dans la vallée de Serre Chevalier (Saint-Chaffrey, La Salle-les-Alpes, Le Monêtier-les-Bains) et dans le Pays des Écrins, autour de Vallouise et de L'Argentière-la-Bessée. Plus largement, « nous intervenons dans les Hautes-Alpes mais aussi en région PACA et Rhône-Alpes ».",
-      links: [
-        { label: 'Charpentier à Serre Chevalier', href: '/charpentier-serre-chevalier/' },
+      text: "Depuis L'Argentière-la-Bessée, nous intervenons à Briançon et dans les communes autour. Plus largement, « nous intervenons dans les Hautes-Alpes mais aussi en région PACA et Rhône-Alpes ».",
+      sectors: [
         {
-          label: 'Charpentier en Vallouise et Pays des Écrins',
-          href: '/charpentier-vallouise-pays-des-ecrins/',
+          title: 'Charpentier à Serre Chevalier',
+          text: 'Saint-Chaffrey, La Salle-les-Alpes, Le Monêtier-les-Bains.',
+          link: { label: 'Nos chantiers à Serre Chevalier', href: '/charpentier-serre-chevalier/' },
+        },
+        {
+          title: 'Charpentier en Vallouise et Pays des Écrins',
+          text: "Autour de Vallouise et de L'Argentière-la-Bessée.",
+          link: { label: 'Nos chantiers en Vallouise', href: '/charpentier-vallouise-pays-des-ecrins/' },
         },
       ],
+      showMap: false,
     },
     // Section 9 — FAQ
     {
@@ -221,7 +222,7 @@ export const page: SeedPage = {
     // Section 10 — Appel à l'action et coordonnées
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       title: 'Un projet à **Briançon** ?',
       text: 'Chaque projet chez 3B Charpente débute par une étude sur mesure. Parlons du vôtre.',
       primary: { label: 'Demander mon devis', href: '/contact/' },

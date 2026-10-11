@@ -4,8 +4,6 @@
   z-index: 50;
   border-bottom: 1px solid transparent;
   background: var(--header-bg);
-  backdrop-filter: saturate(1.4) blur(14px);
-  -webkit-backdrop-filter: saturate(1.4) blur(14px);
 }
 
 /* A hairline appears once the page scrolls: pure CSS, no listener. */

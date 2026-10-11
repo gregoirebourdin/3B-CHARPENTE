@@ -309,7 +309,7 @@ export const service: SeedService = {
     // 3.11 Appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       kicker: 'Votre toiture',
       title: 'Un toit à isoler **ou à refaire** ?',
       text: p(

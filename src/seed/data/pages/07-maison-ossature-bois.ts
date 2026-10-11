@@ -222,7 +222,7 @@ export const service: SeedService = {
     // 3.10 3B Récup'
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       badge: '3B Récup’',
       kicker: "3B Récup'",
       title: 'Construire neuf **avec du réemploi**',
@@ -255,7 +255,7 @@ export const service: SeedService = {
     // 3.13 Appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       title: 'Un projet de **maison bois** ?',
       text: "Chaque projet chez 3B Charpente débute par une étude sur mesure. Parlez-nous de votre terrain et de vos envies : nous discuterons de vos besoins lors d'une rencontre et vous proposerons un devis détaillé.",
       primary: { label: 'Demander mon devis', href: '/contact/' },

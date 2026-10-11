@@ -194,7 +194,7 @@ export const page: SeedPage = {
     // Section 13 : appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       kicker: 'Votre projet',
       title: 'Et si le prochain chantier était **le vôtre** ?',
       text: "Chaque projet chez 3B Charpente débute par une étude sur mesure. Racontez-nous le vôtre : nous en parlerons lors d'une rencontre, puis nous vous proposerons un devis détaillé.",

@@ -20,6 +20,7 @@ export const page: SeedPage = {
   },
   hero: {
     variant: 'collage',
+    tone: 'forest',
     kicker: "3B Récup' · la filière réemploi de 3B Charpente",
     title: "3B Récup' : **déconstruction et réemploi du bois** dans les Hautes-Alpes",
     text: "Chez 3B Récup', nous sommes spécialisés dans **la récupération et la transformation du bois issu de la déconstruction** en solutions de construction durables. **De la dépose à la repose**, nos charpentiers accompagnent les entreprises de construction et de démolition, les architectes, les collectivités et les particuliers.",
@@ -55,7 +56,7 @@ export const page: SeedPage = {
       caption: "Garde-corps en bois de réemploi, maison rénovée à L'Argentière-la-Bessée.",
       tone: 'cream',
     },
-    // 3.4 Pourquoi réemployer le bois (fond forêt, seule photo d'ambiance de la page)
+    // 3.4 Pourquoi réemployer le bois (fond nuit, cernes du bois)
     {
       type: 'manifesto',
       layout: 'columns',
@@ -76,7 +77,6 @@ export const page: SeedPage = {
           text: 'Pour le bois neuf, nous utilisons principalement du mélèze et du sapin provenant des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli. Le bois de réemploi complète cette ressource.',
         },
       ],
-      image: 'ambiance/foret.png',
     },
     // 3.5 Pour qui
     {
@@ -276,7 +276,7 @@ export const page: SeedPage = {
     // 3.11 Appel à l'action
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       badge: '3B Récup’',
       kicker: 'Transformez votre projet avec le réemploi',
       title: 'Parlons de **votre bâtiment**',

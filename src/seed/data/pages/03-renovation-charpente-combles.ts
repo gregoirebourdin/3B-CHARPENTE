@@ -217,7 +217,7 @@ export const service: SeedService = {
     // 3.11 3B Récup'
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       badge: '3B Récup’',
       kicker: "3B Récup'",
       title: 'Votre ancienne charpente **a encore de la valeur**',
@@ -253,7 +253,7 @@ export const service: SeedService = {
     // 3.14 Appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       title: 'Prêt à **transformer vos combles** ?',
       text: 'Chaque projet chez 3B Charpente débute par une étude sur mesure. Nous venons voir votre charpente, nous discutons de vos besoins et vous proposons un devis détaillé.',
       primary: { label: 'Demander mon devis', href: '/contact/' },

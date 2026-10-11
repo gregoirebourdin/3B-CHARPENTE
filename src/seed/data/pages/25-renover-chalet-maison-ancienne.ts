@@ -178,7 +178,7 @@ Vient enfin ce qui se voit et se touche : planchers, escaliers, bardages, terra
     // 3.11 Garder et réemployer le vieux bois (bandeau vert forêt)
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       anchor: 'vieux-bois',
       badge: '3B Récup’',
       title: 'Garder le vieux bois **et lui donner une seconde vie**',
@@ -259,7 +259,7 @@ Pour une maison particulière, un diagnostic ressources, c'est-à-dire un repér
     // 3.16 Appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       title: 'Prêt à **transformer votre maison** ?',
       text: 'Chaque projet chez 3B Charpente débute par une étude sur mesure. Nous venons voir votre chalet ou votre maison, nous regardons la charpente et l\'enveloppe avec vous, et nous vous proposons un devis détaillé, dans le bon ordre.',
       primary: { label: 'Demander mon devis', href: '/contact/' },

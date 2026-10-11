@@ -227,7 +227,7 @@ export const service: SeedService = {
     // 3.10 3B Récup'
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       badge: '3B Récup’',
       kicker: "3B Récup'",
       title: 'Un garde-corps **en bois de réemploi**',
@@ -263,7 +263,7 @@ export const service: SeedService = {
     // 3.13 Appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       title: 'Un escalier **à dessiner** ?',
       text: "Chaque projet chez 3B Charpente débute par une étude sur mesure. Nous venons prendre les cotes, nous dessinons l'escalier avec vous et vous proposons un devis détaillé.",
       primary: { label: 'Demander mon devis', href: '/contact/' },

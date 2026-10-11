@@ -28,7 +28,7 @@ export const page: SeedPage = {
     // 3.3 Appel à l'action
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       title: 'Une question sur **votre projet** ?',
       text: 'Chaque projet commence par une rencontre. Décrivez-nous votre maison ou votre bâtiment, nous vous rappelons.',
       primary: { label: 'Demander mon devis', href: '/contact/' },

@@ -1,0 +1,137 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 250px) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.aside {
+  position: sticky;
+  top: calc(var(--header-h) + var(--space-6));
+  display: grid;
+  gap: var(--space-6);
+  max-height: calc(100vh - var(--header-h) - var(--space-12));
+  overflow: auto;
+  scrollbar-width: thin;
+}
+
+.toc {
+  padding: 20px 18px 14px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  font-size: 0.875rem;
+}
+
+.tocHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.tocTitle {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.tocCount {
+  color: var(--fg-muted);
+  font-size: 0.75rem;
+}
+
+.toc ol {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toc a {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 4px;
+  min-height: 32px;
+  padding: 6px 8px 6px 10px;
+  border-left: 2px solid transparent;
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+  color: var(--fg-muted);
+  line-height: 1.35;
+  text-decoration: none;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out);
+}
+
+.toc a:hover {
+  color: var(--fg);
+  background: var(--bg-alt);
+}
+
+.toc a[aria-current='true'] {
+  border-left-color: var(--fg-accent);
+  color: var(--fg);
+  font-weight: 650;
+}
+
+.tocNum {
+  color: var(--fg-accent);
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.tocFooter {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+  padding-inline: 4px;
+}
+
+.body {
+  min-width: 0;
+  max-width: 760px;
+  counter-reset: doc-h2;
+}
+
+/* « 01 — Éditeur du site »: the sections of a long text, numbered. */
+.numbered :global(h2[id]) {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: 16px;
+  counter-increment: doc-h2;
+}
+
+.numbered :global(h2[id])::before {
+  content: counter(doc-h2, decimal-leading-zero) ' —';
+  color: var(--fg-accent);
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+@media (max-width: 1000px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aside {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .tocFooter {
+    display: none;
+  }
+}

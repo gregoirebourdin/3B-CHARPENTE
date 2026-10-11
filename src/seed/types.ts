@@ -66,7 +66,7 @@ export type SeedBlock =
     } & SeedHeading)
   | ({
       type: 'cards'
-      variant?: 'icon' | 'letter' | 'photo' | 'numbered' | 'plain'
+      variant?: 'icon' | 'letter' | 'photo' | 'numbered' | 'index' | 'plain'
       columns?: 2 | 3 | 4
       items: SeedCard[]
       asideImage?: Photo
@@ -156,7 +156,7 @@ export type SeedBlock =
     } & Omit<SeedHeading, 'intro' | 'tone'>)
   | ({ type: 'gallery'; images: { image: Photo; caption?: string }[] } & SeedHeading)
   | ({ type: 'comparisonTable'; columns: string[]; rows: string[][]; note?: string } & SeedHeading)
-  | { type: 'quote'; text: string; author?: string; role?: string; image?: Photo; tone?: Tone; anchor?: string }
+  | { type: 'quote'; lead?: string; text: string; author?: string; role?: string; image?: Photo; tone?: Tone; anchor?: string }
   | { type: 'proofs'; variant?: 'band' | 'compact'; anchor?: string }
   | ({
       type: 'serviceArea'
@@ -171,7 +171,9 @@ export type SeedBlock =
   | { type: 'richText'; content: Md; showToc?: boolean; boxed?: boolean; tone?: Tone; anchor?: string }
 
 export type SeedHero = {
-  variant?: 'collage' | 'photo' | 'simple'
+  variant?: 'collage' | 'photo' | 'map' | 'simple'
+  /** 'forest': forest-green panel with the wood rings (3B Récup'). */
+  tone?: 'cream' | 'forest'
   kicker?: string
   /** The H1. */
   title: Title
@@ -183,6 +185,12 @@ export type SeedHero = {
   /** Slug of the chantier shown as a small card on the collage. */
   highlight?: string
   caption?: string
+  /** Short label on the main photo (commune or work). */
+  photoTag?: string
+  /** "Fiche d'atelier" on the photo: short facts taken from the page text. */
+  sheet?: { label: string; value: string }[]
+  /** Mood photo (the forest) behind the hero, darkened. */
+  backdrop?: Photo
 }
 
 export type FaqTopic =

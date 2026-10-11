@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { ServiceSearch } from '@/components/layout/ServiceSearch'
 import { CmsLink, ButtonGroup } from '@/components/ui/CmsLink'
 import { getCompany, getServices, getSiteTexts } from '@/lib/cms/queries'
-import { phoneToE164, template } from '@/lib/links'
+import { phoneToE164 } from '@/lib/links'
 import { pathFor } from '@/payload/utilities/routes'
 
 import styles from './not-found.module.css'
@@ -14,6 +14,8 @@ export const metadata: Metadata = { title: 'Page introuvable', robots: { index: 
 export default async function NotFound() {
   const [company, texts, services] = await Promise.all([getCompany(), getSiteTexts(), getServices()])
   const t = texts.notFound
+  // The phone number becomes a link where {telephone} sits in the sentence.
+  const [before = '', after = ''] = t.text.includes('{telephone}') ? t.text.split('{telephone}') : [`${t.text} `, '']
   return (
     <section className={styles.wrap}>
       <div className="container container--narrow">
@@ -22,11 +24,11 @@ export default async function NotFound() {
         </p>
         <h1 className={styles.title}>{t.title}</h1>
         <p className={styles.text}>
-          {template(t.text, { telephone: '' }).replace(/\s*$/, ' ')}
+          {before}
           <a href={`tel:${phoneToE164(company.phone)}`} data-track="Clic téléphone" className={styles.phone}>
             {company.phone}
           </a>
-          .
+          {after}
         </p>
         <ServiceSearch
           label={t.searchLabel}

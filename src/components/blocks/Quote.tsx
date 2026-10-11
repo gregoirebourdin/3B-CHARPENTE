@@ -16,6 +16,7 @@ export function Quote({ block }: BlockProps<Data>) {
           </div>
         ) : null}
         <div>
+          {block.lead ? <p className={`kicker ${styles.lead}`}>{block.lead}</p> : null}
           <span className={styles.mark} aria-hidden="true">
             «
           </span>

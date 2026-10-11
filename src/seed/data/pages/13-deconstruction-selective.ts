@@ -271,7 +271,7 @@ export const page: SeedPage = {
     // 3.11 Appel à l'action
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       badge: '3B Récup’',
       kicker: 'Un bâtiment à déconstruire ?',
       title: 'Démontons-le **pièce par pièce**',

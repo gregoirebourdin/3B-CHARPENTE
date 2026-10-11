@@ -35,6 +35,72 @@ export function Cards({ block, context }: BlockProps<Data>) {
     </div>
   ) : null
 
+  if (variant === 'index') {
+    // Editorial index: numbered rows between hairlines; many short items fall into three columns.
+    const items = block.items ?? []
+    const grid = items.length > 6
+    return (
+      <Section tone={block.tone} anchor={block.anchor}>
+        <SectionHeading
+          kicker={block.kicker}
+          title={block.title}
+          accent={block.titleAccent}
+          intro={block.intro}
+          layout="split"
+          actions={cta ? <CmsLink link={cta} variant="outline" arrow /> : undefined}
+        />
+        <ol className={grid ? styles.indexGrid : styles.index}>
+          {items.map((item, index) => {
+            const link = resolveLink(item.link, context.company)
+            const sameAsTitle =
+              link && link.label.trim().toLowerCase() === item.title.trim().toLowerCase()
+            return (
+              <li
+                key={item.id ?? index}
+                className={styles.indexRow}
+                data-link={link ? '' : undefined}
+                data-reveal=""
+                style={{
+                  ['--reveal-delay' as string]: `${grid ? (index % 3) * 60 : Math.min(index, 4) * 40}ms`,
+                }}
+              >
+                <span className={styles.indexNum} aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 className={styles.indexTitle}>
+                  {link && sameAsTitle ? (
+                    <CmsLink link={link} className={styles.stretched}>
+                      {item.title}
+                    </CmsLink>
+                  ) : (
+                    item.title
+                  )}
+                </h3>
+                <div className={styles.indexText}>
+                  {item.text ? <RichText data={item.text} /> : null}
+                  {link && !sameAsTitle ? (
+                    <CmsLink link={link} className={`${styles.indexMore} ${styles.stretched}`}>
+                      {link.label}
+                      <Icon name="arrowRight" size={14} />
+                    </CmsLink>
+                  ) : null}
+                </div>
+                {link ? (
+                  <span className={styles.indexGo} aria-hidden="true">
+                    <Icon name="arrowRight" size={18} />
+                  </span>
+                ) : null}
+                {!grid && isMedia(item.image) ? (
+                  <Media media={item.image} alt="" sizes="220px" className={styles.indexPeek} />
+                ) : null}
+              </li>
+            )
+          })}
+        </ol>
+      </Section>
+    )
+  }
+
   if (aside) {
     return (
       <Section tone={block.tone} anchor={block.anchor}>
@@ -54,7 +120,9 @@ export function Cards({ block, context }: BlockProps<Data>) {
                 return (
                   <li key={item.id ?? index} className={styles.feature} data-reveal="">
                     {variant === 'numbered' ? (
-                      <span className={styles.featureNum}>{String(index + 1).padStart(2, '0')}</span>
+                      <span className={styles.featureNum}>
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
                     ) : (
                       <span className={styles.disc}>
                         <Icon name={item.icon ?? 'check'} size={20} />
@@ -106,7 +174,9 @@ export function Cards({ block, context }: BlockProps<Data>) {
                   <Icon name={item.icon ?? 'check'} size={22} />
                 </span>
               ) : null}
-              {variant === 'numbered' ? <span className={styles.number}>{String(index + 1).padStart(2, '0')}</span> : null}
+              {variant === 'numbered' ? (
+                <span className={styles.number}>{String(index + 1).padStart(2, '0')}</span>
+              ) : null}
               <div className={styles.body}>
                 {variant === 'letter' ? (
                   <span className={styles.glyph} aria-hidden="true">

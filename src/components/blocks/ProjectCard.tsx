@@ -23,6 +23,8 @@ type Props = ProjectCardData & {
   headingLevel?: 'h3' | 'h2'
   /** First card of a bento grid: taller photo, larger title. */
   large?: boolean
+  /** « row »: a square photo on the left, the words on the right. */
+  layout?: 'stack' | 'row'
 }
 
 export const projectCommune = (project: Project) =>
@@ -43,27 +45,38 @@ export function ProjectCard({
   priority,
   headingLevel = 'h3',
   large,
+  layout = 'stack',
 }: Props) {
   const href = pathFor('projects', project) ?? '/realisations/'
   const commune = projectCommune(project)
   const main = projectServices(project)[0]
   const photos = project.gallery?.length ?? 0
-  const badge =
-    tag || (label === 'brand' ? '3B Charpente' : project.locality || commune?.name || main?.shortLabel || main?.title || '3B Charpente')
+  const place = project.locality || commune?.name
+  const badge = tag || (label === 'brand' ? '3B Charpente' : place || main?.shortLabel || main?.title || '3B Charpente')
+  const pinned = !tag && label !== 'brand' && Boolean(place)
   const Heading = headingLevel
 
   const info = [main?.shortLabel || main?.title, photos ? template(photosLabel, { n: photos }) : null].filter(Boolean).join(' · ')
 
   return (
-    <article className={large ? `${styles.card} ${styles.large}` : styles.card}>
+    <article className={[styles.card, large ? styles.large : undefined, layout === 'row' ? styles.row : undefined].filter(Boolean).join(' ')}>
       <div className={styles.media}>
         <Media
           media={project.heroImage}
           fill
-          sizes={large ? '(min-width: 1100px) 700px, 92vw' : '(min-width: 1100px) 400px, (min-width: 700px) 45vw, 92vw'}
+          sizes={
+            large
+              ? '(min-width: 1100px) 700px, 92vw'
+              : layout === 'row'
+                ? '(min-width: 1100px) 240px, 40vw'
+                : '(min-width: 1100px) 400px, (min-width: 700px) 45vw, 92vw'
+          }
           priority={priority}
         />
-        <span className={styles.badge}>{badge}</span>
+        <span className={styles.badge}>
+          {pinned ? <Icon name="mapPin" size={13} /> : null}
+          {badge}
+        </span>
       </div>
       <div className={styles.body}>
         {info ? <p className={styles.info}>{info}</p> : null}

@@ -1,6 +1,7 @@
 import '@/styles/globals.css'
 
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import type { ReactNode } from 'react'
 
 import { Analytics } from '@/components/layout/Analytics'
@@ -60,10 +61,10 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
 
   return (
     <html lang="fr" className={`${nohemi.variable} ${inter.variable}`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: BOOT }} />
-      </head>
       <body>
+        <Script id="boot" strategy="beforeInteractive">
+          {BOOT}
+        </Script>
         <a href="#contenu" className="skip-link">
           Aller au contenu
         </a>

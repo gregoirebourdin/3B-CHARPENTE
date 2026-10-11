@@ -198,3 +198,233 @@ a.pill:hover svg {
     position: static;
   }
 }
+
+/* ---------- Lexicon (definitions): terms between hairlines ---------- */
+/* Heading on the left, the text on the right (no photo). */
+.lexHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: end;
+  gap: var(--space-6) clamp(2rem, 6vw, 6rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Heading and text on the left, a framed photo on the right. */
+.lexTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.lexCopy {
+  display: grid;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+.lexHeading {
+  margin-bottom: 0;
+}
+
+.lexText {
+  max-width: 62ch;
+  color: color-mix(in srgb, var(--fg) 84%, var(--bg));
+}
+
+.lexText > div > p:first-child {
+  color: var(--fg);
+  font-size: 1.125rem;
+}
+
+.lexHead .lexText {
+  padding-bottom: 6px;
+}
+
+.lexFigure {
+  position: relative;
+  isolation: isolate;
+  margin: 12px 0 0 12px;
+}
+
+.lexFigure::after {
+  content: '';
+  position: absolute;
+  inset: -12px 12px 12px -12px;
+  z-index: -1;
+  border: 1px solid var(--c-line-strong);
+  border-radius: calc(var(--radius-lg) + 4px);
+  pointer-events: none;
+}
+
+.lexFrame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 4.4;
+  border-radius: var(--radius-lg);
+  background: var(--bg-alt);
+  box-shadow: var(--shadow-md);
+}
+
+.lexFrame img {
+  object-fit: cover;
+}
+
+.lexFigure figcaption {
+  margin-top: var(--space-3);
+  color: var(--fg-muted);
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+}
+
+.lexicon {
+  --cols: 4;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  margin: 0;
+  border-top: 1.5px solid var(--fg);
+}
+
+.lexicon[data-cols='1'] {
+  --cols: 1;
+}
+
+.lexicon[data-cols='2'] {
+  --cols: 2;
+}
+
+.lexicon[data-cols='3'] {
+  --cols: 3;
+}
+
+.lexicon[data-cols='5'] {
+  --cols: 5;
+}
+
+.entry {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  padding: 22px 26px 6px;
+  border-left: 1px solid var(--c-line);
+}
+
+/* First entry of each row: flush left, no rule. */
+.lexicon[data-cols='1'] .entry,
+.lexicon[data-cols='2'] .entry:nth-child(2n + 1),
+.lexicon[data-cols='3'] .entry:nth-child(3n + 1),
+.lexicon[data-cols='4'] .entry:nth-child(4n + 1),
+.lexicon[data-cols='5'] .entry:nth-child(5n + 1) {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.entryTerm {
+  display: grid;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 1.3125rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+}
+
+.entryNum {
+  color: var(--fg-accent);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.entryText {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  color: var(--fg-muted);
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
+
+.entryText strong {
+  color: var(--fg);
+}
+
+/* Years and short words, set large like a frieze. */
+.frieze .entryTerm {
+  font-size: clamp(1.625rem, 1.1rem + 1.4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.frieze .entryTerm[data-year] {
+  color: var(--fg-accent);
+}
+
+@media (max-width: 1080px) {
+  .lexicon[data-cols='4'],
+  .lexicon[data-cols='5'] {
+    --cols: 2;
+  }
+
+  .lexicon[data-cols='4'] .entry,
+  .lexicon[data-cols='5'] .entry {
+    padding-left: 26px;
+    border-left: 1px solid var(--c-line);
+  }
+
+  .lexicon[data-cols='4'] .entry:nth-child(2n + 1),
+  .lexicon[data-cols='5'] .entry:nth-child(2n + 1) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .lexicon[data-cols='4'] .entry:nth-child(n + 3),
+  .lexicon[data-cols='5'] .entry:nth-child(n + 3) {
+    border-top: 1px solid var(--c-line);
+  }
+}
+
+@media (max-width: 900px) {
+  .lexHead,
+  .lexTop {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .lexFigure {
+    max-width: 520px;
+  }
+
+  .lexFrame {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 600px) {
+  .lexicon,
+  .lexicon[data-cols] {
+    --cols: 1;
+  }
+
+  .lexicon[data-cols] .entry {
+    padding: 18px 0 16px;
+    border-left: 0;
+    border-top: 1px solid var(--c-line);
+  }
+
+  .lexicon[data-cols] .entry:first-child {
+    border-top: 0;
+  }
+
+  .frieze .entry {
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    column-gap: var(--space-4);
+  }
+
+  .frieze .entryTerm {
+    font-size: 1.5rem;
+  }
+}

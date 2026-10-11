@@ -45,6 +45,9 @@
   position: absolute;
   left: 14px;
   bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   max-width: calc(100% - 28px);
   padding: 6px 10px;
   border-radius: var(--radius-sm);
@@ -124,4 +127,43 @@
 
 .card:hover .more svg {
   transform: translateX(3px);
+}
+
+/* « Row »: a square photo on the left, the words on the right (bento of four). */
+.row {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  align-items: center;
+  column-gap: 20px;
+}
+
+.row .media {
+  aspect-ratio: 1 / 1;
+}
+
+.row .title {
+  font-size: clamp(1.125rem, 1rem + 0.35vw, 1.3125rem);
+}
+
+.row .text {
+  font-size: 0.9375rem;
+  -webkit-line-clamp: 3;
+}
+
+@media (max-width: 600px) {
+  .row {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    column-gap: 14px;
+  }
+
+  .row .text {
+    display: none;
+  }
+
+  .row .badge {
+    display: none;
+  }
+
+  .row .title {
+    font-size: 1.0625rem;
+  }
 }

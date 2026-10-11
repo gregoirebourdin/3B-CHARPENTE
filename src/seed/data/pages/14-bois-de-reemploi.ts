@@ -243,7 +243,7 @@ export const page: SeedPage = {
     // 3.10 Appel à l'action
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       badge: '3B Récup’',
       kicker: 'Transformez votre projet avec le réemploi',
       title: 'Donnons une **nouvelle vie** à votre bois',

@@ -87,6 +87,10 @@ export function hero(ctx: SeedContext, value: SeedHero): Json {
     images: photos(ctx, value.images),
     highlight: value.highlight ? (ctx.projects.get(value.highlight) ?? null) : null,
     caption: value.caption,
+    tone: value.tone ?? 'cream',
+    photoTag: value.photoTag,
+    sheet: (value.sheet ?? []).map((row) => ({ label: row.label, value: row.value })),
+    backdrop: photo(ctx, value.backdrop) ?? null,
   }
 }
 
@@ -277,6 +281,7 @@ export function block(ctx: SeedContext, value: SeedBlock): Json {
     case 'quote':
       return {
         blockType: 'quote',
+        lead: value.lead,
         text: value.text,
         author: value.author,
         role: value.role,

@@ -291,7 +291,7 @@ Une rénovation aidée n'est pas forcément une rénovation complète, faite en 
     // 3.14 Appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       kicker: 'Un projet de rénovation énergétique ?',
       title: 'Parlons de **votre maison**',
       text: "Isolation de toiture ou de murs, fenêtres de toit, menuiseries : contactez-nous par le site ou par téléphone. Nous venons voir votre maison et vous proposons un devis détaillé, en charpentiers qualifiés RGE. Pour les aides, nous vous orientons vers votre conseiller France Rénov'.",

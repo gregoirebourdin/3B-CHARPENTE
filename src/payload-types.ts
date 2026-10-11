@@ -440,7 +440,11 @@ export interface Page {
   title: string;
   breadcrumbLabel?: string | null;
   hero: {
-    variant?: ('collage' | 'photo' | 'simple') | null;
+    /**
+     * Carte du secteur : les communes rattachées à cette page (collection « Communes ») et deux de leurs chantiers, posés sur le relief.
+     */
+    variant?: ('collage' | 'photo' | 'map' | 'simple') | null;
+    tone?: ('cream' | 'forest') | null;
     /**
      * Petite ligne au-dessus du titre principal.
      */
@@ -576,6 +580,24 @@ export interface Page {
      */
     highlight?: (number | null) | Project;
     caption?: string | null;
+    /**
+     * Courte : la commune ou l’ouvrage. Ex. : « L’Argentière-la-Bessée ».
+     */
+    photoTag?: string | null;
+    /**
+     * Trois lignes courtes et vérifiables, reprises du texte de la page. Ex. : « Essences » → « Mélèze et sapin des Hautes-Alpes ».
+     */
+    sheet?:
+      | {
+          label: string;
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Uniquement une photo d’ambiance (la forêt), assombrie sous le texte : une ou deux fois sur tout le site. Les photos de chantier restent en cadre.
+     */
+    backdrop?: (number | null) | Media;
   };
   /**
    * Paragraphe de 40 à 60 mots, qui se suffit à lui-même : qui, quoi, où. C’est le texte que Google et les assistants IA reprennent.
@@ -720,7 +742,11 @@ export interface Service {
     description?: string | null;
   };
   hero: {
-    variant?: ('collage' | 'photo' | 'simple') | null;
+    /**
+     * Carte du secteur : les communes rattachées à cette page (collection « Communes ») et deux de leurs chantiers, posés sur le relief.
+     */
+    variant?: ('collage' | 'photo' | 'map' | 'simple') | null;
+    tone?: ('cream' | 'forest') | null;
     /**
      * Petite ligne au-dessus du titre principal.
      */
@@ -856,6 +882,24 @@ export interface Service {
      */
     highlight?: (number | null) | Project;
     caption?: string | null;
+    /**
+     * Courte : la commune ou l’ouvrage. Ex. : « L’Argentière-la-Bessée ».
+     */
+    photoTag?: string | null;
+    /**
+     * Trois lignes courtes et vérifiables, reprises du texte de la page. Ex. : « Essences » → « Mélèze et sapin des Hautes-Alpes ».
+     */
+    sheet?:
+      | {
+          label: string;
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Uniquement une photo d’ambiance (la forêt), assombrie sous le texte : une ou deux fois sur tout le site. Les photos de chantier restent en cadre.
+     */
+    backdrop?: (number | null) | Media;
   };
   /**
    * Paragraphe de 40 à 60 mots, qui se suffit à lui-même : qui, quoi, où. C’est le texte que Google et les assistants IA reprennent.
@@ -959,7 +1003,7 @@ export interface Media {
   };
 }
 /**
- * Vos chantiers. Pour en ajouter un rapidement : ouvrez un chantier proche, cliquez sur « … » puis « Dupliquer », changez les textes et les photos.
+ * Vos chantiers. Pour en ajouter un : bouton « Ajouter un chantier » (assistant en trois étapes).
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "projects".
@@ -1337,7 +1381,7 @@ export interface CardsBlock {
    * Une ou deux phrases sous le titre (facultatif).
    */
   intro?: string | null;
-  variant?: ('icon' | 'letter' | 'photo' | 'numbered' | 'plain') | null;
+  variant?: ('icon' | 'letter' | 'photo' | 'numbered' | 'index' | 'plain') | null;
   columns?: ('2' | '3' | '4') | null;
   items?:
     | {
@@ -2384,6 +2428,10 @@ export interface ComparisonTableBlock {
  * via the `definition` "QuoteBlock".
  */
 export interface QuoteBlock {
+  /**
+   * Petite ligne au-dessus de la citation. Ex. : « Ce qui compte pour lui ? »
+   */
+  lead?: string | null;
   text: string;
   author?: string | null;
   role?: string | null;
@@ -3136,6 +3184,7 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         variant?: T;
+        tone?: T;
         kicker?: T;
         title?: T;
         titleAccent?: T;
@@ -3169,6 +3218,15 @@ export interface PagesSelect<T extends boolean = true> {
         images?: T;
         highlight?: T;
         caption?: T;
+        photoTag?: T;
+        sheet?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+        backdrop?: T;
       };
   tldr?: T;
   layout?:
@@ -3680,6 +3738,7 @@ export interface ComparisonTableBlockSelect<T extends boolean = true> {
  * via the `definition` "QuoteBlock_select".
  */
 export interface QuoteBlockSelect<T extends boolean = true> {
+  lead?: T;
   text?: T;
   author?: T;
   role?: T;
@@ -3890,6 +3949,7 @@ export interface ServicesSelect<T extends boolean = true> {
     | T
     | {
         variant?: T;
+        tone?: T;
         kicker?: T;
         title?: T;
         titleAccent?: T;
@@ -3923,6 +3983,15 @@ export interface ServicesSelect<T extends boolean = true> {
         images?: T;
         highlight?: T;
         caption?: T;
+        photoTag?: T;
+        sheet?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+        backdrop?: T;
       };
   tldr?: T;
   layout?:
@@ -4544,355 +4613,471 @@ export interface SiteText {
   id: number;
   general?: {
     /**
-     * Par défaut : Accueil
+     * Texte d’origine : Accueil
      */
     breadcrumbHome?: string | null;
     /**
-     * Par défaut : En bref
+     * Texte d’origine : En bref
      */
     tldrLabel?: string | null;
     /**
-     * Par défaut : Appeler
+     * Texte d’origine : Appeler
      */
     callLabel?: string | null;
     /**
-     * Par défaut : Appelez-nous
+     * Texte d’origine : Appelez-nous
      */
     headerPhoneLabel?: string | null;
     /**
-     * Par défaut : Chantier
+     * Texte d’origine : Chantier
      */
     heroHighlightLabel?: string | null;
     /**
-     * Par défaut : Une autre question ?
+     * Texte d’origine : Une autre question ?
      */
     faqHelpTitle?: string | null;
     /**
-     * Par défaut : Appelez-nous ou écrivez-nous : nous vous répondons.
+     * Texte d’origine : Appelez-nous ou écrivez-nous : nous vous répondons.
      */
     faqHelpText?: string | null;
     /**
-     * Par défaut : Nous écrire
+     * Texte d’origine : Nous écrire
      */
     faqHelpLink?: string | null;
     /**
-     * Par défaut : Vous avez travaillé avec nous ?
+     * Texte d’origine : Vous avez travaillé avec nous ?
      */
     reviewPrompt?: string | null;
     /**
-     * Par défaut : Laissez un avis sur Google
+     * Texte d’origine : Laissez un avis sur Google
      */
     reviewLink?: string | null;
     /**
-     * Par défaut : Voir les travaux
+     * Texte d’origine : Voir les travaux
      */
     projectCardLink?: string | null;
     /**
-     * Par défaut : {n} photos
+     * Texte d’origine : {n} photos
      */
     projectPhotos?: string | null;
     /**
-     * Par défaut : Lire le guide
+     * Texte d’origine : Lire le guide
      */
     articleCardLink?: string | null;
     /**
-     * Par défaut : En savoir plus
+     * Texte d’origine : En savoir plus
      */
     serviceCardLink?: string | null;
+    /**
+     * Texte d’origine : Fiche d’atelier
+     */
+    heroSheetLabel?: string | null;
+    /**
+     * Texte d’origine : N° {n}
+     */
+    heroSheetNumber?: string | null;
+    /**
+     * Texte d’origine : Nos chantiers ici
+     */
+    mapHere?: string | null;
+    /**
+     * Texte d’origine : Nos autres chantiers
+     */
+    mapOther?: string | null;
+    /**
+     * Texte d’origine : Schéma sans échelle
+     */
+    mapScale?: string | null;
+    /**
+     * Texte d’origine : Itinéraire
+     */
+    directions?: string | null;
+    /**
+     * Texte d’origine : {n} rubriques
+     */
+    tocCount?: string | null;
   };
   project?: {
     /**
-     * Par défaut : Demander mon devis
+     * Texte d’origine : Demander mon devis
      */
     heroPrimary?: string | null;
     /**
-     * Par défaut : Toutes nos réalisations
+     * Texte d’origine : Toutes nos réalisations
      */
     heroSecondary?: string | null;
     /**
-     * Par défaut : Le projet
+     * Texte d’origine : Le projet
      */
     introKicker?: string | null;
     /**
-     * Par défaut : Le projet à **{commune}**
+     * Texte d’origine : Le projet à **{commune}**
      */
     introTitle?: string | null;
     /**
-     * Par défaut : Le **projet**
+     * Texte d’origine : Le **projet**
      */
     introTitleNoCommune?: string | null;
     /**
-     * Par défaut : Fiche technique
+     * Texte d’origine : Fiche technique
      */
     factsTitle?: string | null;
     /**
-     * Par défaut : Commune
+     * Texte d’origine : Commune
      */
     factCommune?: string | null;
     /**
-     * Par défaut : Prestation
+     * Texte d’origine : Prestation
      */
     factService?: string | null;
     /**
-     * Par défaut : Année
+     * Texte d’origine : Année
      */
     factYear?: string | null;
     /**
-     * Par défaut : Durée
+     * Texte d’origine : Durée
      */
     factDuration?: string | null;
     /**
-     * Par défaut : Surface
+     * Texte d’origine : Surface
      */
     factSurface?: string | null;
     /**
-     * Par défaut : Contexte
+     * Texte d’origine : Contexte
      */
     factContext?: string | null;
     /**
-     * Par défaut : Architecte
+     * Texte d’origine : Architecte
      */
     factArchitect?: string | null;
     /**
-     * Par défaut : Étape par étape
+     * Texte d’origine : Étape par étape
      */
     stepsKicker?: string | null;
     /**
-     * Par défaut : Ce que nous avons **fait**
+     * Texte d’origine : Ce que nous avons **fait**
      */
     stepsTitle?: string | null;
     /**
-     * Par défaut : En images
+     * Texte d’origine : En images
      */
     galleryKicker?: string | null;
     /**
-     * Par défaut : Le chantier en **{n} photos**
+     * Texte d’origine : Le chantier en **{n} photos**
      */
     galleryTitle?: string | null;
     /**
-     * Par défaut : Matériaux
+     * Texte d’origine : Matériaux
      */
     materialsKicker?: string | null;
     /**
-     * Par défaut : Les **matériaux** du chantier
+     * Texte d’origine : Les **matériaux** du chantier
      */
     materialsTitle?: string | null;
     /**
-     * Par défaut : Découvrir 3B Récup’
+     * Texte d’origine : Découvrir 3B Récup’
      */
     recupLink?: string | null;
     /**
-     * Par défaut : Pour aller plus loin
+     * Texte d’origine : Pour aller plus loin
      */
     moreKicker?: string | null;
     /**
-     * Par défaut : Le **savoir-faire** derrière ce chantier
+     * Texte d’origine : Le **savoir-faire** derrière ce chantier
      */
     moreTitle?: string | null;
     /**
-     * Par défaut : Techniques, étapes et questions fréquentes : tout ce que nous faisons en {prestation}.
+     * Texte d’origine : Techniques, étapes et questions fréquentes : tout ce que nous faisons en {prestation}.
      */
     serviceCardText?: string | null;
     /**
-     * Par défaut : Voir la prestation
+     * Texte d’origine : Voir la prestation
      */
     serviceCardLink?: string | null;
     /**
-     * Par défaut : Nos autres chantiers et les communes où nous intervenons autour de {secteur}.
+     * Texte d’origine : Nos autres chantiers et les communes où nous intervenons autour de {secteur}.
      */
     sectorCardText?: string | null;
     /**
-     * Par défaut : Voir nos chantiers du secteur
+     * Texte d’origine : Voir nos chantiers du secteur
      */
     sectorCardLink?: string | null;
     /**
-     * Par défaut : Où intervenons-nous ?
+     * Texte d’origine : Où intervenons-nous ?
      */
     outsideTitle?: string | null;
     /**
-     * Par défaut : « Basé dans le nord des Hautes-Alpes, nous intervenons dans les Hautes-Alpes mais aussi en région PACA et Rhône-Alpes. »
+     * Texte d’origine : « Basé dans le nord des Hautes-Alpes, nous intervenons dans les Hautes-Alpes mais aussi en région PACA et Rhône-Alpes. »
      */
     outsideText?: string | null;
     /**
-     * Par défaut : Voir toutes nos réalisations
+     * Texte d’origine : Voir toutes nos réalisations
      */
     outsideLink?: string | null;
     /**
-     * Par défaut : D’autres chantiers
+     * Texte d’origine : D’autres chantiers
      */
     similarKicker?: string | null;
     /**
-     * Par défaut : Des réalisations **proches**
+     * Texte d’origine : Des réalisations **proches**
      */
     similarTitle?: string | null;
     /**
-     * Par défaut : Voir toutes nos réalisations
+     * Texte d’origine : Voir toutes nos réalisations
      */
     similarLink?: string | null;
     /**
-     * Par défaut : Un projet **semblable** ?
+     * Texte d’origine : Un projet **semblable** ?
      */
     ctaTitle?: string | null;
     /**
-     * Par défaut : Chaque projet chez 3B Charpente débute par une étude sur mesure. Parlons du vôtre lors d’une rencontre : nous vous proposerons un devis détaillé, adapté à votre projet.
+     * Texte d’origine : Chaque projet chez 3B Charpente débute par une étude sur mesure. Parlons du vôtre lors d’une rencontre : nous vous proposerons un devis détaillé, adapté à votre projet.
      */
     ctaText?: string | null;
     /**
-     * Par défaut : Demander mon devis
+     * Texte d’origine : Demander mon devis
      */
     ctaPrimary?: string | null;
     /**
-     * Par défaut : Appeler le {telephone}
+     * Texte d’origine : Appeler le {telephone}
      */
     ctaSecondary?: string | null;
+    /**
+     * Texte d’origine : Ce chantier
+     */
+    mapCurrent?: string | null;
+    /**
+     * Texte d’origine : Réalisations proches
+     */
+    mapNearby?: string | null;
   };
   article?: {
     /**
-     * Par défaut : Sommaire
+     * Texte d’origine : Sommaire
      */
     tocTitle?: string | null;
     /**
-     * Par défaut : Par {auteur}
+     * Texte d’origine : Par {auteur}
      */
     byline?: string | null;
     /**
-     * Par défaut : Publié le {date}
+     * Texte d’origine : Publié le {date}
      */
     published?: string | null;
     /**
-     * Par défaut : Mis à jour le {date}
+     * Texte d’origine : Mis à jour le {date}
      */
     updated?: string | null;
     /**
-     * Par défaut : {n} min de lecture
+     * Texte d’origine : {n} min de lecture
      */
     readingTime?: string | null;
+    /**
+     * Texte d’origine : Demander mon devis
+     */
+    tocCta?: string | null;
+    /**
+     * Texte d’origine : Vérifier notre qualification
+     */
+    authorLink?: string | null;
+    /**
+     * Texte d’origine : Pour aller plus loin
+     */
+    moreKicker?: string | null;
+    /**
+     * Texte d’origine : Nos autres **guides**
+     */
+    moreTitle?: string | null;
+    /**
+     * Texte d’origine : Tous nos conseils
+     */
+    moreLink?: string | null;
+    /**
+     * Texte d’origine : {n} guides
+     */
+    listCount?: string | null;
+    /**
+     * Texte d’origine : par sujet
+     */
+    listTopics?: string | null;
+    /**
+     * Texte d’origine : À la une
+     */
+    listFeatured?: string | null;
+    /**
+     * Texte d’origine : Les autres guides
+     */
+    listOthers?: string | null;
+    /**
+     * Texte d’origine : Au sommaire
+     */
+    listToc?: string | null;
   };
   explorer?: {
     /**
-     * Par défaut : Toutes
+     * Texte d’origine : Toutes
      */
     all?: string | null;
     /**
-     * Par défaut : Toutes les communes
+     * Texte d’origine : Toutes les communes
      */
     allCommunes?: string | null;
     /**
-     * Par défaut : {n} chantiers
+     * Texte d’origine : {n} chantiers
      */
     count?: string | null;
     /**
-     * Par défaut : 1 chantier
+     * Texte d’origine : 1 chantier
      */
     countOne?: string | null;
     /**
-     * Par défaut : Effacer les filtres
+     * Texte d’origine : Effacer les filtres
      */
     reset?: string | null;
     /**
-     * Par défaut : Autres chantiers
+     * Texte d’origine : classés par famille
+     */
+    byFamily?: string | null;
+    /**
+     * Texte d’origine : Autres chantiers
      */
     otherGroup?: string | null;
     /**
-     * Par défaut : Briançon et Briançonnais
+     * Texte d’origine : Briançon et Briançonnais
      */
     areaBrianconnais?: string | null;
     /**
-     * Par défaut : Serre Chevalier
+     * Texte d’origine : Serre Chevalier
      */
     areaSerreChevalier?: string | null;
     /**
-     * Par défaut : Vallouise et Pays des Écrins
+     * Texte d’origine : Vallouise et Pays des Écrins
      */
     areaVallouise?: string | null;
     /**
-     * Par défaut : Hors Hautes-Alpes
+     * Texte d’origine : Hors Hautes-Alpes
      */
     areaOutside?: string | null;
   };
   form?: {
     /**
-     * Par défaut : Les champs marqués d’un astérisque sont obligatoires.
+     * Texte d’origine : Les champs marqués d’un astérisque sont obligatoires.
      */
     requiredNote?: string | null;
     /**
-     * Par défaut : Envoi en cours…
+     * Texte d’origine : Envoi en cours…
      */
     sending?: string | null;
     /**
-     * Par défaut : Ajouter des fichiers
+     * Texte d’origine : Ajouter des fichiers
      */
     addFiles?: string | null;
     /**
-     * Par défaut : Retirer
+     * Texte d’origine : Retirer
      */
     removeFile?: string | null;
     /**
-     * Par défaut : Merci de prendre quelques secondes pour relire votre demande avant de l’envoyer.
+     * Texte d’origine : Merci de prendre quelques secondes pour relire votre demande avant de l’envoyer.
      */
     tooSoon?: string | null;
     /**
-     * Par défaut : Plusieurs demandes viennent d’être envoyées depuis votre connexion. Réessayez dans quelques minutes ou appelez-nous au {telephone}.
+     * Texte d’origine : Plusieurs demandes viennent d’être envoyées depuis votre connexion. Réessayez dans quelques minutes ou appelez-nous au {telephone}.
      */
     tooMany?: string | null;
     /**
-     * Par défaut : Voir nos réalisations en attendant
+     * Texte d’origine : Voir nos réalisations en attendant
      */
     successCta?: string | null;
     /**
-     * Par défaut : Ce champ est obligatoire.
+     * Texte d’origine : Ce champ est obligatoire.
      */
     requiredError?: string | null;
     /**
-     * Par défaut : Indiquez une adresse e-mail valide.
+     * Texte d’origine : Indiquez une adresse e-mail valide.
      */
     emailError?: string | null;
     /**
-     * Par défaut : Indiquez un numéro de téléphone valide.
+     * Texte d’origine : Indiquez un numéro de téléphone valide.
      */
     phoneError?: string | null;
     /**
-     * Par défaut : Ce fichier ne peut pas être envoyé (format ou taille).
+     * Texte d’origine : Ce fichier ne peut pas être envoyé (format ou taille).
      */
     fileError?: string | null;
     /**
-     * Par défaut : Envoi du fichier…
+     * Texte d’origine : Envoi du fichier…
      */
     uploading?: string | null;
     /**
-     * Par défaut : Nos coordonnées
+     * Texte d’origine : Nos coordonnées
      */
     contactTitle?: string | null;
     /**
-     * Par défaut : Horaires
+     * Texte d’origine : Horaires
      */
     hoursTitle?: string | null;
+    /**
+     * Texte d’origine : Téléphone
+     */
+    phoneLabel?: string | null;
+    /**
+     * Texte d’origine : E-mail
+     */
+    emailLabel?: string | null;
+    /**
+     * Texte d’origine : Adresse
+     */
+    addressLabel?: string | null;
   };
   notFound?: {
     /**
-     * Par défaut : Cette page n’existe pas (ou plus)
+     * Texte d’origine : Cette page n’existe pas (ou plus)
      */
     title?: string | null;
     /**
-     * Par défaut : L’adresse a peut-être changé. Voici nos prestations, ou appelez-nous directement au {telephone}.
+     * Texte d’origine : L’adresse a peut-être changé. Voici nos prestations, ou appelez-nous directement au {telephone}.
      */
     text?: string | null;
     /**
-     * Par défaut : Trouver une prestation
+     * Texte d’origine : Trouver une prestation
      */
     searchLabel?: string | null;
     /**
-     * Par défaut : Ex. : escalier, isolation, charpente…
+     * Texte d’origine : Ex. : escalier, isolation, charpente…
      */
     searchPlaceholder?: string | null;
     /**
-     * Par défaut : Retour à l’accueil
+     * Texte d’origine : Retour à l’accueil
      */
     homeLink?: string | null;
     /**
-     * Par défaut : Nous contacter
+     * Texte d’origine : Nous contacter
      */
     contactLink?: string | null;
+    /**
+     * Texte d’origine : Nos prestations
+     */
+    servicesKicker?: string | null;
+    /**
+     * Texte d’origine : Réalisations
+     */
+    projectsKicker?: string | null;
+    /**
+     * Texte d’origine : Voir nos réalisations
+     */
+    projectsLink?: string | null;
+    /**
+     * Texte d’origine : Contact et devis
+     */
+    contactKicker?: string | null;
+    /**
+     * Texte d’origine : 3B Récup’
+     */
+    recupKicker?: string | null;
+    /**
+     * Texte d’origine : Découvrir 3B Récup’
+     */
+    recupLink?: string | null;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -5154,6 +5339,13 @@ export interface SiteTextsSelect<T extends boolean = true> {
         projectPhotos?: T;
         articleCardLink?: T;
         serviceCardLink?: T;
+        heroSheetLabel?: T;
+        heroSheetNumber?: T;
+        mapHere?: T;
+        mapOther?: T;
+        mapScale?: T;
+        directions?: T;
+        tocCount?: T;
       };
   project?:
     | T
@@ -5194,6 +5386,8 @@ export interface SiteTextsSelect<T extends boolean = true> {
         ctaText?: T;
         ctaPrimary?: T;
         ctaSecondary?: T;
+        mapCurrent?: T;
+        mapNearby?: T;
       };
   article?:
     | T
@@ -5203,6 +5397,16 @@ export interface SiteTextsSelect<T extends boolean = true> {
         published?: T;
         updated?: T;
         readingTime?: T;
+        tocCta?: T;
+        authorLink?: T;
+        moreKicker?: T;
+        moreTitle?: T;
+        moreLink?: T;
+        listCount?: T;
+        listTopics?: T;
+        listFeatured?: T;
+        listOthers?: T;
+        listToc?: T;
       };
   explorer?:
     | T
@@ -5212,6 +5416,7 @@ export interface SiteTextsSelect<T extends boolean = true> {
         count?: T;
         countOne?: T;
         reset?: T;
+        byFamily?: T;
         otherGroup?: T;
         areaBrianconnais?: T;
         areaSerreChevalier?: T;
@@ -5235,6 +5440,9 @@ export interface SiteTextsSelect<T extends boolean = true> {
         uploading?: T;
         contactTitle?: T;
         hoursTitle?: T;
+        phoneLabel?: T;
+        emailLabel?: T;
+        addressLabel?: T;
       };
   notFound?:
     | T
@@ -5245,6 +5453,12 @@ export interface SiteTextsSelect<T extends boolean = true> {
         searchPlaceholder?: T;
         homeLink?: T;
         contactLink?: T;
+        servicesKicker?: T;
+        projectsKicker?: T;
+        projectsLink?: T;
+        contactKicker?: T;
+        recupKicker?: T;
+        recupLink?: T;
       };
   updatedAt?: T;
   createdAt?: T;

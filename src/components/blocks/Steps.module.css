@@ -1,3 +1,60 @@
+/* ---------- Contact sheet: the photos of the steps ---------- */
+.sheet {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0 0 clamp(2.5rem, 5vw, 3.5rem);
+  padding: 0;
+  list-style: none;
+}
+
+.sheet[data-count='1'] {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 560px;
+}
+
+.sheet[data-count='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.sheet[data-count='3'] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sheetItem {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  background: var(--bg-alt);
+}
+
+.sheetItem img {
+  object-fit: cover;
+}
+
+.sheetTag {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  max-width: calc(100% - 24px);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: rgb(248 244 238 / 0.94);
+  color: #102311;
+  font-size: 0.8125rem;
+  font-weight: 650;
+  line-height: 1.3;
+  backdrop-filter: blur(6px);
+}
+
+.sheetTag b {
+  margin-right: 4px;
+  color: #336233;
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
 /* ---------- Frieze ---------- */
 .frieze {
   position: relative;
@@ -27,6 +84,8 @@
 }
 
 .num {
+  position: relative;
+  z-index: 1;
   display: grid;
   place-items: center;
   width: 56px;
@@ -61,65 +120,35 @@
   font-size: 0.9375rem;
 }
 
-/* ---------- Detailed steps ---------- */
-.detailed {
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--c-line);
-  list-style: none;
-}
+/* Long methods: rows of three, each with its own rule. */
+@media (min-width: 1081px) {
+  .rows {
+    gap: 48px 32px;
+  }
 
-.step {
-  display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
-  gap: var(--space-6);
-  padding-block: clamp(1.5rem, 3vw, 2.25rem);
-  border-bottom: 1px solid var(--c-line);
-}
+  .rows::before {
+    display: none;
+  }
 
-.step[data-has-image] {
-  grid-template-columns: 96px minmax(0, 1fr) minmax(0, 0.8fr);
-  align-items: start;
-}
+  .rows li::after {
+    content: '';
+    position: absolute;
+    top: 27px;
+    left: 68px;
+    right: -24px;
+    height: 1px;
+    background: var(--c-line-strong);
+  }
 
-.bigNum {
-  color: var(--fg-accent);
-  font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 2rem + 1.5vw, 3.5rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1;
-}
+  .rows li:nth-child(3n)::after,
+  .rows li:last-child::after {
+    right: 0;
+    background: linear-gradient(90deg, var(--c-line-strong), transparent);
+  }
 
-.stepBody {
-  display: grid;
-  align-content: start;
-  gap: 10px;
-  max-width: 62ch;
-}
-
-.stepTitle {
-  font-size: var(--fs-h3);
-  font-weight: 600;
-}
-
-.stepText {
-  display: grid;
-  gap: 0.8em;
-  color: color-mix(in srgb, var(--fg) 80%, var(--bg));
-}
-
-.photo {
-  position: relative;
-  overflow: hidden;
-  margin: 0;
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius-md);
-  background: var(--bg-alt);
-}
-
-.photo img {
-  object-fit: cover;
+  .rows .text {
+    max-width: 40ch;
+  }
 }
 
 .cta {
@@ -127,8 +156,215 @@
   margin-top: var(--space-10);
 }
 
+/* ---------- A method that loops (3B Récup'): forest panel and cycle ---------- */
+.cycleWrap {
+  position: relative;
+  padding-block: var(--section-pad);
+}
+
+.panel {
+  --fg: #ffffff;
+  --fg-muted: rgb(255 255 255 / 0.78);
+  --fg-accent: #a3d2a3;
+  --c-line: rgb(255 255 255 / 0.18);
+  --c-line-strong: rgb(255 255 255 / 0.36);
+  --bg: #2c4f2d;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(2rem, 5vw, 4.5rem);
+  border-radius: var(--radius-xl);
+  background: #2c4f2d;
+  color: #ffffff;
+}
+
+:global(:root[data-theme='dark']) .panel {
+  --bg: #1f3a22;
+  background: #1f3a22;
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .panel {
+    --bg: #1f3a22;
+    background: #1f3a22;
+  }
+}
+
+.panelRings {
+  position: absolute;
+  left: -220px;
+  bottom: -260px;
+  z-index: -1;
+  width: 620px;
+  height: 620px;
+  background: #a3d2a3;
+  opacity: 0.16;
+  pointer-events: none;
+  -webkit-mask: var(--rings-url) center / contain no-repeat;
+  mask: var(--rings-url) center / contain no-repeat;
+}
+
+.panelTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.panelHeading {
+  margin-bottom: 0;
+}
+
+.cycle {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  justify-self: center;
+}
+
+.cycle svg {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.cycleRings {
+  position: absolute;
+  inset: 31%;
+  background: #a3d2a3;
+  opacity: 0.55;
+  -webkit-mask: var(--rings-url) center / contain no-repeat;
+  mask: var(--rings-url) center / contain no-repeat;
+}
+
+.cycleArc {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.6);
+  stroke-width: 1.6;
+}
+
+.cycleArrow {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.85);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cycleNode {
+  fill: #a3d2a3;
+}
+
+.cycleNum {
+  fill: #102311;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cycleLabel {
+  fill: #ffffff;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* The frieze on the forest panel: hairlines instead of circles on cream. */
+.onForest {
+  grid-template-columns: repeat(var(--steps, 5), minmax(0, 1fr));
+  gap: 0;
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--c-line);
+}
+
+.onForest::before {
+  display: none;
+}
+
+.onForest li {
+  padding: 0 clamp(0.75rem, 1.4vw, 1.25rem);
+  border-left: 1px solid var(--c-line);
+}
+
+.onForest li:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.onForest .num {
+  width: 40px;
+  height: 40px;
+  border-color: #a3d2a3;
+  background: transparent;
+  color: #a3d2a3;
+  font-size: 0.9375rem;
+}
+
+.onForest li:first-child .num {
+  border-color: #a3d2a3;
+  background: #a3d2a3;
+  color: #102311;
+}
+
+.onForest .title {
+  color: #ffffff;
+  font-size: 1.0625rem;
+}
+
+.onForest .text {
+  color: rgb(255 255 255 / 0.78);
+  font-size: 0.875rem;
+}
+
+.onForest .text a {
+  color: #ffffff;
+}
+
+/* ---------- In a guide: one column ---------- */
+:global(.article-body) .frieze {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+:global(.article-body) .frieze::before {
+  top: 0;
+  bottom: 0;
+  left: 27px;
+  right: auto;
+  width: 1px;
+  height: auto;
+}
+
+:global(.article-body) .frieze li {
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: 20px;
+  padding-bottom: 28px;
+}
+
+:global(.article-body) .frieze li::after {
+  display: none;
+}
+
+:global(.article-body) .frieze li > :not(.num) {
+  grid-column: 2;
+}
+
+:global(.article-body) .num {
+  grid-row: 1 / span 2;
+}
+
+:global(.article-body) .sheet {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* ---------- Tablets and phones: a vertical frieze ---------- */
 @media (max-width: 1080px) {
-  .frieze {
+  .frieze,
+  .onForest {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
   }
@@ -155,12 +391,51 @@
   .num {
     grid-row: 1 / span 2;
   }
+
+  .onForest li {
+    grid-template-columns: 40px minmax(0, 1fr);
+    column-gap: 16px;
+    padding: 0 0 22px;
+    border-left: 0;
+  }
+
+  .onForest::before {
+    display: block;
+    left: 20px;
+    top: var(--space-6);
+    background: var(--c-line);
+  }
+
+  .sheet {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .panelTop {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-@media (max-width: 760px) {
-  .step,
-  .step[data-has-image] {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-3);
+@media (max-width: 560px) {
+  .sheet[data-count='3'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sheet {
+    gap: 10px;
+  }
+
+  .sheetTag {
+    left: 8px;
+    bottom: 8px;
+    padding: 4px 7px;
+    font-size: 0.75rem;
+  }
+
+  .cycle {
+    max-width: 340px;
+  }
+
+  .cycleLabel {
+    font-size: 15px;
   }
 }

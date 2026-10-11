@@ -266,3 +266,225 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ---------- Editorial index (numbered rows between hairlines) ---------- */
+.index {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--c-line);
+  list-style: none;
+}
+
+.indexRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1.05fr) minmax(0, 1.25fr) 52px;
+  align-items: center;
+  gap: var(--space-6);
+  padding-block: 26px;
+  border-bottom: 1px solid var(--c-line);
+  transition: padding var(--dur-base) var(--ease-out);
+}
+
+.indexRow[data-link]:hover {
+  padding-inline: var(--space-3);
+}
+
+.indexNum {
+  color: var(--fg-muted);
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.indexTitle {
+  font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.875rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+.indexTitle a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.indexText {
+  display: grid;
+  gap: 6px;
+  color: var(--fg-muted);
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
+
+.indexMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-self: start;
+  color: var(--fg-accent);
+  font-size: 0.875rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.indexMore svg {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.indexRow:hover .indexMore svg {
+  transform: translateX(3px);
+}
+
+.indexGo {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 50%;
+  transition:
+    background-color 220ms var(--ease-out),
+    border-color 220ms var(--ease-out),
+    color 220ms var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.indexRow:hover .indexGo,
+.indexRow:focus-within .indexGo {
+  border-color: var(--btn-bg);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  transform: rotate(-45deg);
+}
+
+.stretched {
+  position: static;
+}
+
+.stretched::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.stretched:focus-visible {
+  outline: none;
+}
+
+.stretched:focus-visible::after {
+  outline: 2px solid var(--c-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* The item's photo follows the row on hover (pointer devices). */
+.indexPeek {
+  position: absolute;
+  right: 96px;
+  top: 50%;
+  z-index: 2;
+  width: 220px;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) rotate(-3deg) scale(0.92);
+  transition:
+    opacity 260ms var(--ease-out),
+    transform 420ms var(--ease-out);
+}
+
+@media (hover: hover) {
+  .indexRow:hover .indexPeek {
+    opacity: 1;
+    transform: translateY(-50%) rotate(-3deg) scale(1);
+  }
+}
+
+/* Many short items: three columns of compact rows. */
+.indexGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(1.25rem, 2.6vw, 2.5rem);
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--c-line);
+  list-style: none;
+}
+
+.indexGrid .indexRow {
+  grid-template-columns: 34px minmax(0, 1fr) 44px;
+  align-items: start;
+  gap: 6px 12px;
+  padding-block: 22px;
+}
+
+.indexGrid .indexNum {
+  padding-top: 5px;
+  font-size: 0.875rem;
+}
+
+.indexGrid .indexTitle {
+  font-size: 1.1875rem;
+  line-height: 1.25;
+}
+
+.indexGrid .indexText {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 0.9375rem;
+}
+
+.indexGrid .indexGo {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  width: 44px;
+  height: 44px;
+}
+
+.indexGrid .indexRow[data-link]:hover {
+  padding-inline: 0;
+}
+
+@media (max-width: 1080px) {
+  .indexRow {
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    gap: var(--space-2) var(--space-4);
+    padding-block: 22px;
+  }
+
+  .indexText {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .indexGo {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    width: 44px;
+    height: 44px;
+  }
+
+  .indexPeek {
+    display: none;
+  }
+
+  .indexGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .indexGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .indexRow[data-link]:hover {
+    padding-inline: 0;
+  }
+}

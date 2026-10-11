@@ -45,7 +45,7 @@
   --band-accent: var(--c-sage);
   --pill-bg: var(--c-sage);
   --pill-fg: var(--c-ink);
-  --header-bg: rgb(248 244 238 / 0.86);
+  --header-bg: #f8f4ee;
   --logo-mark: #254227;
   --logo-text: #102311;
 
@@ -143,7 +143,7 @@
     --band-accent: #a3d2a3;
     --pill-bg: #2a4a2e;
     --pill-fg: #dcecd9;
-    --header-bg: rgb(14 26 16 / 0.86);
+    --header-bg: #0e1a10;
     --logo-mark: #a3d2a3;
     --logo-text: #eef1e8;
     --shadow-md: 0 14px 34px -16px rgb(0 0 0 / 0.6);
@@ -180,7 +180,7 @@
   --band-accent: #a3d2a3;
   --pill-bg: #2a4a2e;
   --pill-fg: #dcecd9;
-  --header-bg: rgb(14 26 16 / 0.86);
+  --header-bg: #0e1a10;
   --logo-mark: #a3d2a3;
   --logo-text: #eef1e8;
   --shadow-md: 0 14px 34px -16px rgb(0 0 0 / 0.6);

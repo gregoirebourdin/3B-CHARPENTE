@@ -2,10 +2,10 @@ import type { Commune, Company } from '@/payload-types'
 
 import styles from './AreaMap.module.css'
 
-type Point = { lat: number; lon: number }
+export type Point = { lat: number; lon: number }
 
 /** Approximate courses of the Guisane, the Durance and the Gyronde (haute Durance). */
-const RIVERS: Point[][] = [
+export const RIVERS: Point[][] = [
   [
     { lat: 44.995, lon: 6.46 },
     { lat: 44.976, lon: 6.508 },

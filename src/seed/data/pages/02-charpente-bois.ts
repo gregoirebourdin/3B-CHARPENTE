@@ -42,6 +42,12 @@ export const service: SeedService = {
     proofs: [{ label: 'Depuis 2007' }, { label: 'Bois des Hautes-Alpes' }],
     images: [HERO],
     caption: "Levage des fermes, réfection d'une charpente à L'Argentière-la-Bessée.",
+    photoTag: "L'Argentière-la-Bessée",
+    sheet: [
+      { label: 'Essences', value: 'Mélèze et sapin des Hautes-Alpes' },
+      { label: 'Assemblages', value: 'Bois sur bois : tenons, mortaises, chevilles' },
+      { label: "À l'atelier", value: 'Traçage, taille, assemblage à blanc' },
+    ],
   },
 
   // Savoldelli nommée une seule fois sur la page (section « Nos bois ») : voir validationPoints.
@@ -81,7 +87,7 @@ export const service: SeedService = {
     // 3.5 Ce que nous réalisons
     {
       type: 'cards',
-      variant: 'icon',
+      variant: 'index',
       columns: 3,
       kicker: 'Nos charpentes',
       title: "Du neuf à l'ancien, **une charpente pour chaque projet**",
@@ -230,7 +236,7 @@ export const service: SeedService = {
     // 3.10 3B Récup'
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       badge: '3B Récup’',
       kicker: "3B Récup'",
       title: "Une vieille charpente **n'est pas un déchet**",
@@ -270,7 +276,7 @@ export const service: SeedService = {
     // 3.13 Appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       title: 'Prêt à **transformer votre espace** ?',
       text: "Chaque projet chez 3B Charpente débute par une étude sur mesure. Parlez-nous de votre charpente : nous discuterons de vos besoins lors d'une rencontre et vous proposerons un devis détaillé.",
       primary: { label: 'Demander mon devis', href: '/contact/' },

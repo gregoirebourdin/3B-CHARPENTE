@@ -60,40 +60,97 @@
 
 .visual {
   position: relative;
+  isolation: isolate;
   margin: 0;
 }
 
-.imageMain {
+.imageMain,
+.imageSecond {
+  position: relative;
   overflow: hidden;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  background: var(--bg-alt);
 }
 
 .imageMain img,
 .imageSecond img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
-.stacked {
-  padding-bottom: clamp(3rem, 8vw, 6rem);
+/* One photo: a passe-partout frame, like a carpenter's square laid behind. */
+.framed {
+  padding: 12px 0 0 12px;
 }
 
-.stacked .imageMain {
-  width: 82%;
-}
-
-.imageSecond {
+.framed::before {
+  content: '';
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 50%;
-  overflow: hidden;
-  border: 6px solid var(--bg);
-  border-radius: var(--radius-md);
+  top: 0;
+  left: 0;
+  right: 12px;
+  aspect-ratio: 4 / 3;
+  z-index: -1;
+  border: 1px solid var(--c-line-strong);
+  border-radius: calc(var(--radius-lg) + 4px);
+  pointer-events: none;
+}
+
+.framed .imageMain {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
+}
+
+/* Two photos: the second laid over the corner of the first. */
+.collage {
+  padding-bottom: 22%;
+}
+
+.collage .imageMain {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.collage .imageSecond {
+  position: absolute;
+  left: -36px;
+  bottom: 0;
+  width: 48%;
+  aspect-ratio: 4 / 3;
+  border: 6px solid var(--bg);
+  border-radius: calc(var(--radius-lg) + 6px);
+  box-shadow: var(--shadow-md);
+}
+
+:global([data-tone='light']) .collage .imageSecond {
+  border-color: var(--bg-alt);
+}
+
+.left .collage .imageSecond {
+  left: auto;
+  right: -36px;
+}
+
+/* Labels on the photos: what they show. */
+.tag {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  max-width: calc(100% - 24px);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: rgb(248 244 238 / 0.94);
+  color: #102311;
+  font-size: 0.8125rem;
+  font-weight: 650;
+  line-height: 1.3;
+  backdrop-filter: blur(6px);
+}
+
+.tagTop {
+  top: 14px;
+  bottom: auto;
+  left: 14px;
 }
 
 .badge {
@@ -112,6 +169,21 @@
   margin-top: var(--space-3);
   color: var(--fg-muted);
   font-size: var(--fs-xs);
+  line-height: 1.45;
+}
+
+/* Beside the second photo, the caption fills the free corner. */
+.collage .caption {
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  width: 46%;
+  margin: 0;
+}
+
+.left .collage .caption {
+  right: auto;
+  left: 0;
 }
 
 @media (max-width: 900px) {
@@ -121,5 +193,62 @@
 
   .left .visual {
     order: 0;
+  }
+
+  .visual {
+    max-width: 640px;
+  }
+
+  .collage .imageSecond,
+  .left .collage .imageSecond {
+    left: 0;
+    right: auto;
+  }
+
+  .left .collage .caption {
+    left: auto;
+    right: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .collage {
+    padding-bottom: 0;
+  }
+
+  .collage .imageSecond,
+  .left .collage .imageSecond {
+    position: relative;
+    left: auto;
+    right: auto;
+    width: 62%;
+    margin: -22% 0 0 auto;
+  }
+
+  .collage .caption,
+  .left .collage .caption {
+    position: static;
+    width: auto;
+    margin-top: var(--space-3);
+  }
+
+  .framed {
+    padding: 10px 0 0 10px;
+  }
+
+  .framed::before {
+    right: 10px;
+  }
+
+  .tag {
+    left: 10px;
+    bottom: 10px;
+    padding: 5px 8px;
+    font-size: 0.75rem;
+  }
+
+  .tagTop {
+    top: 10px;
+    bottom: auto;
   }
 }

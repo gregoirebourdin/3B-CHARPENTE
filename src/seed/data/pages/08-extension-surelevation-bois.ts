@@ -194,7 +194,7 @@ export const service: SeedService = {
     // 3.10 3B Récup'
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       badge: '3B Récup’',
       kicker: "3B Récup'",
       title: 'La toiture déposée **peut resservir**',
@@ -262,7 +262,7 @@ export const service: SeedService = {
     // 3.14 Appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       title: 'Besoin de **place en plus** ?',
       text: 'Chaque projet chez 3B Charpente débute par une étude sur mesure. Nous venons voir votre maison, nous discutons de vos besoins et vous proposons un devis détaillé.',
       primary: { label: 'Demander mon devis', href: '/contact/' },

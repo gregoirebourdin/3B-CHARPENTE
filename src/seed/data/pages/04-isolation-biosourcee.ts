@@ -275,7 +275,7 @@ export const service: SeedService = {
     // 3.10 3B Récup'
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       badge: '3B Récup’',
       kicker: "3B Récup'",
       title: "Rénover, c'est aussi **réemployer**",
@@ -304,7 +304,7 @@ export const service: SeedService = {
     // 3.12 Appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       kicker: 'Votre projet',
       title: 'Prêt à isoler **votre maison** ?',
       text: "Chaque projet chez 3B Charpente débute par une étude sur mesure. Parlez-nous de votre maison : nous venons la voir, nous discutons de vos besoins et nous vous proposons un devis détaillé.\n\n*« Construire durablement, c'est construire pour l'avenir. »*",

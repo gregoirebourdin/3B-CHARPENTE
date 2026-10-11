@@ -12,7 +12,7 @@ export const page: SeedPage = {
     image: 'rehabilitation-d-une-ancienne-forge-a-la-salle-les-alpes/8Chantier fini.JPG',
   },
   hero: {
-    variant: 'collage',
+    variant: 'map',
     kicker: 'Charpente · Toiture · Escaliers · Balcons',
     title: 'Charpentier à **Serre Chevalier**, de Saint-Chaffrey au Monêtier-les-Bains',
     text: "Dans la vallée de la Guisane, 3B Charpente reprend les charpentes et les toitures, réhabilite le bâti ancien et crée des escaliers et des balcons en bois. Nous sommes installés depuis 2007 à L'Argentière-la-Bessée et nous travaillons le **bois des Hautes-Alpes** et des **isolants biosourcés**.",
@@ -78,7 +78,7 @@ export const page: SeedPage = {
     // Section 5 — Nos prestations dans la vallée
     {
       type: 'cards',
-      variant: 'icon',
+      variant: 'index',
       columns: 3,
       kicker: 'Ce que nous faisons',
       title: 'Nos **prestations** à Serre Chevalier',
@@ -175,27 +175,24 @@ export const page: SeedPage = {
     },
     // Section 8 — Communes desservies
     {
-      type: 'list',
-      style: 'pills',
+      type: 'serviceArea',
+      tone: 'cream',
       kicker: 'Où nous intervenons',
       title: 'Toute la **vallée de Serre Chevalier**',
-      text: "Depuis L'Argentière-la-Bessée, nous intervenons dans la vallée de Serre Chevalier :",
-      items: [
-        { title: 'La Salle-les-Alpes' },
-        { title: 'Le Monêtier-les-Bains (Le Casset)' },
-        { title: 'et les communes voisines' },
-      ],
-    },
-    {
-      type: 'textImage',
-      text: "À l'entrée de la vallée, Briançon a sa propre page. Nous travaillons aussi dans le Pays des Écrins, autour de Vallouise et de L'Argentière-la-Bessée. Plus largement, « nous intervenons dans les Hautes-Alpes mais aussi en région PACA et Rhône-Alpes ».",
-      links: [
-        { label: 'Charpentier à Briançon', href: '/charpentier-briancon/' },
+      text: "Depuis L'Argentière-la-Bessée, nous intervenons dans la vallée de Serre Chevalier : à La Salle-les-Alpes, au Monêtier-les-Bains (Le Casset) et dans les communes voisines. Plus largement, « nous intervenons dans les Hautes-Alpes mais aussi en région PACA et Rhône-Alpes ».",
+      sectors: [
         {
-          label: 'Charpentier en Vallouise et Pays des Écrins',
-          href: '/charpentier-vallouise-pays-des-ecrins/',
+          title: 'Charpentier à Briançon',
+          text: "À l'entrée de la vallée, Briançon a sa propre page.",
+          link: { label: 'Nos chantiers à Briançon', href: '/charpentier-briancon/' },
+        },
+        {
+          title: 'Charpentier en Vallouise et Pays des Écrins',
+          text: "Autour de Vallouise et de L'Argentière-la-Bessée.",
+          link: { label: 'Nos chantiers en Vallouise', href: '/charpentier-vallouise-pays-des-ecrins/' },
         },
       ],
+      showMap: false,
     },
     // Section 9 — FAQ
     {
@@ -213,7 +210,7 @@ export const page: SeedPage = {
     // Section 10 — Appel à l'action et coordonnées
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       title: 'Un projet dans la **vallée** ?',
       text: 'Chaque projet chez 3B Charpente débute par une étude sur mesure. Parlons du vôtre.',
       primary: { label: 'Demander mon devis', href: '/contact/' },

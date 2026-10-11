@@ -42,6 +42,7 @@ export const page: SeedPage = {
       { label: 'Qualifié RGE', icon: 'medal' },
     ],
     images: [P.assemblageBlanc],
+    backdrop: P.foret,
   },
 
   tldr: "3B Charpente est l'entreprise de charpente de Jean-Michel Tardy, fondée en 2007 à L'Argentière-la-Bessée (Hautes-Alpes). Formé chez les Compagnons du Devoir, Jean-Michel a fait son Tour de France en France métropolitaine, en Martinique et en Autriche. L'entreprise est qualifiée RGE par Qualibat, travaille le mélèze et le sapin des Hautes-Alpes et réemploie le bois avec 3B Récup'.",
@@ -72,12 +73,13 @@ export const page: SeedPage = {
       type: 'textImage',
       kicker: 'Le fondateur',
       title: 'Jean-Michel Tardy, du **Tour de France** aux **Hautes-Alpes**',
-      text: "Jean-Michel Tardy est originaire des montagnes grenobloises. Il débute la charpente en 1995 : à 16 ans, il entre en apprentissage dans une entreprise de Savoie.\n\nIl passe son CAP dans un CFA des Compagnons du Devoir, puis part sur le Tour de France. Ce parcours de formation fait passer le jeune charpentier d'entreprise en entreprise pour apprendre le métier auprès de différentes équipes. Pour Jean-Michel, ce sera en France métropolitaine, en Martinique et en Autriche.\n\nIl devient ensuite formateur pendant deux ans à L'Argentière-la-Bessée, puis crée 3B Charpente dans les Hautes-Alpes, en 2007.\n\n**Ce qui compte pour lui ?**",
+      text: "Jean-Michel Tardy est originaire des montagnes grenobloises. Il débute la charpente en 1995 : à 16 ans, il entre en apprentissage dans une entreprise de Savoie.\n\nIl passe son CAP dans un CFA des Compagnons du Devoir, puis part sur le Tour de France. Ce parcours de formation fait passer le jeune charpentier d'entreprise en entreprise pour apprendre le métier auprès de différentes équipes. Pour Jean-Michel, ce sera en France métropolitaine, en Martinique et en Autriche.\n\nIl devient ensuite formateur pendant deux ans à L'Argentière-la-Bessée, puis crée 3B Charpente dans les Hautes-Alpes, en 2007.",
       images: [P.tailleForge],
       imagePosition: 'left',
     },
     {
       type: 'quote',
+      lead: 'Ce qui compte pour lui ?',
       text: "Le travail en équipe, l'écoute apportée aux clients, la belle ouvrage, la joie de venir travailler le matin.",
       author: 'Jean-Michel Tardy',
       role: 'fondateur de 3B Charpente',
@@ -182,7 +184,7 @@ export const page: SeedPage = {
       intro: "Autour de Jean-Michel, une équipe de charpentiers travaille à l'atelier et sur les chantiers.",
     },
 
-    // Section 8 : nos valeurs (photo d'ambiance « forêt », la seule de la page)
+    // Section 8 : nos valeurs (panneau vert forêt ; la photo d'ambiance de la forêt est en fond du haut de page)
     {
       type: 'manifesto',
       layout: 'columns',
@@ -205,7 +207,6 @@ export const page: SeedPage = {
         },
         { title: 'La transparence', text: 'Simple, transparent, et toujours à votre écoute : voilà notre promesse.' },
       ],
-      image: P.foret,
     },
 
     // Section 9 : qualifications (cartes Scierie Savoldelli, PRECI et FEADER retirées : voir points à valider)
@@ -233,7 +234,7 @@ export const page: SeedPage = {
     // Section 10 : 3B Récup' (teaser)
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       badge: "3B Récup'",
       title: '**Prolonger la vie** des matériaux de construction',
       text: "Avec 3B Récup', nous voulons prolonger la vie des matériaux de construction, réduisant ainsi les déchets et l'impact environnemental, tout en offrant des solutions esthétiques et économiques. Nous déposons les structures bois, les transformons dans nos ateliers et les réemployons sur nos chantiers.\n\n- Réduire l'impact environnemental\n- Maximiser l'utilisation des ressources",
@@ -270,7 +271,7 @@ export const page: SeedPage = {
     // Section 13 : appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       kicker: 'Travaillons ensemble',
       title: 'Parlons de votre **projet**',
       text: 'Nous sommes là pour répondre à toutes vos questions et discuter de vos projets de construction et de rénovation.',

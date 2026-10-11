@@ -24,7 +24,22 @@ export const heroField: Field = {
       options: [
         { label: 'Texte + collage de photos', value: 'collage' },
         { label: 'Texte + une photo', value: 'photo' },
+        { label: 'Texte + carte du secteur (pages secteur)', value: 'map' },
         { label: 'Texte seul', value: 'simple' },
+      ],
+      admin: {
+        description:
+          'Carte du secteur : les communes rattachées à cette page (collection « Communes ») et deux de leurs chantiers, posés sur le relief.',
+      },
+    },
+    {
+      name: 'tone',
+      type: 'select',
+      label: 'Fond du haut de page',
+      defaultValue: 'cream',
+      options: [
+        { label: 'Crème, courbes de niveau (par défaut)', value: 'cream' },
+        { label: 'Panneau vert forêt, cernes du bois (3B Récup’)', value: 'forest' },
       ],
     },
     {
@@ -103,6 +118,47 @@ export const heroField: Field = {
       label: 'Légende de la photo principale',
       maxLength: 160,
       admin: { condition: (_, siblingData) => siblingData?.variant !== 'simple' },
+    },
+    {
+      name: 'photoTag',
+      type: 'text',
+      label: 'Étiquette sur la photo (facultatif)',
+      maxLength: 40,
+      admin: {
+        condition: (_, siblingData) => siblingData?.variant === 'photo' || siblingData?.variant === 'collage',
+        description: 'Courte : la commune ou l’ouvrage. Ex. : « L’Argentière-la-Bessée ».',
+      },
+    },
+    {
+      name: 'sheet',
+      type: 'array',
+      label: 'Fiche d’atelier posée sur la photo (facultatif)',
+      labels: { singular: 'Ligne', plural: 'Lignes' },
+      maxRows: 4,
+      admin: {
+        condition: (_, siblingData) => siblingData?.variant === 'photo',
+        description: 'Trois lignes courtes et vérifiables, reprises du texte de la page. Ex. : « Essences » → « Mélèze et sapin des Hautes-Alpes ».',
+      },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            { name: 'label', type: 'text', label: 'Intitulé', required: true, maxLength: 24, admin: { width: '35%' } },
+            { name: 'value', type: 'text', label: 'Valeur', required: true, maxLength: 70, admin: { width: '65%' } },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'backdrop',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Photo d’ambiance en fond (facultatif)',
+      filterOptions: { kind: { equals: 'ambiance' } },
+      admin: {
+        description:
+          'Uniquement une photo d’ambiance (la forêt), assombrie sous le texte : une ou deux fois sur tout le site. Les photos de chantier restent en cadre.',
+      },
     },
   ],
 }

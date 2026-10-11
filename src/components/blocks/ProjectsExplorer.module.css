@@ -10,9 +10,7 @@
   margin-bottom: var(--space-12);
   padding-block: var(--space-4);
   border-block: 1px solid var(--c-line);
-  background: var(--header-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--bg);
 }
 
 .barInner {

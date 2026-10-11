@@ -127,6 +127,36 @@ export const getProjects = cache(async (whereKey = '{}', limit = 100, sort = 'or
   return docs as Project[]
 })
 
+/** The steps of a few chantiers, for cards that tell what was done (ids as a JSON array, for the cache). */
+export const getProjectSteps = cache(async (idsKey: string): Promise<Pick<Project, 'id' | 'steps'>[]> => {
+  const ids = JSON.parse(idsKey) as number[]
+  if (!ids.length) return []
+  const payload = await getPayloadClient()
+  const { docs } = await payload.find({
+    collection: 'projects',
+    where: { and: [{ id: { in: ids } }, await published()] },
+    select: { steps: true },
+    depth: 0,
+    limit: ids.length,
+    pagination: false,
+  })
+  return docs as Pick<Project, 'id' | 'steps'>[]
+})
+
+/** The sections of every guide (reading time, outline), without the rest. */
+export const getArticleLayouts = cache(async (): Promise<Pick<Article, 'id' | 'layout'>[]> => {
+  const payload = await getPayloadClient()
+  const { docs } = await payload.find({
+    collection: 'articles',
+    where: await published(),
+    select: { layout: true },
+    depth: 0,
+    limit: 50,
+    pagination: false,
+  })
+  return docs as Pick<Article, 'id' | 'layout'>[]
+})
+
 export const getArticles = cache(async (): Promise<Article[]> => {
   const payload = await getPayloadClient()
   const { docs } = await payload.find({

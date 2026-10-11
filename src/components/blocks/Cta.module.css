@@ -26,7 +26,13 @@
 }
 
 .card {
-  padding-block: 0 var(--section-pad);
+  padding-block: var(--section-pad);
+}
+
+/* After a section on the same cream ground, its padding already gives the air above. */
+:global([data-tone='cream']) + .card,
+.card + .card {
+  padding-top: 0;
 }
 
 /* After a section with its own padding, the card needs no extra space above. */
