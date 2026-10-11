@@ -22,8 +22,13 @@ export type SeedContext = {
   faqs: Map<string, number>
   forms: Map<string, number>
   log: (message: string) => void
-  /** Context passed to every Payload operation: no revalidation during the import. */
-  opContext: { disableRevalidate: true }
+  /**
+   * Context passed to every Payload operation: no revalidation during the import.
+   * A new object on each read: Payload and its plugins write into `req.context`
+   * (e.g. the storage plugin's `skipCloudStorage`), so concurrent operations must
+   * never share one.
+   */
+  readonly opContext: { disableRevalidate: true }
 }
 
 export const nfc = (value: string) => value.normalize('NFC')
@@ -42,7 +47,9 @@ export async function createContext(payload: Payload, root: string): Promise<See
     faqs: new Map(),
     forms: new Map(),
     log: (message) => console.log(message),
-    opContext: { disableRevalidate: true },
+    get opContext() {
+      return { disableRevalidate: true as const }
+    },
   }
 }
 

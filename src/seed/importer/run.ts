@@ -25,6 +25,8 @@ export type SeedOptions = {
   editorPassword?: string
   /** Only create the accounts (content import postponed). */
   accountsOnly?: boolean
+  /** Only check the photo library: upload again the photos whose files are missing from storage. */
+  repairMediaOnly?: boolean
 }
 
 const MANIFEST = '3b-charpente-kit/photos-chantiers/manifest.json'
@@ -78,6 +80,29 @@ async function upsert(ctx: SeedContext, collection: CollectionSlug, where: Json,
 /* Photos                                                              */
 /* ------------------------------------------------------------------ */
 
+type MediaDoc = { sourceKey?: string | null; url?: string | null; sizes?: Record<string, { url?: string | null } | undefined> | null }
+
+/** Source keys of the photos whose original or one of its sizes cannot be read from storage. */
+async function missingFiles(docs: MediaDoc[]) {
+  const checks = docs.flatMap((doc) =>
+    doc.sourceKey
+      ? [doc.url, ...Object.values(doc.sizes ?? {}).map((size) => size?.url)]
+          .filter((url): url is string => Boolean(url && /^https?:\/\//.test(url)))
+          .map((url) => ({ key: doc.sourceKey!, url }))
+      : [],
+  )
+  const missing = new Set<string>()
+  const worker = async () => {
+    for (let check = checks.shift(); check; check = checks.shift()) {
+      if (missing.has(check.key)) continue
+      const response = await fetch(check.url, { method: 'HEAD', cache: 'no-store' }).catch(() => null)
+      if (!response || response.status === 404) missing.add(check.key)
+    }
+  }
+  await Promise.all(Array.from({ length: 12 }, worker))
+  return missing
+}
+
 async function importPhotos(ctx: SeedContext, projects: SeedProject[], docs: Doc[], options: SeedOptions) {
   const index = photoIndex(ctx.root)
   const manifest = JSON.parse(fs.readFileSync(path.join(ctx.root, MANIFEST), 'utf8')) as {
@@ -108,11 +133,15 @@ async function importPhotos(ctx: SeedContext, projects: SeedProject[], docs: Doc
     { key: 'ambiance/rondins.png', legend: 'rondins de bois', folder: 'ambiance' },
   ]
 
-  const existing = await ctx.payload.find({ collection: 'media', limit: 1000, depth: 0, pagination: false, select: { sourceKey: true } })
+  const existing = await ctx.payload.find({ collection: 'media', limit: 1000, depth: 0, pagination: false })
   for (const doc of existing.docs) if (doc.sourceKey) ctx.media.set(doc.sourceKey, doc.id)
+  const missing = options.repairMediaOnly ? await missingFiles(existing.docs) : new Set<string>()
+  if (options.repairMediaOnly) ctx.log(`Photos : ${missing.size} fichier(s) absent(s) du stockage`)
 
   let done = 0
-  const queue = entries.filter((entry) => options.refreshMedia || !ctx.media.has(entry.key))
+  const queue = entries.filter((entry) =>
+    options.repairMediaOnly ? missing.has(entry.key) : options.refreshMedia || !ctx.media.has(entry.key),
+  )
   const worker = async () => {
     for (let entry = queue.shift(); entry; entry = queue.shift()) {
       const file = index.get(entry.key)
@@ -139,7 +168,15 @@ async function importPhotos(ctx: SeedContext, projects: SeedProject[], docs: Doc
       const existingId = ctx.media.get(entry.key)
       const fileArg = { data: buffer, mimetype, name, size: buffer.length }
       const doc = existingId
-        ? await ctx.payload.update({ collection: 'media', id: existingId, data, file: fileArg, context: ctx.opContext })
+        ? await ctx.payload.update({
+            collection: 'media',
+            id: existingId,
+            data,
+            file: fileArg,
+            // Same file name: the URLs already used by the pages stay valid.
+            overwriteExistingFiles: true,
+            context: ctx.opContext,
+          })
         : await ctx.payload.create({ collection: 'media', data, file: fileArg, context: ctx.opContext })
       ctx.media.set(entry.key, (doc as { id: number }).id)
       done += 1
@@ -394,10 +431,10 @@ async function publishAll(ctx: SeedContext, pages: SeedPage[], services: SeedSer
 /* ------------------------------------------------------------------ */
 
 async function importGlobals(ctx: SeedContext) {
-  const { payload, opContext } = ctx
+  const { payload } = ctx
   await payload.updateGlobal({
     slug: 'company',
-    context: opContext,
+    context: ctx.opContext,
     data: {
       ...settings.company,
       hours: settings.company.hours.map((day) => ({ ...day })),
@@ -406,7 +443,7 @@ async function importGlobals(ctx: SeedContext) {
   })
   await payload.updateGlobal({
     slug: 'header',
-    context: opContext,
+    context: ctx.opContext,
     data: {
       nav: settings.header.nav.map((item) => ({
         label: item.label,
@@ -419,7 +456,7 @@ async function importGlobals(ctx: SeedContext) {
   })
   await payload.updateGlobal({
     slug: 'footer',
-    context: opContext,
+    context: ctx.opContext,
     data: {
       tagline: settings.footer.tagline,
       columns: settings.footer.columns.map((column) => ({
@@ -430,18 +467,18 @@ async function importGlobals(ctx: SeedContext) {
       legalLinks: settings.footer.legalLinks.map((item) => ({ link: link(ctx, item) })),
     } as never,
   })
-  await payload.updateGlobal({ slug: 'proofs', context: opContext, data: { items: settings.proofs } as never })
-  await payload.updateGlobal({ slug: 'site-texts', context: opContext, data: SITE_TEXT_DEFAULTS as never })
+  await payload.updateGlobal({ slug: 'proofs', context: ctx.opContext, data: { items: settings.proofs } as never })
+  await payload.updateGlobal({ slug: 'site-texts', context: ctx.opContext, data: SITE_TEXT_DEFAULTS as never })
   await payload.updateGlobal({
     slug: 'seo-settings',
-    context: opContext,
+    context: ctx.opContext,
     data: {
       ...settings.seoSettings,
       defaultImage: photo(ctx, settings.seoSettings.defaultImage),
       areaServed: settings.seoSettings.areaServed.map((name) => ({ name })),
     } as never,
   })
-  await payload.updateGlobal({ slug: 'analytics', context: opContext, data: { provider: 'vercel' } as never })
+  await payload.updateGlobal({ slug: 'analytics', context: ctx.opContext, data: { provider: 'vercel' } as never })
   ctx.log('✓ Réglages : entreprise, en-tête, pied de page, preuves, textes, référencement, mesure')
 }
 
@@ -524,6 +561,7 @@ export async function runSeed(payload: Payload, root: string, options: SeedOptio
   await importUsers(ctx, options)
   if (options.accountsOnly) return
   await importPhotos(ctx, projects, docs, options)
+  if (options.repairMediaOnly) return ctx
   await importCommunes(ctx, false)
   await createShells(ctx, pages, services, articles, projects)
   await importCommunes(ctx, true)

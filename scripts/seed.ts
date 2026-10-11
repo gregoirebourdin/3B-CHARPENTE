@@ -11,7 +11,8 @@
  *
  * SEED_IF_EMPTY=true (used by the Vercel build): imports only into an empty
  * database, so the first deployment arrives with its content and the next
- * ones never touch what the team has edited since.
+ * ones never touch what the team has edited since. On a filled database it only
+ * re-sends the photos whose files are missing from Blob storage.
  */
 import { getPayload } from 'payload'
 
@@ -35,6 +36,8 @@ try {
     const { totalDocs } = await payload.count({ collection: 'pages' })
     if (totalDocs > 0) {
       console.log(`Contenu déjà présent (${totalDocs} pages) : import ignoré.`)
+      // Only safety net: photos whose file never reached storage are sent again.
+      if (blobEnabled()) await runSeed(payload, process.cwd(), { repairMediaOnly: true })
       process.exit(0)
     }
     // On Vercel, photos must go to Blob storage: without it, only the accounts

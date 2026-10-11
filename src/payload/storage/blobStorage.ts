@@ -29,7 +29,9 @@ const adapter =
     requiresClientUploadReceipt: true,
     generateURL: ({ filename, prefix: docPrefix = '' }) =>
       blobUrl(buildStoragePathData({ collectionPrefix: prefix, docPrefix, filename }).storageFilePath),
-    handleUpload: async ({ data, file, storageFilePath }) => {
+    // Nothing to return: the document already holds everything (prefix, filename,
+    // sizes). Returning `data` would make the plugin save the whole document again.
+    handleUpload: async ({ file, storageFilePath }) => {
       await put(storageFilePath, file.buffer, {
         access: 'public',
         addRandomSuffix: false,
@@ -37,7 +39,6 @@ const adapter =
         cacheControlMaxAge,
         contentType: file.mimeType,
       })
-      return data
     },
     handleDelete: async ({ storageFilePath }) => {
       await del(blobUrl(storageFilePath))
