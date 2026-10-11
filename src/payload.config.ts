@@ -77,7 +77,8 @@ export default buildConfig({
   collections: [Pages, Articles, Services, Projects, Communes, Faqs, Media, Team, Reviews, ValidationPoints, Users],
   globals: [Company, Header, Footer, Proofs, SiteTextsGlobal, SeoSettings, Analytics],
   db: postgresAdapter({
-    pool: { connectionString: process.env.DATABASE_URL || '' },
+    // POSTGRES_URL comes from the Neon integration of Vercel (pooled); DATABASE_URL elsewhere.
+    pool: { connectionString: process.env.POSTGRES_URL || process.env.DATABASE_URL || '' },
     migrationDir: path.resolve(dirname, 'migrations'),
     // Schema changes go through migrations (src/migrations), never through a silent push.
     push: process.env.PAYLOAD_DB_PUSH === 'true',
