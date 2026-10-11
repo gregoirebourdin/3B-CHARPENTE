@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# next / build
+.next/
+out/
+build/
+next-env.d.ts
+*.tsbuildinfo
+
+# env
+.env
+.env*.local
+.vercel
+
+# logs & os
+*.log
+.DS_Store
+
+# local artefacts
+/media/
+/test-results/
+/playwright-report/
+/backups/
