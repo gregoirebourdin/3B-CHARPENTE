@@ -13,6 +13,7 @@ export const article: SeedArticle = {
   slug: 'isolant-biosource-montagne',
   title: "Quel **isolant biosourcé** choisir pour une maison de montagne dans les **Hautes-Alpes** ?",
   topic: 'Isolation',
+  menuLabel: 'Choisir un isolant biosourcé',
   excerpt:
     "Ouate de cellulose, fibre de bois, laines de chanvre, lin et coton : les isolants biosourcés, fabriqués à partir de matières végétales, ne se valent pas partout. Voici comment les choisir pour une maison exposée au froid de l'hiver et au soleil d'altitude, expliqué par des charpentiers qui les posent.",
   cardSummary:

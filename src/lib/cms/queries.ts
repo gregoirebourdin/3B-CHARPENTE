@@ -100,12 +100,15 @@ export const getServices = cache(async (): Promise<Service[]> => {
   const { docs } = await payload.find({
     collection: 'services',
     where: await published(),
+    // Menus and cards only: the sections of each prestation stay out of the query.
+    select: { layout: false, hero: false },
     sort: 'order',
     depth: 1,
     limit: 50,
     pagination: false,
   })
-  return docs
+  // Lists never read the hero or the sections, which the select leaves out.
+  return docs as Service[]
 })
 
 export const getProjects = cache(async (whereKey = '{}', limit = 100, sort = 'order'): Promise<Project[]> => {
@@ -114,12 +117,14 @@ export const getProjects = cache(async (whereKey = '{}', limit = 100, sort = 'or
   const { docs } = await payload.find({
     collection: 'projects',
     where: { and: [where, await published()] },
+    select: { description: false, steps: false, materials: false, related: false, meta: false },
     sort: [sort, 'title'],
     depth: DEPTH,
     limit,
     pagination: false,
   })
-  return docs
+  // Cards never read the story, the steps or the SEO tab, which the select leaves out.
+  return docs as Project[]
 })
 
 export const getArticles = cache(async (): Promise<Article[]> => {
@@ -127,6 +132,7 @@ export const getArticles = cache(async (): Promise<Article[]> => {
   const { docs } = await payload.find({
     collection: 'articles',
     where: await published(),
+    select: { layout: false },
     sort: '-publishedAt',
     depth: 1,
     limit: 50,

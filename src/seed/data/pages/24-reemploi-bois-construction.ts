@@ -13,6 +13,7 @@ export const article: SeedArticle = {
   slug: 'reemploi-bois-construction',
   title: "Réemployer le bois en construction : **ce qu'on peut réutiliser**, comment, et à quelles conditions",
   topic: 'Réemploi',
+  menuLabel: 'Réemployer le bois',
   excerpt:
     "Une vieille charpente, un plancher de grange, un bardage grisé : dans un bâtiment qu'on rénove ou qu'on démolit, une partie du bois peut resservir. Encore faut-il savoir lequel, comment le récupérer et à quelles conditions le reposer. Ce guide répond à ces trois questions avec notre regard de charpentiers, en citant les règles officielles sans les exagérer.",
   cardSummary: 'Les mots du réemploi, les bois concernés, les cinq étapes et les conditions à réunir.',

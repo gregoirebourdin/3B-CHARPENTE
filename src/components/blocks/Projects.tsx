@@ -44,7 +44,7 @@ export async function Projects({ block, context }: BlockProps<Data>) {
   return (
     <Section tone={block.tone} anchor={block.anchor}>
       <SectionHeading kicker={block.kicker} title={block.title} accent={block.titleAccent} intro={block.intro} />
-      <ul className={styles.grid}>
+      <ul className={styles.grid} data-count={cards.length}>
         {cards.map((card, index) => (
           <li key={card.project.id} data-reveal="" style={{ ['--reveal-delay' as string]: `${(index % 3) * 90}ms` }}>
             <ProjectCard

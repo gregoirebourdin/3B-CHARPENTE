@@ -369,6 +369,7 @@ async function publishAll(ctx: SeedContext, pages: SeedPage[], services: SeedSer
       data: {
         title,
         titleAccent,
+        menuLabel: article.menuLabel,
         topic: article.topic,
         excerpt: article.excerpt,
         cardSummary: article.cardSummary,

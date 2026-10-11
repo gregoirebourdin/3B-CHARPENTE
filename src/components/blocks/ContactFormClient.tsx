@@ -2,7 +2,7 @@
 
 import { upload } from '@vercel/blob/client'
 import { usePathname } from 'next/navigation'
-import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
+import { useEffect, useId, useMemo, useRef, useState, useSyncExternalStore, type FormEvent, type ReactNode } from 'react'
 
 import { submitContact } from '@/app/(site)/actions/contact'
 import { Icon } from '@/components/ui/Icon'
@@ -31,6 +31,11 @@ type Texts = {
   fileError: string
   uploading: string
 }
+
+// The address does not change while the form is open: nothing to subscribe to.
+const noSubscription = () => () => {}
+const readProjet = () => new URLSearchParams(window.location.search).get('projet')
+const noProjet = () => null
 
 type Props = {
   formId: number
@@ -61,28 +66,33 @@ export function ContactFormClient({
 }: Props) {
   const base = useId()
   const pathname = usePathname()
-  const [values, setValues] = useState<FormValues>({})
+  const [typed, setValues] = useState<FormValues>({})
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [notice, setNotice] = useState<string | null>(null)
   const [files, setFiles] = useState<FileState[]>([])
-  const startedAt = useRef(Date.now())
+  const startedAt = useRef(0)
+  const fileCount = useRef(0)
   const formRef = useRef<HTMLFormElement>(null)
   const statusRef = useRef<HTMLDivElement>(null)
 
   // "Demander mon devis" from a service page: /contact/?projet=charpente-bois pre-checks the matching box.
-  useEffect(() => {
-    startedAt.current = Date.now()
-    const projet = new URLSearchParams(window.location.search).get('projet')
-    if (!projet) return
-    const next: FormValues = {}
+  const projet = useSyncExternalStore(noSubscription, readProjet, noProjet)
+  const values = useMemo<FormValues>(() => {
+    if (!projet) return typed
+    const prefill: FormValues = {}
     for (const field of fields) {
       if (field.kind !== 'checkboxGroup') continue
       const match = field.options.filter((option) => option.prefill.includes(projet)).map((option) => option.label)
-      if (match.length) next[field.name] = match.slice(0, 1)
+      if (match.length) prefill[field.name] = match.slice(0, 1)
     }
-    if (Object.keys(next).length) setValues((current) => ({ ...current, ...next }))
-  }, [fields])
+    return { ...prefill, ...typed }
+  }, [projet, fields, typed])
+
+  // Time to fill the form (bots answer in under a second).
+  useEffect(() => {
+    startedAt.current = Date.now()
+  }, [])
 
   const setValue = (name: string, value: string | string[]) => {
     setValues((current) => ({ ...current, [name]: value }))
@@ -103,7 +113,7 @@ export function ContactFormClient({
     const maxBytes = (field.maxSizeMb ?? 10) * 1024 * 1024
     const selected = Array.from(list).slice(0, Math.max(0, max - files.length))
     for (const file of selected) {
-      const id = `${file.name}-${file.size}-${Date.now()}`
+      const id = `${file.name}-${file.size}-${(fileCount.current += 1)}`
       const typeOk = ACCEPTED_FILE_TYPES.includes(file.type) || /\.(heic|heif)$/i.test(file.name)
       if (!typeOk || file.size > maxBytes) {
         setFiles((current) => [...current, { id, name: file.name, status: 'error' }])
@@ -176,7 +186,7 @@ export function ContactFormClient({
 
   return (
     <form ref={formRef} className={styles.form} onSubmit={onSubmit} noValidate>
-      <p className={styles.requiredNote}>{texts.requiredNote}</p>
+      {texts.requiredNote ? <p className={styles.requiredNote}>{texts.requiredNote}</p> : null}
 
       {status === 'error' ? (
         <div ref={statusRef} tabIndex={-1} className={styles.alert} role="alert">

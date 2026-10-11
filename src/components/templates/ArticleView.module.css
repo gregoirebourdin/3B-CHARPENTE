@@ -11,6 +11,9 @@
 .cover img {
   width: 100%;
   height: auto;
+  /* Landscape crop whatever the photo; the focal point set in the admin decides what stays visible. */
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
 }

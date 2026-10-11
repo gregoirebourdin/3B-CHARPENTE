@@ -40,6 +40,8 @@ export async function ContactForm({ block, context }: BlockProps<Data>) {
             uploadsEnabled={Boolean(process.env.BLOB_READ_WRITE_TOKEN)}
             texts={{
               ...texts.form,
+              // Not repeated when the introduction above the form already says it.
+              requiredNote: /astérisque/i.test(block.intro ?? '') ? '' : texts.form.requiredNote,
               tooMany: template(texts.form.tooMany, { telephone: company.phone }),
             }}
           />

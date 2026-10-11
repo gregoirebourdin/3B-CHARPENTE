@@ -14,6 +14,8 @@ const routing = routingHooks('pages')
 export const Pages: CollectionConfig = {
   slug: 'pages',
   labels: { singular: 'Page', plural: 'Pages' },
+  // Fields loaded when another document links here (cards, menus, breadcrumbs), not the whole page.
+  defaultPopulate: { title: true, breadcrumbLabel: true, slug: true, path: true, parent: true },
   admin: {
     group: 'Contenu du site',
     useAsTitle: 'title',

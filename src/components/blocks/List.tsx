@@ -17,9 +17,28 @@ export function List({ block, context }: BlockProps<Data>) {
   const Tag = style === 'numbered' ? 'ol' : 'ul'
 
   const list = (
-    <Tag className={`${styles.list} ${styles[style]}`}>
+    <Tag className={`${styles.list} ${styles[style]}`} data-many={(block.items?.length ?? 0) > 5 ? '' : undefined}>
       {(block.items ?? []).map((item, index) => {
         const link = resolveLink(item.link, context.company)
+        if (style === 'pills') {
+          // A pill is one link: its title is the label.
+          const label = item.title ? fillTokens(item.title, context.company) : link?.label
+          return (
+            <li key={item.id ?? index}>
+              {link ? (
+                <CmsLink link={link} className={styles.pill}>
+                  {label}
+                  <Icon name="arrowRight" size={16} />
+                </CmsLink>
+              ) : (
+                <span className={styles.pill}>{label}</span>
+              )}
+            </li>
+          )
+        }
+        // A link that only repeats the title becomes the title itself.
+        const titleIsLink =
+          Boolean(link && item.title) && style !== 'definitions' && link!.label.trim().toLowerCase() === item.title!.trim().toLowerCase()
         return (
           <li key={item.id ?? index} className={styles.item}>
             {style === 'checks' ? (
@@ -32,12 +51,17 @@ export function List({ block, context }: BlockProps<Data>) {
               {item.title ? (
                 style === 'definitions' ? (
                   <h3 className={styles.term}>{fillTokens(item.title, context.company)}</h3>
+                ) : titleIsLink ? (
+                  <CmsLink link={link} className={`${styles.itemTitle} ${styles.titleLink}`}>
+                    {fillTokens(item.title, context.company)}
+                    <Icon name="arrowRight" size={16} />
+                  </CmsLink>
                 ) : (
                   <strong className={styles.itemTitle}>{fillTokens(item.title, context.company)}</strong>
                 )
               ) : null}
               {item.text ? <RichText data={item.text} /> : null}
-              {link ? (
+              {link && !titleIsLink ? (
                 <CmsLink link={link} className={`${styles.link} link-underline`}>
                   {link.label}
                   <Icon name="arrowRight" size={16} />

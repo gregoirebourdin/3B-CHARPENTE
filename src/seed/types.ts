@@ -247,6 +247,8 @@ export type SeedArticle = {
   kind: 'article'
   slug: string
   title: Title
+  /** Short title for the footer and menus. */
+  menuLabel?: string
   topic: string
   excerpt: string
   cardSummary?: string

@@ -14,7 +14,7 @@ export async function Team({ block }: BlockProps<Data>) {
   return (
     <Section tone={block.tone} anchor={block.anchor}>
       <SectionHeading kicker={block.kicker} title={block.title} accent={block.titleAccent} intro={block.intro} />
-      <ul className={styles.grid}>
+      <ul className={styles.grid} data-count={team.length}>
         {team.map((member) => (
           <li key={member.id} className={styles.member} data-reveal="">
             {isMedia(member.photo) ? (
@@ -30,9 +30,11 @@ export async function Team({ block }: BlockProps<Data>) {
                   .join('')}
               </span>
             )}
-            <h3 className={styles.name}>{member.name}</h3>
-            <p className={styles.role}>{member.role}</p>
-            {member.bio ? <p className={styles.bio}>{member.bio}</p> : null}
+            <div className={styles.body}>
+              <h3 className={styles.name}>{member.name}</h3>
+              <p className={styles.role}>{member.role}</p>
+              {member.bio ? <p className={styles.bio}>{member.bio}</p> : null}
+            </div>
           </li>
         ))}
       </ul>

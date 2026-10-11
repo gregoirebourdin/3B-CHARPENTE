@@ -42,9 +42,9 @@ export function Media({ media, sizes, priority, className, fill, alt, quality = 
   if (!isMedia(media)) return null
   const focal =
     typeof media.focalX === 'number' && typeof media.focalY === 'number' ? `${media.focalX}% ${media.focalY}%` : undefined
+  const text = alt ?? media.alt ?? ''
   const common = {
     src: mediaSrc(media.url as string),
-    alt: alt ?? media.alt ?? '',
     sizes,
     quality,
     priority,
@@ -54,6 +54,6 @@ export function Media({ media, sizes, priority, className, fill, alt, quality = 
     blurDataURL: media.blurDataURL ?? undefined,
     style: focal ? { objectPosition: focal } : undefined,
   }
-  if (fill) return <Image {...common} fill />
-  return <Image {...common} width={media.width ?? 1200} height={media.height ?? 800} />
+  if (fill) return <Image {...common} alt={text} fill />
+  return <Image {...common} alt={text} width={media.width ?? 1200} height={media.height ?? 800} />
 }

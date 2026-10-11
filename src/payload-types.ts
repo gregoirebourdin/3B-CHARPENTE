@@ -1135,6 +1135,10 @@ export interface Article {
   id: number;
   title: string;
   /**
+   * Utilisé dans le pied de page et les menus. Laisser vide pour reprendre le titre.
+   */
+  menuLabel?: string | null;
+  /**
    * Recopiez les mots du titre à afficher en vert. Plusieurs groupes : séparez-les par une virgule. Ex. : « simplement, durablement ».
    */
   titleAccent?: string | null;
@@ -3803,6 +3807,7 @@ export interface RichTextBlockSelect<T extends boolean = true> {
  */
 export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
+  menuLabel?: T;
   titleAccent?: T;
   topic?: T;
   excerpt?: T;

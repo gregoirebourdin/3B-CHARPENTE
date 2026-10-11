@@ -15,6 +15,23 @@ const routing = routingHooks('projects')
 export const Projects: CollectionConfig = {
   slug: 'projects',
   labels: { singular: 'Réalisation', plural: 'Réalisations' },
+  // Fields loaded when another document links here (cards, menus, breadcrumbs), not the whole page.
+  defaultPopulate: {
+    title: true,
+    titleAccent: true,
+    shortTitle: true,
+    slug: true,
+    commune: true,
+    services: true,
+    locality: true,
+    tags: true,
+    heroImage: true,
+    summary: true,
+    gallery: true,
+    featured: true,
+    order: true,
+    publishedAt: true,
+  },
   admin: {
     group: 'Prestations et chantiers',
     useAsTitle: 'title',

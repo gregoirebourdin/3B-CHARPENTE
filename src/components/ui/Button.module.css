@@ -121,3 +121,12 @@
     flex: 1 1 100%;
   }
 }
+
+/* Long labels wrap on phones rather than pushing the page sideways. */
+@media (max-width: 560px) {
+  .button {
+    max-width: 100%;
+    white-space: normal;
+    text-wrap: balance;
+  }
+}

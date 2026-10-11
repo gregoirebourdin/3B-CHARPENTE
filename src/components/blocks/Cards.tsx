@@ -20,7 +20,8 @@ export function Cards({ block, context }: BlockProps<Data>) {
     return (
       <li
         key={item.id ?? index}
-        className={[styles.card, styles[variant], item.muted ? styles.muted : undefined].filter(Boolean).join(' ')}
+        className={item.muted ? `${styles.card} ${styles.muted}` : styles.card}
+        data-variant={variant}
         data-reveal=""
         style={{ ['--reveal-delay' as string]: `${(index % 3) * 80}ms` }}
       >

@@ -25,7 +25,7 @@ export async function SiteFooter() {
     } else if (column.source === 'articles') {
       links = articles.map((article) => ({
         href: pathFor('articles', article) ?? '/',
-        label: article.title.replace(/\*\*/g, ''),
+        label: article.menuLabel || article.title.replace(/\*\*/g, ''),
         external: false,
         kind: 'internal' as const,
       }))

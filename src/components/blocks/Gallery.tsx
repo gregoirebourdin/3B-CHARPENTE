@@ -17,7 +17,7 @@ export type GalleryItem = { image: MediaDoc; caption?: string | null }
 export function PhotoGrid({ items, id }: { items: GalleryItem[]; id: string }) {
   return (
     <Lightbox id={id}>
-      <ul className={styles.grid}>
+      <ul className={styles.grid} data-count={Math.min(items.length, 3)}>
         {items.map(({ image, caption }, index) => {
           const text = caption || image.caption || ''
           return (
@@ -33,7 +33,10 @@ export function PhotoGrid({ items, id }: { items: GalleryItem[]; id: string }) {
                   data-width={image.width ?? undefined}
                   data-height={image.height ?? undefined}
                 >
-                  <Media media={image} sizes="(min-width: 1100px) 380px, (min-width: 700px) 45vw, 92vw" />
+                  <Media
+                    media={image}
+                    sizes={items.length === 1 ? '(min-width: 1100px) 980px, 92vw' : '(min-width: 1100px) 380px, (min-width: 700px) 45vw, 92vw'}
+                  />
                   <span className="visually-hidden">Agrandir la photo</span>
                 </a>
                 {text ? <figcaption className={styles.caption}>{text}</figcaption> : null}

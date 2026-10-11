@@ -34,6 +34,10 @@
   line-height: 1.03;
 }
 
+.title[data-length='long'] {
+  font-size: clamp(2.2rem, 1.55rem + 2.3vw, 3.4rem);
+}
+
 .text {
   max-width: 60ch;
   color: color-mix(in srgb, var(--fg) 82%, var(--bg));

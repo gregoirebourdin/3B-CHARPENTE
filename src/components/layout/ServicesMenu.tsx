@@ -19,8 +19,12 @@ export function ServicesMenu({ label, services }: Props) {
   const id = useId()
   const wrapper = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
-
-  useEffect(() => setOpen(false), [pathname])
+  // Navigating closes the menu (state adjusted during render, no effect needed).
+  const [openedOn, setOpenedOn] = useState(pathname)
+  if (openedOn !== pathname) {
+    setOpenedOn(pathname)
+    setOpen(false)
+  }
 
   useEffect(() => {
     if (!open) return

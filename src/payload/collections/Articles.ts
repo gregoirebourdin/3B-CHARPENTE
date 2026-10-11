@@ -15,6 +15,19 @@ const routing = routingHooks('articles')
 export const Articles: CollectionConfig = {
   slug: 'articles',
   labels: { singular: 'Guide conseil', plural: 'Conseils (guides)' },
+  // Fields loaded when another document links here (cards, menus, breadcrumbs), not the whole page.
+  defaultPopulate: {
+    title: true,
+    titleAccent: true,
+    menuLabel: true,
+    slug: true,
+    topic: true,
+    excerpt: true,
+    cardSummary: true,
+    image: true,
+    author: true,
+    publishedAt: true,
+  },
   admin: {
     group: 'Contenu du site',
     useAsTitle: 'title',
@@ -37,6 +50,13 @@ export const Articles: CollectionConfig = {
       label: 'Titre du guide (H1)',
       required: true,
       maxLength: 120,
+    },
+    {
+      name: 'menuLabel',
+      type: 'text',
+      label: 'Titre court',
+      maxLength: 45,
+      admin: { description: 'Utilisé dans le pied de page et les menus. Laisser vide pour reprendre le titre.' },
     },
     {
       type: 'row',

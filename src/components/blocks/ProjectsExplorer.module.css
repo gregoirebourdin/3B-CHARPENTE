@@ -17,6 +17,7 @@
 
 .barInner {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-3);
 }
 
@@ -38,6 +39,8 @@
 
 .pills {
   display: flex;
+  flex: 1;
+  min-width: 0;
   gap: var(--space-2);
   overflow-x: auto;
   padding-block: 2px;
@@ -46,6 +49,14 @@
 
 .pills::-webkit-scrollbar {
   display: none;
+}
+
+/* Wide screens: every filter visible at once; phones keep a swipeable row. */
+@media (min-width: 900px) {
+  .pills {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
 }
 
 .pill {
@@ -96,9 +107,13 @@
   display: flex;
   align-items: center;
   gap: var(--space-4);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .select select {
+  min-width: 0;
+  max-width: 100%;
   min-height: 40px;
   padding: 0.4rem 2.2rem 0.4rem 0.9rem;
   border: 1px solid var(--c-line-strong);

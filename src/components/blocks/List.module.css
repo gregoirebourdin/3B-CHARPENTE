@@ -45,6 +45,29 @@
   font-weight: 650;
 }
 
+.titleLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-self: start;
+  color: var(--fg-accent);
+  text-decoration: none;
+}
+
+.titleLink:hover {
+  text-decoration: underline;
+}
+
+.titleLink svg {
+  flex: none;
+}
+
+/* Long lists of short items: two or three columns on wide screens. */
+.list[data-many]:not(.definitions, .pills) {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: var(--space-6) var(--space-8);
+}
+
 .check {
   display: grid;
   flex: none;
@@ -101,20 +124,37 @@
 .pills {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: var(--space-3);
 }
 
-.pills .item {
-  padding: 0.65rem 1.25rem;
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0.6rem 1.15rem;
   border-radius: var(--radius-pill);
   background: var(--pill-bg);
   color: var(--pill-fg);
   font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
 }
 
-.pills .itemTitle {
-  font-weight: 650;
+a.pill:hover {
+  background: color-mix(in srgb, var(--pill-bg) 80%, var(--c-forest));
+  transform: translateY(-1px);
+}
+
+a.pill svg {
+  flex: none;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+a.pill:hover svg {
+  transform: translateX(3px);
 }
 
 .link {

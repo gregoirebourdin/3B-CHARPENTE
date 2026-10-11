@@ -64,6 +64,9 @@ export function AreaMap({ communes, company }: { communes: Commune[]; company: C
       .join(' ')
 
   const names = places.map((c) => c.villages || c.name).join(', ')
+  // The commune of the workshop is drawn once, as the workshop marker.
+  const isHome = (c: Commune) => !!hq && Math.hypot(c.latitude! - hq.lat, (c.longitude! - hq.lon) * k) < 0.02
+  const home = places.find(isHome)
 
   return (
     <figure className={styles.map}>
@@ -78,7 +81,7 @@ export function AreaMap({ communes, company }: { communes: Commune[]; company: C
         {RIVERS.map((river, index) => (
           <path key={index} d={path(river)} className={styles.river} />
         ))}
-        {places.map((commune) => {
+        {places.filter((commune) => !isHome(commune)).map((commune) => {
           const { x, y } = project({ lat: commune.latitude!, lon: commune.longitude! })
           const right = x < WIDTH * 0.62
           return (
@@ -97,9 +100,14 @@ export function AreaMap({ communes, company }: { communes: Commune[]; company: C
                 <g>
                   <circle cx={x} cy={y} r="13" className={styles.hqHalo} />
                   <circle cx={x} cy={y} r="7.5" className={styles.hq} />
-                  <text x={x + 14} y={y + 22} className={styles.hqLabel}>
+                  <text x={x - 18} y={home ? y - 2 : y + 5} textAnchor="end" className={styles.hqLabel}>
                     {company.name}
                   </text>
+                  {home ? (
+                    <text x={x - 18} y={y + 15} textAnchor="end" className={styles.label}>
+                      {home.villages || home.name}
+                    </text>
+                  ) : null}
                 </g>
               )
             })()

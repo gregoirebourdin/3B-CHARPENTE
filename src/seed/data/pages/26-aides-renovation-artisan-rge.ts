@@ -15,6 +15,7 @@ export const article: SeedArticle = {
   slug: 'aides-renovation-artisan-rge',
   title: 'Aides à la rénovation : pourquoi choisir un **artisan RGE** dans les **Hautes-Alpes** ?',
   topic: 'Aides',
+  menuLabel: 'Aides à la rénovation et RGE',
   excerpt:
     "Vous voulez isoler votre toit ou vos murs, ou changer vos fenêtres, et vous avez entendu parler des aides ? Avant les montants, une question compte : l'entreprise est-elle qualifiée RGE pour vos travaux ? Voici ce que recouvre ce label, comment le vérifier et comment préparer votre projet.",
   cardSummary: "Ce qu'est le label RGE, comment le vérifier et les étapes d'un projet aidé.",

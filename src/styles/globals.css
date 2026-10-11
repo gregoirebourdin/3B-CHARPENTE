@@ -127,6 +127,13 @@ a {
   font-style: normal;
 }
 
+/* Hyphenated place names stay on one line where there is room for them. */
+@media (min-width: 700px) {
+  .keep-together {
+    white-space: nowrap;
+  }
+}
+
 /* Animated underline used by text links (« Voir les travaux → »). */
 .link-underline {
   text-decoration: none;

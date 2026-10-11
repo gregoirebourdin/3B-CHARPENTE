@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from 'react'
 
 import { template } from '@/lib/links'
 
@@ -13,6 +13,28 @@ export type ExplorerFilters = {
   communeGroups: { label: string; options: { key: string; label: string; count: number }[] }[]
   total: number
   texts: { all: string; allCommunes: string; count: string; countOne: string; reset: string }
+}
+
+/** The address is the filter state: shareable, and the back button keeps working. */
+const CHANGE_EVENT = 'tb:explorer-filters'
+
+function subscribe(onChange: () => void) {
+  window.addEventListener('hashchange', onChange)
+  window.addEventListener(CHANGE_EVENT, onChange)
+  return () => {
+    window.removeEventListener('hashchange', onChange)
+    window.removeEventListener(CHANGE_EVENT, onChange)
+  }
+}
+
+const readAddress = () => `${window.location.search}${window.location.hash}`
+// On the server and during hydration: no filter, every card visible.
+const noAddress = () => ''
+
+function writeFilters(service: string, commune: string) {
+  const hash = [service, commune].filter(Boolean).join('&')
+  window.history.replaceState(null, '', `${window.location.pathname}${hash ? `#${hash}` : ''}`)
+  window.dispatchEvent(new Event(CHANGE_EVENT))
 }
 
 /** Reads #escaliers, #briancon, #escaliers&briancon or ?prestation=…&commune=… */
@@ -39,25 +61,13 @@ function readUrl(filters: ExplorerFilters): { service: string; commune: string }
  * the choice in the address (#escaliers&briancon) so it can be shared.
  */
 export function ExplorerShell({ filters, children }: { filters: ExplorerFilters; children: ReactNode }) {
-  const [service, setService] = useState('')
-  const [commune, setCommune] = useState('')
+  const address = useSyncExternalStore(subscribe, readAddress, noAddress)
+  const { service, commune } = useMemo(
+    () => (address ? readUrl(filters) : { service: '', commune: '' }),
+    [address, filters],
+  )
   const [count, setCount] = useState(filters.total)
   const root = useRef<HTMLDivElement>(null)
-  const ready = useRef(false)
-
-  useEffect(() => {
-    const initial = readUrl(filters)
-    setService(initial.service)
-    setCommune(initial.commune)
-    ready.current = true
-    const onHash = () => {
-      const next = readUrl(filters)
-      setService(next.service)
-      setCommune(next.commune)
-    }
-    window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
-  }, [filters])
 
   const apply = useCallback(() => {
     const element = root.current
@@ -75,11 +85,6 @@ export function ExplorerShell({ filters, children }: { filters: ExplorerFilters;
     const empty = element.querySelector<HTMLElement>('[data-explorer-empty]')
     if (empty) empty.hidden = visible > 0
     setCount(visible)
-    if (ready.current) {
-      const hash = [service, commune].filter(Boolean).join('&')
-      const url = `${window.location.pathname}${hash ? `#${hash}` : ''}`
-      window.history.replaceState(null, '', url)
-    }
   }, [service, commune])
 
   useEffect(apply, [apply])
@@ -93,7 +98,7 @@ export function ExplorerShell({ filters, children }: { filters: ExplorerFilters;
           <div className={styles.filterGroup} role="group" aria-label={filters.serviceLabel}>
             <span className={styles.filterLabel}>{filters.serviceLabel}</span>
             <div className={styles.pills}>
-              <button type="button" className={styles.pill} aria-pressed={!service} onClick={() => setService('')}>
+              <button type="button" className={styles.pill} aria-pressed={!service} onClick={() => writeFilters('', commune)}>
                 {filters.texts.all} <span>({filters.total})</span>
               </button>
               {filters.services.map((item) => (
@@ -102,7 +107,7 @@ export function ExplorerShell({ filters, children }: { filters: ExplorerFilters;
                   type="button"
                   className={styles.pill}
                   aria-pressed={service === item.key}
-                  onClick={() => setService(service === item.key ? '' : item.key)}
+                  onClick={() => writeFilters(service === item.key ? '' : item.key, commune)}
                 >
                   {item.label} <span>({item.count})</span>
                 </button>
@@ -112,7 +117,7 @@ export function ExplorerShell({ filters, children }: { filters: ExplorerFilters;
           <div className={styles.filterRow}>
             <label className={styles.select}>
               <span className={styles.filterLabel}>{filters.communeLabel}</span>
-              <select value={commune} onChange={(event) => setCommune(event.target.value)}>
+              <select value={commune} onChange={(event) => writeFilters(service, event.target.value)}>
                 <option value="">{filters.texts.allCommunes}</option>
                 {filters.communeGroups.map((group) => (
                   <optgroup key={group.label} label={group.label}>
@@ -132,10 +137,7 @@ export function ExplorerShell({ filters, children }: { filters: ExplorerFilters;
               <button
                 type="button"
                 className={styles.reset}
-                onClick={() => {
-                  setService('')
-                  setCommune('')
-                }}
+                onClick={() => writeFilters('', '')}
               >
                 {filters.texts.reset}
               </button>

@@ -13,6 +13,7 @@ export const article: SeedArticle = {
   slug: 'renover-chalet-maison-ancienne',
   title: 'Rénover un chalet ou une maison ancienne dans les Hautes-Alpes : **par où commencer** ?',
   topic: 'Rénovation',
+  menuLabel: 'Rénover un chalet',
   excerpt:
     "En montagne, une maison ancienne ou un chalet se rénove dans un ordre précis : ce qui porte, puis ce qui protège, puis ce qui isole, et enfin ce qui se voit. Voici l'ordre que nous recommandons, illustré par des maisons que nous avons rénovées à Vallouise, Prelles, Briançon et L'Argentière-la-Bessée.",
   cardSummary: "L'ordre des travaux, de la charpente aux finitions, avec des exemples de chantiers.",

@@ -57,3 +57,39 @@
   color: var(--fg-muted);
   font-size: var(--fs-small);
 }
+
+.body {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+}
+
+/* A single member: one wide card, portrait beside the text. */
+.grid[data-count='1'] {
+  grid-template-columns: minmax(0, 760px);
+}
+
+.grid[data-count='1'] .member {
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.grid[data-count='1'] .photo {
+  width: clamp(120px, 20vw, 200px);
+  margin-bottom: 0;
+}
+
+.grid[data-count='1'] .initials {
+  margin-bottom: 0;
+}
+
+.grid[data-count='1'] .bio {
+  font-size: 1rem;
+}
+
+@media (max-width: 560px) {
+  .grid[data-count='1'] .member {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
