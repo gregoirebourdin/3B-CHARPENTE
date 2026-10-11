@@ -2,6 +2,7 @@ import type { CollectionBeforeChangeHook } from 'payload'
 import { ValidationError } from 'payload'
 
 import { pathIsReachable } from '../utilities/resolvePath'
+import { normalizePath, pathFor, type LinkableCollection } from '../utilities/routes'
 
 type Issue = { path: string; message: string }
 
@@ -53,7 +54,7 @@ function collectLinks(data: unknown) {
  * Refuses to publish a document without meta description or with a broken
  * internal link. Drafts are never blocked: Jean can save his work at any time.
  */
-export const publishGuard: CollectionBeforeChangeHook = async ({ data, req, collection, context }) => {
+export const publishGuard: CollectionBeforeChangeHook = async ({ data, originalDoc, req, collection, context }) => {
   if (data._status !== 'published' || context.skipPublishGuard) return data
   const issues: Issue[] = []
 
@@ -67,7 +68,15 @@ export const publishGuard: CollectionBeforeChangeHook = async ({ data, req, coll
 
   const { urls, issues: linkIssues } = collectLinks(data)
   issues.push(...linkIssues)
+  // Links to the document itself (its sommaire, « #editeur »…) are always fine,
+  // under its new address as under the one it is leaving (a redirect will follow).
+  const own = new Set(
+    [pathFor(collection.slug as LinkableCollection, { ...originalDoc, ...data }), originalDoc ? pathFor(collection.slug as LinkableCollection, originalDoc) : null]
+      .filter((value): value is string => Boolean(value))
+      .map((value) => normalizePath(value)),
+  )
   for (const { url, path } of urls) {
+    if (own.has(normalizePath(url.split('#')[0] ?? url))) continue
     const reachable = await pathIsReachable(url, { payload: req.payload, req, publishedOnly: false })
     if (!reachable) issues.push({ path, message: `Le lien vers ${url} mène à une page qui n’existe pas.` })
   }

@@ -91,21 +91,33 @@ export const preventRootCollision =
  * Remembers the address of the currently published version, so that the
  * afterChange hook can create a redirect when a published address changes.
  */
+/**
+ * Published address before the change, per request and per document. Kept on
+ * the request object itself: Payload hands the afterChange hooks a different
+ * `context` object than the beforeChange ones, so a value set there is lost.
+ */
+const previousPaths = new WeakMap<object, Map<string, string | null>>()
+const keyOf = (collection: LinkableCollection, id: number | string) => `${collection}:${id}`
+
 export const rememberPublishedPath =
   (collection: LinkableCollection): CollectionBeforeChangeHook =>
-  async ({ operation, originalDoc, req, context }) => {
+  async ({ operation, originalDoc, req }) => {
     if (operation !== 'update' || !originalDoc?.id) return
     const published = (await req.payload
       .findByID({ collection, id: originalDoc.id, depth: 0, draft: false, req, disableErrors: true })
       .catch(() => null)) as Routable | null
-    context.previousPublishedPath = published?._status === 'published' ? pathFor(collection, published) : null
+    const paths = previousPaths.get(req) ?? new Map<string, string | null>()
+    paths.set(keyOf(collection, originalDoc.id), published?._status === 'published' ? pathFor(collection, published) : null)
+    previousPaths.set(req, paths)
   }
 
 /** Creates (or refreshes) a 301 from the old address to the document. */
 export const createRedirectOnPathChange =
   (collection: LinkableCollection): CollectionAfterChangeHook =>
   async ({ doc, req, context }) => {
-    const previous = context.previousPublishedPath as string | null | undefined
+    const paths = previousPaths.get(req)
+    const previous = paths?.get(keyOf(collection, doc.id))
+    paths?.delete(keyOf(collection, doc.id))
     if (!previous || doc._status !== 'published') return doc
     const current = pathFor(collection, doc)
     if (!current || current === previous || previous === '/') return doc
