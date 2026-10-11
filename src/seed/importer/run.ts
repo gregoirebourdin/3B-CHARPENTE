@@ -23,6 +23,8 @@ export type SeedOptions = {
   adminPassword?: string
   adminEmail?: string
   editorPassword?: string
+  /** Only create the accounts (content import postponed). */
+  accountsOnly?: boolean
 }
 
 const MANIFEST = '3b-charpente-kit/photos-chantiers/manifest.json'
@@ -520,6 +522,7 @@ export async function runSeed(payload: Payload, root: string, options: SeedOptio
   ctx.log(`Import : ${pages.length} pages, ${services.length} prestations, ${articles.length} guides, ${projects.length} réalisations`)
 
   await importUsers(ctx, options)
+  if (options.accountsOnly) return
   await importPhotos(ctx, projects, docs, options)
   await importCommunes(ctx, false)
   await createShells(ctx, pages, services, articles, projects)

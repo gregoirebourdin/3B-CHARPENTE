@@ -18,8 +18,8 @@ export type ResolvedLink = {
 }
 
 /** "06 34 67 31 49" → "+33634673149" (French numbers). */
-export function phoneToE164(phone: string): string {
-  const digits = phone.replace(/[^\d+]/g, '')
+export function phoneToE164(phone: string | null | undefined): string {
+  const digits = (phone ?? '').replace(/[^\d+]/g, '')
   if (digits.startsWith('+')) return digits
   if (digits.startsWith('0')) return `+33${digits.slice(1)}`
   return digits

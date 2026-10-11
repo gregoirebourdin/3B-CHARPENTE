@@ -18,6 +18,15 @@ import { getPayload } from 'payload'
 import config from '../src/payload.config'
 import { runSeed } from '../src/seed/importer/run'
 
+function accountOptions() {
+  return {
+    adminUsername: process.env.SEED_ADMIN_USERNAME,
+    adminPassword: process.env.SEED_ADMIN_PASSWORD,
+    adminEmail: process.env.SEED_ADMIN_EMAIL,
+    editorPassword: process.env.SEED_EDITOR_PASSWORD,
+  }
+}
+
 const payload = await getPayload({ config })
 const started = Date.now()
 try {
@@ -27,15 +36,17 @@ try {
       console.log(`Contenu déjà présent (${totalDocs} pages) : import ignoré.`)
       process.exit(0)
     }
+    // On Vercel, photos must go to Blob storage: without it, only the accounts
+    // are created (so the admin is never left open) and the import waits for
+    // the next deployment.
+    if (process.env.VERCEL && !process.env.BLOB_READ_WRITE_TOKEN) {
+      console.warn('Stockage Vercel Blob non branché : comptes créés, import du contenu reporté au prochain déploiement.')
+      await runSeed(payload, process.cwd(), { ...accountOptions(), accountsOnly: true })
+      process.exit(0)
+    }
     console.log('Base vide : import du contenu initial.')
   }
-  await runSeed(payload, process.cwd(), {
-    refreshMedia: process.env.SEED_REFRESH_MEDIA === 'true',
-    adminUsername: process.env.SEED_ADMIN_USERNAME,
-    adminPassword: process.env.SEED_ADMIN_PASSWORD,
-    adminEmail: process.env.SEED_ADMIN_EMAIL,
-    editorPassword: process.env.SEED_EDITOR_PASSWORD,
-  })
+  await runSeed(payload, process.cwd(), { ...accountOptions(), refreshMedia: process.env.SEED_REFRESH_MEDIA === 'true' })
   console.log(`Durée : ${Math.round((Date.now() - started) / 1000)} s`)
   process.exit(0)
 } catch (error) {
