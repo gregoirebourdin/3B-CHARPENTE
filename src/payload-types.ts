@@ -918,6 +918,8 @@ export interface Media {
   credit?: string | null;
   blurDataURL?: string | null;
   sourceKey?: string | null;
+  prefix?: string | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -4055,6 +4057,8 @@ export interface MediaSelect<T extends boolean = true> {
   credit?: T;
   blurDataURL?: T;
   sourceKey?: T;
+  prefix?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;

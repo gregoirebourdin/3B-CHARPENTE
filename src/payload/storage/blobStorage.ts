@@ -66,7 +66,14 @@ export const blobStorage =
       serverHandler: clientUploadRoute({ collections, cacheControlMaxAge }),
       serverHandlerPath: '/blob-client-upload',
     })
-    if (!enabled) return incoming
+    // Same database schema with or without Blob (prefix columns always present).
+    if (!enabled) {
+      return cloudStoragePlugin({
+        alwaysInsertFields: true,
+        enabled: false,
+        collections: Object.fromEntries(Object.entries(collections).map(([slug, options]) => [slug, { ...options, adapter: null }])),
+      })(incoming)
+    }
 
     const withAdapter = Object.fromEntries(
       Object.entries(collections).map(([slug, options]) => [slug, { ...options, adapter: adapter(cacheControlMaxAge) }]),
@@ -83,6 +90,7 @@ export const blobStorage =
       ),
     }
     return cloudStoragePlugin({
+      alwaysInsertFields: true,
       collections: Object.fromEntries(
         Object.entries(withAdapter).map(([slug, options]) => [slug, { ...options, disablePayloadAccessControl: true as const }]),
       ),
