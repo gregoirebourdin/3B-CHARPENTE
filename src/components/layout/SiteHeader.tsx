@@ -35,7 +35,7 @@ export async function SiteHeader() {
     <header role="banner" className={styles.header}>
       <div className={`container ${styles.inner}`}>
         <Link href="/" className={styles.logo} aria-label={`${company.name}, retour à l’accueil`}>
-          <Logo />
+          <Logo height={62} priority />
         </Link>
 
         <nav aria-label="Navigation principale" className={styles.nav}>

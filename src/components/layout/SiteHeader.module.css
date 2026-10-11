@@ -38,10 +38,9 @@
   border-radius: var(--radius-xs);
 }
 
-.logo svg {
-  width: clamp(150px, 12vw + 60px, 205px);
-  height: auto;
-  aspect-ratio: 3968 / 648;
+.logo img {
+  width: auto;
+  height: clamp(48px, 2.5vw + 30px, 62px);
 }
 
 .nav {

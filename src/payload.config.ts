@@ -56,7 +56,7 @@ export default buildConfig({
     meta: {
       titleSuffix: ' · Administration 3B Charpente',
       robots: 'noindex, nofollow',
-      icons: [{ rel: 'icon', type: 'image/svg+xml', url: '/favicon.svg' }],
+      icons: [{ rel: 'icon', type: 'image/png', url: '/favicon-48.png' }],
     },
     components: {
       graphics: {

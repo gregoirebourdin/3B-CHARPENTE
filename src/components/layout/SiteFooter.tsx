@@ -1,4 +1,8 @@
+import Image from 'next/image'
 import Link from 'next/link'
+
+import ecoArtisan from '@/assets/brand/badge-rge-eco-artisan.png'
+import qualibat from '@/assets/brand/badge-qualibat-rge.png'
 
 import { CmsLink } from '@/components/ui/CmsLink'
 import { Icon } from '@/components/ui/Icon'
@@ -47,9 +51,21 @@ export async function SiteFooter() {
         <div className={styles.top}>
           <div className={styles.brand}>
             <Link href="/" aria-label={`${company.name}, accueil`} className={styles.logo}>
-              <Logo variant="horizontal" />
+              <Logo height={96} />
             </Link>
             {footer.tagline ? <p className={styles.tagline}>{footer.tagline}</p> : null}
+            {company.rge?.label ? (
+              <a
+                href={company.rge.directoryUrl || undefined}
+                target={company.rge.directoryUrl ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                className={styles.badges}
+                aria-label={`${company.rge.label} : vérifier dans l’annuaire officiel (nouvel onglet)`}
+              >
+                <Image src={qualibat} alt="Qualibat RGE" height={64} sizes="54px" />
+                <Image src={ecoArtisan} alt="RGE Eco Artisan" height={52} sizes="82px" />
+              </a>
+            ) : null}
           </div>
 
           <div className={styles.columns}>

@@ -25,8 +25,8 @@ export async function generateMetadata(): Promise<Metadata> {
     formatDetection: { telephone: false, email: false, address: false },
     icons: {
       icon: [
-        { url: '/favicon.svg', type: 'image/svg+xml' },
         { url: '/favicon-48.png', sizes: '48x48', type: 'image/png' },
+        { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
       ],
       apple: '/apple-touch-icon.png',
     },

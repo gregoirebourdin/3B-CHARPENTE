@@ -21,10 +21,24 @@
   width: fit-content;
 }
 
-.logo svg {
-  width: 190px;
-  height: auto;
-  aspect-ratio: 3968 / 648;
+.logo img {
+  width: auto;
+  height: 96px;
+}
+
+.badges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: fit-content;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.badges img {
+  width: auto;
 }
 
 .tagline {
