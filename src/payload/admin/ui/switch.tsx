@@ -1,24 +1,39 @@
 'use client'
 
 import { Switch as SwitchPrimitive } from 'radix-ui'
-import type { ComponentProps } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 
-import { cn } from './utils'
+import { cn, focusRing } from './utils'
 
-export function Switch({ className, ...props }: ComponentProps<typeof SwitchPrimitive.Root>) {
+/**
+ * On/off switch, always followed by its visible word (« Ouvert », « Fermé »):
+ * the whole thing is the 44 px target.
+ */
+export function Switch({
+  className,
+  onLabel,
+  offLabel,
+  ...props
+}: ComponentProps<typeof SwitchPrimitive.Root> & { onLabel?: ReactNode; offLabel?: ReactNode }) {
   return (
     <SwitchPrimitive.Root
       data-slot="switch"
       className={cn(
-        'tw:peer tw:inline-flex tw:h-7 tw:w-12 tw:shrink-0 tw:cursor-pointer tw:items-center tw:rounded-full tw:border tw:border-transparent tw:p-0.5 tw:outline-none tw:transition-colors tw:focus-visible:ring-[3px] tw:focus-visible:ring-ring/40 tw:disabled:cursor-not-allowed tw:disabled:opacity-50 tw:data-[state=checked]:bg-primary tw:data-[state=unchecked]:bg-input',
+        'tw:group tw:inline-flex tw:min-h-11 tw:shrink-0 tw:cursor-pointer tw:items-center tw:gap-2.5 tw:rounded-xs tw:border-0 tw:bg-transparent tw:p-0 tw:font-sans tw:text-base tw:font-semibold tw:text-ink tw:data-[state=unchecked]:text-stone-text tw:disabled:cursor-not-allowed tw:disabled:opacity-45',
+        focusRing,
         className,
       )}
       {...props}
     >
-      <SwitchPrimitive.Thumb
-        data-slot="switch-thumb"
-        className="tw:pointer-events-none tw:block tw:size-6 tw:rounded-full tw:bg-card tw:shadow-xs tw:ring-0 tw:transition-transform tw:data-[state=checked]:translate-x-5 tw:data-[state=unchecked]:translate-x-0"
-      />
+      <span className="tw:relative tw:block tw:h-[26px] tw:w-11 tw:shrink-0 tw:rounded-full tw:bg-line-strong tw:transition-colors tw:duration-180 tw:group-data-[state=checked]:bg-forest">
+        <SwitchPrimitive.Thumb className="tw:absolute tw:top-[3px] tw:left-[3px] tw:block tw:size-5 tw:rounded-full tw:bg-white tw:shadow-[0_1px_3px_rgb(16_35_17/0.3)] tw:transition-transform tw:duration-320 tw:ease-brand tw:data-[state=checked]:translate-x-[18px]" />
+      </span>
+      {onLabel || offLabel ? (
+        <>
+          <span className="tw:group-data-[state=unchecked]:hidden">{onLabel}</span>
+          <span className="tw:group-data-[state=checked]:hidden">{offLabel}</span>
+        </>
+      ) : null}
     </SwitchPrimitive.Root>
   )
 }

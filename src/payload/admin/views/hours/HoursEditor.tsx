@@ -1,18 +1,18 @@
 'use client'
 
 import { SetStepNav, toast } from '@payloadcms/ui'
-import { CalendarOff, Copy, Eye, Plus, Save, Trash2 } from 'lucide-react'
-import Link from 'next/link'
+import { CalendarOff, Check, Copy, Mail, MapPin, Phone, Plus, Trash2, X } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useMemo, useState, useTransition } from 'react'
+import { useMemo, useState, useTransition, type ReactNode } from 'react'
 
 import { groupedHours } from '@/lib/hours'
 import type { Company } from '@/payload-types'
 
-import { Button } from '../../ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card'
-import { FieldHint, Input, Label } from '../../ui/input'
-import { EmptyState, Page, PageHeader } from '../../ui/page'
+import { Button, Cta } from '../../ui/button'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../ui/card'
+import { Field, FieldError, FieldHint, fieldClass, IconField, Input, Label, Optional, selectClass } from '../../ui/input'
+import { notify } from '../../ui/notify'
+import { Alert, EmptyState, Page, PageHeader, TextLink } from '../../ui/page'
 import { Switch } from '../../ui/switch'
 import { cn } from '../../ui/utils'
 
@@ -94,7 +94,7 @@ export function HoursEditor({ initial }: { initial: Data | null }) {
           ),
         },
     )
-    toast.info('Les horaires du lundi sont copiés du mardi au vendredi. Pensez à enregistrer.')
+    toast.info('Le lundi est copié du mardi au vendredi.', { description: 'Pensez à enregistrer.' })
   }
 
   const errors = {
@@ -116,7 +116,7 @@ export function HoursEditor({ initial }: { initial: Data | null }) {
   const save = () => {
     if (hasErrors) {
       setShowErrors(true)
-      toast.error('Quelques cases sont à corriger : elles sont signalées en rouge.')
+      toast.error('Quelques cases sont à corriger.', { description: 'Elles sont signalées en rouge.' })
       return
     }
     startTransition(async () => {
@@ -140,153 +140,169 @@ export function HoursEditor({ initial }: { initial: Data | null }) {
         if (!response.ok) throw new Error(String(response.status))
         setSaved(JSON.stringify(data))
         setShowErrors(false)
-        toast.success('Enregistré. Le site est à jour.')
+        notify.saved('Vos coordonnées et vos horaires s’affichent déjà sur le site.')
         router.refresh()
       } catch {
-        toast.error('L’enregistrement n’a pas abouti. Vérifiez la connexion et réessayez.')
+        notify.error(save)
       }
     })
   }
 
   const err = (message: string | null | undefined) => (showErrors && message ? message : null)
+  const savedData = JSON.parse(saved) as Data
+  const changedDays = new Set(data.hours.filter((day, index) => JSON.stringify(day) !== JSON.stringify(savedData.hours[index])).map((day) => day.day))
 
   return (
     <Page>
       <SetStepNav nav={[{ label: 'Coordonnées et horaires' }]} />
       <PageHeader
+        crumbs={[{ label: 'Réglages' }, { label: 'Coordonnées et horaires' }]}
         title="Coordonnées et horaires"
-        description="Ces informations s’affichent partout sur le site : en haut des pages, dans le pied de page, sur la page Contact et dans Google."
+        description="Votre téléphone, votre adresse et vos heures d’ouverture, tels que vos clients les voient."
         actions={
-          <Button size="lg" onClick={save} disabled={pending || !dirty}>
-            <Save aria-hidden="true" />
+          <Cta onClick={save} loading={pending} disabled={!dirty} icon={<Check />}>
             {pending ? 'Enregistrement…' : dirty ? 'Enregistrer' : 'Tout est enregistré'}
-          </Button>
+          </Cta>
         }
       />
 
-      <div className="tw:grid tw:items-start tw:gap-6 tw:xl:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
-        <div className="tw:flex tw:flex-col tw:gap-6">
+      <Alert>
+        <p>
+          <strong>Ces informations s’affichent partout sur le site</strong> : en haut des pages, dans le pied de page, sur la page Contact et dans Google.
+        </p>
+      </Alert>
+
+      <div className="tw:grid tw:items-start tw:gap-6 tw:wide:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        <div className="tw:grid tw:gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>Horaires de la semaine</CardTitle>
-              <CardDescription>Cochez les jours d’ouverture. La pause de midi est facultative.</CardDescription>
+              <div className="tw:grid tw:gap-1">
+                <CardTitle>Horaires de la semaine</CardTitle>
+                <CardDescription>Ouvert ou fermé, puis les heures. La pause de midi est facultative.</CardDescription>
+              </div>
             </CardHeader>
-            <CardContent className="tw:flex tw:flex-col">
+            <div>
               {data.hours.map((day, index) => {
                 const label = DAYS[index]!.label
                 const open = !day.closed
                 const split = Boolean(day.opens2 || day.closes2)
                 const error = err(errors.days[index])
+                const errorId = `day-error-${day.day}`
                 return (
-                  <fieldset key={day.day} className="tw:m-0 tw:grid tw:min-w-0 tw:gap-3 tw:border-0 tw:border-t tw:border-solid tw:border-border tw:px-0 tw:py-4 tw:first:border-t-0 tw:first:pt-0 tw:md:grid-cols-[150px_minmax(0,1fr)] tw:md:items-center">
-                    <legend className="tw:sr-only">{label}</legend>
-                    <div className="tw:flex tw:items-center tw:gap-3">
+                  <div
+                    key={day.day}
+                    role="group"
+                    aria-labelledby={`day-${day.day}`}
+                    className={cn(
+                      'tw:grid tw:gap-x-4 tw:gap-y-2 tw:border-0 tw:border-b tw:border-solid tw:border-line tw:px-6 tw:py-3 tw:last:border-b-0 tw:max-desk:px-4',
+                      'tw:desk:grid-cols-[92px_116px_minmax(0,1fr)] tw:desk:items-center',
+                      changedDays.has(day.day) && 'tw:bg-[color-mix(in_srgb,var(--c-sage-soft)_45%,transparent)]',
+                    )}
+                  >
+                    <div className="tw:flex tw:items-center tw:justify-between tw:gap-3 tw:desk:contents">
+                      <span id={`day-${day.day}`} className={cn('tw:text-base tw:font-semibold', !open && 'tw:text-stone-text')}>
+                        {label}
+                      </span>
                       <Switch
-                        id={`open-${day.day}`}
                         checked={open}
                         onCheckedChange={(checked) =>
                           setDay(index, checked ? { closed: false, opens: day.opens || '07:30', closes: day.closes || '17:00' } : { closed: true })
                         }
-                        aria-label={`${label} : ${open ? 'ouvert' : 'fermé'}`}
+                        aria-label={`${label} ouvert`}
+                        onLabel="Ouvert"
+                        offLabel="Fermé"
                       />
-                      <Label htmlFor={`open-${day.day}`} className="tw:cursor-pointer tw:text-base">
-                        {label}
-                      </Label>
                     </div>
                     {open ? (
-                      <div className="tw:flex tw:flex-col tw:gap-2">
-                        <div className="tw:flex tw:flex-wrap tw:items-center tw:gap-2">
-                          <TimeInput label={`${label}, ouverture`} value={day.opens} onChange={(opens) => setDay(index, { opens })} invalid={Boolean(error)} />
-                          <span className="tw:text-muted-foreground">à</span>
-                          <TimeInput label={`${label}, fermeture`} value={day.closes} onChange={(closes) => setDay(index, { closes })} invalid={Boolean(error)} />
+                      <div className="tw:grid tw:gap-2">
+                        <div className="tw:flex tw:flex-wrap tw:items-center tw:gap-x-2 tw:gap-y-2">
+                          <TimeInput label={`${label}, ouverture`} value={day.opens} onChange={(opens) => setDay(index, { opens })} invalid={Boolean(error)} describedBy={error ? errorId : undefined} />
+                          <span className="tw:text-stone-text">à</span>
+                          <TimeInput label={`${label}, fermeture`} value={day.closes} onChange={(closes) => setDay(index, { closes })} invalid={Boolean(error)} describedBy={error ? errorId : undefined} />
                           {split ? (
                             <>
-                              <span className="tw:px-1 tw:text-muted-foreground">puis</span>
-                              <TimeInput label={`${label}, réouverture`} value={day.opens2} onChange={(opens2) => setDay(index, { opens2 })} invalid={Boolean(error)} />
-                              <span className="tw:text-muted-foreground">à</span>
-                              <TimeInput label={`${label}, fermeture du soir`} value={day.closes2} onChange={(closes2) => setDay(index, { closes2 })} invalid={Boolean(error)} />
-                              <Button variant="ghost" size="sm" onClick={() => setDay(index, { opens2: null, closes2: null })}>
+                              <span className="tw:px-1 tw:text-stone-text">puis</span>
+                              <TimeInput label={`${label}, réouverture`} value={day.opens2} onChange={(opens2) => setDay(index, { opens2 })} invalid={Boolean(error)} describedBy={error ? errorId : undefined} />
+                              <span className="tw:text-stone-text">à</span>
+                              <TimeInput label={`${label}, fermeture du soir`} value={day.closes2} onChange={(closes2) => setDay(index, { closes2 })} invalid={Boolean(error)} describedBy={error ? errorId : undefined} />
+                              <Button variant="ghost" onClick={() => setDay(index, { opens2: null, closes2: null })}>
+                                <X aria-hidden="true" />
                                 Sans pause
                               </Button>
                             </>
                           ) : (
-                            <Button variant="ghost" size="sm" onClick={() => setDay(index, { closes: '12:00', opens2: '13:30', closes2: day.closes || '17:00' })}>
+                            <Button variant="ghost" onClick={() => setDay(index, { closes: '12:00', opens2: '13:30', closes2: day.closes || '17:00' })}>
                               <Plus aria-hidden="true" />
                               Pause de midi
                             </Button>
                           )}
                         </div>
-                        {error ? (
-                          <p role="alert" className="tw:m-0 tw:text-sm tw:font-medium tw:text-destructive">
-                            {error}
-                          </p>
-                        ) : null}
+                        {error ? <FieldError id={errorId}>{error}</FieldError> : null}
                       </div>
                     ) : (
-                      <p className="tw:m-0 tw:text-[15px] tw:text-muted-foreground">Fermé</p>
+                      <p className="tw:m-0 tw:text-base tw:text-stone-text">Fermé toute la journée</p>
                     )}
-                  </fieldset>
+                  </div>
                 )
               })}
-              <div className="tw:flex tw:flex-wrap tw:gap-3 tw:border-t tw:border-border tw:pt-4">
-                <Button variant="outline" onClick={copyToWeekdays}>
-                  <Copy aria-hidden="true" />
-                  Copier le lundi sur toute la semaine
-                </Button>
-              </div>
-            </CardContent>
+            </div>
+            <CardFooter>
+              <Button variant="outline" onClick={copyToWeekdays}>
+                <Copy aria-hidden="true" />
+                Copier le lundi sur toute la semaine
+              </Button>
+            </CardFooter>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Fermetures exceptionnelles</CardTitle>
-              <CardDescription>Congés, ponts… Elles s’affichent sur le site deux mois à l’avance.</CardDescription>
+              <div className="tw:grid tw:gap-1">
+                <CardTitle>Fermetures exceptionnelles</CardTitle>
+                <CardDescription>Congés, ponts… Elles s’affichent sur le site deux mois à l’avance.</CardDescription>
+              </div>
             </CardHeader>
-            <CardContent className="tw:flex tw:flex-col tw:gap-4">
+            <CardContent className="tw:grid tw:gap-4">
               {data.closures.length ? (
                 data.closures.map((closure, index) => {
                   const error = err(errors.closures[index])
                   const set = (patch: Partial<Closure>) =>
                     setData((current) => current && { ...current, closures: current.closures.map((c, i) => (i === index ? { ...c, ...patch } : c)) })
                   return (
-                    <div key={closure.id ?? index} className="tw:grid tw:gap-3 tw:rounded-lg tw:bg-muted tw:p-4 tw:md:grid-cols-[1fr_1fr_1.4fr_auto] tw:md:items-end">
-                      <div className="tw:flex tw:flex-col tw:gap-1.5">
+                    <div key={closure.id ?? index} className="tw:grid tw:gap-3 tw:rounded-sm tw:border tw:border-line tw:bg-surface tw:p-4 tw:desk:grid-cols-[1fr_1fr_1.4fr_auto] tw:desk:items-end">
+                      <Field>
                         <Label htmlFor={`from-${index}`}>Du</Label>
                         <Input id={`from-${index}`} type="date" value={(closure.from ?? '').slice(0, 10)} onChange={(e) => set({ from: e.target.value })} aria-invalid={Boolean(error)} />
-                      </div>
-                      <div className="tw:flex tw:flex-col tw:gap-1.5">
+                      </Field>
+                      <Field>
                         <Label htmlFor={`to-${index}`}>Au</Label>
                         <Input id={`to-${index}`} type="date" value={(closure.to ?? '').slice(0, 10)} onChange={(e) => set({ to: e.target.value })} aria-invalid={Boolean(error)} />
-                      </div>
-                      <div className="tw:flex tw:flex-col tw:gap-1.5">
-                        <Label htmlFor={`label-${index}`}>Motif (facultatif)</Label>
+                      </Field>
+                      <Field>
+                        <Label htmlFor={`label-${index}`}>
+                          Motif <Optional />
+                        </Label>
                         <Input id={`label-${index}`} value={closure.label ?? ''} placeholder="Congés d’été" onChange={(e) => set({ label: e.target.value })} />
-                      </div>
+                      </Field>
                       <Button
-                        variant="ghost"
-                        size="icon"
-                        aria-label="Supprimer cette fermeture"
+                        variant="destructiveGhost"
                         onClick={() => setData((current) => current && { ...current, closures: current.closures.filter((_, i) => i !== index) })}
                       >
                         <Trash2 aria-hidden="true" />
+                        Retirer
                       </Button>
-                      {error ? (
-                        <p role="alert" className="tw:m-0 tw:text-sm tw:font-medium tw:text-destructive tw:md:col-span-4">
-                          {error}
-                        </p>
-                      ) : null}
+                      {error ? <FieldError className="tw:desk:col-span-4">{error}</FieldError> : null}
                     </div>
                   )
                 })
               ) : (
-                <p className="tw:m-0 tw:flex tw:items-center tw:gap-2 tw:text-[15px] tw:text-muted-foreground">
-                  <CalendarOff className="tw:size-[18px]" aria-hidden="true" />
+                <p className="tw:m-0 tw:flex tw:items-center tw:gap-2 tw:text-base tw:text-stone-text">
+                  <CalendarOff className="tw:size-5" aria-hidden="true" />
                   Aucune fermeture prévue.
                 </p>
               )}
               <Button
                 variant="outline"
-                className="tw:self-start"
+                className="tw:justify-self-start"
                 onClick={() => setData((current) => current && { ...current, closures: [...current.closures, { from: '', to: '', label: '' } as Closure] })}
               >
                 <Plus aria-hidden="true" />
@@ -296,93 +312,137 @@ export function HoursEditor({ initial }: { initial: Data | null }) {
           </Card>
         </div>
 
-        <div className="tw:flex tw:flex-col tw:gap-6 tw:xl:sticky tw:xl:top-[calc(var(--app-header-height)+16px)]">
-          <Card>
-            <CardHeader>
-              <CardTitle>Téléphone, e-mail et adresse</CardTitle>
-            </CardHeader>
-            <CardContent className="tw:flex tw:flex-col tw:gap-4">
-              <Field id="phone" label="Téléphone" error={err(errors.phone)} hint="Comme il s’affiche : 06 34 67 31 49">
-                <Input id="phone" type="tel" inputMode="tel" value={data.phone} onChange={(e) => setData({ ...data, phone: e.target.value })} aria-invalid={Boolean(err(errors.phone))} />
-              </Field>
-              <Field id="email" label="E-mail" error={err(errors.email)} hint="Les demandes du site arrivent à cette adresse.">
-                <Input id="email" type="email" value={data.email} onChange={(e) => setData({ ...data, email: e.target.value })} aria-invalid={Boolean(err(errors.email))} />
-              </Field>
-              <Field id="street" label="Rue" error={err(errors.street)}>
-                <Input id="street" value={data.address.street} onChange={(e) => setData({ ...data, address: { ...data.address, street: e.target.value } })} aria-invalid={Boolean(err(errors.street))} />
-              </Field>
-              <div className="tw:grid tw:grid-cols-[120px_minmax(0,1fr)] tw:gap-3">
-                <Field id="postalCode" label="Code postal" error={err(errors.postalCode)}>
-                  <Input
-                    id="postalCode"
-                    inputMode="numeric"
-                    value={data.address.postalCode}
-                    onChange={(e) => setData({ ...data, address: { ...data.address, postalCode: e.target.value } })}
-                    aria-invalid={Boolean(err(errors.postalCode))}
-                  />
-                </Field>
-                <Field id="city" label="Commune" error={err(errors.city)}>
-                  <Input id="city" value={data.address.city} onChange={(e) => setData({ ...data, address: { ...data.address, city: e.target.value } })} aria-invalid={Boolean(err(errors.city))} />
-                </Field>
-              </div>
-              <Field id="note" label="Précision sous les horaires (facultatif)" hint="Ex. : « Sur rendez-vous en dehors de ces horaires ».">
-                <Input id="note" value={data.hoursNote} maxLength={160} onChange={(e) => setData({ ...data, hoursNote: e.target.value })} />
-              </Field>
-            </CardContent>
-          </Card>
-
-          <Card className="tw:border-transparent tw:bg-[#2c4f2d] tw:text-white tw:dark:bg-[#1f3a22]">
-            <CardHeader>
-              <CardTitle className="tw:flex tw:items-center tw:gap-2 tw:text-white">
-                <Eye className="tw:size-5" aria-hidden="true" />
-                Ce que voient vos clients
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="tw:flex tw:flex-col tw:gap-3">
-              <p className="tw:m-0 tw:font-heading tw:text-[28px] tw:font-bold tw:leading-none">{data.phone || '—'}</p>
-              <ul className="tw:m-0 tw:flex tw:list-none tw:flex-col tw:gap-1 tw:p-0 tw:text-[15px] tw:text-white/85">
-                {preview.map((group) => (
-                  <li key={group.days} className={cn(group.closed && 'tw:text-white/60')}>
-                    <strong className="tw:font-semibold tw:text-white">{group.days}</strong> : {group.hours}
-                  </li>
-                ))}
-              </ul>
-              {data.hoursNote ? <p className="tw:m-0 tw:text-sm tw:text-white/75">{data.hoursNote}</p> : null}
-              <p className="tw:m-0 tw:text-sm tw:text-white/75">
-                {data.address.street}, {data.address.postalCode} {data.address.city}
-              </p>
-            </CardContent>
-          </Card>
-
-          <p className="tw:m-0 tw:text-sm tw:text-muted-foreground">
-            Nom, SIRET, qualifications RGE :{' '}
-            <Link href="/admin/globals/company" className="tw:font-semibold tw:text-foreground">
-              toutes les informations de l’entreprise
-            </Link>
-            .
-          </p>
-        </div>
+        <aside aria-label="Aperçu" className="tw:grid tw:gap-3 tw:wide:sticky tw:wide:top-6">
+          <p className="tw:m-0 tw:text-sm tw:font-semibold tw:text-stone-text">Aperçu du pied de page</p>
+          <div className="tw:grid tw:gap-4 tw:rounded-md tw:bg-night tw:p-6 tw:text-on-night tw:shadow-md">
+            <p className="tw:m-0 tw:font-heading tw:text-[26px] tw:font-bold tw:leading-none">{data.phone || '—'}</p>
+            <ul className="tw:m-0 tw:grid tw:list-none tw:gap-1 tw:p-0 tw:text-[15px]">
+              {preview.map((group) => (
+                <li key={group.days} className={cn('tw:text-on-night/85', group.closed && 'tw:text-on-night/60')}>
+                  <strong className="tw:font-semibold tw:text-on-night">{group.days}</strong> : {group.hours}
+                </li>
+              ))}
+            </ul>
+            {data.hoursNote ? <p className="tw:m-0 tw:text-sm tw:text-on-night/75">{data.hoursNote}</p> : null}
+            <p className="tw:m-0 tw:text-sm tw:text-on-night/75">
+              {data.address.street}
+              <br />
+              {data.address.postalCode} {data.address.city}
+            </p>
+            <p className="tw:m-0 tw:text-sm tw:text-on-night/75">{data.email}</p>
+          </div>
+          <FieldHint>L’aperçu change dès que vous modifiez une case.</FieldHint>
+        </aside>
       </div>
+
+      <Card>
+        <CardHeader>
+          <div className="tw:grid tw:gap-1">
+            <CardTitle>Téléphone, e-mail et adresse</CardTitle>
+            <CardDescription>Les demandes du site arrivent à cette adresse e-mail.</CardDescription>
+          </div>
+        </CardHeader>
+        <CardContent className="tw:grid tw:gap-5 tw:desk:grid-cols-2">
+          <FormField id="phone" label="Téléphone" error={err(errors.phone)} hint="Comme il s’affiche : 06 34 67 31 49">
+            <IconField icon={<Phone />}>
+              <Input id="phone" type="tel" inputMode="tel" autoComplete="tel" value={data.phone} onChange={(e) => setData({ ...data, phone: e.target.value })} aria-invalid={Boolean(err(errors.phone))} aria-describedby="phone-help" />
+            </IconField>
+          </FormField>
+          <FormField id="email" label="E-mail" error={err(errors.email)} hint="Une seule adresse.">
+            <IconField icon={<Mail />}>
+              <Input id="email" type="email" autoComplete="email" value={data.email} onChange={(e) => setData({ ...data, email: e.target.value })} aria-invalid={Boolean(err(errors.email))} aria-describedby="email-help" />
+            </IconField>
+          </FormField>
+          <FormField id="street" label="Adresse" error={err(errors.street)} className="tw:desk:col-span-2">
+            <IconField icon={<MapPin />}>
+              <Input id="street" autoComplete="street-address" value={data.address.street} onChange={(e) => setData({ ...data, address: { ...data.address, street: e.target.value } })} aria-invalid={Boolean(err(errors.street))} aria-describedby="street-help" />
+            </IconField>
+          </FormField>
+          <div className="tw:grid tw:grid-cols-[132px_minmax(0,1fr)] tw:gap-3 tw:desk:col-span-2 tw:desk:grid-cols-[160px_minmax(0,1fr)]">
+            <FormField id="postalCode" label="Code postal" error={err(errors.postalCode)}>
+              <Input
+                id="postalCode"
+                inputMode="numeric"
+                autoComplete="postal-code"
+                value={data.address.postalCode}
+                onChange={(e) => setData({ ...data, address: { ...data.address, postalCode: e.target.value } })}
+                aria-invalid={Boolean(err(errors.postalCode))}
+                aria-describedby="postalCode-help"
+              />
+            </FormField>
+            <FormField id="city" label="Commune" error={err(errors.city)}>
+              <Input id="city" autoComplete="address-level2" value={data.address.city} onChange={(e) => setData({ ...data, address: { ...data.address, city: e.target.value } })} aria-invalid={Boolean(err(errors.city))} aria-describedby="city-help" />
+            </FormField>
+          </div>
+          <FormField id="note" label={<>Précision sous les horaires <Optional /></>} hint="Ex. : « Sur rendez-vous en dehors de ces horaires »." className="tw:desk:col-span-2">
+            <Input id="note" value={data.hoursNote} maxLength={160} onChange={(e) => setData({ ...data, hoursNote: e.target.value })} aria-describedby="note-help" />
+          </FormField>
+        </CardContent>
+        <CardFooter>
+          <TextLink href="/admin/globals/company">Nom, SIRET, qualifications : toutes les informations de l’entreprise</TextLink>
+        </CardFooter>
+      </Card>
     </Page>
   )
 }
 
-function TimeInput({ label, value, onChange, invalid }: { label: string; value?: string | null; onChange: (value: string) => void; invalid?: boolean }) {
-  return <Input type="time" step={300} aria-label={label} value={value ?? ''} onChange={(e) => onChange(e.target.value)} aria-invalid={invalid} className="tw:w-[140px]" />
+/** Quarter-hours from 5 h to 22 h: big native list, no AM/PM, easy on a phone. */
+const TIMES = Array.from({ length: (22 - 5) * 4 + 1 }, (_, i) => {
+  const minutes = 5 * 60 + i * 15
+  return `${String(Math.floor(minutes / 60)).padStart(2, '0')}:${String(minutes % 60).padStart(2, '0')}`
+})
+
+const spoken = (time: string) => {
+  const [h = '0', m = '00'] = time.split(':')
+  return `${Number(h)} h${m === '00' ? '' : ` ${m}`}`
 }
 
-function Field({ id, label, hint, error, children }: { id: string; label: string; hint?: string; error?: string | null; children: React.ReactNode }) {
+function TimeInput({
+  label,
+  value,
+  onChange,
+  invalid,
+  describedBy,
+}: {
+  label: string
+  value?: string | null
+  onChange: (value: string) => void
+  invalid?: boolean
+  describedBy?: string
+}) {
+  const current = (value ?? '').slice(0, 5)
+  const options = current && !TIMES.includes(current) ? [...TIMES, current].sort() : TIMES
   return (
-    <div className="tw:flex tw:flex-col tw:gap-1.5">
+    <select
+      aria-label={label}
+      value={current}
+      onChange={(e) => onChange(e.target.value)}
+      aria-invalid={invalid}
+      aria-describedby={describedBy}
+      className={cn(fieldClass, selectClass, 'tw:min-h-11 tw:w-[104px] tw:cursor-pointer tw:pr-9 tw:bg-[position:right_12px_center] tw:tabular-nums')}
+    >
+      {current ? null : <option value="">—</option>}
+      {options.map((time) => (
+        <option key={time} value={time}>
+          {spoken(time)}
+        </option>
+      ))}
+    </select>
+  )
+}
+
+function FormField({ id, label, hint, error, className, children }: { id: string; label: ReactNode; hint?: string; error?: string | null; className?: string; children: ReactNode }) {
+  return (
+    <Field className={className}>
       <Label htmlFor={id}>{label}</Label>
       {children}
       {error ? (
-        <p role="alert" className="tw:m-0 tw:text-sm tw:font-medium tw:text-destructive">
+        <FieldError id={`${id}-help`} role="alert">
           {error}
-        </p>
+        </FieldError>
       ) : hint ? (
-        <FieldHint>{hint}</FieldHint>
+        <FieldHint id={`${id}-help`}>{hint}</FieldHint>
       ) : null}
-    </div>
+    </Field>
   )
 }

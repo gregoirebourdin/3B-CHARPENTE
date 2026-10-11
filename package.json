@@ -27,6 +27,9 @@
     "build:vercel": "payload migrate && SEED_IF_EMPTY=true payload run scripts/seed.ts && next build"
   },
   "dependencies": {
+    "@dnd-kit/core": "6.3.1",
+    "@dnd-kit/sortable": "10.0.0",
+    "@dnd-kit/utilities": "3.2.2",
     "@payloadcms/db-postgres": "3.90.2",
     "@payloadcms/email-resend": "3.90.2",
     "@payloadcms/live-preview-react": "3.90.2",

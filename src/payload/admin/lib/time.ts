@@ -17,7 +17,8 @@ export function relativeFr(value: string | Date | null | undefined, now = new Da
   return `le ${date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: sameYear ? undefined : 'numeric', timeZone: 'Europe/Paris' })}`
 }
 
-/** « samedi 11 octobre » */
+/** « Dimanche 11 octobre 2026 » */
 export function todayFr(now = new Date()) {
-  return now.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Paris' })
+  const text = now.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })
+  return text.charAt(0).toUpperCase() + text.slice(1)
 }

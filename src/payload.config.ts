@@ -79,6 +79,7 @@ export default buildConfig({
         dashboard: { Component: '@/payload/admin/views/DashboardView#DashboardView' },
         demandes: { Component: '@/payload/admin/views/requests/RequestsView#RequestsView', path: '/demandes' },
         horaires: { Component: '@/payload/admin/views/hours/HoursView#HoursView', path: '/horaires' },
+        nouveauChantier: { Component: '@/payload/admin/views/project/NewProjectView#NewProjectView', path: '/nouveau-chantier' },
       },
     },
     livePreview: {

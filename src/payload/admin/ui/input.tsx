@@ -1,23 +1,78 @@
-import type { ComponentProps } from 'react'
+import { TriangleAlert } from 'lucide-react'
+import type { ComponentProps, ReactNode } from 'react'
 
 import { cn } from './utils'
 
-const field =
-  'tw:w-full tw:min-w-0 tw:rounded-lg tw:border tw:border-input tw:bg-card tw:px-3.5 tw:font-sans tw:text-base tw:text-foreground tw:shadow-xs tw:outline-none tw:transition-[border-color,box-shadow] tw:placeholder:text-muted-foreground/80 tw:focus-visible:border-ring tw:focus-visible:ring-[3px] tw:focus-visible:ring-ring/25 tw:disabled:cursor-not-allowed tw:disabled:opacity-60 tw:aria-invalid:border-destructive tw:aria-invalid:ring-destructive/20'
+export const fieldClass = [
+  'tw:block tw:w-full tw:min-w-0 tw:rounded-xs tw:border tw:border-line-strong tw:bg-card tw:px-3.5 tw:py-2.5 tw:font-sans tw:text-base tw:leading-[1.4] tw:text-ink',
+  'tw:transition-[border-color,box-shadow] tw:duration-180 tw:ease-brand tw:placeholder:text-stone-text tw:placeholder:opacity-100',
+  'tw:hover:border-[color-mix(in_srgb,var(--c-ink)_45%,transparent)]',
+  'tw:outline-none tw:focus:border-forest tw:focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--c-accent)_24%,transparent)]',
+  'tw:aria-invalid:border-error tw:disabled:cursor-not-allowed tw:disabled:bg-surface tw:disabled:text-stone-text',
+].join(' ')
 
-export function Input({ className, type = 'text', ...props }: ComponentProps<'input'>) {
-  return <input type={type} data-slot="input" className={cn(field, 'tw:h-11', className)} {...props} />
+/** Native select in the same box, with the chevron drawn 16 px from the right edge. */
+export const selectClass = 'tw:appearance-none tw:bg-[image:var(--select-chevron)] tw:bg-[length:16px_16px] tw:bg-[position:right_14px_center] tw:bg-no-repeat tw:pr-10'
+
+export function Select({ className, ...props }: ComponentProps<'select'>) {
+  return <select data-slot="select" className={cn(fieldClass, selectClass, 'tw:min-h-11 tw:cursor-pointer', className)} {...props} />
+}
+
+export function Input({ className, type = 'text', size = 'default', ...props }: Omit<ComponentProps<'input'>, 'size'> & { size?: 'default' | 'lg' }) {
+  return <input type={type} data-slot="input" className={cn(fieldClass, size === 'lg' ? 'tw:min-h-13 tw:text-[17px]' : 'tw:min-h-11', className)} {...props} />
 }
 
 export function Textarea({ className, ...props }: ComponentProps<'textarea'>) {
-  return <textarea data-slot="textarea" className={cn(field, 'tw:min-h-28 tw:py-3 tw:leading-relaxed', className)} {...props} />
+  return <textarea data-slot="textarea" className={cn(fieldClass, 'tw:min-h-28 tw:resize-y tw:leading-relaxed', className)} {...props} />
+}
+
+/** A field with an icon at its start (e-mail, phone, pin, clock, magnifier). */
+export function IconField({ icon, className, children }: { icon: ReactNode; className?: string; children: ReactNode }) {
+  return (
+    <div className={cn('tw:relative tw:[&>input]:pl-11', className)}>
+      <span aria-hidden="true" className="tw:pointer-events-none tw:absolute tw:top-1/2 tw:left-3.5 tw:-translate-y-1/2 tw:text-stone-text tw:[&_svg]:size-5">
+        {icon}
+      </span>
+      {children}
+    </div>
+  )
 }
 
 export function Label({ className, ...props }: ComponentProps<'label'>) {
-  return <label data-slot="label" className={cn('tw:flex tw:items-center tw:gap-2 tw:text-[15px] tw:font-semibold tw:text-foreground', className)} {...props} />
+  return <label data-slot="label" className={cn('tw:flex tw:flex-wrap tw:items-baseline tw:gap-x-1.5 tw:text-base tw:font-semibold tw:leading-[1.35] tw:text-ink', className)} {...props} />
+}
+
+/** « facultatif », after a label. */
+export function Optional({ children = 'facultatif' }: { children?: ReactNode }) {
+  return <small className="tw:text-sm tw:font-normal tw:text-stone-text">{children}</small>
 }
 
 /** Short help under a field: one sentence, in plain words. */
 export function FieldHint({ className, ...props }: ComponentProps<'p'>) {
-  return <p data-slot="field-hint" className={cn('tw:m-0 tw:text-sm tw:text-muted-foreground', className)} {...props} />
+  return <p data-slot="field-hint" className={cn('tw:m-0 tw:text-sm tw:leading-[1.45] tw:text-stone-text', className)} {...props} />
+}
+
+/** Error under a field (linked to it with aria-describedby). */
+export function FieldError({ className, children, ...props }: ComponentProps<'p'>) {
+  return (
+    <p data-slot="field-error" className={cn('tw:m-0 tw:flex tw:items-center tw:gap-1.5 tw:text-sm tw:font-semibold tw:text-error tw:[&_svg]:size-4', className)} {...props}>
+      <TriangleAlert aria-hidden="true" />
+      {children}
+    </p>
+  )
+}
+
+/** Label, field, help and error, stacked with 8 px between them. */
+export function Field({ className, ...props }: ComponentProps<'div'>) {
+  return <div data-slot="field" className={cn('tw:grid tw:min-w-0 tw:content-start tw:gap-2', className)} {...props} />
+}
+
+/** Checkbox with its clickable label, 44 px high. */
+export function Checkbox({ className, label, ...props }: Omit<ComponentProps<'input'>, 'type'> & { label: ReactNode }) {
+  return (
+    <label className={cn('tw:flex tw:min-h-11 tw:cursor-pointer tw:items-center tw:gap-3 tw:text-base tw:text-ink', className)}>
+      <input type="checkbox" className="tw:m-0 tw:size-[22px] tw:shrink-0 tw:accent-forest" {...props} />
+      {label}
+    </label>
+  )
 }

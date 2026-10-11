@@ -14,7 +14,7 @@ export function DropdownMenuContent({ className, sideOffset = 6, ...props }: Com
       <MenuPrimitive.Content
         data-slot="dropdown-menu-content"
         sideOffset={sideOffset}
-        className={cn('tw:z-[1000] tw:min-w-56 tw:overflow-hidden tw:rounded-xl tw:border tw:border-border tw:bg-card tw:p-1.5 tw:text-foreground tw:shadow-md', className)}
+        className={cn('tw:z-[1000] tw:grid tw:min-w-60 tw:gap-0.5 tw:overflow-hidden tw:rounded-sm tw:border tw:border-line tw:bg-card tw:p-1.5 tw:font-sans tw:text-ink tw:shadow-lg', className)}
         {...props}
       />
     </MenuPrimitive.Portal>
@@ -26,7 +26,7 @@ export function DropdownMenuItem({ className, ...props }: ComponentProps<typeof 
     <MenuPrimitive.Item
       data-slot="dropdown-menu-item"
       className={cn(
-        'tw:flex tw:min-h-10 tw:cursor-pointer tw:select-none tw:items-center tw:gap-2.5 tw:rounded-lg tw:px-2.5 tw:text-[15px] tw:font-medium tw:text-foreground tw:no-underline tw:outline-none tw:data-[highlighted]:bg-muted tw:[&_svg]:size-[18px] tw:[&_svg]:text-muted-foreground',
+        'tw:flex tw:min-h-11 tw:cursor-pointer tw:select-none tw:items-center tw:gap-2.5 tw:rounded-xs tw:px-3 tw:text-base tw:text-ink tw:no-underline tw:outline-none tw:data-[highlighted]:bg-surface tw:data-[variant=destructive]:text-error tw:[&_svg]:size-5 tw:[&_svg]:text-stone-text tw:data-[variant=destructive]:[&_svg]:text-error',
         className,
       )}
       {...props}
@@ -35,9 +35,9 @@ export function DropdownMenuItem({ className, ...props }: ComponentProps<typeof 
 }
 
 export function DropdownMenuLabel({ className, ...props }: ComponentProps<typeof MenuPrimitive.Label>) {
-  return <MenuPrimitive.Label className={cn('tw:px-2.5 tw:py-2 tw:text-sm tw:text-muted-foreground', className)} {...props} />
+  return <MenuPrimitive.Label className={cn('tw:px-3 tw:py-2 tw:text-sm tw:text-stone-text', className)} {...props} />
 }
 
 export function DropdownMenuSeparator({ className, ...props }: ComponentProps<typeof MenuPrimitive.Separator>) {
-  return <MenuPrimitive.Separator className={cn('tw:my-1 tw:h-px tw:bg-border', className)} {...props} />
+  return <MenuPrimitive.Separator className={cn('tw:my-1 tw:h-px tw:bg-line', className)} {...props} />
 }

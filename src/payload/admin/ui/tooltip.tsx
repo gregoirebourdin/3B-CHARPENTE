@@ -5,7 +5,7 @@ import type { ComponentProps } from 'react'
 
 import { cn } from './utils'
 
-export function TooltipProvider({ delayDuration = 200, ...props }: ComponentProps<typeof TooltipPrimitive.Provider>) {
+export function TooltipProvider({ delayDuration = 300, ...props }: ComponentProps<typeof TooltipPrimitive.Provider>) {
   return <TooltipPrimitive.Provider delayDuration={delayDuration} {...props} />
 }
 
@@ -18,7 +18,7 @@ export function TooltipContent({ className, sideOffset = 6, children, ...props }
       <TooltipPrimitive.Content
         data-slot="tooltip-content"
         sideOffset={sideOffset}
-        className={cn('tw:z-[1000] tw:max-w-xs tw:rounded-lg tw:bg-foreground tw:px-3 tw:py-2 tw:text-sm tw:text-background tw:shadow-md', className)}
+        className={cn('tw:z-[1000] tw:max-w-xs tw:rounded-xs tw:bg-night tw:px-2.5 tw:py-1.5 tw:font-sans tw:text-sm tw:font-medium tw:text-on-night tw:shadow-md', className)}
         {...props}
       >
         {children}
