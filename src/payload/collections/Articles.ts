@@ -8,7 +8,7 @@ import { slugField } from '../fields/slug'
 import { publishGuard } from '../hooks/publishGuards'
 import { revalidateHooks } from '../hooks/revalidate'
 import { routingHooks } from '../hooks/routing'
-import { draftVersions, layoutField, previewAdmin, publishedAtField } from './shared'
+import { contentListComponents, draftVersions, layoutField, previewAdmin, publishedAtField } from './shared'
 
 const routing = routingHooks('articles')
 
@@ -34,6 +34,7 @@ export const Articles: CollectionConfig = {
     defaultColumns: ['title', 'topic', 'publishedAt', '_status'],
     description: 'Les guides pratiques, listés sur la page /conseils/.',
     ...previewAdmin('articles'),
+    components: contentListComponents,
   },
   access: {
     read: publishedOrTeam,

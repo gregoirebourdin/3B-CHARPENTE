@@ -21,13 +21,17 @@ import { OverviewComponent as OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860
 import { MetaTitleComponent as MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { MetaDescriptionComponent as MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
+import { ContentListView as ContentListView_d351058d3534fe5573a96dce1ffca315 } from '@/payload/admin/views/list/ContentListView'
 import { AdminNav as AdminNav_05184afed72cf43bcceaeb537700561f } from '@/payload/admin/nav/AdminNav'
 import { Icon as Icon_5b495d5fece06267c23afa6fda6451ee } from '@/payload/admin/components/Brand'
 import { Logo as Logo_5b495d5fece06267c23afa6fda6451ee } from '@/payload/admin/components/Brand'
+import { LoginAside as LoginAside_c13292d852c22fa98f0043d6512fc623 } from '@/payload/admin/components/LoginIntro'
+import { LoginIntro as LoginIntro_c13292d852c22fa98f0043d6512fc623 } from '@/payload/admin/components/LoginIntro'
 import { DashboardView as DashboardView_d01a06dadac0f17fcee7a785dbb34210 } from '@/payload/admin/views/DashboardView'
 import { RequestsView as RequestsView_477080a1585e47ec5654936b52bb1e9f } from '@/payload/admin/views/requests/RequestsView'
 import { HoursView as HoursView_20f99df0b0b0522fb74fc3c6140868ab } from '@/payload/admin/views/hours/HoursView'
 import { NewProjectView as NewProjectView_83c7fac1faa93a9abce750c530de0f35 } from '@/payload/admin/views/project/NewProjectView'
+import { HelpView as HelpView_980e49bbd6f3882367e2a4223aeaeda2 } from '@/payload/admin/views/help/HelpView'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 import { BlobClientUploadHandler as BlobClientUploadHandler_bf180ffcc0eae6412c50e6fd01be383f } from '@/payload/storage/BlobClientUploadHandler'
 
@@ -56,13 +60,17 @@ export const importMap = {
   "@payloadcms/plugin-seo/client#MetaTitleComponent": MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#MetaDescriptionComponent": MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
+  "@/payload/admin/views/list/ContentListView#ContentListView": ContentListView_d351058d3534fe5573a96dce1ffca315,
   "@/payload/admin/nav/AdminNav#AdminNav": AdminNav_05184afed72cf43bcceaeb537700561f,
   "@/payload/admin/components/Brand#Icon": Icon_5b495d5fece06267c23afa6fda6451ee,
   "@/payload/admin/components/Brand#Logo": Logo_5b495d5fece06267c23afa6fda6451ee,
+  "@/payload/admin/components/LoginIntro#LoginAside": LoginAside_c13292d852c22fa98f0043d6512fc623,
+  "@/payload/admin/components/LoginIntro#LoginIntro": LoginIntro_c13292d852c22fa98f0043d6512fc623,
   "@/payload/admin/views/DashboardView#DashboardView": DashboardView_d01a06dadac0f17fcee7a785dbb34210,
   "@/payload/admin/views/requests/RequestsView#RequestsView": RequestsView_477080a1585e47ec5654936b52bb1e9f,
   "@/payload/admin/views/hours/HoursView#HoursView": HoursView_20f99df0b0b0522fb74fc3c6140868ab,
   "@/payload/admin/views/project/NewProjectView#NewProjectView": NewProjectView_83c7fac1faa93a9abce750c530de0f35,
+  "@/payload/admin/views/help/HelpView#HelpView": HelpView_980e49bbd6f3882367e2a4223aeaeda2,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1,
   "@/payload/storage/BlobClientUploadHandler#BlobClientUploadHandler": BlobClientUploadHandler_bf180ffcc0eae6412c50e6fd01be383f
 }

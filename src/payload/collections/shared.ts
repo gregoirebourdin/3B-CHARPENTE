@@ -48,3 +48,8 @@ export const publishedAtField: Field = {
     ],
   },
 }
+
+/** « Mon site » lists: the administration's own table (photo, status, filters) instead of Payload's generic one. */
+export const contentListComponents: NonNullable<CollectionConfig['admin']>['components'] = {
+  views: { list: { Component: '@/payload/admin/views/list/ContentListView#ContentListView' } },
+}

@@ -8,7 +8,7 @@ import { slugField } from '../fields/slug'
 import { publishGuard } from '../hooks/publishGuards'
 import { revalidateHooks } from '../hooks/revalidate'
 import { routingHooks } from '../hooks/routing'
-import { draftVersions, previewAdmin, publishedAtField } from './shared'
+import { contentListComponents, draftVersions, previewAdmin, publishedAtField } from './shared'
 
 const routing = routingHooks('projects')
 
@@ -38,8 +38,9 @@ export const Projects: CollectionConfig = {
     defaultColumns: ['title', 'commune', 'services', 'featured', '_status'],
     listSearchableFields: ['title', 'slug', 'shortTitle'],
     description:
-      'Vos chantiers. Pour en ajouter un rapidement : ouvrez un chantier proche, cliquez sur « … » puis « Dupliquer », changez les textes et les photos.',
+      'Vos chantiers. Pour en ajouter un : bouton « Ajouter un chantier » (assistant en trois étapes).',
     ...previewAdmin('projects'),
+    components: contentListComponents,
   },
   access: {
     read: publishedOrTeam,

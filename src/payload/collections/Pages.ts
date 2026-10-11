@@ -7,7 +7,7 @@ import { slugField } from '../fields/slug'
 import { publishGuard } from '../hooks/publishGuards'
 import { revalidateHooks } from '../hooks/revalidate'
 import { computePagePath, preventRootCollision, routingHooks } from '../hooks/routing'
-import { draftVersions, layoutField, previewAdmin } from './shared'
+import { contentListComponents, draftVersions, layoutField, previewAdmin } from './shared'
 
 const routing = routingHooks('pages')
 
@@ -24,6 +24,7 @@ export const Pages: CollectionConfig = {
     description:
       'Accueil, 3B Récup’, pages secteur, À propos, Contact, mentions légales… Cliquez sur une page pour la modifier.',
     ...previewAdmin('pages'),
+    components: contentListComponents,
   },
   access: {
     read: publishedOrTeam,

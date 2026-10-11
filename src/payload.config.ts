@@ -59,6 +59,32 @@ export default buildConfig({
   i18n: {
     supportedLanguages: { fr },
     fallbackLanguage: 'fr',
+    // A few of Payload's messages, in the plain words of the rest of the administration.
+    translations: {
+      fr: {
+        authentication: {
+          emailOrUsername: 'Identifiant ou adresse e-mail',
+          loggedOutSuccessfully: 'Vous êtes déconnecté. À bientôt.',
+        },
+        fields: {
+          addNew: 'Ajouter',
+          addNewLabel: 'Ajouter : {{label}}',
+          uploadNewLabel: 'Envoyer : {{label}}',
+        },
+        general: {
+          createNew: 'Ajouter',
+          createNewLabel: 'Ajouter : {{label}}',
+          creatingNewLabel: 'Nouveau : {{label}}',
+          updatedSuccessfully: 'Enregistré. Le site est à jour.',
+          successfullyCreated: '{{label}} : c’est enregistré.',
+          deletedSuccessfully: 'Supprimé.',
+        },
+        version: {
+          draftSavedSuccessfully: 'Brouillon enregistré. Il n’est pas encore sur le site.',
+          autosavedSuccessfully: 'Brouillon enregistré automatiquement.',
+        },
+      },
+    },
   },
   admin: {
     user: Users.slug,
@@ -75,11 +101,14 @@ export default buildConfig({
         Icon: '@/payload/admin/components/Brand#Icon',
       },
       Nav: '@/payload/admin/nav/AdminNav#AdminNav',
+      beforeLogin: ['@/payload/admin/components/LoginIntro#LoginIntro'],
+      afterLogin: ['@/payload/admin/components/LoginIntro#LoginAside'],
       views: {
         dashboard: { Component: '@/payload/admin/views/DashboardView#DashboardView' },
         demandes: { Component: '@/payload/admin/views/requests/RequestsView#RequestsView', path: '/demandes' },
         horaires: { Component: '@/payload/admin/views/hours/HoursView#HoursView', path: '/horaires' },
         nouveauChantier: { Component: '@/payload/admin/views/project/NewProjectView#NewProjectView', path: '/nouveau-chantier' },
+        aide: { Component: '@/payload/admin/views/help/HelpView#HelpView', path: '/aide' },
       },
     },
     livePreview: {

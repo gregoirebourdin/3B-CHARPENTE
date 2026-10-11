@@ -8,7 +8,7 @@ import { publishGuard } from '../hooks/publishGuards'
 import { revalidateHooks } from '../hooks/revalidate'
 import { preventRootCollision, routingHooks } from '../hooks/routing'
 import { ICON_OPTIONS } from '../utilities/icons'
-import { draftVersions, layoutField, previewAdmin } from './shared'
+import { contentListComponents, draftVersions, layoutField, previewAdmin } from './shared'
 
 const routing = routingHooks('services')
 
@@ -36,6 +36,7 @@ export const Services: CollectionConfig = {
     description:
       'Les 9 prestations. Le menu « Prestations » et les cartes de l’accueil se construisent tout seuls à partir d’ici (dans l’ordre du champ « Ordre »).',
     ...previewAdmin('services'),
+    components: contentListComponents,
   },
   access: {
     read: publishedOrTeam,
