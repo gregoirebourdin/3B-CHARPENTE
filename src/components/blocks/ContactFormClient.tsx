@@ -1,6 +1,6 @@
 'use client'
 
-import { upload } from '@vercel/blob/client'
+import { uploadPresigned } from '@vercel/blob/client'
 import { usePathname } from 'next/navigation'
 import { useEffect, useId, useMemo, useRef, useState, useSyncExternalStore, type FormEvent, type ReactNode } from 'react'
 
@@ -122,7 +122,11 @@ export function ContactFormClient({
       setFiles((current) => [...current, { id, name: file.name, status: 'uploading' }])
       try {
         const safeName = file.name.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\w.-]+/g, '-')
-        const blob = await upload(`demandes/${safeName}`, file, { access: 'public', handleUploadUrl: '/site-api/upload' })
+        const blob = await uploadPresigned(`demandes/${safeName}`, file, {
+          access: 'public',
+          contentType: file.type || undefined,
+          handleUploadUrl: '/site-api/upload',
+        })
         setFiles((current) => current.map((item) => (item.id === id ? { ...item, status: 'done', url: blob.url } : item)))
       } catch {
         setFiles((current) => current.map((item) => (item.id === id ? { ...item, status: 'error' } : item)))

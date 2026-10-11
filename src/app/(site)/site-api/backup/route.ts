@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server'
 
 import { encryptBackup, exportContent } from '@/lib/backup'
 import { getPayloadClient } from '@/lib/cms/client'
+import { blobEnabled } from '@/payload/storage/blobAuth'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 120
@@ -27,7 +28,7 @@ function authorized(request: Request) {
  */
 export async function GET(request: Request) {
   if (!authorized(request)) return NextResponse.json({ error: 'Non autorisé.' }, { status: 401 })
-  if (!process.env.BLOB_READ_WRITE_TOKEN || !process.env.PAYLOAD_SECRET) {
+  if (!blobEnabled() || !process.env.PAYLOAD_SECRET) {
     return NextResponse.json({ error: 'Stockage Blob ou secret manquant.' }, { status: 503 })
   }
 

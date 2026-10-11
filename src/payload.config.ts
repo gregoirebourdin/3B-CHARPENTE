@@ -6,7 +6,6 @@ import { resendAdapter } from '@payloadcms/email-resend'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { fr } from '@payloadcms/translations/languages/fr'
 import { buildConfig, type Field } from 'payload'
 import sharp from 'sharp'
@@ -30,11 +29,23 @@ import { Company } from './payload/globals/Company'
 import { Analytics, Footer, Header, Proofs, SeoSettings } from './payload/globals/Navigation'
 import { SiteTextsGlobal } from './payload/globals/SiteTexts'
 import { revalidateHooks } from './payload/hooks/revalidate'
+import { blobStorage } from './payload/storage/blobStorage'
 import { orderAdminNav } from './payload/utilities/orderAdminNav'
 import { LINKABLE_COLLECTIONS } from './payload/utilities/routes'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+/**
+ * The Neon database created from Vercel (Storage → Neon) comes first, with or
+ * without the prefix chosen when it was connected; DATABASE_URL otherwise.
+ */
+const databaseUrl = () =>
+  process.env.POSTGRES_URL ||
+  process.env.STORAGE_POSTGRES_URL ||
+  process.env.STORAGE_DATABASE_URL ||
+  process.env.DATABASE_URL ||
+  ''
 
 export default buildConfig({
   // Left empty on Vercel: the admin then calls its API on whatever address it is opened from.
@@ -77,8 +88,7 @@ export default buildConfig({
   collections: [Pages, Articles, Services, Projects, Communes, Faqs, Media, Team, Reviews, ValidationPoints, Users],
   globals: [Company, Header, Footer, Proofs, SiteTextsGlobal, SeoSettings, Analytics],
   db: postgresAdapter({
-    // POSTGRES_URL comes from the Neon integration of Vercel (pooled); DATABASE_URL elsewhere.
-    pool: { connectionString: process.env.POSTGRES_URL || process.env.DATABASE_URL || '' },
+    pool: { connectionString: databaseUrl() },
     migrationDir: path.resolve(dirname, 'migrations'),
     // Schema changes go through migrations (src/migrations), never through a silent push.
     push: process.env.PAYLOAD_DB_PUSH === 'true',
@@ -122,14 +132,8 @@ export default buildConfig({
     formBuilderPlugin(formBuilderConfig),
     // Registered for its translations and its fields (used in src/payload/fields/seo.ts).
     seoPlugin({ collections: [], uploadsCollection: 'media' }),
-    vercelBlobStorage({
-      enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-      collections: { media: { prefix: 'medias', disablePayloadAccessControl: true } },
-      // Large photos go straight from the browser to the Blob store (no 4.5 MB server limit).
-      clientUploads: true,
-      cacheControlMaxAge: 60 * 60 * 24 * 365,
-    }),
+    // Photos in Vercel Blob (OIDC or read-write token); large ones go straight from the browser.
+    blobStorage({ collections: { media: { prefix: 'medias' } } }),
     orderAdminNav([
       'Demandes',
       'Contenu du site',

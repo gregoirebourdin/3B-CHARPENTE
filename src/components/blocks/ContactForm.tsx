@@ -5,6 +5,7 @@ import { RichText } from '@/components/rich-text/RichText'
 import { HAUTES_ALPES_COMMUNES } from '@/data/communes-hautes-alpes'
 import { getCommunes } from '@/lib/cms/queries'
 import { toFieldDefs } from '@/lib/forms/schema'
+import { blobEnabled } from '@/payload/storage/blobAuth'
 import { groupedHours } from '@/lib/hours'
 import { phoneToE164, template } from '@/lib/links'
 import type { ContactFormBlock as Data, Form } from '@/payload-types'
@@ -37,7 +38,7 @@ export async function ContactForm({ block, context }: BlockProps<Data>) {
             failure={<RichText data={form.errorMessage} />}
             privacy={block.privacyNotice ? <RichText data={block.privacyNotice} /> : null}
             communes={suggestions}
-            uploadsEnabled={Boolean(process.env.BLOB_READ_WRITE_TOKEN)}
+            uploadsEnabled={blobEnabled()}
             texts={{
               ...texts.form,
               // Not repeated when the introduction above the form already says it.

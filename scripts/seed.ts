@@ -16,6 +16,7 @@
 import { getPayload } from 'payload'
 
 import config from '../src/payload.config'
+import { blobEnabled } from '../src/payload/storage/blobAuth'
 import { runSeed } from '../src/seed/importer/run'
 
 function accountOptions() {
@@ -39,7 +40,7 @@ try {
     // On Vercel, photos must go to Blob storage: without it, only the accounts
     // are created (so the admin is never left open) and the import waits for
     // the next deployment.
-    if (process.env.VERCEL && !process.env.BLOB_READ_WRITE_TOKEN) {
+    if (process.env.VERCEL && !blobEnabled()) {
       console.warn('Stockage Vercel Blob non branché : comptes créés, import du contenu reporté au prochain déploiement.')
       await runSeed(payload, process.cwd(), { ...accountOptions(), accountsOnly: true })
       process.exit(0)
