@@ -200,6 +200,12 @@ export const redirects: { from: string; to: string }[] = [
 export const generalValidationPoints: (SeedValidationPoint & { page: string })[] = [
   {
     page: 'Tout le site',
+    question: 'Police Nohemi (titres) : la licence fournie couvre-t-elle un site commercial (Pangram Pangram) ?',
+    decision: 'Fichiers fournis par le client utilisés tels quels (auto-hébergés). Sans licence commerciale, remplacer la police des titres dans src/styles/fonts.ts par une police libre.',
+    priority: 'high',
+  },
+  {
+    page: 'Tout le site',
     question: 'Diagnostic PEMD : Jean réalise-t-il lui-même le diagnostic réglementaire, ou intervient-il en appui d’un diagnostiqueur ?',
     decision: 'Variante A partout : « expertise du gisement de bois, en amont ou en appui du diagnostic PEMD ».',
     priority: 'high',

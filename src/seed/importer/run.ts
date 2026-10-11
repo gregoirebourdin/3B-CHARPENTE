@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url'
 import type { CollectionSlug, Payload } from 'payload'
 
 import { SITE_TEXT_DEFAULTS } from '../../payload/globals/siteTextDefaults'
-import { slugify } from '../../payload/utilities/routes'
+import { pathFor, slugify } from '../../payload/utilities/routes'
 import { communes as rawCommunes } from '../data/communes'
 import { contactForm as rawContactForm } from '../data/forms'
 import * as rawSettings from '../data/settings'
@@ -499,6 +499,34 @@ async function importRedirects(ctx: SeedContext) {
     })
   }
   ctx.log(`✓ Redirections : ${settings.redirects.length}`)
+  await pruneShadowedRedirects(ctx.payload, ctx.log)
+}
+
+/**
+ * A redirect whose old address is the live address of a published document is
+ * never served (the document wins) and points somewhere else: left by an old
+ * import where operations shared their context. Such redirects are removed.
+ */
+export async function pruneShadowedRedirects(payload: Payload, log: (message: string) => void = console.log) {
+  const live = new Set<string>()
+  for (const collection of ['pages', 'services', 'projects', 'articles'] as const) {
+    const { docs } = await payload.find({ collection, limit: 1000, depth: 0, pagination: false, where: { _status: { equals: 'published' } } })
+    for (const doc of docs) {
+      const path = pathFor(collection, doc as never)
+      if (path) live.add(path)
+    }
+  }
+  const { docs } = await payload.find({ collection: 'redirects', limit: 2000, depth: 0, pagination: false })
+  let removed = 0
+  for (const redirect of docs as unknown as { id: number; from: string }[]) {
+    const from = redirect.from.endsWith('/') ? redirect.from : `${redirect.from}/`
+    if (live.has(from)) {
+      await payload.delete({ collection: 'redirects', id: redirect.id, context: { disableRevalidate: true } })
+      removed += 1
+    }
+  }
+  if (removed) log(`✓ Redirections masquées retirées : ${removed}`)
+  return removed
 }
 
 async function importTeam(ctx: SeedContext) {
@@ -589,7 +617,10 @@ export async function runSeed(payload: Payload, root: string, options: SeedOptio
   await importUsers(ctx, options)
   if (options.accountsOnly) return
   await importPhotos(ctx, projects, docs, options)
-  if (options.repairMediaOnly) return ctx
+  if (options.repairMediaOnly) {
+    await pruneShadowedRedirects(ctx.payload, ctx.log)
+    return ctx
+  }
   await importCommunes(ctx, false)
   await createShells(ctx, pages, services, articles, projects)
   await importCommunes(ctx, true)

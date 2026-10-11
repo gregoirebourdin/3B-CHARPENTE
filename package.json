@@ -24,7 +24,9 @@
     "backup": "payload run scripts/backup.ts",
     "restore": "payload run scripts/restore.ts",
     "check:seed": "tsx scripts/check-seed.ts",
-    "build:vercel": "payload migrate && SEED_IF_EMPTY=true payload run scripts/seed.ts && next build"
+    "build:vercel": "payload migrate && SEED_IF_EMPTY=true payload run scripts/seed.ts && next build",
+    "export:docs": "payload run scripts/export-docs.ts",
+    "prune:redirects": "payload run scripts/prune-redirects.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "6.3.1",

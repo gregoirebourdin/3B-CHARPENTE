@@ -9,7 +9,8 @@ import { absoluteUrl, BUSINESS_ID, FOUNDER_ID, SITE_URL, WEBSITE_ID } from './si
 
 type Thing = Record<string, unknown>
 
-const imageUrl = (media: number | Media | null | undefined) => (isMedia(media) ? (media.url as string) : undefined)
+/** Structured data needs absolute addresses (local files are served from the site itself). */
+const imageUrl = (media: number | Media | null | undefined) => (isMedia(media) && media.url ? absoluteUrl(media.url) : undefined)
 const clean = (value: string) => value.replace(/\*\*/g, '').trim()
 
 /**
