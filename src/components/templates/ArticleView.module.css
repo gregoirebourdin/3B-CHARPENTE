@@ -1,0 +1,85 @@
+.byline {
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+}
+
+.cover {
+  max-width: calc(980px + var(--gutter) * 2);
+  margin-bottom: var(--space-10);
+}
+
+.cover img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.caption {
+  margin-top: var(--space-3);
+  color: var(--fg-muted);
+  font-size: var(--fs-xs);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+  padding-bottom: var(--section-pad);
+}
+
+.toc {
+  position: sticky;
+  top: calc(var(--header-h) + var(--space-6));
+  order: 2;
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  background: var(--bg-alt);
+  font-size: var(--fs-small);
+}
+
+.tocTitle {
+  margin-bottom: var(--space-3);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.toc ol {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.toc li::marker {
+  color: var(--fg-accent);
+  font-weight: 700;
+}
+
+.toc a {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.toc a:hover {
+  color: var(--fg-accent);
+  text-decoration: underline;
+}
+
+.body {
+  min-width: 0;
+  order: 1;
+}
+
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .toc {
+    position: static;
+    order: 0;
+  }
+}

@@ -21,9 +21,10 @@
     "generate:importmap": "payload generate:importmap",
     "migrate": "payload migrate",
     "migrate:create": "payload migrate:create",
-    "seed": "tsx --env-file-if-exists=.env.local scripts/seed.ts",
+    "seed": "payload run scripts/seed.ts",
     "backup": "tsx --env-file-if-exists=.env.local scripts/backup.ts",
-    "restore": "tsx --env-file-if-exists=.env.local scripts/restore.ts"
+    "restore": "tsx --env-file-if-exists=.env.local scripts/restore.ts",
+    "check:seed": "tsx scripts/check-seed.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.90.2",
@@ -38,6 +39,7 @@
     "@payloadcms/translations": "3.90.2",
     "@payloadcms/ui": "3.90.2",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/blob": "2.8.1",
     "graphql": "^16.14.2",
     "next": "16.4.0",
     "payload": "3.90.2",

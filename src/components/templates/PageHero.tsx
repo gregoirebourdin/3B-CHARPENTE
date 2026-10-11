@@ -4,7 +4,7 @@ import { ButtonGroup, CmsLink } from '@/components/ui/CmsLink'
 import { Icon } from '@/components/ui/Icon'
 import { Media, isMedia } from '@/components/ui/Media'
 import { RichText } from '@/components/rich-text/RichText'
-import { resolveLink } from '@/lib/links'
+import { resolveLink, type ResolvedLink } from '@/lib/links'
 import type { Company, Page } from '@/payload-types'
 
 import styles from './PageHero.module.css'
@@ -19,17 +19,21 @@ type Props = {
   tags?: string[]
   /** Extra line under the text (article author/date…). */
   meta?: React.ReactNode
+  /** Buttons computed by a template (project page) instead of the hero fields. */
+  actions?: { primary?: ResolvedLink | null; secondary?: ResolvedLink | null }
+  /** Rich chapô already rendered (articles use plain text). */
+  lead?: React.ReactNode
 }
 
 /**
  * The top of every page: breadcrumb, H1 with words in green, text, two
  * buttons, two proofs and a collage of real chantier photos that overflow.
  */
-export function PageHero({ hero, company, breadcrumbs, tags, meta }: Props) {
+export function PageHero({ hero, company, breadcrumbs, tags, meta, actions, lead }: Props) {
   const images = (hero.images ?? []).filter(isMedia)
   const variant = hero.variant === 'simple' || images.length === 0 ? 'simple' : hero.variant === 'photo' || images.length === 1 ? 'photo' : 'collage'
-  const primary = resolveLink(hero.primaryCta, company)
-  const secondary = resolveLink(hero.secondaryCta, company)
+  const primary = actions ? (actions.primary ?? null) : resolveLink(hero.primaryCta, company)
+  const secondary = actions ? (actions.secondary ?? null) : resolveLink(hero.secondaryCta, company)
 
   return (
     <section className={`${styles.hero} ${styles[variant]}`} aria-labelledby="titre-page">
@@ -46,6 +50,7 @@ export function PageHero({ hero, company, breadcrumbs, tags, meta }: Props) {
           {hero.kicker ? <p className={styles.kicker}>{hero.kicker}</p> : null}
           <AccentTitle as="h1" id="titre-page" title={hero.title} accent={hero.titleAccent} className={styles.title} />
           {hero.text ? <RichText data={hero.text} className={styles.text} /> : null}
+          {lead ? <div className={styles.text}>{lead}</div> : null}
           {meta ? <div className={styles.meta}>{meta}</div> : null}
           {primary || secondary ? (
             <ButtonGroup className={styles.actions}>

@@ -26,6 +26,37 @@ import {
   TeamBlock,
 } from './dynamic'
 
+/** Short table names: Postgres identifiers are limited to 63 characters. */
+const DB_NAMES: Record<string, string> = {
+  textImage: 'b_txtimg',
+  cards: 'b_cards',
+  servicesGrid: 'b_svc',
+  projects: 'b_proj',
+  projectsExplorer: 'b_explr',
+  steps: 'b_steps',
+  list: 'b_list',
+  faq: 'b_faq',
+  cta: 'b_cta',
+  manifesto: 'b_mnf',
+  spotlight: 'b_spot',
+  gallery: 'b_gal',
+  comparisonTable: 'b_table',
+  quote: 'b_quote',
+  proofs: 'b_proofs',
+  serviceArea: 'b_area',
+  team: 'b_team',
+  reviews: 'b_reviews',
+  articles: 'b_arts',
+  contactForm: 'b_form',
+  richText: 'b_rich',
+}
+
+// Prefixed by the parent table (pages, services, articles…) so collections never share a table.
+const withDbName = (block: Block): Block => {
+  const short = DB_NAMES[block.slug] ?? block.slug
+  return { ...block, dbName: ({ tableName }) => (tableName ? `${tableName}_${short}` : short) }
+}
+
 /**
  * The page builder. Order = order of the "Ajouter une section" menu.
  * Each block has exactly one React component in src/components/blocks.
@@ -52,4 +83,4 @@ export const PAGE_BLOCKS: Block[] = [
   ArticlesBlock,
   ContactFormBlock,
   RichTextBlock,
-]
+].map(withDbName)

@@ -11,6 +11,7 @@ import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0
 import { ParagraphFeatureClient as ParagraphFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { EmailCell as EmailCell_206c2b7370dc2af2d6b41dcc7c87a1ac } from '@/payload/admin/components/ContactCell'
 import { ReplyActions as ReplyActions_206c2b7370dc2af2d6b41dcc7c87a1ac } from '@/payload/admin/components/ContactCell'
+import { ExplorerNotice as ExplorerNotice_6037e6e625d7e068ef472f1710f335b4 } from '@/payload/admin/components/Notice'
 import { ProofsNotice as ProofsNotice_6037e6e625d7e068ef472f1710f335b4 } from '@/payload/admin/components/Notice'
 import { ReviewsNotice as ReviewsNotice_6037e6e625d7e068ef472f1710f335b4 } from '@/payload/admin/components/Notice'
 import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
@@ -42,6 +43,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#ParagraphFeatureClient": ParagraphFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/payload/admin/components/ContactCell#EmailCell": EmailCell_206c2b7370dc2af2d6b41dcc7c87a1ac,
   "@/payload/admin/components/ContactCell#ReplyActions": ReplyActions_206c2b7370dc2af2d6b41dcc7c87a1ac,
+  "@/payload/admin/components/Notice#ExplorerNotice": ExplorerNotice_6037e6e625d7e068ef472f1710f335b4,
   "@/payload/admin/components/Notice#ProofsNotice": ProofsNotice_6037e6e625d7e068ef472f1710f335b4,
   "@/payload/admin/components/Notice#ReviewsNotice": ReviewsNotice_6037e6e625d7e068ef472f1710f335b4,
   "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,

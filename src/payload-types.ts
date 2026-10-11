@@ -917,6 +917,7 @@ export interface Media {
   kind?: ('chantier' | 'ambiance' | 'portrait' | 'visuel') | null;
   credit?: string | null;
   blurDataURL?: string | null;
+  sourceKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -1942,6 +1943,7 @@ export interface Faq {
    * 40 à 80 mots, une réponse directe dès la première phrase.
    */
   answer: string;
+  sourceKey?: string | null;
   /**
    * Pour retrouver la question facilement.
    */
@@ -4032,6 +4034,7 @@ export interface CommunesSelect<T extends boolean = true> {
 export interface FaqsSelect<T extends boolean = true> {
   question?: T;
   answer?: T;
+  sourceKey?: T;
   topic?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -4046,6 +4049,7 @@ export interface MediaSelect<T extends boolean = true> {
   kind?: T;
   credit?: T;
   blurDataURL?: T;
+  sourceKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -4797,6 +4801,26 @@ export interface SiteText {
      */
     successCta?: string | null;
     /**
+     * Par défaut : Ce champ est obligatoire.
+     */
+    requiredError?: string | null;
+    /**
+     * Par défaut : Indiquez une adresse e-mail valide.
+     */
+    emailError?: string | null;
+    /**
+     * Par défaut : Indiquez un numéro de téléphone valide.
+     */
+    phoneError?: string | null;
+    /**
+     * Par défaut : Ce fichier ne peut pas être envoyé (format ou taille).
+     */
+    fileError?: string | null;
+    /**
+     * Par défaut : Envoi du fichier…
+     */
+    uploading?: string | null;
+    /**
      * Par défaut : Nos coordonnées
      */
     contactTitle?: string | null;
@@ -5160,6 +5184,11 @@ export interface SiteTextsSelect<T extends boolean = true> {
         tooSoon?: T;
         tooMany?: T;
         successCta?: T;
+        requiredError?: T;
+        emailError?: T;
+        phoneError?: T;
+        fileError?: T;
+        uploading?: T;
         contactTitle?: T;
         hoursTitle?: T;
       };

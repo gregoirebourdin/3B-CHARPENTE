@@ -15,6 +15,21 @@ type Props = {
   quality?: 70 | 75 | 82
 }
 
+const SERVER_ORIGIN = (() => {
+  try {
+    return new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000').origin
+  } catch {
+    return ''
+  }
+})()
+
+/** Files served by Payload itself (local storage) become same-origin paths; Blob URLs stay absolute. */
+export function mediaSrc(url: string): string {
+  if (SERVER_ORIGIN && url.startsWith(SERVER_ORIGIN)) return url.slice(SERVER_ORIGIN.length) || '/'
+  if (url.startsWith('http://localhost')) return url.replace(/^http:\/\/localhost(:\d+)?/, '')
+  return url
+}
+
 export const isMedia = (value: unknown): value is MediaDoc =>
   Boolean(value && typeof value === 'object' && 'url' in value && (value as MediaDoc).url)
 
@@ -28,7 +43,7 @@ export function Media({ media, sizes, priority, className, fill, alt, quality = 
   const focal =
     typeof media.focalX === 'number' && typeof media.focalY === 'number' ? `${media.focalX}% ${media.focalY}%` : undefined
   const common = {
-    src: media.url as string,
+    src: mediaSrc(media.url as string),
     alt: alt ?? media.alt ?? '',
     sizes,
     quality,

@@ -46,6 +46,12 @@ export const Faqs: CollectionConfig = {
       admin: { rows: 5, description: '40 à 80 mots, une réponse directe dès la première phrase.' },
     },
     {
+      name: 'sourceKey',
+      type: 'text',
+      index: true,
+      admin: { hidden: true },
+    },
+    {
       name: 'topic',
       type: 'select',
       label: 'Thème',

@@ -229,3 +229,21 @@ a {
     display: none !important;
   }
 }
+
+/* ---------- Guides: sections flow in the reading column ---------- */
+.article-body > section,
+.article-body section[data-tone] {
+  padding-block: var(--space-8);
+  background: transparent;
+}
+
+.article-body .container {
+  max-width: none;
+  padding-inline: 0;
+}
+
+.article-body section[data-tone='light'] > .container {
+  padding: var(--space-8);
+  border-radius: var(--radius-lg);
+  background: var(--bg-alt);
+}

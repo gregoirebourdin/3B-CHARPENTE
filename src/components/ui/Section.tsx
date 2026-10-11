@@ -21,6 +21,7 @@ export function Section({ children, tone, anchor, spacing = 'default', className
     <section
       id={anchor || undefined}
       aria-labelledby={labelledBy}
+      data-tone={tone ?? 'cream'}
       className={[
         styles.section,
         styles[`tone-${tone ?? 'cream'}`],

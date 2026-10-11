@@ -32,7 +32,7 @@
   line-height: 1;
 }
 
-blockquote p {
+.quote blockquote p {
   font-family: var(--font-heading);
   font-size: clamp(1.45rem, 1.15rem + 1.2vw, 2.15rem);
   font-weight: 600;

@@ -107,6 +107,13 @@ export const Media: CollectionConfig = {
       type: 'text',
       admin: { hidden: true },
     },
+    {
+      // Origin of the file in the initial import (3b-charpente-kit/photos-chantiers), so a re-import updates instead of duplicating.
+      name: 'sourceKey',
+      type: 'text',
+      index: true,
+      admin: { hidden: true },
+    },
   ],
   hooks: {
     beforeOperation: [cleanFileName],

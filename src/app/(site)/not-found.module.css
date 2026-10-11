@@ -1,0 +1,31 @@
+.wrap {
+  padding-block: var(--space-16) var(--section-pad);
+}
+
+.code {
+  color: var(--c-sage);
+  font-family: var(--font-heading);
+  font-size: clamp(5rem, 3rem + 8vw, 9rem);
+  font-weight: 700;
+  line-height: 0.9;
+}
+
+.title {
+  margin-top: var(--space-4);
+  font-size: var(--fs-h1);
+}
+
+.text {
+  margin-top: var(--space-5);
+  color: var(--fg-muted);
+  font-size: var(--fs-lead);
+}
+
+.phone {
+  color: var(--fg);
+  font-weight: 700;
+}
+
+.actions {
+  margin-top: var(--space-10);
+}
