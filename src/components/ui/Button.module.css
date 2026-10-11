@@ -1,0 +1,123 @@
+.button {
+  --_bg: var(--btn-bg);
+  --_fg: var(--btn-fg);
+  --_border: var(--btn-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: 0.8rem 1.35rem;
+  border: 1.5px solid var(--_border);
+  border-radius: var(--radius-sm);
+  background: var(--_bg);
+  color: var(--_fg);
+  font-family: var(--font-body);
+  font-size: 0.975rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button svg {
+  flex: none;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.button:hover svg[data-arrow] {
+  transform: translateX(3px);
+}
+
+.primary:hover {
+  --_bg: var(--btn-bg-hover);
+  --_border: var(--btn-bg-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.outline {
+  --_bg: transparent;
+  --_fg: var(--fg);
+  --_border: var(--c-forest);
+}
+
+.outline:hover {
+  --_bg: var(--c-sage-soft);
+}
+
+/* On forest-green grounds */
+.light {
+  --_bg: #ffffff;
+  --_fg: #102311;
+  --_border: #ffffff;
+}
+
+.light:hover {
+  --_bg: var(--c-sage);
+  --_border: var(--c-sage);
+}
+
+.outlineLight {
+  --_bg: transparent;
+  --_fg: #ffffff;
+  --_border: rgb(255 255 255 / 0.7);
+}
+
+.outlineLight:hover {
+  --_border: #ffffff;
+  --_bg: rgb(255 255 255 / 0.08);
+}
+
+.sage {
+  --_bg: var(--c-sage);
+  --_fg: #102311;
+  --_border: var(--c-sage);
+}
+
+.sage:hover {
+  --_bg: #b9dfb9;
+  --_border: #b9dfb9;
+}
+
+.small {
+  min-height: 42px;
+  padding: 0.6rem 1rem;
+  font-size: 0.925rem;
+}
+
+.large {
+  min-height: 54px;
+  padding: 0.95rem 1.6rem;
+  font-size: 1.025rem;
+}
+
+.block {
+  width: 100%;
+}
+
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+@media (max-width: 520px) {
+  .group > * {
+    flex: 1 1 100%;
+  }
+}

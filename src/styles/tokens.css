@@ -1,0 +1,176 @@
+/*
+ * 3B Charpente — design tokens.
+ * Source of truth for every colour, size, radius, shadow and motion of the
+ * public site. Documented in docs/design.md and mirrored in Claude Design.
+ * Components never use a raw value: always a token.
+ */
+
+:root {
+  /* ---------- Colour: mockup palette ---------- */
+  --c-cream: #f8f4ee; /* page background */
+  --c-ink: #102311; /* text */
+  --c-forest: #2c4f2d; /* filled buttons, CTA bands */
+  --c-forest-deep: #24412a; /* hover of forest */
+  --c-accent: #336233; /* green words in titles on light grounds */
+  --c-sage: #a3d2a3; /* pills, icon dots, accents on dark grounds */
+  --c-sage-soft: #dcecd9; /* soft sage tint (active pills, highlights) */
+  --c-stone: #78716c; /* decorative stone (borders, separators) */
+  --c-stone-text: #6b645f; /* secondary text: #78716C darkened for AA (5.3:1 on cream) */
+  --c-card: #ffffff;
+  --c-surface: #f2f2ec; /* light section ground */
+  --c-line: rgb(16 35 17 / 0.12);
+  --c-line-strong: rgb(16 35 17 / 0.24);
+  --c-overlay: rgb(9 20 10 / 0.62); /* veil on photos under white text */
+  --c-focus: #336233;
+  --c-error: #a12c1d;
+  --c-success: #2c4f2d;
+
+  /* Semantic aliases used by components */
+  --bg: var(--c-cream);
+  --bg-alt: var(--c-surface);
+  --bg-card: var(--c-card);
+  --fg: var(--c-ink);
+  --fg-muted: var(--c-stone-text);
+  --fg-accent: var(--c-accent);
+  --btn-bg: var(--c-forest);
+  --btn-bg-hover: var(--c-forest-deep);
+  --btn-fg: #ffffff;
+  --band-bg: var(--c-forest);
+  --band-fg: #ffffff;
+  --band-accent: var(--c-sage);
+  --pill-bg: var(--c-sage);
+  --pill-fg: var(--c-ink);
+  --header-bg: rgb(248 244 238 / 0.86);
+  --logo-mark: #254227;
+  --logo-text: #102311;
+
+  color-scheme: light;
+
+  /* ---------- Typography ---------- */
+  --font-heading: var(--font-nohemi), 'Arial', sans-serif;
+  --font-body: var(--font-inter), system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --fs-display: clamp(2.45rem, 1.55rem + 3.7vw, 4.4rem); /* H1 hero */
+  --fs-h1: clamp(2.25rem, 1.6rem + 2.7vw, 3.6rem);
+  --fs-h2: clamp(1.95rem, 1.45rem + 2vw, 3rem);
+  --fs-h3: clamp(1.2rem, 1.08rem + 0.5vw, 1.5rem);
+  --fs-h4: 1.125rem;
+  --fs-lead: clamp(1.075rem, 1rem + 0.35vw, 1.25rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9375rem;
+  --fs-xs: 0.8125rem;
+  --fs-kicker: 0.8125rem;
+
+  --lh-tight: 1.06;
+  --lh-heading: 1.15;
+  --lh-body: 1.65;
+  --tracking-heading: -0.02em;
+  --tracking-kicker: 0.08em;
+
+  /* ---------- Space (4 px base) ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --section-pad: clamp(4rem, 2.6rem + 5vw, 7.5rem);
+  --gutter: clamp(1rem, 0.4rem + 3vw, 3rem);
+  --container: 1240px;
+  --container-narrow: 760px;
+  --header-h: 76px;
+
+  /* ---------- Shape ---------- */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* ---------- Elevation ---------- */
+  --shadow-sm: 0 1px 2px rgb(16 35 17 / 0.06), 0 1px 1px rgb(16 35 17 / 0.04);
+  --shadow-md: 0 14px 34px -16px rgb(16 35 17 / 0.22), 0 2px 6px rgb(16 35 17 / 0.05);
+  --shadow-lg: 0 30px 60px -24px rgb(16 35 17 / 0.32);
+
+  /* ---------- Motion ---------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-reveal: 650ms;
+  --reveal-distance: 28px;
+}
+
+/* ---------- Night forest theme (follows the device setting) ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --c-cream: #0e1a10;
+    --c-ink: #eef1e8;
+    --c-forest: #a3d2a3;
+    --c-forest-deep: #b9dfb9;
+    --c-accent: #a3d2a3;
+    --c-sage: #a3d2a3;
+    --c-sage-soft: #24402a;
+    --c-stone: #8d968a;
+    --c-stone-text: #a8b0a2;
+    --c-card: #16271a;
+    --c-surface: #122015;
+    --c-line: rgb(238 241 232 / 0.12);
+    --c-line-strong: rgb(238 241 232 / 0.26);
+    --c-overlay: rgb(5 12 6 / 0.7);
+    --c-focus: #a3d2a3;
+    --c-error: #f2a093;
+
+    --btn-fg: #0e1a10;
+    --band-bg: #1f3a22;
+    --band-fg: #ffffff;
+    --band-accent: #a3d2a3;
+    --pill-bg: #2a4a2e;
+    --pill-fg: #dcecd9;
+    --header-bg: rgb(14 26 16 / 0.86);
+    --logo-mark: #a3d2a3;
+    --logo-text: #eef1e8;
+    --shadow-md: 0 14px 34px -16px rgb(0 0 0 / 0.6);
+    --shadow-lg: 0 30px 60px -24px rgb(0 0 0 / 0.7);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --c-cream: #0e1a10;
+  --c-ink: #eef1e8;
+  --c-forest: #a3d2a3;
+  --c-forest-deep: #b9dfb9;
+  --c-accent: #a3d2a3;
+  --c-sage: #a3d2a3;
+  --c-sage-soft: #24402a;
+  --c-stone: #8d968a;
+  --c-stone-text: #a8b0a2;
+  --c-card: #16271a;
+  --c-surface: #122015;
+  --c-line: rgb(238 241 232 / 0.12);
+  --c-line-strong: rgb(238 241 232 / 0.26);
+  --c-overlay: rgb(5 12 6 / 0.7);
+  --c-focus: #a3d2a3;
+  --c-error: #f2a093;
+
+  --btn-fg: #0e1a10;
+  --band-bg: #1f3a22;
+  --band-fg: #ffffff;
+  --band-accent: #a3d2a3;
+  --pill-bg: #2a4a2e;
+  --pill-fg: #dcecd9;
+  --header-bg: rgb(14 26 16 / 0.86);
+  --logo-mark: #a3d2a3;
+  --logo-text: #eef1e8;
+  --shadow-md: 0 14px 34px -16px rgb(0 0 0 / 0.6);
+  --shadow-lg: 0 30px 60px -24px rgb(0 0 0 / 0.7);
+  color-scheme: dark;
+}

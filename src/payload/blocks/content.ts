@@ -327,7 +327,7 @@ export const ComparisonTableBlock: Block = {
       labels: { singular: 'Colonne', plural: 'Colonnes' },
       minRows: 2,
       maxRows: 6,
-      fields: [{ name: 'label', type: 'text', label: 'En-tête', required: true, maxLength: 60 }],
+      fields: [{ name: 'label', type: 'text', label: 'En-tête (peut rester vide)', maxLength: 60 }],
     },
     {
       name: 'rows',

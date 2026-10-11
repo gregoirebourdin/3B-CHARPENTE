@@ -116,6 +116,7 @@ export interface Config {
     header: Header;
     footer: Footer;
     proofs: Proof;
+    'site-texts': SiteText;
     'seo-settings': SeoSetting;
     analytics: Analytics;
   };
@@ -124,6 +125,7 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     proofs: ProofsSelect<false> | ProofsSelect<true>;
+    'site-texts': SiteTextsSelect<false> | SiteTextsSelect<true>;
     'seo-settings': SeoSettingsSelect<false> | SeoSettingsSelect<true>;
     analytics: AnalyticsSelect<false> | AnalyticsSelect<true>;
   };
@@ -1131,6 +1133,9 @@ export interface Commune {
 export interface Article {
   id: number;
   title: string;
+  /**
+   * Recopiez les mots du titre à afficher en vert. Plusieurs groupes : séparez-les par une virgule. Ex. : « simplement, durablement ».
+   */
   titleAccent?: string | null;
   /**
    * Ex. : Isolation, Réemploi.
@@ -1670,6 +1675,10 @@ export interface ProjectsExplorerBlock {
             }[]
           | null;
         projects?: (number | Project)[] | null;
+        /**
+         * Permet de faire un lien direct vers cette section : /page/#ancre.
+         */
+        anchor?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -2323,7 +2332,7 @@ export interface ComparisonTableBlock {
   intro?: string | null;
   columns?:
     | {
-        label: string;
+        label?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -3378,6 +3387,7 @@ export interface ProjectsExplorerBlockSelect<T extends boolean = true> {
               id?: T;
             };
         projects?: T;
+        anchor?: T;
         id?: T;
       };
   anchor?: T;
@@ -4502,6 +4512,329 @@ export interface Proof {
   createdAt?: string | null;
 }
 /**
+ * Les petites phrases des gabarits (fiche chantier, guide, filtres, formulaire, page 404). Entre ** : mots en vert. Mots remplacés automatiquement : {commune}, {n}, {prestation}, {secteur}, {telephone}, {date}, {auteur}.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-texts".
+ */
+export interface SiteText {
+  id: number;
+  general?: {
+    /**
+     * Par défaut : Accueil
+     */
+    breadcrumbHome?: string | null;
+    /**
+     * Par défaut : En bref
+     */
+    tldrLabel?: string | null;
+    /**
+     * Par défaut : Appeler
+     */
+    callLabel?: string | null;
+    /**
+     * Par défaut : Vous avez travaillé avec nous ?
+     */
+    reviewPrompt?: string | null;
+    /**
+     * Par défaut : Laissez un avis sur Google
+     */
+    reviewLink?: string | null;
+    /**
+     * Par défaut : Voir les travaux
+     */
+    projectCardLink?: string | null;
+    /**
+     * Par défaut : {n} photos
+     */
+    projectPhotos?: string | null;
+    /**
+     * Par défaut : Lire le guide
+     */
+    articleCardLink?: string | null;
+    /**
+     * Par défaut : En savoir plus
+     */
+    serviceCardLink?: string | null;
+  };
+  project?: {
+    /**
+     * Par défaut : Demander mon devis
+     */
+    heroPrimary?: string | null;
+    /**
+     * Par défaut : Toutes nos réalisations
+     */
+    heroSecondary?: string | null;
+    /**
+     * Par défaut : Le projet
+     */
+    introKicker?: string | null;
+    /**
+     * Par défaut : Le projet à **{commune}**
+     */
+    introTitle?: string | null;
+    /**
+     * Par défaut : Le **projet**
+     */
+    introTitleNoCommune?: string | null;
+    /**
+     * Par défaut : Fiche technique
+     */
+    factsTitle?: string | null;
+    /**
+     * Par défaut : Commune
+     */
+    factCommune?: string | null;
+    /**
+     * Par défaut : Prestation
+     */
+    factService?: string | null;
+    /**
+     * Par défaut : Année
+     */
+    factYear?: string | null;
+    /**
+     * Par défaut : Durée
+     */
+    factDuration?: string | null;
+    /**
+     * Par défaut : Surface
+     */
+    factSurface?: string | null;
+    /**
+     * Par défaut : Contexte
+     */
+    factContext?: string | null;
+    /**
+     * Par défaut : Architecte
+     */
+    factArchitect?: string | null;
+    /**
+     * Par défaut : Étape par étape
+     */
+    stepsKicker?: string | null;
+    /**
+     * Par défaut : Ce que nous avons **fait**
+     */
+    stepsTitle?: string | null;
+    /**
+     * Par défaut : En images
+     */
+    galleryKicker?: string | null;
+    /**
+     * Par défaut : Le chantier en **{n} photos**
+     */
+    galleryTitle?: string | null;
+    /**
+     * Par défaut : Matériaux
+     */
+    materialsKicker?: string | null;
+    /**
+     * Par défaut : Les **matériaux** du chantier
+     */
+    materialsTitle?: string | null;
+    /**
+     * Par défaut : Découvrir 3B Récup’
+     */
+    recupLink?: string | null;
+    /**
+     * Par défaut : Pour aller plus loin
+     */
+    moreKicker?: string | null;
+    /**
+     * Par défaut : Le **savoir-faire** derrière ce chantier
+     */
+    moreTitle?: string | null;
+    /**
+     * Par défaut : Techniques, étapes et questions fréquentes : tout ce que nous faisons en {prestation}.
+     */
+    serviceCardText?: string | null;
+    /**
+     * Par défaut : Voir la prestation
+     */
+    serviceCardLink?: string | null;
+    /**
+     * Par défaut : Nos autres chantiers et les communes où nous intervenons autour de {secteur}.
+     */
+    sectorCardText?: string | null;
+    /**
+     * Par défaut : Voir nos chantiers du secteur
+     */
+    sectorCardLink?: string | null;
+    /**
+     * Par défaut : Où intervenons-nous ?
+     */
+    outsideTitle?: string | null;
+    /**
+     * Par défaut : « Basé dans le nord des Hautes-Alpes, nous intervenons dans les Hautes-Alpes mais aussi en région PACA et Rhône-Alpes. »
+     */
+    outsideText?: string | null;
+    /**
+     * Par défaut : Voir toutes nos réalisations
+     */
+    outsideLink?: string | null;
+    /**
+     * Par défaut : D’autres chantiers
+     */
+    similarKicker?: string | null;
+    /**
+     * Par défaut : Des réalisations **proches**
+     */
+    similarTitle?: string | null;
+    /**
+     * Par défaut : Voir toutes nos réalisations
+     */
+    similarLink?: string | null;
+    /**
+     * Par défaut : Un projet **semblable** ?
+     */
+    ctaTitle?: string | null;
+    /**
+     * Par défaut : Chaque projet chez 3B Charpente débute par une étude sur mesure. Parlons du vôtre lors d’une rencontre : nous vous proposerons un devis détaillé, adapté à votre projet.
+     */
+    ctaText?: string | null;
+    /**
+     * Par défaut : Demander mon devis
+     */
+    ctaPrimary?: string | null;
+    /**
+     * Par défaut : Appeler le {telephone}
+     */
+    ctaSecondary?: string | null;
+  };
+  article?: {
+    /**
+     * Par défaut : Sommaire
+     */
+    tocTitle?: string | null;
+    /**
+     * Par défaut : Par {auteur}
+     */
+    byline?: string | null;
+    /**
+     * Par défaut : Publié le {date}
+     */
+    published?: string | null;
+    /**
+     * Par défaut : Mis à jour le {date}
+     */
+    updated?: string | null;
+    /**
+     * Par défaut : {n} min de lecture
+     */
+    readingTime?: string | null;
+  };
+  explorer?: {
+    /**
+     * Par défaut : Toutes
+     */
+    all?: string | null;
+    /**
+     * Par défaut : Toutes les communes
+     */
+    allCommunes?: string | null;
+    /**
+     * Par défaut : {n} chantiers
+     */
+    count?: string | null;
+    /**
+     * Par défaut : 1 chantier
+     */
+    countOne?: string | null;
+    /**
+     * Par défaut : Effacer les filtres
+     */
+    reset?: string | null;
+    /**
+     * Par défaut : Autres chantiers
+     */
+    otherGroup?: string | null;
+    /**
+     * Par défaut : Briançon et Briançonnais
+     */
+    areaBrianconnais?: string | null;
+    /**
+     * Par défaut : Serre Chevalier
+     */
+    areaSerreChevalier?: string | null;
+    /**
+     * Par défaut : Vallouise et Pays des Écrins
+     */
+    areaVallouise?: string | null;
+    /**
+     * Par défaut : Hors Hautes-Alpes
+     */
+    areaOutside?: string | null;
+  };
+  form?: {
+    /**
+     * Par défaut : Les champs marqués d’un astérisque sont obligatoires.
+     */
+    requiredNote?: string | null;
+    /**
+     * Par défaut : Envoi en cours…
+     */
+    sending?: string | null;
+    /**
+     * Par défaut : Ajouter des fichiers
+     */
+    addFiles?: string | null;
+    /**
+     * Par défaut : Retirer
+     */
+    removeFile?: string | null;
+    /**
+     * Par défaut : Merci de prendre quelques secondes pour relire votre demande avant de l’envoyer.
+     */
+    tooSoon?: string | null;
+    /**
+     * Par défaut : Plusieurs demandes viennent d’être envoyées depuis votre connexion. Réessayez dans quelques minutes ou appelez-nous au {telephone}.
+     */
+    tooMany?: string | null;
+    /**
+     * Par défaut : Voir nos réalisations en attendant
+     */
+    successCta?: string | null;
+    /**
+     * Par défaut : Nos coordonnées
+     */
+    contactTitle?: string | null;
+    /**
+     * Par défaut : Horaires
+     */
+    hoursTitle?: string | null;
+  };
+  notFound?: {
+    /**
+     * Par défaut : Cette page n’existe pas (ou plus)
+     */
+    title?: string | null;
+    /**
+     * Par défaut : L’adresse a peut-être changé. Voici nos prestations, ou appelez-nous directement au {telephone}.
+     */
+    text?: string | null;
+    /**
+     * Par défaut : Trouver une prestation
+     */
+    searchLabel?: string | null;
+    /**
+     * Par défaut : Ex. : escalier, isolation, charpente…
+     */
+    searchPlaceholder?: string | null;
+    /**
+     * Par défaut : Retour à l’accueil
+     */
+    homeLink?: string | null;
+    /**
+     * Par défaut : Nous contacter
+     */
+    contactLink?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * Réglages par défaut. Le titre et la description de chaque page se règlent sur la page elle-même.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -4731,6 +5064,114 @@ export interface ProofsSelect<T extends boolean = true> {
         label?: T;
         icon?: T;
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-texts_select".
+ */
+export interface SiteTextsSelect<T extends boolean = true> {
+  general?:
+    | T
+    | {
+        breadcrumbHome?: T;
+        tldrLabel?: T;
+        callLabel?: T;
+        reviewPrompt?: T;
+        reviewLink?: T;
+        projectCardLink?: T;
+        projectPhotos?: T;
+        articleCardLink?: T;
+        serviceCardLink?: T;
+      };
+  project?:
+    | T
+    | {
+        heroPrimary?: T;
+        heroSecondary?: T;
+        introKicker?: T;
+        introTitle?: T;
+        introTitleNoCommune?: T;
+        factsTitle?: T;
+        factCommune?: T;
+        factService?: T;
+        factYear?: T;
+        factDuration?: T;
+        factSurface?: T;
+        factContext?: T;
+        factArchitect?: T;
+        stepsKicker?: T;
+        stepsTitle?: T;
+        galleryKicker?: T;
+        galleryTitle?: T;
+        materialsKicker?: T;
+        materialsTitle?: T;
+        recupLink?: T;
+        moreKicker?: T;
+        moreTitle?: T;
+        serviceCardText?: T;
+        serviceCardLink?: T;
+        sectorCardText?: T;
+        sectorCardLink?: T;
+        outsideTitle?: T;
+        outsideText?: T;
+        outsideLink?: T;
+        similarKicker?: T;
+        similarTitle?: T;
+        similarLink?: T;
+        ctaTitle?: T;
+        ctaText?: T;
+        ctaPrimary?: T;
+        ctaSecondary?: T;
+      };
+  article?:
+    | T
+    | {
+        tocTitle?: T;
+        byline?: T;
+        published?: T;
+        updated?: T;
+        readingTime?: T;
+      };
+  explorer?:
+    | T
+    | {
+        all?: T;
+        allCommunes?: T;
+        count?: T;
+        countOne?: T;
+        reset?: T;
+        otherGroup?: T;
+        areaBrianconnais?: T;
+        areaSerreChevalier?: T;
+        areaVallouise?: T;
+        areaOutside?: T;
+      };
+  form?:
+    | T
+    | {
+        requiredNote?: T;
+        sending?: T;
+        addFiles?: T;
+        removeFile?: T;
+        tooSoon?: T;
+        tooMany?: T;
+        successCta?: T;
+        contactTitle?: T;
+        hoursTitle?: T;
+      };
+  notFound?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        searchLabel?: T;
+        searchPlaceholder?: T;
+        homeLink?: T;
+        contactLink?: T;
       };
   updatedAt?: T;
   createdAt?: T;

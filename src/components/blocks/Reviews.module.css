@@ -1,0 +1,41 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.stars {
+  color: #b7791f;
+  letter-spacing: 0.1em;
+}
+
+.stars span {
+  color: var(--c-line-strong);
+}
+
+.text p {
+  font-size: 1rem;
+}
+
+.author {
+  display: grid;
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+}
+
+.author strong {
+  color: var(--fg);
+}

@@ -1,0 +1,53 @@
+.section {
+  position: relative;
+}
+
+.spacing-default {
+  padding-block: var(--section-pad);
+}
+
+.spacing-tight {
+  padding-block: calc(var(--section-pad) * 0.55);
+}
+
+.spacing-none {
+  padding-block: 0;
+}
+
+.tone-cream {
+  background: var(--bg);
+}
+
+.tone-light {
+  background: var(--bg-alt);
+}
+
+/* Two consecutive sections on the same ground share their padding. */
+.tone-cream + .tone-cream.spacing-default,
+.tone-light + .tone-light.spacing-default {
+  padding-top: calc(var(--section-pad) * 0.35);
+}
+
+.recup {
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Wood rings of 3B Récup': a quiet identity mark, never behind text. */
+.recup::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  right: -140px;
+  top: -120px;
+  width: 460px;
+  height: 460px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at 46% 54%,
+    transparent 0 17px,
+    color-mix(in srgb, var(--fg-accent) 14%, transparent) 17px 18.5px
+  );
+  mask-image: radial-gradient(circle, #000 35%, transparent 70%);
+  pointer-events: none;
+}

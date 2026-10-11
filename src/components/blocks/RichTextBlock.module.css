@@ -1,0 +1,31 @@
+.boxed {
+  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+  border-left: 4px solid var(--fg-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--bg-alt);
+}
+
+.toc {
+  margin-bottom: var(--space-10);
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  background: var(--bg-alt);
+}
+
+.toc ol {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.toc a {
+  color: var(--fg);
+  font-weight: 550;
+  text-decoration: none;
+}
+
+.toc a:hover {
+  color: var(--fg-accent);
+  text-decoration: underline;
+}

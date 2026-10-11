@@ -1,0 +1,62 @@
+.wrap {
+  position: relative;
+  z-index: 2;
+}
+
+.band {
+  padding-bottom: var(--space-8);
+}
+
+.box {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-3) var(--space-6);
+  max-width: 1040px;
+  padding: var(--space-6) var(--space-8);
+  border-left: 4px solid var(--fg-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--bg-alt);
+}
+
+.label {
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--pill-bg);
+  color: var(--pill-fg);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.text {
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+}
+
+/* Home: a white card that straddles the hero and the next section. */
+.card {
+  margin-top: calc(-1 * var(--space-12));
+  padding-bottom: var(--space-12);
+}
+
+.card .box {
+  margin-inline: auto;
+  border-left: 0;
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 640px) {
+  .box {
+    grid-template-columns: 1fr;
+    padding: var(--space-5) var(--space-5);
+  }
+
+  .label {
+    justify-self: start;
+  }
+}

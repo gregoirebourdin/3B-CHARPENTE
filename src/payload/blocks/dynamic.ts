@@ -435,6 +435,7 @@ export const ProjectsExplorerBlock: Block = {
           hasMany: true,
           label: 'Chantiers de cette famille',
         },
+        ...tailFields,
       ],
     },
     ...tailFields,

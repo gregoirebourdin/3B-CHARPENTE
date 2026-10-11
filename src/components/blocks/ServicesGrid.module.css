@@ -1,0 +1,146 @@
+.grid {
+  display: grid;
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.full {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.compact {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: var(--space-4);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: clamp(1.5rem, 1.2rem + 1vw, 2.5rem);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.compact .card {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5);
+}
+
+.icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--pill-bg);
+  color: var(--pill-fg);
+}
+
+.compact .icon {
+  width: 48px;
+  height: 48px;
+}
+
+.body {
+  display: grid;
+  flex: 1;
+  gap: var(--space-3);
+}
+
+.compact .body {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.title {
+  font-size: var(--fs-h3);
+  line-height: 1.2;
+}
+
+.compact .title {
+  font-size: 1.1rem;
+}
+
+.title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.stretched::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-md);
+}
+
+.stretched:focus-visible {
+  outline: none;
+}
+
+.stretched:focus-visible::after {
+  outline: 2px solid var(--c-focus);
+  outline-offset: 3px;
+}
+
+.text {
+  color: color-mix(in srgb, var(--fg) 85%, var(--bg));
+  font-size: 1rem;
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
+  color: var(--fg-accent);
+  font-weight: 650;
+  font-size: var(--fs-small);
+}
+
+.compact .more {
+  margin: 0;
+  padding: 0;
+}
+
+.more svg {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.card:hover .more svg {
+  transform: translateX(3px);
+}
+
+.cta {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-10);
+}
+
+@media (max-width: 1000px) {
+  .full {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .full {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

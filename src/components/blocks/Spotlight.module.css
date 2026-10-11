@@ -1,0 +1,178 @@
+.wrap {
+  padding-block: var(--section-pad);
+}
+
+.panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(2rem, 1rem + 4vw, 4.5rem);
+  border-radius: var(--radius-xl);
+  background: var(--band-bg);
+  color: var(--band-fg);
+}
+
+/* 3B Récup' signature: wood rings. */
+.rings {
+  position: absolute;
+  z-index: -1;
+  right: -120px;
+  top: -140px;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle at 45% 55%, transparent 0 16px, rgb(163 210 163 / 0.16) 16px 17.5px);
+  mask-image: radial-gradient(circle, #000 30%, transparent 70%);
+}
+
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: center;
+}
+
+.visual {
+  position: relative;
+  padding: 0 clamp(1rem, 4vw, 2.5rem) clamp(2.5rem, 6vw, 4rem) 0;
+}
+
+.main {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.main img,
+.thumb img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 4.6;
+  object-fit: cover;
+}
+
+.thumb {
+  position: absolute;
+  width: 45%;
+  overflow: hidden;
+  border: 5px solid var(--band-bg);
+  border-radius: var(--radius-md);
+}
+
+.thumb img {
+  aspect-ratio: 4 / 3;
+}
+
+.thumbA {
+  right: 0;
+  bottom: 0;
+}
+
+.thumbB {
+  right: 0;
+  top: 18%;
+}
+
+.copy {
+  display: grid;
+  gap: var(--space-5);
+  justify-items: start;
+}
+
+.badge {
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-pill);
+  background: #a3d2a3;
+  color: #102311;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.kicker {
+  color: var(--band-accent);
+  font-size: var(--fs-kicker);
+  font-weight: 650;
+  letter-spacing: var(--tracking-kicker);
+  text-transform: uppercase;
+}
+
+.title {
+  color: var(--band-fg);
+  font-size: var(--fs-h2);
+}
+
+.title :global(.accent) {
+  color: var(--band-accent);
+}
+
+.text {
+  color: rgb(255 255 255 / 0.88);
+}
+
+.text strong {
+  color: #ffffff;
+}
+
+.steps {
+  display: grid;
+  gap: var(--space-3);
+  width: 100%;
+  margin: 0;
+  padding: var(--space-5) 0 0;
+  border-top: 1px solid rgb(255 255 255 / 0.18);
+  list-style: none;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  gap: var(--space-3);
+  color: rgb(255 255 255 / 0.85);
+  font-size: var(--fs-small);
+}
+
+.steps strong {
+  color: #ffffff;
+}
+
+.stepNumber {
+  color: var(--band-accent);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5) var(--space-8);
+  margin-top: var(--space-2);
+}
+
+.links {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .visual {
+    max-width: 520px;
+  }
+}

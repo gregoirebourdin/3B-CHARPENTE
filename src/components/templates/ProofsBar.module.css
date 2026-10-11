@@ -1,0 +1,40 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.45rem 1rem 0.45rem 0.5rem;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-pill);
+  background: var(--bg-card);
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--pill-bg);
+  color: var(--pill-fg);
+}
+
+.compact {
+  padding-bottom: var(--space-12);
+}
+
+.band {
+  padding-block: var(--space-12);
+  background: var(--bg-alt);
+}

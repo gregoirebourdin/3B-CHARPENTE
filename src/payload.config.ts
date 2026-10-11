@@ -27,6 +27,7 @@ import { basicEditor } from './payload/editor'
 import { formBuilderConfig } from './payload/forms'
 import { Company } from './payload/globals/Company'
 import { Analytics, Footer, Header, Proofs, SeoSettings } from './payload/globals/Navigation'
+import { SiteTextsGlobal } from './payload/globals/SiteTexts'
 import { revalidateHooks } from './payload/hooks/revalidate'
 import { orderAdminNav } from './payload/utilities/orderAdminNav'
 import { LINKABLE_COLLECTIONS } from './payload/utilities/routes'
@@ -75,7 +76,7 @@ export default buildConfig({
     },
   },
   collections: [Pages, Articles, Services, Projects, Communes, Faqs, Media, Team, Reviews, ValidationPoints, Users],
-  globals: [Company, Header, Footer, Proofs, SeoSettings, Analytics],
+  globals: [Company, Header, Footer, Proofs, SiteTextsGlobal, SeoSettings, Analytics],
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URL || '' },
     migrationDir: path.resolve(dirname, 'migrations'),
