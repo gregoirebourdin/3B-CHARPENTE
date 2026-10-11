@@ -1,50 +1,68 @@
 import { CmsLink } from '@/components/ui/CmsLink'
-import { Section } from '@/components/ui/Section'
-import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Media, isMedia } from '@/components/ui/Media'
 import { RichText } from '@/components/rich-text/RichText'
+import { Section } from '@/components/ui/Section'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 import { resolveLink } from '@/lib/links'
 import type { StepsBlock as Data } from '@/payload-types'
 
-import { StepsTabs } from './StepsTabs'
 import styles from './Steps.module.css'
 import type { BlockProps } from './types'
 
+/**
+ * Steps, always all visible (no tabs): a numbered horizontal frieze for short
+ * steps (vertical on phones), or detailed steps with their photos.
+ */
 export function Steps({ block, context }: BlockProps<Data>) {
-  const steps = (block.steps ?? []).map((step, index) => ({
-    id: step.id ?? String(index),
-    number: String(index + 1).padStart(2, '0'),
-    title: step.title,
-    content: <RichText data={step.text} />,
-    image: isMedia(step.image) ? (
-      <Media media={step.image} sizes="(min-width: 1000px) 460px, 92vw" className={styles.image} />
-    ) : null,
-  }))
   const cta = resolveLink(block.cta, context.company)
+  const frieze = block.variant === 'timeline'
+  const steps = block.steps ?? []
+  const button = cta ? <CmsLink link={cta} variant="primary" arrow /> : null
 
   return (
     <Section tone={block.tone} anchor={block.anchor} recup={block.isHowTo ?? false}>
-      <SectionHeading kicker={block.kicker} title={block.title} accent={block.titleAccent} intro={block.intro} align="center" />
-      {block.variant === 'timeline' ? (
-        <ol className={styles.timeline} data-reveal="">
-          {steps.map((step) => (
-            <li key={step.id} className={styles.timelineItem}>
-              <span className={styles.timelineNumber}>{step.number}</span>
-              <div className={styles.timelineBody}>
-                <h3>{step.title}</h3>
-                {step.content}
-              </div>
+      <SectionHeading
+        kicker={block.kicker}
+        title={block.title}
+        accent={block.titleAccent}
+        intro={block.intro}
+        layout="split"
+        actions={frieze ? button : undefined}
+      />
+      {frieze ? (
+        <ol className={styles.frieze} style={{ ['--steps' as string]: Math.min(steps.length, 6) }} data-reveal="">
+          {steps.map((step, index) => (
+            <li key={step.id ?? index}>
+              <span className={styles.num}>{String(index + 1).padStart(2, '0')}</span>
+              <h3 className={styles.title}>{step.title}</h3>
+              <RichText data={step.text} className={styles.text} />
             </li>
           ))}
         </ol>
       ) : (
-        <StepsTabs steps={steps} />
+        <>
+          <ol className={styles.detailed}>
+            {steps.map((step, index) => {
+              const image = isMedia(step.image) ? step.image : null
+              return (
+                <li key={step.id ?? index} className={styles.step} data-has-image={image ? '' : undefined} data-reveal="">
+                  <span className={styles.bigNum}>{String(index + 1).padStart(2, '0')}</span>
+                  <div className={styles.stepBody}>
+                    <h3 className={styles.stepTitle}>{step.title}</h3>
+                    <RichText data={step.text} className={styles.stepText} />
+                  </div>
+                  {image ? (
+                    <figure className={styles.photo}>
+                      <Media media={image} fill sizes="(min-width: 1000px) 360px, 92vw" />
+                    </figure>
+                  ) : null}
+                </li>
+              )
+            })}
+          </ol>
+          {button ? <div className={styles.cta}>{button}</div> : null}
+        </>
       )}
-      {cta ? (
-        <div className={styles.cta}>
-          <CmsLink link={cta} variant="primary" size="large" arrow />
-        </div>
-      ) : null}
     </Section>
   )
 }

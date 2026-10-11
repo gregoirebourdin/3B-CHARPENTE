@@ -28,9 +28,9 @@ export async function ServiceArea({ block, context }: BlockProps<Data>) {
                 return (
                   <li key={sector.id ?? index} className={styles.sector} data-reveal="">
                     <span className={styles.pin}>
-                      <Icon name="mapPin" size={20} />
+                      <Icon name="mapPin" size={16} />
                     </span>
-                    <div>
+                    <div className={styles.sectorBody}>
                       <h3 className={styles.sectorTitle}>
                         {link ? (
                           <Link href={link.href} className={styles.stretched}>
@@ -41,13 +41,8 @@ export async function ServiceArea({ block, context }: BlockProps<Data>) {
                         )}
                       </h3>
                       {sector.text ? <p className={styles.sectorText}>{sector.text}</p> : null}
-                      {link?.label ? (
-                        <span className={styles.more} aria-hidden="true">
-                          {link.label}
-                          <Icon name="arrowRight" size={16} />
-                        </span>
-                      ) : null}
                     </div>
+                    {link ? <Icon name="arrowRight" size={18} className={styles.arrow} /> : null}
                   </li>
                 )
               })}

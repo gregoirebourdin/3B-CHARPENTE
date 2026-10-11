@@ -1,16 +1,6 @@
 import styles from './Decor.module.css'
 
-/** Light-green organic shapes + translucent round grid of the mockup's green bands. */
-export function Decor({ grid = true }: { grid?: boolean }) {
-  return (
-    <div className={styles.decor} aria-hidden="true">
-      <svg className={`${styles.blob} ${styles.blobA}`} viewBox="0 0 165 260">
-        <path d="M53.7 217a381 381 0 0 0-41.4 18.6c-15.3 8-30.3 17.1-47 21.5s-36 3.3-49.3-7.7c-7.5-6.2-12.5-15-15.9-24.1-3.9-10.4-5.9-22.7 0-32 2.7-4.3 6.9-7.6 11.3-10.2 16.8-10 37-11.4 56.4-14.1s39.8-7.6 52.8-22.2c9.8-11 13.8-26 18-40.2a647 647 0 0 1 19.8-57.3c5.4-13.3 11.5-26.8 22.3-36.3a51.8 51.8 0 0 1 47.2-11 51.7 51.7 0 0 1 27.7 19.3c8.3 11.3 7.7 22.7 8.7 36.1a248 248 0 0 1-5.3 71.3c-4.7 21.1-10.9 51.4-30.5 63.4-11.1 6.8-24.1 9.5-36.6 12.8a380 380 0 0 0-38.2 12.2" />
-      </svg>
-      <svg className={`${styles.blob} ${styles.blobB}`} viewBox="0 0 165 260">
-        <path d="M53.7 217a381 381 0 0 0-41.4 18.6c-15.3 8-30.3 17.1-47 21.5s-36 3.3-49.3-7.7c-7.5-6.2-12.5-15-15.9-24.1-3.9-10.4-5.9-22.7 0-32 2.7-4.3 6.9-7.6 11.3-10.2 16.8-10 37-11.4 56.4-14.1s39.8-7.6 52.8-22.2c9.8-11 13.8-26 18-40.2a647 647 0 0 1 19.8-57.3c5.4-13.3 11.5-26.8 22.3-36.3a51.8 51.8 0 0 1 47.2-11 51.7 51.7 0 0 1 27.7 19.3c8.3 11.3 7.7 22.7 8.7 36.1a248 248 0 0 1-5.3 71.3c-4.7 21.1-10.9 51.4-30.5 63.4-11.1 6.8-24.1 9.5-36.6 12.8a380 380 0 0 0-38.2 12.2" />
-      </svg>
-      {grid ? <div className={styles.grid} /> : null}
-    </div>
-  )
+/** Wood rings (the 3B Récup' signature), very light, in a corner of a forest panel. */
+export function Decor({ position = 'bottomLeft' }: { position?: 'bottomLeft' | 'topRight' }) {
+  return <div className={`${styles.rings} ${styles[position]}`} aria-hidden="true" />
 }

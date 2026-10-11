@@ -85,6 +85,7 @@ export function hero(ctx: SeedContext, value: SeedHero): Json {
     secondaryCta: link(ctx, value.secondaryCta) ?? {},
     proofs: (value.proofs ?? []).map((proof) => ({ label: proof.label, text: proof.text, icon: proof.icon ?? 'check' })),
     images: photos(ctx, value.images),
+    highlight: value.highlight ? (ctx.projects.get(value.highlight) ?? null) : null,
     caption: value.caption,
   }
 }

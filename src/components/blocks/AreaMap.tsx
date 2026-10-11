@@ -37,8 +37,8 @@ const PAD = 46
 
 /**
  * Hand-drawn map of the communes where 3B has worked: a few kilobytes of
- * SVG, no Google Maps iframe, no cookie. Positions come from the coordinates
- * of each commune in the admin.
+ * SVG over the contour lines of the relief, no Google Maps iframe, no cookie.
+ * Positions come from the coordinates of each commune in the admin.
  */
 export function AreaMap({ communes, company }: { communes: Commune[]; company: Company }) {
   const places = communes.filter((c) => c.showOnMap && typeof c.latitude === 'number' && typeof c.longitude === 'number')
@@ -70,14 +70,8 @@ export function AreaMap({ communes, company }: { communes: Commune[]; company: C
 
   return (
     <figure className={styles.map}>
+      <div className={styles.topo} aria-hidden="true" />
       <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-label={`Carte des communes de nos chantiers : ${names}.`}>
-        <defs>
-          <pattern id="contours" width="38" height="38" patternUnits="userSpaceOnUse">
-            <circle cx="19" cy="19" r="17" fill="none" className={styles.contour} />
-          </pattern>
-        </defs>
-        <rect width={WIDTH} height={HEIGHT} rx="24" className={styles.ground} />
-        <rect width={WIDTH} height={HEIGHT} rx="24" fill="url(#contours)" opacity="0.5" />
         {RIVERS.map((river, index) => (
           <path key={index} d={path(river)} className={styles.river} />
         ))}

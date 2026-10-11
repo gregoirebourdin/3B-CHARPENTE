@@ -24,6 +24,8 @@
   --c-focus: #336233;
   --c-error: #a12c1d;
   --c-success: #2c4f2d;
+  --c-night: #0f1f10; /* footer, manifesto, dark panels */
+  --on-forest: #ffffff; /* text on forest-green grounds */
 
   /* Semantic aliases used by components */
   --bg: var(--c-cream);
@@ -35,6 +37,9 @@
   --btn-bg: var(--c-forest);
   --btn-bg-hover: var(--c-forest-deep);
   --btn-fg: #ffffff;
+  /* Arrow disc inside buttons (sage on forest). */
+  --btn-disc-bg: var(--c-sage);
+  --btn-disc-fg: #102311;
   --band-bg: var(--c-forest);
   --band-fg: #ffffff;
   --band-accent: var(--c-sage);
@@ -50,12 +55,12 @@
   --font-heading: var(--font-nohemi), 'Arial', sans-serif;
   --font-body: var(--font-inter), system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --fs-display: clamp(2.45rem, 1.55rem + 3.7vw, 4.4rem); /* H1 hero */
-  --fs-h1: clamp(2.25rem, 1.6rem + 2.7vw, 3.6rem);
-  --fs-h2: clamp(1.95rem, 1.45rem + 2vw, 3rem);
-  --fs-h3: clamp(1.2rem, 1.08rem + 0.5vw, 1.5rem);
+  --fs-display: clamp(2rem, 1.2rem + 3.6vw, 4rem); /* H1 of the home page */
+  --fs-h1: clamp(2.25rem, 1.9rem + 2.6vw, 3.75rem);
+  --fs-h2: clamp(2rem, 1.6rem + 1.9vw, 3rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
   --fs-h4: 1.125rem;
-  --fs-lead: clamp(1.075rem, 1rem + 0.35vw, 1.25rem);
+  --fs-lead: clamp(1.125rem, 1rem + 0.35vw, 1.25rem);
   --fs-body: 1.0625rem;
   --fs-small: 0.9375rem;
   --fs-xs: 0.8125rem;
@@ -65,7 +70,7 @@
   --lh-heading: 1.15;
   --lh-body: 1.65;
   --tracking-heading: -0.02em;
-  --tracking-kicker: 0.08em;
+  --tracking-kicker: 0.14em;
 
   /* ---------- Space (4 px base) ---------- */
   --space-1: 0.25rem;
@@ -80,18 +85,18 @@
   --space-16: 4rem;
   --space-20: 5rem;
   --space-24: 6rem;
-  --section-pad: clamp(4rem, 2.6rem + 5vw, 7.5rem);
-  --gutter: clamp(1rem, 0.4rem + 3vw, 3rem);
+  --section-pad: clamp(5rem, 9vw, 8rem);
+  --gutter: clamp(1.25rem, 4vw, 3rem);
   --container: 1240px;
   --container-narrow: 760px;
-  --header-h: 76px;
+  --header-h: 84px;
 
   /* ---------- Shape ---------- */
   --radius-xs: 6px;
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
   --radius-pill: 999px;
 
   /* ---------- Elevation ---------- */
@@ -129,6 +134,10 @@
     --c-error: #f2a093;
 
     --btn-fg: #0e1a10;
+    --btn-disc-bg: #0e1a10;
+    --btn-disc-fg: #a3d2a3;
+    --c-night: #08110a;
+    --on-forest: #0e1a10;
     --band-bg: #1f3a22;
     --band-fg: #ffffff;
     --band-accent: #a3d2a3;
@@ -162,6 +171,10 @@
   --c-error: #f2a093;
 
   --btn-fg: #0e1a10;
+  --btn-disc-bg: #0e1a10;
+  --btn-disc-fg: #a3d2a3;
+  --c-night: #08110a;
+  --on-forest: #0e1a10;
   --band-bg: #1f3a22;
   --band-fg: #ffffff;
   --band-accent: #a3d2a3;

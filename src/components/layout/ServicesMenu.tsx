@@ -8,7 +8,7 @@ import { Icon } from '@/components/ui/Icon'
 
 import styles from './SiteHeader.module.css'
 
-type Props = { label: string; services: { href: string; label: string; icon?: string | null }[] }
+type Props = { label: string; services: { href: string; label: string; icon?: string | null; text?: string | null }[] }
 
 /**
  * "Prestations" dropdown. Opens on hover and keyboard focus with CSS alone,
@@ -45,11 +45,14 @@ export function ServicesMenu({ label, services }: Props) {
     }
   }, [open])
 
+  const current = services.some((service) => pathname.startsWith(service.href))
+
   return (
     <div ref={wrapper} className={styles.dropdown} data-open={open || undefined}>
       <button
         type="button"
         className={styles.link}
+        data-current={current || undefined}
         aria-expanded={open}
         aria-controls={id}
         onClick={() => setOpen((value) => !value)}
@@ -61,11 +64,18 @@ export function ServicesMenu({ label, services }: Props) {
         <ul className={styles.panelList}>
           {services.map((service) => (
             <li key={service.href}>
-              <Link href={service.href} className={styles.panelLink}>
+              <Link
+                href={service.href}
+                className={styles.panelLink}
+                aria-current={pathname.startsWith(service.href) ? 'page' : undefined}
+              >
                 <span className={styles.panelIcon}>
                   <Icon name={service.icon} size={20} />
                 </span>
-                {service.label}
+                <span className={styles.panelText}>
+                  <strong>{service.label}</strong>
+                  {service.text ? <span>{service.text}</span> : null}
+                </span>
               </Link>
             </li>
           ))}

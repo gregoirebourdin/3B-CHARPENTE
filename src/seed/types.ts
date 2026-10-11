@@ -180,6 +180,8 @@ export type SeedHero = {
   secondaryCta?: SeedLink
   proofs?: { label: string; text?: string; icon?: IconName }[]
   images?: Photo[]
+  /** Slug of the chantier shown as a small card on the collage. */
+  highlight?: string
   caption?: string
 }
 

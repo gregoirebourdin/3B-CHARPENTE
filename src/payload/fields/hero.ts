@@ -88,6 +88,16 @@ export const heroField: Field = {
       },
     },
     {
+      name: 'highlight',
+      type: 'relationship',
+      relationTo: 'projects',
+      label: 'Chantier mis en avant (petite carte sur la photo)',
+      admin: {
+        condition: (_, siblingData) => siblingData?.variant === 'collage',
+        description: 'Facultatif : une carte « Chantier · commune » posée sur la photo, qui mène au chantier.',
+      },
+    },
+    {
       name: 'caption',
       type: 'text',
       label: 'Légende de la photo principale',

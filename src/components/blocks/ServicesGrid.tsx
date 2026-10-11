@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import { CmsLink } from '@/components/ui/CmsLink'
 import { Icon } from '@/components/ui/Icon'
+import { Media } from '@/components/ui/Media'
 import { Section } from '@/components/ui/Section'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { getServices } from '@/lib/cms/queries'
@@ -12,7 +13,11 @@ import { pathFor } from '@/payload/utilities/routes'
 import styles from './ServicesGrid.module.css'
 import type { BlockProps } from './types'
 
-/** Service cards: built automatically from the "Prestations" collection, or chosen by hand. */
+/**
+ * The services, built automatically from the "Prestations" collection (or
+ * chosen by hand). "Complet": an editorial numbered index, a photo of the
+ * service peeks out on hover. "Compact": small cards (other services).
+ */
 export async function ServicesGrid({ block, context }: BlockProps<Data>) {
   const all = await getServices()
   const services =
@@ -29,11 +34,16 @@ export async function ServicesGrid({ block, context }: BlockProps<Data>) {
 
   return (
     <Section tone={block.tone} anchor={block.anchor}>
-      <SectionHeading kicker={block.kicker} title={block.title} accent={block.titleAccent} intro={block.intro} />
-      <ul className={`${styles.grid} ${compact ? styles.compact : styles.full}`}>
-        {visible.map((service, index) => {
-          const href = pathFor('services', service) ?? '/'
-          return (
+      <SectionHeading
+        kicker={block.kicker}
+        title={block.title}
+        accent={block.titleAccent}
+        intro={block.intro}
+        layout={compact ? 'stack' : 'split'}
+      />
+      {compact ? (
+        <ul className={styles.compact}>
+          {visible.map((service, index) => (
             <li
               key={service.id}
               className={styles.card}
@@ -41,24 +51,36 @@ export async function ServicesGrid({ block, context }: BlockProps<Data>) {
               style={{ ['--reveal-delay' as string]: `${(index % 3) * 80}ms` }}
             >
               <span className={styles.icon}>
-                <Icon name={service.icon} size={compact ? 22 : 26} />
+                <Icon name={service.icon} size={22} />
               </span>
-              <div className={styles.body}>
-                <h3 className={styles.title}>
-                  <Link href={href} className={styles.stretched}>
-                    {compact ? service.title : service.cardTitle || service.title}
-                  </Link>
-                </h3>
-                {!compact ? <p className={styles.text}>{service.cardText}</p> : null}
-                <span className={styles.more} aria-hidden="true">
-                  {compact ? null : service.cardLinkLabel || context.texts.general.serviceCardLink}
-                  <Icon name="arrowRight" size={16} />
-                </span>
-              </div>
+              <h3 className={styles.cardTitle}>
+                <Link href={pathFor('services', service) ?? '/'} className={styles.stretched}>
+                  {service.title}
+                </Link>
+              </h3>
+              <Icon name="arrowRight" size={18} className={styles.cardArrow} />
             </li>
-          )
-        })}
-      </ul>
+          ))}
+        </ul>
+      ) : (
+        <ol className={styles.index}>
+          {visible.map((service, index) => (
+            <li key={service.id} data-reveal="" style={{ ['--reveal-delay' as string]: `${Math.min(index, 4) * 50}ms` }}>
+              <Link href={pathFor('services', service) ?? '/'} className={styles.row}>
+                <span className={styles.num} aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 className={styles.title}>{service.cardTitle || service.title}</h3>
+                {service.cardText ? <p className={styles.text}>{service.cardText}</p> : null}
+                <span className={styles.go} aria-hidden="true">
+                  <Icon name="arrowRight" size={18} />
+                </span>
+                <Media media={service.image} alt="" sizes="220px" className={styles.peek} />
+              </Link>
+            </li>
+          ))}
+        </ol>
+      )}
       {cta ? (
         <div className={styles.cta}>
           <CmsLink link={cta} variant="outline" arrow />

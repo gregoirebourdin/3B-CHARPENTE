@@ -21,6 +21,8 @@ type Props = ProjectCardData & {
   photosLabel: string
   priority?: boolean
   headingLevel?: 'h3' | 'h2'
+  /** First card of a bento grid: taller photo, larger title. */
+  large?: boolean
 }
 
 export const projectCommune = (project: Project) =>
@@ -29,8 +31,19 @@ export const projectCommune = (project: Project) =>
 export const projectServices = (project: Project) =>
   (project.services ?? []).filter((service): service is Service => typeof service === 'object' && service !== null)
 
-/** Card of a chantier: photo with a label, title, info line, short text, "Voir les travaux →". */
-export function ProjectCard({ project, title, text, tag, label = 'commune', linkLabel, photosLabel, priority, headingLevel = 'h3' }: Props) {
+/** Card of a chantier: photo with a label, info line, title, short text, "Voir les travaux →". The whole card is the link. */
+export function ProjectCard({
+  project,
+  title,
+  text,
+  tag,
+  label = 'commune',
+  linkLabel,
+  photosLabel,
+  priority,
+  headingLevel = 'h3',
+  large,
+}: Props) {
   const href = pathFor('projects', project) ?? '/realisations/'
   const commune = projectCommune(project)
   const main = projectServices(project)[0]
@@ -39,21 +52,26 @@ export function ProjectCard({ project, title, text, tag, label = 'commune', link
     tag || (label === 'brand' ? '3B Charpente' : project.locality || commune?.name || main?.shortLabel || main?.title || '3B Charpente')
   const Heading = headingLevel
 
+  const info = [main?.shortLabel || main?.title, photos ? template(photosLabel, { n: photos }) : null].filter(Boolean).join(' · ')
+
   return (
-    <article className={styles.card}>
+    <article className={large ? `${styles.card} ${styles.large}` : styles.card}>
       <div className={styles.media}>
-        <Media media={project.heroImage} sizes="(min-width: 1100px) 380px, (min-width: 700px) 45vw, 92vw" priority={priority} />
+        <Media
+          media={project.heroImage}
+          fill
+          sizes={large ? '(min-width: 1100px) 700px, 92vw' : '(min-width: 1100px) 400px, (min-width: 700px) 45vw, 92vw'}
+          priority={priority}
+        />
         <span className={styles.badge}>{badge}</span>
       </div>
       <div className={styles.body}>
+        {info ? <p className={styles.info}>{info}</p> : null}
         <Heading className={styles.title}>
           <Link href={href} className={styles.stretched}>
             {title || project.shortTitle || project.title.replace(/\*\*/g, '')}
           </Link>
         </Heading>
-        <p className={styles.info}>
-          {[main?.shortLabel || main?.title, photos ? template(photosLabel, { n: photos }) : null].filter(Boolean).join(' · ')}
-        </p>
         <p className={styles.text}>{text || project.summary}</p>
         <span className={styles.more} aria-hidden="true">
           {linkLabel}

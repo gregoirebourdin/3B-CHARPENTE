@@ -47,15 +47,26 @@ export const page: SeedPage = {
     primaryCta: { label: 'Demander mon devis', href: '/contact/' },
     secondaryCta: { label: 'Voir nos réalisations', href: '/realisations/' },
     proofs: [
-      { label: 'Depuis 2007', icon: 'calendar' },
-      { label: 'Qualifié RGE', icon: 'medal' },
+      { label: 'Depuis 2007', text: "à L'Argentière-la-Bessée", icon: 'calendar' },
+      { label: 'Qualifié RGE', text: 'Qualibat', icon: 'medal' },
+      { label: 'Compagnons du Devoir', text: 'notre formation', icon: 'ruler' },
     ],
     images: [P.levageFermes, P.tailleTenon, P.terrasseVallouise],
+    highlight: 'refection-d-une-charpente-a-l-argentiere-la-bessee',
   },
 
   tldr: "3B Charpente est une entreprise de charpente bois fondée en 2007 par Jean-Michel Tardy, formé chez les Compagnons du Devoir, et installée à L'Argentière-la-Bessée (Hautes-Alpes). Elle réalise charpentes, rénovations, isolation biosourcée avec la qualification RGE, maisons ossature bois, escaliers et balcons, en bois local. Avec 3B Récup', elle déconstruit et réemploie le bois.",
 
   layout: [
+    // Section 4 : prestations (les textes des cartes viennent des prestations)
+    {
+      type: 'servicesGrid',
+      mode: 'all',
+      kicker: 'Nos prestations',
+      title: "Tous nos **métiers du bois**, de la charpente à l'**isolation**",
+      cta: { label: 'Parler de mon projet', href: '/contact/' },
+    },
+
     // Section 3 : manifeste
     {
       type: 'manifesto',
@@ -64,17 +75,8 @@ export const page: SeedPage = {
       title: 'Construire **simplement**, penser **durablement**.',
       text: 'Chez 3B Charpente, nous faisons les choses différemment. Notre engagement pour le bois local et les techniques écoresponsables nous distingue dans les Hautes-Alpes, à Briançon comme dans les communes voisines.\n\nNous privilégions les matériaux sains et le réemploi pour limiter notre impact sur l\'environnement. Chaque charpente ou rénovation de chalet est le fruit d\'un travail étroit avec vous : nous l\'adaptons à votre maison, à vos usages et à vos goûts.',
       emphasis: 'Simple, transparent, et toujours à votre écoute : voilà notre promesse.',
-      image: P.soleilCouchant,
+      image: 'ambiance/foret.png',
       cta: { label: 'Découvrir notre histoire', href: '/a-propos/' },
-    },
-
-    // Section 4 : prestations (les textes des cartes viennent des prestations)
-    {
-      type: 'servicesGrid',
-      mode: 'all',
-      kicker: 'Nos prestations',
-      title: "Tous nos **métiers du bois**, de la charpente à l'**isolation**",
-      cta: { label: 'Parler de mon projet', href: '/contact/' },
     },
 
     // Section 5 : 3B Récup'
@@ -177,7 +179,8 @@ export const page: SeedPage = {
     // Section 8 : votre projet, étape par étape
     {
       type: 'steps',
-      variant: 'tabs',
+      variant: 'timeline',
+      tone: 'light',
       kicker: 'Votre projet, étape par étape',
       title: 'Chaque projet commence par une **étude sur mesure**',
       steps: [

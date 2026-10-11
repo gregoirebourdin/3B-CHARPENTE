@@ -1,13 +1,13 @@
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
   align-items: center;
 }
 
 .copy {
   display: grid;
-  gap: var(--space-6);
+  gap: 28px;
 }
 
 .heading {
@@ -15,13 +15,15 @@
 }
 
 .text {
+  display: grid;
+  gap: 1em;
   max-width: 60ch;
-  font-size: var(--fs-lead);
+  color: color-mix(in srgb, var(--fg) 84%, var(--bg));
+  font-size: 1.125rem;
 }
 
+/* Sectors: rows between hairlines, the whole row is the link. */
 .sectors {
-  display: grid;
-  gap: var(--space-4);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -29,35 +31,42 @@
 
 .sector {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) 24px;
+  align-items: start;
   gap: var(--space-4);
-  padding: var(--space-5) var(--space-6);
-  border-radius: var(--radius-md);
-  background: var(--bg-card);
-  box-shadow: var(--shadow-sm);
-  transition:
-    transform var(--dur-base) var(--ease-out),
-    box-shadow var(--dur-base) var(--ease-out);
+  padding-block: 20px;
+  border-top: 1px solid var(--c-line);
+  transition: padding var(--dur-base) var(--ease-out);
 }
 
-.sector:hover {
-  transform: translateX(4px);
-  box-shadow: var(--shadow-md);
+.sector:last-child {
+  border-bottom: 1px solid var(--c-line);
+}
+
+.sector:has(a):hover {
+  padding-inline: var(--space-2);
 }
 
 .pin {
   display: grid;
-  flex: none;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: var(--pill-bg);
   color: var(--pill-fg);
 }
 
+.sectorBody {
+  display: grid;
+  gap: 4px;
+}
+
 .sectorTitle {
-  font-size: 1.2rem;
+  font-size: 1.1875rem;
+  font-weight: 600;
+  line-height: 1.25;
 }
 
 .sectorTitle a {
@@ -69,23 +78,21 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: var(--radius-md);
 }
 
 .sectorText {
-  margin-top: var(--space-1);
   color: var(--fg-muted);
-  font-size: var(--fs-small);
+  font-size: 0.9375rem;
 }
 
-.more {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
+.arrow {
+  margin-top: 10px;
   color: var(--fg-accent);
-  font-size: var(--fs-small);
-  font-weight: 650;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.sector:hover .arrow {
+  transform: translateX(3px);
 }
 
 @media (max-width: 900px) {

@@ -10,7 +10,7 @@ import styles from './MobileMenu.module.css'
 
 export type MobileNavItem =
   | { kind: 'link'; label: string; href: string; highlight?: boolean }
-  | { kind: 'services'; label: string; children: { href: string; label: string; icon?: string | null }[] }
+  | { kind: 'services'; label: string; children: { href: string; label: string; icon?: string | null; text?: string | null }[] }
 
 type Props = {
   items: MobileNavItem[]

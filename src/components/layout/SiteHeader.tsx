@@ -2,23 +2,25 @@ import Link from 'next/link'
 
 import { CmsLink } from '@/components/ui/CmsLink'
 import { Icon } from '@/components/ui/Icon'
-import { getCompany, getHeader, getServices } from '@/lib/cms/queries'
+import { getCompany, getHeader, getServices, getSiteTexts } from '@/lib/cms/queries'
 import { phoneToE164, resolveLink } from '@/lib/links'
 import { pathFor } from '@/payload/utilities/routes'
 
 import { Logo } from './Logo'
 import { MobileMenu, type MobileNavItem } from './MobileMenu'
+import { NavLink } from './NavLink'
 import { ServicesMenu } from './ServicesMenu'
 import styles from './SiteHeader.module.css'
 
 export async function SiteHeader() {
-  const [header, company, services] = await Promise.all([getHeader(), getCompany(), getServices()])
+  const [header, company, services, texts] = await Promise.all([getHeader(), getCompany(), getServices(), getSiteTexts()])
 
   const serviceLinks = services
     .map((service) => ({
       href: pathFor('services', service) ?? '/',
       label: service.menuLabel || service.title,
       icon: service.icon,
+      text: service.cardText,
     }))
     .filter((service) => service.href !== '/')
 
@@ -35,7 +37,7 @@ export async function SiteHeader() {
     <header role="banner" className={styles.header}>
       <div className={`container ${styles.inner}`}>
         <Link href="/" className={styles.logo} aria-label={`${company.name}, retour à l’accueil`}>
-          <Logo height={62} priority />
+          <Logo height={60} priority />
         </Link>
 
         <nav aria-label="Navigation principale" className={styles.nav}>
@@ -47,9 +49,9 @@ export async function SiteHeader() {
                 </li>
               ) : (
                 <li key={item.href} className={styles.item}>
-                  <Link href={item.href} className={item.highlight ? styles.highlight : styles.link}>
+                  <NavLink href={item.href} className={item.highlight ? `${styles.link} ${styles.highlight}` : styles.link}>
                     {item.label}
-                  </Link>
+                  </NavLink>
                 </li>
               ),
             )}
@@ -57,7 +59,11 @@ export async function SiteHeader() {
         </nav>
 
         <div className={styles.actions}>
-          <CmsLink link={cta} variant="outline" size="small" className={styles.cta} />
+          <a href={tel} className={styles.phone} data-track="Clic téléphone">
+            <small>{texts.general.headerPhoneLabel}</small>
+            {company.phone}
+          </a>
+          <CmsLink link={cta} variant="primary" size="small" arrow className={styles.cta} />
           <a href={tel} className={styles.call} data-track="Clic téléphone" aria-label={`Appeler le ${company.phone}`}>
             <Icon name="phone" size={20} />
             <span className={styles.callLabel}>Appeler</span>

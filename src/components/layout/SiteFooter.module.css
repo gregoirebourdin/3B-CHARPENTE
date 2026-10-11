@@ -1,20 +1,34 @@
+/* Night footer (always dark). */
 .footer {
-  padding-block: var(--space-20) var(--space-8);
-  border-top: 1px solid var(--c-line);
-  background: var(--bg);
-  font-size: var(--fs-small);
+  padding-block: clamp(4rem, 8vw, 6.5rem) var(--space-8);
+  background: var(--c-night);
+  color: rgb(238 241 232 / 0.78);
+  font-size: 0.9375rem;
+}
+
+.footer a {
+  color: rgb(238 241 232 / 0.78);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #ffffff;
+}
+
+.footer :focus-visible {
+  outline-color: #a3d2a3;
 }
 
 .top {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 3fr);
-  gap: var(--space-12);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 2.4fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
 }
 
 .brand {
   display: grid;
   align-content: start;
-  gap: var(--space-5);
+  gap: 22px;
 }
 
 .logo {
@@ -26,87 +40,81 @@
   height: 96px;
 }
 
+.tagline {
+  max-width: 24ch;
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 1.1875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+
+/* RGE badges on a white cartouche, linked to the official directory. */
 .badges {
   display: flex;
   align-items: center;
   gap: var(--space-4);
   width: fit-content;
-  padding: var(--space-3) var(--space-4);
+  padding: 12px 16px;
   border-radius: var(--radius-md);
   background: #ffffff;
-  box-shadow: var(--shadow-sm);
 }
 
 .badges img {
   width: auto;
 }
 
-.tagline {
-  max-width: 30ch;
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 600;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
-}
-
 .columns {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
   gap: var(--space-8) var(--space-6);
 }
 
 .column ul {
   display: grid;
-  gap: var(--space-2);
+  gap: 9px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.column a {
-  color: var(--fg-muted);
-}
-
-.column a:hover {
-  color: var(--fg);
-}
-
 .columnTitle {
-  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: 14px;
+  color: #ffffff;
   font-family: var(--font-body);
-  font-size: var(--fs-small);
+  font-size: 0.875rem;
   font-weight: 650;
   letter-spacing: 0;
+}
+
+.columnTitle svg {
+  color: #a3d2a3;
 }
 
 .contact {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-6);
-  margin-top: var(--space-16);
-  padding: var(--space-8);
-  border-radius: var(--radius-lg);
-  background: var(--bg-alt);
+  margin-top: 56px;
+  padding-block: 28px;
+  border-block: 1px solid rgb(238 241 232 / 0.14);
 }
 
 .contactItem {
-  display: flex;
-  gap: var(--space-4);
   line-height: 1.6;
 }
 
-.contactItem > svg {
-  flex: none;
-  margin-top: 2px;
-  color: var(--fg-accent);
-}
-
-.strongLink {
+.phone {
+  display: inline-block;
+  color: #ffffff !important;
   font-family: var(--font-heading);
-  font-size: 1.2rem;
-  font-weight: 600;
-  text-decoration: none;
+  font-size: 1.625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .hours {
@@ -122,6 +130,7 @@
 }
 
 .hours dt {
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -131,12 +140,15 @@
 
 .closure {
   margin-top: var(--space-2);
-  color: var(--fg-muted);
+  color: rgb(238 241 232 / 0.65);
 }
 
 .review {
   margin-top: var(--space-6);
-  color: var(--fg-muted);
+}
+
+.review a {
+  color: #ffffff;
 }
 
 .bottom {
@@ -145,10 +157,8 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  margin-top: var(--space-10);
   padding-top: var(--space-6);
-  border-top: 1px solid var(--c-line);
-  color: var(--fg-muted);
+  font-size: 0.875rem;
 }
 
 .legal {
@@ -162,11 +172,10 @@
 
 @media (max-width: 900px) {
   .top {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .contact {
-    grid-template-columns: 1fr;
-    padding: var(--space-6);
+    grid-template-columns: minmax(0, 1fr);
   }
 }

@@ -51,7 +51,7 @@ export async function SiteFooter() {
         <div className={styles.top}>
           <div className={styles.brand}>
             <Link href="/" aria-label={`${company.name}, accueil`} className={styles.logo}>
-              <Logo height={96} />
+              <Logo height={96} inverse />
             </Link>
             {footer.tagline ? <p className={styles.tagline}>{footer.tagline}</p> : null}
             {company.rge?.label ? (
@@ -84,30 +84,34 @@ export async function SiteFooter() {
           </div>
         </div>
 
-        <div className={styles.contact} itemScope itemType="https://schema.org/PostalAddress">
-          <div className={styles.contactItem}>
-            <Icon name="mapPin" size={22} />
+        <div className={styles.contact}>
+          <div className={styles.contactItem} itemScope itemType="https://schema.org/PostalAddress">
+            <h2 className={styles.columnTitle}>
+              <Icon name="mapPin" size={16} /> {company.name}
+            </h2>
             <p>
-              <strong>{company.name}</strong>
+              <span itemProp="streetAddress">{address.street}</span>
               <br />
-              <span itemProp="streetAddress">{address.street}</span>,{' '}
               <span itemProp="postalCode">{address.postalCode}</span> <span itemProp="addressLocality">{address.city}</span>
             </p>
           </div>
           <div className={styles.contactItem}>
-            <Icon name="phone" size={22} />
+            <h2 className={styles.columnTitle}>
+              <Icon name="phone" size={16} /> Téléphone
+            </h2>
+            <a href={`tel:${phoneToE164(company.phone)}`} data-track="Clic téléphone" className={styles.phone}>
+              {company.phone}
+            </a>
             <p>
-              <a href={`tel:${phoneToE164(company.phone)}`} data-track="Clic téléphone" className={styles.strongLink}>
-                {company.phone}
-              </a>
-              <br />
               <a href={`mailto:${company.email}`} data-track="Clic e-mail" className="link-underline">
                 {company.email}
               </a>
             </p>
           </div>
           <div className={styles.contactItem}>
-            <Icon name="clock" size={22} />
+            <h2 className={styles.columnTitle}>
+              <Icon name="clock" size={16} /> Horaires
+            </h2>
             <div>
               <dl className={styles.hours}>
                 {hours.map((group) => (

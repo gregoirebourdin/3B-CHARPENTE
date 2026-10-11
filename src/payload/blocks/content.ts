@@ -280,8 +280,8 @@ export const StepsBlock: Block = {
           label: 'Affichage',
           defaultValue: 'tabs',
           options: [
-            { label: 'Onglets 01, 02… (accordéon sur mobile)', value: 'tabs' },
-            { label: 'Liste verticale numérotée', value: 'timeline' },
+            { label: 'Étapes détaillées (texte et photos, toutes visibles)', value: 'tabs' },
+            { label: 'Frise horizontale (étapes courtes)', value: 'timeline' },
           ],
           admin: { width: '50%' },
         },

@@ -1,92 +1,111 @@
+/*
+ * Buttons of the « Atelier alpin » kit: pills, with the arrow in a sage disc
+ * that turns a quarter on hover. Variants recolour a few local properties.
+ */
 .button {
   --_bg: var(--btn-bg);
   --_fg: var(--btn-fg);
   --_border: var(--btn-bg);
+  --_disc-bg: var(--btn-disc-bg);
+  --_disc-fg: var(--btn-disc-fg);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
-  min-height: 48px;
-  padding: 0.8rem 1.35rem;
+  gap: var(--space-3);
+  min-height: 52px;
+  padding: 0 var(--space-6);
   border: 1.5px solid var(--_border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-pill);
   background: var(--_bg);
   color: var(--_fg);
   font-family: var(--font-body);
-  font-size: 0.975rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.2;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
+  cursor: pointer;
   transition:
     background-color var(--dur-fast) var(--ease-out),
     border-color var(--dur-fast) var(--ease-out),
-    color var(--dur-fast) var(--ease-out),
-    transform var(--dur-fast) var(--ease-out),
-    box-shadow var(--dur-fast) var(--ease-out);
+    color var(--dur-fast) var(--ease-out);
 }
 
-.button:hover {
-  transform: translateY(-1px);
+.withDisc {
+  padding-right: 9px;
 }
 
-.button:active {
-  transform: translateY(0);
-}
-
-.button svg {
+.disc {
+  display: grid;
   flex: none;
-  transition: transform var(--dur-base) var(--ease-out);
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--_disc-bg);
+  color: var(--_disc-fg);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
 }
 
-.button:hover svg[data-arrow] {
-  transform: translateX(3px);
+.button:hover .disc,
+.button:focus-visible .disc {
+  transform: translateX(3px) rotate(-45deg);
 }
 
 .primary:hover {
   --_bg: var(--btn-bg-hover);
   --_border: var(--btn-bg-hover);
-  box-shadow: var(--shadow-md);
 }
 
 .outline {
   --_bg: transparent;
   --_fg: var(--fg);
-  --_border: var(--c-forest);
+  --_border: var(--c-line-strong);
+  --_disc-bg: var(--btn-bg);
+  --_disc-fg: var(--btn-fg);
 }
 
 .outline:hover {
   --_bg: var(--c-sage-soft);
+  --_border: var(--fg);
 }
 
-/* On forest-green grounds */
+/* On forest-green and night grounds (always dark, in both themes). */
 .light {
   --_bg: #ffffff;
   --_fg: #102311;
   --_border: #ffffff;
+  --_disc-bg: #2c4f2d;
+  --_disc-fg: #ffffff;
 }
 
 .light:hover {
-  --_bg: var(--c-sage);
-  --_border: var(--c-sage);
+  --_bg: #a3d2a3;
+  --_border: #a3d2a3;
 }
 
 .outlineLight {
   --_bg: transparent;
   --_fg: #ffffff;
-  --_border: rgb(255 255 255 / 0.7);
+  --_border: rgb(255 255 255 / 0.5);
+  --_disc-bg: #a3d2a3;
+  --_disc-fg: #102311;
 }
 
 .outlineLight:hover {
-  --_border: #ffffff;
   --_bg: rgb(255 255 255 / 0.08);
+  --_border: #ffffff;
 }
 
 .sage {
-  --_bg: var(--c-sage);
+  --_bg: #a3d2a3;
   --_fg: #102311;
-  --_border: var(--c-sage);
+  --_border: #a3d2a3;
+  --_disc-bg: #2c4f2d;
+  --_disc-fg: #ffffff;
 }
 
 .sage:hover {
@@ -95,15 +114,33 @@
 }
 
 .small {
-  min-height: 42px;
-  padding: 0.6rem 1rem;
-  font-size: 0.925rem;
+  min-height: 44px;
+  padding-inline: 18px;
+  font-size: 0.9375rem;
+}
+
+.small.withDisc {
+  padding-right: 7px;
+}
+
+.small .disc {
+  width: 28px;
+  height: 28px;
 }
 
 .large {
-  min-height: 54px;
-  padding: 0.95rem 1.6rem;
-  font-size: 1.025rem;
+  min-height: 58px;
+  padding-inline: 28px;
+  font-size: 1.0625rem;
+}
+
+.large.withDisc {
+  padding-right: 11px;
+}
+
+.large .disc {
+  width: 38px;
+  height: 38px;
 }
 
 .block {
@@ -113,17 +150,16 @@
 .group {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
+  align-items: center;
+  gap: var(--space-3) 14px;
 }
 
-@media (max-width: 520px) {
-  .group > * {
+/* Phones: buttons take the full width, long labels wrap instead of overflowing. */
+@media (max-width: 600px) {
+  .group > .button {
     flex: 1 1 100%;
   }
-}
 
-/* Long labels wrap on phones rather than pushing the page sideways. */
-@media (max-width: 560px) {
   .button {
     max-width: 100%;
     white-space: normal;

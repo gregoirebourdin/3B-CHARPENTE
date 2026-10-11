@@ -1,33 +1,44 @@
 .map {
+  position: relative;
+  overflow: hidden;
   margin: 0;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+  background: var(--bg-alt);
+}
+
+:global([data-tone='light']) .map {
+  background: var(--bg);
+}
+
+/* The real relief of the Hautes-Alpes, as contour lines. */
+.topo {
+  position: absolute;
+  inset: 0;
+  background: var(--c-accent);
+  opacity: 0.3;
+  pointer-events: none;
+  -webkit-mask: var(--topo-url) center / cover no-repeat;
+  mask: var(--topo-url) center / cover no-repeat;
 }
 
 .map svg {
+  position: relative;
   width: 100%;
   height: auto;
 }
 
-.ground {
-  fill: var(--bg-alt);
-}
-
-.contour {
-  stroke: color-mix(in srgb, var(--fg-accent) 22%, transparent);
-  stroke-width: 1;
-}
-
 .river {
   fill: none;
-  stroke: color-mix(in srgb, #5b8db0 70%, var(--bg-alt));
-  stroke-width: 3.5;
+  stroke: #8fb3c9;
+  stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0.75;
 }
 
 .dot {
-  fill: var(--c-sage);
-  stroke: var(--c-forest);
+  fill: #a3d2a3;
+  stroke: #2c4f2d;
   stroke-width: 2;
 }
 
@@ -42,20 +53,26 @@
   stroke-linejoin: round;
 }
 
+:global([data-tone='light']) .label,
+:global([data-tone='light']) .hqLabel {
+  stroke: var(--bg);
+}
+
 .hq {
-  fill: var(--c-forest);
+  fill: #2c4f2d;
 }
 
 .hqHalo {
-  fill: color-mix(in srgb, var(--c-forest) 20%, transparent);
+  fill: rgb(44 79 45 / 0.18);
 }
 
 .hqLabel {
   fill: var(--fg-accent);
   font-family: var(--font-heading);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   paint-order: stroke;
   stroke: var(--bg-alt);
   stroke-width: 4px;
+  stroke-linejoin: round;
 }

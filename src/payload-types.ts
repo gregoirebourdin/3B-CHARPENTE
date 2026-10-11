@@ -571,6 +571,10 @@ export interface Page {
      * Collage : 1 grande photo puis 2 vignettes. Utilisez de vraies photos de chantier.
      */
     images?: (number | Media)[] | null;
+    /**
+     * Facultatif : une carte « Chantier · commune » posée sur la photo, qui mène au chantier.
+     */
+    highlight?: (number | null) | Project;
     caption?: string | null;
   };
   /**
@@ -847,6 +851,10 @@ export interface Service {
      * Collage : 1 grande photo puis 2 vignettes. Utilisez de vraies photos de chantier.
      */
     images?: (number | Media)[] | null;
+    /**
+     * Facultatif : une carte « Chantier · commune » posée sur la photo, qui mène au chantier.
+     */
+    highlight?: (number | null) | Project;
     caption?: string | null;
   };
   /**
@@ -3159,6 +3167,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         images?: T;
+        highlight?: T;
         caption?: T;
       };
   tldr?: T;
@@ -3912,6 +3921,7 @@ export interface ServicesSelect<T extends boolean = true> {
               id?: T;
             };
         images?: T;
+        highlight?: T;
         caption?: T;
       };
   tldr?: T;
@@ -4546,6 +4556,26 @@ export interface SiteText {
      */
     callLabel?: string | null;
     /**
+     * Par défaut : Appelez-nous
+     */
+    headerPhoneLabel?: string | null;
+    /**
+     * Par défaut : Chantier
+     */
+    heroHighlightLabel?: string | null;
+    /**
+     * Par défaut : Une autre question ?
+     */
+    faqHelpTitle?: string | null;
+    /**
+     * Par défaut : Appelez-nous ou écrivez-nous : nous vous répondons.
+     */
+    faqHelpText?: string | null;
+    /**
+     * Par défaut : Nous écrire
+     */
+    faqHelpLink?: string | null;
+    /**
      * Par défaut : Vous avez travaillé avec nous ?
      */
     reviewPrompt?: string | null;
@@ -5113,6 +5143,11 @@ export interface SiteTextsSelect<T extends boolean = true> {
         breadcrumbHome?: T;
         tldrLabel?: T;
         callLabel?: T;
+        headerPhoneLabel?: T;
+        heroHighlightLabel?: T;
+        faqHelpTitle?: T;
+        faqHelpText?: T;
+        faqHelpLink?: T;
         reviewPrompt?: T;
         reviewLink?: T;
         projectCardLink?: T;

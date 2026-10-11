@@ -3,60 +3,44 @@
   z-index: 2;
 }
 
-.band {
-  padding-bottom: var(--space-8);
-}
-
+/* « En bref »: label on the left, the answer on the right, between two hairlines. */
 .box {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: start;
-  gap: var(--space-3) var(--space-6);
-  max-width: 1040px;
-  padding: var(--space-6) var(--space-8);
-  border-left: 4px solid var(--fg-accent);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  background: var(--bg-alt);
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: var(--space-6) var(--space-12);
+  padding-block: 36px;
+  border-block: 1px solid var(--c-line);
 }
 
 .label {
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--radius-pill);
-  background: var(--pill-bg);
-  color: var(--pill-fg);
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  padding-top: 6px;
+  color: var(--fg-accent);
+  font-size: var(--fs-kicker);
+  font-weight: 650;
+  letter-spacing: var(--tracking-kicker);
   text-transform: uppercase;
-  white-space: nowrap;
 }
 
 .text {
-  font-size: var(--fs-lead);
+  max-width: 68ch;
+  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.3125rem);
   line-height: 1.6;
 }
 
-/* Home: a white card that straddles the hero and the next section. */
+.band {
+  padding-bottom: var(--space-4);
+}
+
+/* Home: right under the hero. */
 .card {
-  margin-top: calc(-1 * var(--space-12));
-  padding-bottom: var(--space-12);
+  margin-top: calc(-1 * clamp(2rem, 4vw, 3.5rem));
+  padding-bottom: var(--space-6);
 }
 
-.card .box {
-  margin-inline: auto;
-  border-left: 0;
-  border-radius: var(--radius-lg);
-  background: var(--bg-card);
-  box-shadow: var(--shadow-md);
-}
-
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .box {
-    grid-template-columns: 1fr;
-    padding: var(--space-5) var(--space-5);
-  }
-
-  .label {
-    justify-self: start;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+    padding-block: 28px;
   }
 }

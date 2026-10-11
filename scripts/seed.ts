@@ -13,6 +13,9 @@
  * database, so the first deployment arrives with its content and the next
  * ones never touch what the team has edited since. On a filled database it only
  * re-sends the photos whose files are missing from Blob storage.
+ *
+ * SEED_FORCE=true: re-imports the initial content even into a filled database
+ * (before launch only: it overwrites the edited pages).
  */
 import { getPayload } from 'payload'
 
@@ -32,7 +35,8 @@ function accountOptions() {
 const payload = await getPayload({ config })
 const started = Date.now()
 try {
-  if (process.env.SEED_IF_EMPTY === 'true') {
+  // SEED_FORCE=true (one deployment only): re-import the initial content over the existing one.
+  if (process.env.SEED_IF_EMPTY === 'true' && process.env.SEED_FORCE !== 'true') {
     const { totalDocs } = await payload.count({ collection: 'pages' })
     if (totalDocs > 0) {
       console.log(`Contenu déjà présent (${totalDocs} pages) : import ignoré.`)

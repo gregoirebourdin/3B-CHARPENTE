@@ -33,7 +33,14 @@ export async function PageView({ page }: { page: Page }) {
 
   return (
     <div data-section={isRecup ? 'recup' : undefined}>
-      <PageHero hero={page.hero} company={company} breadcrumbs={isHome ? undefined : crumbs} />
+      <PageHero
+        hero={page.hero}
+        company={company}
+        breadcrumbs={isHome ? undefined : crumbs}
+        display={isHome}
+        highlightLabel={texts.general.heroHighlightLabel}
+        highlightLink={texts.general.projectCardLink}
+      />
       <Tldr text={page.tldr} variant={isHome ? 'card' : 'band'} label={texts.general.tldrLabel} />
       <RenderBlocks blocks={page.layout} context={context} />
       <JsonLd
