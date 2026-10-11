@@ -11,6 +11,7 @@ import { fr } from '@payloadcms/translations/languages/fr'
 import { buildConfig, type Field } from 'payload'
 import sharp from 'sharp'
 
+import { DEPLOYMENT_ORIGINS } from './lib/deployment'
 import { isTeam } from './payload/access'
 import { Articles } from './payload/collections/Articles'
 import { Communes } from './payload/collections/Communes'
@@ -35,17 +36,15 @@ import { LINKABLE_COLLECTIONS } from './payload/utilities/routes'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
-const trustedOrigins = [serverURL, process.env.NEXT_PUBLIC_SITE_URL].filter(Boolean) as string[]
-
 export default buildConfig({
-  serverURL,
+  // Left empty on Vercel: the admin then calls its API on whatever address it is opened from.
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || undefined,
   secret: process.env.PAYLOAD_SECRET || '',
   sharp,
   editor: basicEditor,
   graphQL: { disable: true },
-  cors: trustedOrigins,
-  csrf: trustedOrigins,
+  cors: DEPLOYMENT_ORIGINS,
+  csrf: DEPLOYMENT_ORIGINS,
   i18n: {
     supportedLanguages: { fr },
     fallbackLanguage: 'fr',

@@ -1,6 +1,7 @@
 import type { PluginConfig as FormBuilderPluginConfig } from '@payloadcms/plugin-form-builder/types'
 import type { Block, CollectionAfterChangeHook, Field } from 'payload'
 
+import { ADMIN_BASE_URL } from '../lib/deployment'
 import { isTeam } from './access'
 import { richTextField } from './editor'
 
@@ -158,7 +159,7 @@ export const notifyNewSubmission: CollectionAfterChangeHook<Submission> = async 
     const files = (doc.attachments ?? [])
       .map(({ url, name }) => `<li><a href="${escapeHtml(url)}">${escapeHtml(name || url)}</a></li>`)
       .join('')
-    const adminUrl = `${process.env.NEXT_PUBLIC_SERVER_URL ?? ''}/admin/collections/form-submissions/${doc.id}`
+    const adminUrl = `${ADMIN_BASE_URL}/admin/collections/form-submissions/${doc.id}`
 
     await payload.sendEmail({
       to,
