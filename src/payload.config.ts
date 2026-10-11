@@ -77,6 +77,8 @@ export default buildConfig({
       Nav: '@/payload/admin/nav/AdminNav#AdminNav',
       views: {
         dashboard: { Component: '@/payload/admin/views/DashboardView#DashboardView' },
+        demandes: { Component: '@/payload/admin/views/requests/RequestsView#RequestsView', path: '/demandes' },
+        horaires: { Component: '@/payload/admin/views/hours/HoursView#HoursView', path: '/horaires' },
       },
     },
     livePreview: {

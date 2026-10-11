@@ -142,10 +142,10 @@ export function NavShell({ groups, requests, userName, userRole }: Props) {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <a href="/admin/logout">
+                <Link href="/admin/logout" prefetch={false}>
                   <LogOut aria-hidden="true" />
                   Se déconnecter
-                </a>
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

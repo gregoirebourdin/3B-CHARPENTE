@@ -25,6 +25,8 @@ import { AdminNav as AdminNav_05184afed72cf43bcceaeb537700561f } from '@/payload
 import { Icon as Icon_5b495d5fece06267c23afa6fda6451ee } from '@/payload/admin/components/Brand'
 import { Logo as Logo_5b495d5fece06267c23afa6fda6451ee } from '@/payload/admin/components/Brand'
 import { DashboardView as DashboardView_d01a06dadac0f17fcee7a785dbb34210 } from '@/payload/admin/views/DashboardView'
+import { RequestsView as RequestsView_477080a1585e47ec5654936b52bb1e9f } from '@/payload/admin/views/requests/RequestsView'
+import { HoursView as HoursView_20f99df0b0b0522fb74fc3c6140868ab } from '@/payload/admin/views/hours/HoursView'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 import { BlobClientUploadHandler as BlobClientUploadHandler_bf180ffcc0eae6412c50e6fd01be383f } from '@/payload/storage/BlobClientUploadHandler'
 
@@ -57,6 +59,8 @@ export const importMap = {
   "@/payload/admin/components/Brand#Icon": Icon_5b495d5fece06267c23afa6fda6451ee,
   "@/payload/admin/components/Brand#Logo": Logo_5b495d5fece06267c23afa6fda6451ee,
   "@/payload/admin/views/DashboardView#DashboardView": DashboardView_d01a06dadac0f17fcee7a785dbb34210,
+  "@/payload/admin/views/requests/RequestsView#RequestsView": RequestsView_477080a1585e47ec5654936b52bb1e9f,
+  "@/payload/admin/views/hours/HoursView#HoursView": HoursView_20f99df0b0b0522fb74fc3c6140868ab,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1,
   "@/payload/storage/BlobClientUploadHandler#BlobClientUploadHandler": BlobClientUploadHandler_bf180ffcc0eae6412c50e6fd01be383f
 }
