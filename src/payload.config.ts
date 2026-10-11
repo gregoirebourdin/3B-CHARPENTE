@@ -74,8 +74,10 @@ export default buildConfig({
         Logo: '@/payload/admin/components/Brand#Logo',
         Icon: '@/payload/admin/components/Brand#Icon',
       },
-      beforeDashboard: ['@/payload/admin/components/Dashboard#Dashboard'],
-      beforeNavLinks: ['@/payload/admin/components/NavExtras#ViewSiteLink'],
+      Nav: '@/payload/admin/nav/AdminNav#AdminNav',
+      views: {
+        dashboard: { Component: '@/payload/admin/views/DashboardView#DashboardView' },
+      },
     },
     livePreview: {
       breakpoints: [

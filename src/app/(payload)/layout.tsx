@@ -4,7 +4,10 @@ import { handleServerFunctions, RootLayout } from '@payloadcms/next/layouts'
 import type { ServerFunctionClient } from 'payload'
 import type { ReactNode } from 'react'
 
+import { inter, nohemi } from '@/styles/fonts'
+
 import { importMap } from './admin/importMap.js'
+import './admin-ui.css'
 import './custom.scss'
 
 const serverFunction: ServerFunctionClient = async function (args) {
@@ -14,7 +17,12 @@ const serverFunction: ServerFunctionClient = async function (args) {
 
 export default function PayloadLayout({ children }: { children: ReactNode }) {
   return (
-    <RootLayout config={config} importMap={importMap} serverFunction={serverFunction}>
+    <RootLayout
+      config={config}
+      importMap={importMap}
+      serverFunction={serverFunction}
+      htmlProps={{ className: `${inter.variable} ${nohemi.variable}` }}
+    >
       {children}
     </RootLayout>
   )

@@ -21,10 +21,10 @@ import { OverviewComponent as OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860
 import { MetaTitleComponent as MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { MetaDescriptionComponent as MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
+import { AdminNav as AdminNav_05184afed72cf43bcceaeb537700561f } from '@/payload/admin/nav/AdminNav'
 import { Icon as Icon_5b495d5fece06267c23afa6fda6451ee } from '@/payload/admin/components/Brand'
 import { Logo as Logo_5b495d5fece06267c23afa6fda6451ee } from '@/payload/admin/components/Brand'
-import { Dashboard as Dashboard_9debc4f49b7ce0dc04490f9a9b74e411 } from '@/payload/admin/components/Dashboard'
-import { ViewSiteLink as ViewSiteLink_d0293d349756ec93c4a7ef062acbe14a } from '@/payload/admin/components/NavExtras'
+import { DashboardView as DashboardView_d01a06dadac0f17fcee7a785dbb34210 } from '@/payload/admin/views/DashboardView'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 import { BlobClientUploadHandler as BlobClientUploadHandler_bf180ffcc0eae6412c50e6fd01be383f } from '@/payload/storage/BlobClientUploadHandler'
 
@@ -53,10 +53,10 @@ export const importMap = {
   "@payloadcms/plugin-seo/client#MetaTitleComponent": MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#MetaDescriptionComponent": MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
+  "@/payload/admin/nav/AdminNav#AdminNav": AdminNav_05184afed72cf43bcceaeb537700561f,
   "@/payload/admin/components/Brand#Icon": Icon_5b495d5fece06267c23afa6fda6451ee,
   "@/payload/admin/components/Brand#Logo": Logo_5b495d5fece06267c23afa6fda6451ee,
-  "@/payload/admin/components/Dashboard#Dashboard": Dashboard_9debc4f49b7ce0dc04490f9a9b74e411,
-  "@/payload/admin/components/NavExtras#ViewSiteLink": ViewSiteLink_d0293d349756ec93c4a7ef062acbe14a,
+  "@/payload/admin/views/DashboardView#DashboardView": DashboardView_d01a06dadac0f17fcee7a785dbb34210,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1,
   "@/payload/storage/BlobClientUploadHandler#BlobClientUploadHandler": BlobClientUploadHandler_bf180ffcc0eae6412c50e6fd01be383f
 }

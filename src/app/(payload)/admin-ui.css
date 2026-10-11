@@ -1,0 +1,127 @@
+/*
+ * Administration 3B Charpente — shadcn/ui components, customised.
+ * Tailwind with the « tw: » prefix and without its reset (preflight), so it
+ * never changes Payload's own screens: only our components use these classes.
+ * Colours follow Payload's light/dark theme (html[data-theme]).
+ */
+@layer theme, utilities;
+@import 'tailwindcss/theme.css' layer(theme) prefix(tw);
+@import 'tailwindcss/utilities.css' layer(utilities) source(none) prefix(tw);
+@source '../../payload/admin';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+:root {
+  --ui-radius: 10px;
+  --ui-background: #f8f4ee;
+  --ui-foreground: #102311;
+  --ui-card: #ffffff;
+  --ui-card-foreground: #102311;
+  --ui-muted: #f2f2ec;
+  --ui-muted-foreground: #5f5953;
+  --ui-primary: #2c4f2d;
+  --ui-primary-hover: #24412a;
+  --ui-primary-foreground: #ffffff;
+  --ui-secondary: #f2f2ec;
+  --ui-secondary-foreground: #102311;
+  --ui-accent: #dcecd9;
+  --ui-accent-foreground: #102311;
+  --ui-sage: #a3d2a3;
+  --ui-border: rgb(16 35 17 / 0.12);
+  --ui-input: rgb(16 35 17 / 0.24);
+  --ui-ring: #336233;
+  --ui-destructive: #a12c1d;
+  --ui-destructive-foreground: #ffffff;
+  --ui-warning: #8a5a00;
+  --ui-warning-soft: #fbf1dc;
+  --ui-success-soft: #dcecd9;
+  --ui-shadow: 0 1px 2px rgb(16 35 17 / 0.06), 0 1px 1px rgb(16 35 17 / 0.04);
+  --ui-shadow-md: 0 14px 34px -16px rgb(16 35 17 / 0.22), 0 2px 6px rgb(16 35 17 / 0.05);
+}
+
+[data-theme='dark'] {
+  --ui-background: #0e1a10;
+  --ui-foreground: #eef1e8;
+  --ui-card: #16271a;
+  --ui-card-foreground: #eef1e8;
+  --ui-muted: #122015;
+  --ui-muted-foreground: #a8b0a2;
+  --ui-primary: #a3d2a3;
+  --ui-primary-hover: #b9dfb9;
+  --ui-primary-foreground: #0e1a10;
+  --ui-secondary: #1b2e1f;
+  --ui-secondary-foreground: #eef1e8;
+  --ui-accent: #24402a;
+  --ui-accent-foreground: #eef1e8;
+  --ui-border: rgb(238 241 232 / 0.12);
+  --ui-input: rgb(238 241 232 / 0.26);
+  --ui-ring: #a3d2a3;
+  --ui-destructive: #f2a093;
+  --ui-destructive-foreground: #1a0a07;
+  --ui-warning: #f0c36a;
+  --ui-warning-soft: #33280f;
+  --ui-success-soft: #24402a;
+  --ui-shadow: 0 1px 2px rgb(0 0 0 / 0.4);
+  --ui-shadow-md: 0 14px 34px -16px rgb(0 0 0 / 0.6);
+}
+
+/* Payload sets the root font size to 13 px: every size here is in px, so a
+ * 44 px button stays 44 px and text stays at 16 px. */
+@theme inline {
+  --spacing: 4px;
+  --text-xs: 13px;
+  --text-xs--line-height: 18px;
+  --text-sm: 14px;
+  --text-sm--line-height: 20px;
+  --text-base: 16px;
+  --text-base--line-height: 24px;
+  --text-lg: 18px;
+  --text-lg--line-height: 26px;
+  --text-xl: 20px;
+  --text-xl--line-height: 28px;
+  --text-2xl: 24px;
+  --text-2xl--line-height: 30px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  --container-xs: 320px;
+  --container-sm: 384px;
+  --container-md: 448px;
+  --container-lg: 512px;
+  --container-xl: 576px;
+  --container-2xl: 672px;
+  --container-3xl: 768px;
+  --color-background: var(--ui-background);
+  --color-foreground: var(--ui-foreground);
+  --color-card: var(--ui-card);
+  --color-card-foreground: var(--ui-card-foreground);
+  --color-muted: var(--ui-muted);
+  --color-muted-foreground: var(--ui-muted-foreground);
+  --color-primary: var(--ui-primary);
+  --color-primary-hover: var(--ui-primary-hover);
+  --color-primary-foreground: var(--ui-primary-foreground);
+  --color-secondary: var(--ui-secondary);
+  --color-secondary-foreground: var(--ui-secondary-foreground);
+  --color-accent: var(--ui-accent);
+  --color-accent-foreground: var(--ui-accent-foreground);
+  --color-sage: var(--ui-sage);
+  --color-border: var(--ui-border);
+  --color-input: var(--ui-input);
+  --color-ring: var(--ui-ring);
+  --color-destructive: var(--ui-destructive);
+  --color-destructive-foreground: var(--ui-destructive-foreground);
+  --color-warning: var(--ui-warning);
+  --color-warning-soft: var(--ui-warning-soft);
+  --color-success-soft: var(--ui-success-soft);
+  --radius-sm: calc(var(--ui-radius) - 4px);
+  --radius-md: calc(var(--ui-radius) - 2px);
+  --radius-lg: var(--ui-radius);
+  --radius-xl: calc(var(--ui-radius) + 4px);
+  --radius-2xl: calc(var(--ui-radius) + 10px);
+  --shadow-xs: var(--ui-shadow);
+  --shadow-md: var(--ui-shadow-md);
+  --font-sans: var(--font-inter), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-heading: var(--font-nohemi), var(--font-inter), sans-serif;
+}
