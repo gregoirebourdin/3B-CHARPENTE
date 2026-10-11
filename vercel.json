@@ -3,5 +3,13 @@
   "framework": "nextjs",
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm run build:vercel",
-  "regions": ["fra1"]
+  "regions": [
+    "fra1"
+  ],
+  "crons": [
+    {
+      "path": "/site-api/backup",
+      "schedule": "17 2 * * *"
+    }
+  ]
 }

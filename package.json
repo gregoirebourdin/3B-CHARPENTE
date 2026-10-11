@@ -21,8 +21,8 @@
     "migrate": "payload migrate",
     "migrate:create": "payload migrate:create",
     "seed": "payload run scripts/seed.ts",
-    "backup": "tsx --env-file-if-exists=.env.local scripts/backup.ts",
-    "restore": "tsx --env-file-if-exists=.env.local scripts/restore.ts",
+    "backup": "payload run scripts/backup.ts",
+    "restore": "payload run scripts/restore.ts",
     "check:seed": "tsx scripts/check-seed.ts",
     "build:vercel": "payload migrate && SEED_IF_EMPTY=true payload run scripts/seed.ts && next build"
   },
