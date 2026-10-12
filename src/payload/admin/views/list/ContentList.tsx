@@ -9,7 +9,8 @@ import { relativeFr } from '../../lib/time'
 import { Badge } from '../../ui/badge'
 import { Button, Cta } from '../../ui/button'
 import { Card } from '../../ui/card'
-import { IconField, Input, Select } from '../../ui/input'
+import { IconField, Input } from '../../ui/input'
+import { Select } from '../../ui/select'
 import { EmptyState, Page, PageHeader } from '../../ui/page'
 import { Segmented, SegmentedItem } from '../../ui/tabs'
 import { cn, focusRing } from '../../ui/utils'
@@ -44,6 +45,8 @@ export type ListConfig = {
 type Status = 'all' | 'published' | 'draft'
 
 const PAGE = 20
+/** Radix Select keeps "" for « nothing chosen »: the « all » choice needs a value of its own. */
+const ALL = '__all'
 
 const fold = (text: string) =>
   text
@@ -122,14 +125,13 @@ export function ContentList({ config, rows, filters, failed }: { config: ListCon
             <Input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={config.searchPlaceholder} aria-label={`Chercher dans les ${many}`} />
           </IconField>
           {filters.length ? (
-            <Select value={filter} onChange={(event) => setFilter(event.target.value)} aria-label="Filtrer" className="tw:w-[260px] tw:max-desk:w-full">
-              <option value="">{config.filterLabel ?? 'Tout'}</option>
-              {filters.map((option) => (
-                <option key={option.id} value={option.id}>
-                  {option.label}
-                </option>
-              ))}
-            </Select>
+            <Select
+              value={filter || ALL}
+              onValueChange={(value) => setFilter(value === ALL ? '' : value)}
+              aria-label="Filtrer"
+              className="tw:w-[260px] tw:max-desk:w-full"
+              options={[{ value: ALL, label: config.filterLabel ?? 'Tout' }, ...filters.map((option) => ({ value: option.id, label: option.label }))]}
+            />
           ) : null}
           {counts.draft ? (
             <Segmented aria-label="Statut" className="tw:max-desk:w-full tw:max-desk:[&>*]:flex-1 tw:max-desk:[&>*]:justify-center">

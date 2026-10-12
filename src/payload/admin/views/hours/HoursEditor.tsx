@@ -10,7 +10,8 @@ import type { Company } from '@/payload-types'
 
 import { Button, Cta } from '../../ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../ui/card'
-import { Field, FieldError, FieldHint, fieldClass, IconField, Input, Label, Optional, selectClass } from '../../ui/input'
+import { Field, FieldError, FieldHint, IconField, Input, Label, Optional } from '../../ui/input'
+import { Select } from '../../ui/select'
 import { notify } from '../../ui/notify'
 import { Alert, EmptyState, Page, PageHeader, TextLink } from '../../ui/page'
 import { Switch } from '../../ui/switch'
@@ -413,21 +414,16 @@ function TimeInput({
   const current = (value ?? '').slice(0, 5)
   const options = current && !TIMES.includes(current) ? [...TIMES, current].sort() : TIMES
   return (
-    <select
+    <Select
       aria-label={label}
       value={current}
-      onChange={(e) => onChange(e.target.value)}
-      aria-invalid={invalid}
+      onValueChange={onChange}
+      invalid={invalid}
       aria-describedby={describedBy}
-      className={cn(fieldClass, selectClass, 'tw:min-h-11 tw:w-[104px] tw:cursor-pointer tw:pr-9 tw:bg-[position:right_12px_center] tw:tabular-nums')}
-    >
-      {current ? null : <option value="">—</option>}
-      {options.map((time) => (
-        <option key={time} value={time}>
-          {spoken(time)}
-        </option>
-      ))}
-    </select>
+      placeholder="—"
+      className="tw:w-[112px] tw:tabular-nums"
+      options={options.map((time) => ({ value: time, label: spoken(time) }))}
+    />
   )
 }
 

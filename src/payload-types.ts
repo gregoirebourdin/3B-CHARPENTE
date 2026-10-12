@@ -632,7 +632,13 @@ export interface Page {
       )[]
     | null;
   meta?: {
+    /**
+     * La ligne bleue dans les résultats. Le métier et le lieu d’abord, « | 3B Charpente » à la fin.
+     */
     title?: string | null;
+    /**
+     * Les deux lignes sous le titre : ce que vous faites, où, et une invitation (« Devis gratuit », « Parlons-en »).
+     */
     description?: string | null;
     /**
      * Facultatif : sinon, la photo principale de la page est utilisée.
@@ -934,7 +940,13 @@ export interface Service {
       )[]
     | null;
   meta?: {
+    /**
+     * La ligne bleue dans les résultats. Le métier et le lieu d’abord, « | 3B Charpente » à la fin.
+     */
     title?: string | null;
+    /**
+     * Les deux lignes sous le titre : ce que vous faites, où, et une invitation (« Devis gratuit », « Parlons-en »).
+     */
     description?: string | null;
     /**
      * Facultatif : sinon, la photo principale de la page est utilisée.
@@ -1121,7 +1133,13 @@ export interface Project {
    */
   related?: (number | Project)[] | null;
   meta?: {
+    /**
+     * La ligne bleue dans les résultats. Le métier et le lieu d’abord, « | 3B Charpente » à la fin.
+     */
     title?: string | null;
+    /**
+     * Les deux lignes sous le titre : ce que vous faites, où, et une invitation (« Devis gratuit », « Parlons-en »).
+     */
     description?: string | null;
     /**
      * Facultatif : sinon, la photo principale de la page est utilisée.
@@ -1240,7 +1258,13 @@ export interface Article {
       )[]
     | null;
   meta?: {
+    /**
+     * La ligne bleue dans les résultats. Le métier et le lieu d’abord, « | 3B Charpente » à la fin.
+     */
     title?: string | null;
+    /**
+     * Les deux lignes sous le titre : ce que vous faites, où, et une invitation (« Devis gratuit », « Parlons-en »).
+     */
     description?: string | null;
     /**
      * Facultatif : sinon, la photo principale de la page est utilisée.

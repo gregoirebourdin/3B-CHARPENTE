@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from 'react'
 
+import { Listbox } from '@/components/ui/form/Listbox'
 import { template } from '@/lib/links'
 
 import styles from './ProjectsExplorer.module.css'
@@ -115,21 +116,25 @@ export function ExplorerShell({ filters, children }: { filters: ExplorerFilters;
             </div>
           </div>
           <div className={styles.filterRow}>
-            <label className={styles.select}>
-              <span className={styles.filterLabel}>{filters.communeLabel}</span>
-              <select value={commune} onChange={(event) => writeFilters(service, event.target.value)}>
-                <option value="">{filters.texts.allCommunes}</option>
-                {filters.communeGroups.map((group) => (
-                  <optgroup key={group.label} label={group.label}>
-                    {group.options.map((option) => (
-                      <option key={option.key} value={option.key}>
-                        {option.label} ({option.count})
-                      </option>
-                    ))}
-                  </optgroup>
-                ))}
-              </select>
-            </label>
+            <div className={styles.select}>
+              <span id="explorer-commune-label" className={styles.filterLabel}>
+                {filters.communeLabel}
+              </span>
+              <Listbox
+                id="explorer-commune"
+                value={commune}
+                onChange={(next) => writeFilters(service, next)}
+                labelledBy="explorer-commune-label"
+                className={styles.selectBox}
+                groups={[
+                  { options: [{ value: '', label: filters.texts.allCommunes }] },
+                  ...filters.communeGroups.map((group) => ({
+                    label: group.label,
+                    options: group.options.map((option) => ({ value: option.key, label: option.label, hint: String(option.count) })),
+                  })),
+                ]}
+              />
+            </div>
             <p className={styles.count} aria-live="polite">
               {countText}
             </p>

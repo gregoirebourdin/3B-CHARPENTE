@@ -109,18 +109,15 @@
   max-width: 100%;
 }
 
-.select select {
-  min-width: 0;
-  max-width: 100%;
-  min-height: 40px;
-  padding: 0.4rem 2.2rem 0.4rem 0.9rem;
-  border: 1px solid var(--c-line-strong);
-  border-radius: var(--radius-sm);
-  background: var(--bg-card)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2378716c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E")
-    no-repeat right 0.7rem center;
+.selectBox {
+  width: min(320px, 100%);
+}
+
+/* The filter bar is compact: a 44 px list instead of the form's 52 px. */
+.selectBox [role='combobox'] {
+  min-height: 44px;
+  padding-block: 0.5rem;
   font-size: var(--fs-small);
-  appearance: none;
 }
 
 .count {

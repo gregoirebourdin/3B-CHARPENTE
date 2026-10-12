@@ -146,3 +146,17 @@
   --font-sans: var(--font-inter), system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-heading: var(--font-nohemi), var(--font-inter), sans-serif;
 }
+
+/* Lists and menus open with a short lift (none when motion is reduced). */
+@keyframes tb-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-slot='select-content'] {
+    animation: none !important;
+  }
+}

@@ -11,6 +11,7 @@ import type { IconName } from '@/payload/utilities/icons'
 import { Badge } from '../../ui/badge'
 import { Button, Cta } from '../../ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../../ui/card'
+import { CheckboxCard } from '../../ui/checkbox'
 import { Field, FieldError, FieldHint, Input, Label, Optional, Textarea } from '../../ui/input'
 import { notify } from '../../ui/notify'
 import { Alert, EmptyState, Page, PageHeader } from '../../ui/page'
@@ -354,25 +355,16 @@ export function NewProjectWizard({ services, communes, order }: { services: Serv
                       const main = serviceIds[0] === service.id
                       return (
                         <li key={service.id}>
-                          <label
-                            className={cn(
-                              'tw:flex tw:min-h-14 tw:cursor-pointer tw:items-center tw:gap-3 tw:rounded-sm tw:border tw:border-line-strong tw:bg-card tw:px-3.5 tw:py-2.5 tw:transition-colors tw:hover:bg-surface',
-                              'tw:has-focus-visible:outline-solid tw:has-focus-visible:outline-2 tw:has-focus-visible:outline-offset-3 tw:has-focus-visible:outline-leaf',
-                              checked && 'tw:border-forest tw:bg-sage-soft tw:shadow-[0_0_0_1px_var(--c-forest)] tw:hover:bg-sage-soft',
-                            )}
+                          <CheckboxCard
+                            checked={checked}
+                            onCheckedChange={() => setServiceIds((ids) => (checked ? ids.filter((id) => id !== service.id) : [...ids, service.id]))}
                           >
-                            <input
-                              type="checkbox"
-                              checked={checked}
-                              onChange={() => setServiceIds((ids) => (checked ? ids.filter((id) => id !== service.id) : [...ids, service.id]))}
-                              className="tw:m-0 tw:size-[22px] tw:shrink-0 tw:accent-forest"
-                            />
                             <Icon name={service.icon as IconName} className="tw:size-6 tw:shrink-0 tw:text-leaf" aria-hidden="true" />
                             <span className="tw:grid tw:min-w-0">
                               <span className="tw:text-base tw:font-semibold tw:leading-[1.25]">{service.title}</span>
                               {main && serviceIds.length > 1 ? <span className="tw:text-sm tw:text-stone-text">Prestation principale</span> : null}
                             </span>
-                          </label>
+                          </CheckboxCard>
                         </li>
                       )
                     })}

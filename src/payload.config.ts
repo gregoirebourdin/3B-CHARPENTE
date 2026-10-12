@@ -5,7 +5,6 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import { resendAdapter } from '@payloadcms/email-resend'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
-import { seoPlugin } from '@payloadcms/plugin-seo'
 import { fr } from '@payloadcms/translations/languages/fr'
 import { buildConfig, type Field } from 'payload'
 import sharp from 'sharp'
@@ -31,6 +30,7 @@ import { SiteTextsGlobal } from './payload/globals/SiteTexts'
 import { revalidateHooks } from './payload/hooks/revalidate'
 import { blobStorage } from './payload/storage/blobStorage'
 import { redirectDestinationField } from './payload/fields/redirectDestination'
+import { customFields } from './payload/utilities/customFields'
 import { hideApiTab } from './payload/utilities/hideApiTab'
 import { orderAdminNav } from './payload/utilities/orderAdminNav'
 import { LINKABLE_COLLECTIONS } from './payload/utilities/routes'
@@ -79,6 +79,7 @@ export default buildConfig({
           lastModified: 'Dernière modification\u00a0',
           perPage: 'Par page\u00a0: {{limit}}',
           save: 'Enregistrer',
+          selectValue: 'Choisir…',
           saveChanges: 'Enregistrer les modifications',
           createNew: 'Ajouter',
           createNewLabel: 'Ajouter : {{label}}',
@@ -202,8 +203,6 @@ export default buildConfig({
       },
     }),
     formBuilderPlugin(formBuilderConfig),
-    // Registered for its translations and its fields (used in src/payload/fields/seo.ts).
-    seoPlugin({ collections: [], uploadsCollection: 'media' }),
     // Photos in Vercel Blob (OIDC or read-write token); large ones go straight from the browser.
     blobStorage({ collections: { media: { prefix: 'medias' } } }),
     orderAdminNav([
@@ -217,5 +216,6 @@ export default buildConfig({
       'Administration',
     ]),
     hideApiTab,
+    customFields,
   ],
 })

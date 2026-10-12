@@ -11,19 +11,15 @@ export const fieldClass = [
   'tw:aria-invalid:border-error tw:disabled:cursor-not-allowed tw:disabled:bg-surface tw:disabled:text-stone-text',
 ].join(' ')
 
-/** Native select in the same box, with the chevron drawn 16 px from the right edge. */
-export const selectClass = 'tw:appearance-none tw:bg-[image:var(--select-chevron)] tw:bg-[length:16px_16px] tw:bg-[position:right_14px_center] tw:bg-no-repeat tw:pr-10'
-
-export function Select({ className, ...props }: ComponentProps<'select'>) {
-  return <select data-slot="select" className={cn(fieldClass, selectClass, 'tw:min-h-11 tw:cursor-pointer', className)} {...props} />
-}
+/** Read-only text (computed address…): flat, grey, clearly not a box to type in. Text inputs only: a button is « read-only » too in CSS. */
+const readOnlyClass = 'tw:read-only:cursor-default tw:read-only:border-line tw:read-only:bg-surface tw:read-only:text-stone-text tw:read-only:shadow-none tw:read-only:focus:border-line'
 
 export function Input({ className, type = 'text', size = 'default', ...props }: Omit<ComponentProps<'input'>, 'size'> & { size?: 'default' | 'lg' }) {
-  return <input type={type} data-slot="input" className={cn(fieldClass, size === 'lg' ? 'tw:min-h-13 tw:text-[17px]' : 'tw:min-h-11', className)} {...props} />
+  return <input type={type} data-slot="input" className={cn(fieldClass, readOnlyClass, size === 'lg' ? 'tw:min-h-13 tw:text-[17px]' : 'tw:min-h-11', className)} {...props} />
 }
 
 export function Textarea({ className, ...props }: ComponentProps<'textarea'>) {
-  return <textarea data-slot="textarea" className={cn(fieldClass, 'tw:min-h-28 tw:resize-y tw:leading-relaxed', className)} {...props} />
+  return <textarea data-slot="textarea" className={cn(fieldClass, readOnlyClass, 'tw:min-h-28 tw:resize-y tw:leading-relaxed', className)} {...props} />
 }
 
 /** A field with an icon at its start (e-mail, phone, pin, clock, magnifier). */
@@ -65,14 +61,4 @@ export function FieldError({ className, children, ...props }: ComponentProps<'p'
 /** Label, field, help and error, stacked with 8 px between them. */
 export function Field({ className, ...props }: ComponentProps<'div'>) {
   return <div data-slot="field" className={cn('tw:grid tw:min-w-0 tw:content-start tw:gap-2', className)} {...props} />
-}
-
-/** Checkbox with its clickable label, 44 px high. */
-export function Checkbox({ className, label, ...props }: Omit<ComponentProps<'input'>, 'type'> & { label: ReactNode }) {
-  return (
-    <label className={cn('tw:flex tw:min-h-11 tw:cursor-pointer tw:items-center tw:gap-3 tw:text-base tw:text-ink', className)}>
-      <input type="checkbox" className="tw:m-0 tw:size-[22px] tw:shrink-0 tw:accent-forest" {...props} />
-      {label}
-    </label>
-  )
 }

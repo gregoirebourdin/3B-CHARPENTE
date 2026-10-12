@@ -4,6 +4,10 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useId, useMemo, useRef, useState, useSyncExternalStore, type FormEvent, type ReactNode } from 'react'
 
 import { submitContact } from '@/app/(site)/actions/contact'
+import { Choice, choicesClass } from '@/components/ui/form/Choice'
+import { Combobox } from '@/components/ui/form/Combobox'
+import formStyles from '@/components/ui/form/Form.module.css'
+import { Listbox } from '@/components/ui/form/Listbox'
 import { Icon } from '@/components/ui/Icon'
 import {
   ACCEPTED_FILE_TYPES,
@@ -29,6 +33,12 @@ type Texts = {
   phoneError: string
   fileError: string
   uploading: string
+}
+
+/** The message box grows with the text instead of showing a scroll bar or a resize handle. */
+const grow = (element: HTMLTextAreaElement) => {
+  element.style.height = 'auto'
+  element.style.height = `${element.scrollHeight + 2}px`
 }
 
 // The address does not change while the form is open: nothing to subscribe to.
@@ -242,27 +252,28 @@ export function ContactFormClient({
               <fieldset key={field.name} className={wrapperClass} aria-describedby={describedBy(field)} aria-required={field.required || undefined}>
                 <legend className={styles.label}>{label}</legend>
                 {help}
-                <div className={multiple ? styles.checks : styles.radios}>
+                <div className={choicesClass}>
                   {field.options.map((option, index) => {
                     const checked = selected.includes(option.label)
                     return (
-                      <label key={option.label} className={styles.choice}>
-                        <input
-                          type={multiple ? 'checkbox' : 'radio'}
-                          name={field.name}
-                          value={option.label}
-                          checked={checked}
-                          aria-invalid={error ? true : undefined}
-                          onChange={() =>
-                            setValue(
-                              field.name,
-                              multiple ? (checked ? selected.filter((item) => item !== option.label) : [...selected, option.label]) : option.label,
-                            )
-                          }
-                          id={`${id}-${index}`}
-                        />
-                        <span>{option.label}</span>
-                      </label>
+                      <Choice
+                        key={option.label}
+                        type={multiple ? 'checkbox' : 'radio'}
+                        name={field.name}
+                        value={option.label}
+                        checked={checked}
+                        invalid={Boolean(error)}
+                        aria-invalid={error ? true : undefined}
+                        onChange={() =>
+                          setValue(
+                            field.name,
+                            multiple ? (checked ? selected.filter((item) => item !== option.label) : [...selected, option.label]) : option.label,
+                          )
+                        }
+                        id={`${id}-${index}`}
+                      >
+                        {option.label}
+                      </Choice>
                     )
                   })}
                 </div>
@@ -317,62 +328,68 @@ export function ContactFormClient({
 
           return (
             <div key={field.name} className={wrapperClass}>
-              <label htmlFor={id} className={styles.label}>
-                {label}
-              </label>
+              {field.kind === 'selectInput' ? (
+                <span id={`${id}-label`} className={styles.label}>
+                  {label}
+                </span>
+              ) : (
+                <label htmlFor={id} className={styles.label}>
+                  {label}
+                </label>
+              )}
               {field.kind === 'textareaInput' ? (
                 <textarea
                   {...common}
+                  className={`${formStyles.control} ${styles.textarea}`}
                   rows={field.rows ?? 6}
                   required={field.required}
                   placeholder={field.placeholder}
                   value={(value as string) ?? ''}
-                  onChange={(event) => setValue(field.name, event.target.value)}
+                  onChange={(event) => {
+                    setValue(field.name, event.target.value)
+                    grow(event.target)
+                  }}
                 />
               ) : field.kind === 'selectInput' ? (
-                <select
-                  {...common}
-                  required={field.required}
+                <Listbox
+                  id={id}
+                  name={field.name}
                   value={(value as string) ?? ''}
-                  onChange={(event) => setValue(field.name, event.target.value)}
-                >
-                  <option value="">—</option>
-                  {field.options.map((option) => (
-                    <option key={option.label} value={option.label}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(next) => {
+                    setValue(field.name, next)
+                    setErrors(({ [field.name]: _removed, ...rest }) => rest)
+                  }}
+                  groups={[{ options: field.options.map((option) => ({ value: option.label, label: option.label })) }]}
+                  placeholder="Choisir…"
+                  labelledBy={`${id}-label`}
+                  describedBy={describedBy(field)}
+                  invalid={Boolean(error)}
+                  required={field.required}
+                  onBlur={() => onBlur(field)}
+                />
+              ) : field.kind === 'communeInput' ? (
+                <Combobox
+                  {...common}
+                  value={(value as string) ?? ''}
+                  onChange={(next) => setValue(field.name, next)}
+                  suggestions={communes}
+                  required={field.required}
+                  placeholder={field.placeholder}
+                  autoCapitalize="words"
+                />
               ) : (
                 <input
                   {...common}
+                  className={formStyles.control}
                   type={field.kind === 'emailInput' ? 'email' : field.kind === 'telInput' ? 'tel' : 'text'}
                   inputMode={field.kind === 'telInput' ? 'tel' : field.kind === 'emailInput' ? 'email' : undefined}
-                  autoComplete={
-                    field.kind === 'emailInput'
-                      ? 'email'
-                      : field.kind === 'telInput'
-                        ? 'tel'
-                        : field.kind === 'communeInput'
-                          ? 'address-level2'
-                          : /nom/.test(field.name)
-                            ? 'name'
-                            : undefined
-                  }
-                  list={field.kind === 'communeInput' ? `${id}-list` : undefined}
+                  autoComplete={field.kind === 'emailInput' ? 'email' : field.kind === 'telInput' ? 'tel' : /nom/.test(field.name) ? 'name' : undefined}
                   required={field.required}
                   placeholder={field.placeholder}
                   value={(value as string) ?? ''}
                   onChange={(event) => setValue(field.name, event.target.value)}
                 />
               )}
-              {field.kind === 'communeInput' ? (
-                <datalist id={`${id}-list`}>
-                  {communes.map((commune) => (
-                    <option key={commune} value={commune} />
-                  ))}
-                </datalist>
-              ) : null}
               {help}
               {errorLine}
             </div>

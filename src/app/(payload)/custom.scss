@@ -733,3 +733,359 @@ html[data-theme='dark'] .tb-brand-logo__dark {
     white-space: nowrap;
   }
 }
+
+// ---------- Our fields (src/payload/admin/fields) ----------
+// « facultatif » sits after the label; in a row of narrow fields it moves to
+// the help line, so labels stay on one line and the boxes stay aligned.
+.tb-optional-hint {
+  display: none;
+}
+
+.tb-optional-hint-only {
+  display: none;
+}
+
+.row__fields > .tb-field {
+  .tb-optional {
+    display: none;
+  }
+
+  .tb-optional-hint,
+  .tb-optional-hint-only {
+    display: inline;
+  }
+
+  .tb-optional-hint-only {
+    display: block;
+  }
+
+  .tb-field__label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+// ---------- Payload's own fields, in the same style ----------
+// Labels, help and boxes of the fields Payload still draws (photos,
+// relations, dates, repeated sections) match ours: 16 px labels, 44 px boxes.
+.field-label {
+  margin: 0 0 8px;
+  color: var(--c-ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+
+  // Same rule as our fields: nothing on required ones, « facultatif » on the others.
+  .required {
+    display: none;
+  }
+
+  &:not(:has(.required))::after {
+    content: 'facultatif';
+    margin-left: 6px;
+    color: var(--c-stone-text);
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+
+.field-description {
+  margin-top: 8px;
+  color: var(--c-stone-text);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.field-type .field-error.tooltip {
+  border-radius: 6px;
+  background: var(--c-error);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+// Payload's own text boxes (account e-mail, password, date)
+.field-type.email input,
+.field-type.password input,
+.field-type.text input,
+.date-time-picker input,
+.field-type.json .code-editor,
+.field-type.code .code-editor {
+  min-height: 44px;
+  border: 1px solid var(--c-line-strong);
+  border-radius: 6px;
+  background: var(--c-card);
+  box-shadow: none;
+  color: var(--c-ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  transition:
+    border-color 180ms var(--ease),
+    box-shadow 180ms var(--ease);
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--c-ink) 45%, transparent);
+  }
+
+  &:focus,
+  &:focus-within {
+    border-color: var(--c-forest);
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-accent) 24%, transparent);
+  }
+}
+
+// Lists of choices (react-select: relations, « Page parente », filters)
+.react-select {
+  .rs__control {
+    flex-wrap: nowrap;
+    min-height: 44px;
+    border: 1px solid var(--c-line-strong);
+    border-radius: 6px;
+    background: var(--c-card);
+    box-shadow: none;
+    font-size: 16px;
+    transition:
+      border-color 180ms var(--ease),
+      box-shadow 180ms var(--ease);
+
+    &:hover {
+      border-color: color-mix(in srgb, var(--c-ink) 45%, transparent);
+    }
+  }
+
+  .rs__control--is-focused,
+  .rs__control--menu-is-open {
+    border-color: var(--c-forest);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-accent) 24%, transparent);
+  }
+
+  .value-container {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .rs__value-container {
+    padding: 4px 12px;
+  }
+
+  .rs__placeholder,
+  .rs__single-value {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .rs__indicators {
+    flex-shrink: 0;
+  }
+
+  .rs__placeholder {
+    color: var(--c-stone-text);
+  }
+
+  .rs__single-value {
+    color: var(--c-ink);
+  }
+
+  .rs__indicator-separator {
+    display: none;
+  }
+
+  .rs__multi-value {
+    max-width: 100%;
+    border-radius: 999px;
+    background: var(--c-sage-soft);
+    color: var(--c-ink);
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.rs__menu,
+.react-select .rs__menu {
+  overflow: hidden;
+  margin-top: 6px;
+  padding: 6px;
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  background: var(--c-card);
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-body);
+
+  .rs__option {
+    min-height: 40px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--c-ink);
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .rs__option--is-focused {
+    background: var(--c-surface);
+  }
+
+  .rs__option--is-selected {
+    background: var(--c-sage-soft);
+    font-weight: 600;
+  }
+}
+
+// « + » next to a relation (create a new one)
+.relationship-add-new__add-button,
+.upload__createNewToggler,
+.upload__listToggler {
+  border-radius: 6px;
+}
+
+// A chosen photo or document: a card with its thumbnail
+.upload-field-card,
+.upload-relationship-details,
+.file-details {
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  background: var(--c-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.upload-relationship-details__filename a,
+.file-details__main-detail a {
+  color: var(--c-ink);
+  font-weight: 600;
+}
+
+.upload-relationship-details__meta,
+.file-details__meta {
+  color: var(--c-stone-text);
+  font-size: 14px;
+}
+
+.thumbnail,
+.upload-relationship-details__thumbnail img {
+  border-radius: 6px;
+}
+
+// Empty photo field: a dashed drop zone, like the chantier assistant
+.dropzone,
+.upload__dropzoneContent {
+  border: 1.5px dashed var(--c-line-strong);
+  border-radius: 8px;
+  background: var(--c-card);
+}
+
+// Repeated sections (blocks, lists of cards, steps…)
+.blocks-field__row,
+.array-field__row {
+  > .collapsible {
+    overflow: hidden;
+    border: 1px solid var(--c-line);
+    border-radius: 8px;
+    background: var(--c-card);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .collapsible__toggle-wrap {
+    min-height: 52px;
+    background: var(--c-card);
+  }
+
+  .collapsible--collapsed .collapsible__toggle-wrap {
+    border-bottom: 0;
+  }
+
+  .collapsible__content {
+    padding: 20px;
+    border-top: 1px solid var(--c-line);
+  }
+}
+
+.blocks-field__block-number {
+  color: var(--c-stone-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.blocks-field__block-pill.pill {
+  border: 1px solid var(--c-line);
+  border-radius: 999px;
+  background: var(--c-surface);
+  color: var(--c-ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+// « Ajouter une section », « Ajouter une carte »
+.blocks-field__drawer-toggler,
+.array-field__add-row {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1.5px dashed var(--c-line-strong);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--c-forest);
+  font-weight: 600;
+
+  &:hover {
+    border-color: var(--c-forest);
+    background: var(--c-surface);
+  }
+}
+
+// Tabs of an edit screen (Haut de page, Sections, Référencement)
+.tabs-field__tabs {
+  gap: 4px;
+  border-bottom: 1px solid var(--c-line);
+}
+
+.tabs-field__tab-button {
+  min-height: 44px;
+  padding: 0 14px;
+  border-bottom: 2px solid transparent;
+  color: var(--c-stone-text);
+  font-size: 16px;
+  font-weight: 600;
+
+  &:hover {
+    color: var(--c-ink);
+  }
+}
+
+.tabs-field__tab-button--active {
+  border-bottom-color: var(--c-forest);
+  color: var(--c-ink);
+}
+
+// Group titles inside a form (« Haut de page (héros) », « Adresse »)
+.group-field__header,
+.group-field__title {
+  color: var(--c-ink);
+  font-family: var(--font-heading, var(--font-body));
+}
+
+// Payload's own checkbox and radio (auth screens): same box as ours
+.checkbox-input__icon {
+  border: 1.5px solid var(--c-line-strong);
+  border-radius: 6px;
+}
+
+.checkbox-input--checked .checkbox-input__icon {
+  border-color: var(--c-forest);
+  background: var(--c-forest);
+}
+
+// Date picker
+.react-datepicker {
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-body);
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  border-radius: 6px;
+  background: var(--c-forest);
+  color: var(--on-forest);
+}
