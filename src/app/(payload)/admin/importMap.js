@@ -15,6 +15,7 @@ import { ReviewsNotice as ReviewsNotice_6037e6e625d7e068ef472f1710f335b4 } from 
 import { GooglePreview as GooglePreview_4e605487b7433ef7806d344646689bf5 } from '@/payload/admin/fields/GooglePreview'
 import { SeoLengthField as SeoLengthField_17a47c89d436e56e46778841bf7ee565 } from '@/payload/admin/fields/SeoLengthField'
 import { ContentListView as ContentListView_d351058d3534fe5573a96dce1ffca315 } from '@/payload/admin/views/list/ContentListView'
+import { DateField as DateField_6015cd4fbe7d848e3aac64676dd21a00 } from '@/payload/admin/fields/DateField'
 import { PhotoLibraryView as PhotoLibraryView_c64f82810f06f622896fcbe0a97e7440 } from '@/payload/admin/views/list/PhotoLibraryView'
 import { RadioField as RadioField_cc4cb1b9fce64d43e3c6d253e2a7f93f } from '@/payload/admin/fields/RadioField'
 import { AdminNav as AdminNav_05184afed72cf43bcceaeb537700561f } from '@/payload/admin/nav/AdminNav'
@@ -49,6 +50,7 @@ export const importMap = {
   "@/payload/admin/fields/GooglePreview#GooglePreview": GooglePreview_4e605487b7433ef7806d344646689bf5,
   "@/payload/admin/fields/SeoLengthField#SeoLengthField": SeoLengthField_17a47c89d436e56e46778841bf7ee565,
   "@/payload/admin/views/list/ContentListView#ContentListView": ContentListView_d351058d3534fe5573a96dce1ffca315,
+  "@/payload/admin/fields/DateField#DateField": DateField_6015cd4fbe7d848e3aac64676dd21a00,
   "@/payload/admin/views/list/PhotoLibraryView#PhotoLibraryView": PhotoLibraryView_c64f82810f06f622896fcbe0a97e7440,
   "@/payload/admin/fields/RadioField#RadioField": RadioField_cc4cb1b9fce64d43e3c6d253e2a7f93f,
   "@/payload/admin/nav/AdminNav#AdminNav": AdminNav_05184afed72cf43bcceaeb537700561f,

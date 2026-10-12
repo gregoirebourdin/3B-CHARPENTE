@@ -12,10 +12,17 @@ const COMPONENTS: Partial<Record<Field['type'], string>> = {
   checkbox: `${BASE}/CheckboxField#CheckboxField`,
   radio: `${BASE}/RadioField#RadioField`,
   upload: `${BASE}/UploadField#UploadField`,
+  date: `${BASE}/DateField#DateField`,
 }
 
 /** Types whose component also handles lists of values (hasMany). */
 const HANDLES_MANY = new Set<Field['type']>(['upload'])
+
+/** Our date picker chooses a day: dates with a time, a month or a time zone keep Payload's. */
+const isDayOnly = (field: AnyField) => {
+  const date = field as { admin?: { date?: { pickerAppearance?: string } }; timezone?: unknown }
+  return !date.timezone && ['default', 'dayOnly', undefined].includes(date.admin?.date?.pickerAppearance)
+}
 
 type AnyField = Field & { admin?: { hidden?: boolean; components?: { Field?: unknown } }; hasMany?: boolean; fields?: Field[]; tabs?: { fields: Field[] }[]; blocks?: (Block | string)[] }
 
@@ -39,6 +46,7 @@ function withComponents(fields: Field[] | undefined): Field[] | undefined {
     const component = COMPONENTS[field.type]
     // Fields with their own component (SEO counters, notices…), hidden ones and lists of values keep theirs.
     if (!component || field.admin?.hidden || field.admin?.components?.Field || (field.hasMany && !HANDLES_MANY.has(field.type))) return input
+    if (field.type === 'date' && !isDayOnly(field)) return input
     return { ...field, admin: { ...field.admin, components: { ...field.admin?.components, Field: component } } } as Field
   })
 }

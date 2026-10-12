@@ -10,6 +10,7 @@ import type { Company } from '@/payload-types'
 
 import { Button, Cta } from '../../ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../ui/card'
+import { DatePicker, dayToYmd, toDay } from '../../components/DatePicker'
 import { Optional } from '../../components/Optional'
 import { Field, FieldDescription, FieldError, FieldLabel } from '../../ui/field'
 import { Input } from '../../ui/input'
@@ -277,14 +278,27 @@ export function HoursEditor({ initial }: { initial: Data | null }) {
                   const set = (patch: Partial<Closure>) =>
                     setData((current) => current && { ...current, closures: current.closures.map((c, i) => (i === index ? { ...c, ...patch } : c)) })
                   return (
-                    <div key={closure.id ?? index} className="tw:grid tw:gap-3 tw:rounded-sm tw:border tw:border-line tw:bg-surface tw:p-4 tw:desk:grid-cols-[1fr_1fr_1.4fr_auto] tw:desk:items-end">
+                    <div key={closure.id ?? index} className="tw:grid tw:gap-3 tw:rounded-sm tw:border tw:border-line tw:bg-surface tw:p-4 tw:desk:grid-cols-2 tw:desk:items-end">
                       <Field>
                         <Label htmlFor={`from-${index}`}>Du</Label>
-                        <Input id={`from-${index}`} type="date" value={(closure.from ?? '').slice(0, 10)} onChange={(e) => set({ from: e.target.value })} aria-invalid={Boolean(error)} />
+                        <DatePicker
+                          id={`from-${index}`}
+                          value={toDay((closure.from ?? '').slice(0, 10))}
+                          onChange={(day) => set({ from: day ? dayToYmd(day) : '' })}
+                          required
+                          invalid={Boolean(error)}
+                        />
                       </Field>
                       <Field>
                         <Label htmlFor={`to-${index}`}>Au</Label>
-                        <Input id={`to-${index}`} type="date" value={(closure.to ?? '').slice(0, 10)} onChange={(e) => set({ to: e.target.value })} aria-invalid={Boolean(error)} />
+                        <DatePicker
+                          id={`to-${index}`}
+                          value={toDay((closure.to ?? '').slice(0, 10))}
+                          onChange={(day) => set({ to: day ? dayToYmd(day) : '' })}
+                          min={toDay((closure.from ?? '').slice(0, 10))}
+                          required
+                          invalid={Boolean(error)}
+                        />
                       </Field>
                       <Field>
                         <Label htmlFor={`label-${index}`}>
@@ -294,12 +308,13 @@ export function HoursEditor({ initial }: { initial: Data | null }) {
                       </Field>
                       <Button
                         variant="destructiveGhost"
+                        className="tw:justify-self-start tw:desk:justify-self-end"
                         onClick={() => setData((current) => current && { ...current, closures: current.closures.filter((_, i) => i !== index) })}
                       >
                         <Trash2 aria-hidden="true" />
                         Retirer
                       </Button>
-                      {error ? <FieldError className="tw:desk:col-span-4">{error}</FieldError> : null}
+                      {error ? <FieldError className="tw:desk:col-span-2">{error}</FieldError> : null}
                     </div>
                   )
                 })

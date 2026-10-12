@@ -105,7 +105,7 @@ Certains champs ne proposent que les photos qui conviennent : le fond assombri d
 
 1. **Réglages** → **Coordonnées et horaires**.
 2. Pour chaque jour : l’interrupteur **Ouvert** / **Fermé**, puis les heures. **Pause de midi** ajoute une seconde plage.
-3. Pour des congés : **Fermetures exceptionnelles**, avec les deux dates.
+3. Pour des congés : **Fermetures exceptionnelles**, avec les deux dates. Un clic sur une date ouvre un calendrier : cliquez sur le jour (les listes du haut changent de mois ou d’année, **Aujourd’hui** revient au jour même). Dans « Au », les jours avant le début sont grisés.
 4. **Enregistrer**. L’aperçu noir montre le pied de page tel que vos clients le verront.
 
 Un seul endroit pour tout le site : en-tête, pied de page, page Contact, boutons d’appel et fiche lue par Google.
