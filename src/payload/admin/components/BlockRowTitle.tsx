@@ -4,12 +4,12 @@ import { Pill, useRowLabel } from '@payloadcms/ui'
 
 type Row = Record<string, unknown>
 
-/** First words of a rich text (Lexical) value. */
+/** First words of a rich text (Tiptap document). */
 const firstText = (value: unknown): string => {
   if (!value || typeof value !== 'object') return ''
-  const node = value as { text?: unknown; root?: unknown; children?: unknown[] }
-  if (typeof node.text === 'string' && node.text.trim()) return node.text
-  for (const child of [node.root, ...(Array.isArray(node.children) ? node.children : [])]) {
+  const node = value as { type?: string; text?: unknown; content?: unknown[] }
+  if (node.type === 'text' && typeof node.text === 'string' && node.text.trim()) return node.text
+  for (const child of Array.isArray(node.content) ? node.content : []) {
     const text = firstText(child)
     if (text) return text
   }

@@ -230,8 +230,9 @@ export const formBuilderConfig: FormBuilderPluginConfig = {
           if ('name' in field && field.name === 'title') return { ...field, label: 'Nom du formulaire' }
           if ('name' in field && field.name === 'fields') return { ...field, label: 'Champs' }
           if ('name' in field && field.name === 'submitButtonLabel') return { ...field, label: 'Texte du bouton d’envoi' }
+          // The plugin's field uses the former editor: ours instead, same name and same column.
           if ('name' in field && field.name === 'confirmationMessage') {
-            return { ...field, label: 'Message après l’envoi', admin: { condition: () => true } } as Field
+            return richTextField({ name: 'confirmationMessage', label: 'Message après l’envoi' })
           }
           return field
         }),

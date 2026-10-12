@@ -1,36 +1,54 @@
-/** Helpers to read Lexical rich text as plain text (JSON-LD, word counts, table of contents). */
+/**
+ * Rich text of the site: Tiptap (ProseMirror) JSON, written in the admin with
+ * the Tiptap editor. Helpers to read it as plain text (JSON-LD, word counts),
+ * headings (table of contents) and links (publication checks).
+ */
 
-export type LexicalNode = {
-  type?: string
+export type TiptapMark = { type: string; attrs?: Record<string, unknown> }
+
+export type TiptapNode = {
+  type: string
   text?: string
-  tag?: string
-  children?: LexicalNode[]
-  [key: string]: unknown
+  attrs?: Record<string, unknown>
+  marks?: TiptapMark[]
+  content?: TiptapNode[]
 }
 
-export type RichTextValue = { root?: LexicalNode } | null | undefined
+/** The stored value: a `doc` node, or nothing. */
+export type RichTextValue = TiptapNode | null | undefined
 
-const BLOCK_TYPES = new Set(['paragraph', 'heading', 'listitem', 'quote', 'list'])
+/** Link mark attributes: `href`, and `ref` (« services:3 ») when it points to a document of the site. */
+export type LinkAttrs = { href?: string | null; ref?: string | null; target?: string | null }
+
+const BLOCKS = new Set(['paragraph', 'heading', 'listItem', 'blockquote', 'bulletList', 'orderedList'])
+
+export const isDoc = (value: unknown): value is TiptapNode =>
+  Boolean(value && typeof value === 'object' && (value as TiptapNode).type === 'doc')
+
+export const linkOf = (node: TiptapNode): LinkAttrs | null =>
+  (node.marks?.find((mark) => mark.type === 'link')?.attrs as LinkAttrs | undefined) ?? null
 
 /** A paragraph made only of a link (« Le bois de réemploi → »): navigation, not content. */
-const isLinkParagraph = (node: LexicalNode) =>
+const isLinkParagraph = (node: TiptapNode) =>
   node.type === 'paragraph' &&
-  Boolean(node.children?.length) &&
-  node.children!.every((child) => child.type === 'link' || child.type === 'autolink' || (typeof child.text === 'string' && !child.text.trim()))
+  Boolean(node.content?.length) &&
+  node.content!.every((child) => (child.type === 'text' && (linkOf(child) || !child.text?.trim())) || child.type === 'hardBreak')
 
-function collect(node: LexicalNode | undefined, out: string[], skipLinks = false): void {
-  if (!node) return
+function collect(node: TiptapNode, out: string[], skipLinks = false): void {
   if (skipLinks && isLinkParagraph(node)) return
-  if (typeof node.text === 'string') out.push(node.text)
-  if (node.type === 'linebreak') out.push('\n')
-  node.children?.forEach((child) => collect(child, out, skipLinks))
-  if (node.type && BLOCK_TYPES.has(node.type)) out.push('\n')
+  if (node.type === 'text') out.push(node.text ?? '')
+  if (node.type === 'hardBreak') out.push('\n')
+  node.content?.forEach((child) => collect(child, out, skipLinks))
+  if (BLOCKS.has(node.type)) out.push('\n')
 }
 
-export function richTextToPlain(value: RichTextValue, options: { skipLinkParagraphs?: boolean } = {}): string {
-  if (!value?.root) return ''
+/** Text of a node and its children, without any line break. */
+export const plainOf = (node: TiptapNode): string => (node.type === 'text' ? (node.text ?? '') : (node.content ?? []).map(plainOf).join(''))
+
+export function richTextToPlain(value: unknown, options: { skipLinkParagraphs?: boolean } = {}): string {
+  if (!isDoc(value)) return ''
   const out: string[] = []
-  collect(value.root, out, options.skipLinkParagraphs ?? false)
+  collect(value, out, options.skipLinkParagraphs ?? false)
   return out
     .join('')
     .replace(/[ \t]+\n/g, '\n')
@@ -38,7 +56,7 @@ export function richTextToPlain(value: RichTextValue, options: { skipLinkParagra
     .trim()
 }
 
-export function isRichTextEmpty(value: RichTextValue): boolean {
+export function isRichTextEmpty(value: unknown): boolean {
   return richTextToPlain(value).length === 0
 }
 
@@ -53,20 +71,49 @@ export function headingId(text: string): string {
     .slice(0, 80)
 }
 
-/** H2 headings of a rich text, for the table of contents. */
-export function extractHeadings(value: RichTextValue, tag = 'h2'): { id: string; text: string }[] {
-  const out: { id: string; text: string }[] = []
-  for (const node of value?.root?.children ?? []) {
-    if (node.type === 'heading' && node.tag === tag) {
-      const parts: string[] = []
-      collect(node, parts)
-      const text = parts.join('').trim()
-      if (text) out.push({ id: headingId(text), text })
+/** Headings of a given level (H2 by default), for the table of contents. */
+export function extractHeadings(value: unknown, level = 2): { id: string; text: string }[] {
+  if (!isDoc(value)) return []
+  return (value.content ?? [])
+    .filter((node) => node.type === 'heading' && Number(node.attrs?.level) === level)
+    .map((node) => plainOf(node).trim())
+    .filter(Boolean)
+    .map((text) => ({ id: headingId(text), text }))
+}
+
+/** Every link of the text, consecutive pieces of the same link merged (« Voir la **charpente** »). */
+export function linksOf(value: unknown): { href: string; ref: string | null; text: string }[] {
+  if (!isDoc(value)) return []
+  const out: { href: string; ref: string | null; text: string }[] = []
+  const walk = (node: TiptapNode, previous: { current: LinkAttrs | null }) => {
+    if (node.type === 'text') {
+      const link = linkOf(node)
+      const last = out[out.length - 1]
+      if (link?.href && previous.current && last && last.href === link.href) last.text += node.text ?? ''
+      else if (link?.href) out.push({ href: link.href, ref: link.ref ?? null, text: node.text ?? '' })
+      previous.current = link
+      return
     }
+    const state = { current: null as LinkAttrs | null }
+    node.content?.forEach((child) => walk(child, state))
   }
+  walk(value, { current: null })
   return out
 }
 
+/** Does the text contain at least one heading? */
+export const hasHeading = (value: unknown) => isDoc(value) && (value.content ?? []).some((node) => node.type === 'heading')
+
 export function countWords(text: string): number {
   return text.split(/\s+/).filter(Boolean).length
+}
+
+/** Plain paragraphs (blank line between them) → a rich text document. */
+export function paragraphsToRichText(text: string): TiptapNode | null {
+  const paragraphs = text
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.replace(/\s*\n\s*/g, ' ').trim())
+    .filter(Boolean)
+  if (!paragraphs.length) return null
+  return { type: 'doc', content: paragraphs.map((paragraph) => ({ type: 'paragraph', content: [{ type: 'text', text: paragraph }] })) }
 }

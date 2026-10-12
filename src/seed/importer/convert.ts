@@ -1,7 +1,6 @@
-import { convertMarkdownToLexical } from '@payloadcms/richtext-lexical'
-
 import type { Md, Photo, SeedBlock, SeedHeading, SeedHero, SeedLink, Title } from '../types'
 import { nfc, resolvePath, type SeedContext } from './context'
+import { markdownToTiptap } from './markdown'
 
 type Json = Record<string, unknown>
 
@@ -29,33 +28,24 @@ export function photo(ctx: SeedContext, ref?: Photo | null): number | undefined 
 export const photos = (ctx: SeedContext, refs?: Photo[] | null) =>
   (refs ?? []).map((ref) => photo(ctx, ref)).filter((id): id is number => typeof id === 'number')
 
-/** Walks Lexical nodes and turns "/path/" links into internal document links. */
-function fixLinks(ctx: SeedContext, node: Json): void {
-  if ((node.type === 'link' || node.type === 'autolink') && node.fields && typeof node.fields === 'object') {
-    const fields = node.fields as Json
-    const url = String(fields.url ?? '')
-    if (url === 'tel') fields.url = `tel:${COMPANY_PHONE}`
-    else if (url === 'email') fields.url = `mailto:${COMPANY_EMAIL}`
-    else if (url.startsWith('/') && !url.includes('#')) {
-      const ref = resolvePath(ctx, url)
-      if (!ref) throw new Error(`Lien interne introuvable : ${url}`)
-      fields.linkType = 'internal'
-      fields.doc = { relationTo: ref.relationTo, value: ref.value }
-      delete fields.url
-    } else {
-      fields.linkType = 'custom'
-    }
-    fields.newTab = /^https?:\/\//.test(String(fields.url ?? ''))
+/** Links of the fiches: « tel » and « email » shortcuts, « /path/ » → a page of the site (followed if its address changes). */
+function resolveLink(ctx: SeedContext, url: string): { href: string; ref: string | null } {
+  if (url === 'tel') return { href: `tel:${COMPANY_PHONE}`, ref: null }
+  if (url === 'email') return { href: `mailto:${COMPANY_EMAIL}`, ref: null }
+  if (!url.startsWith('/')) return { href: url, ref: null }
+  const ref = resolvePath(ctx, url)
+  if (!ref) {
+    // A link to a part of a page (#…) can point to a page imported later: the address alone is enough.
+    if (url.includes('#')) return { href: url, ref: null }
+    throw new Error(`Lien interne introuvable : ${url}`)
   }
-  for (const child of (node.children as Json[] | undefined) ?? []) fixLinks(ctx, child)
+  return { href: url, ref: `${ref.relationTo}:${ref.value}` }
 }
 
-/** Markdown of the fiches → Lexical rich text with resolved internal links. */
+/** Markdown of the fiches → rich text (Tiptap JSON) with resolved internal links. */
 export function richText(ctx: SeedContext, markdown?: Md | null) {
   if (!markdown?.trim()) return undefined
-  const state = convertMarkdownToLexical({ editorConfig: ctx.editorConfig, markdown }) as unknown as { root: Json }
-  fixLinks(ctx, state.root)
-  return state
+  return markdownToTiptap(markdown, (url) => resolveLink(ctx, url)) ?? undefined
 }
 
 /** SeedLink → link group of src/payload/fields/link.ts. */

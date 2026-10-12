@@ -6,7 +6,7 @@ import { JsonLd } from '@/lib/seo/JsonLd'
 import { pageCrumbs } from '@/lib/cms/breadcrumbs'
 import { getArticles, getCommunes, getCompany, getProjects, getSiteTexts } from '@/lib/cms/queries'
 import { template } from '@/lib/links'
-import type { LexicalNode, RichTextValue } from '@/lib/richtext'
+import { hasHeading, linksOf } from '@/lib/richtext'
 import { blocksJsonLd } from '@/lib/seo/blocks'
 import { breadcrumbList, graph, itemList, webPage } from '@/lib/seo/jsonld'
 import type { Page } from '@/payload-types'
@@ -21,19 +21,8 @@ const idOf = (value: unknown) => (value && typeof value === 'object' ? (value as
 /** A rich text that is only a list of links to the sections of the page: the editor's table of contents. */
 function tocLinks(block: LayoutBlock): TocEntry[] | null {
   if (block.blockType !== 'richText') return null
-  const root = (block.content as RichTextValue)?.root
-  const links: TocEntry[] = []
-  let heading = false
-  const walk = (node: LexicalNode) => {
-    if (node.type === 'heading') heading = true
-    if (node.type === 'link' || node.type === 'autolink') {
-      const url = String((node.fields as { url?: string } | undefined)?.url ?? '')
-      const label = (node.children ?? []).map((child) => child.text ?? '').join('')
-      links.push({ href: url, label })
-    }
-    node.children?.forEach(walk)
-  }
-  if (root) walk(root)
+  const links: TocEntry[] = linksOf(block.content).map((link) => ({ href: link.href, label: link.text }))
+  const heading = hasHeading(block.content)
   return !heading && links.length >= 3 && links.every((link) => link.href.includes('#')) ? links : null
 }
 

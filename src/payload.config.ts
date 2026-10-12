@@ -22,7 +22,6 @@ import { Services } from './payload/collections/Services'
 import { Team } from './payload/collections/Team'
 import { Users } from './payload/collections/Users'
 import { ValidationPoints } from './payload/collections/ValidationPoints'
-import { basicEditor } from './payload/editor'
 import { formBuilderConfig } from './payload/forms'
 import { Company } from './payload/globals/Company'
 import { Analytics, Footer, Header, Proofs, SeoSettings } from './payload/globals/Navigation'
@@ -54,7 +53,6 @@ export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || undefined,
   secret: process.env.PAYLOAD_SECRET || '',
   sharp,
-  editor: basicEditor,
   graphQL: { disable: true },
   cors: DEPLOYMENT_ORIGINS,
   csrf: DEPLOYMENT_ORIGINS,

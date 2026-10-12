@@ -4,6 +4,7 @@ import * as migration_20261011_204444_media_storage_prefix from './20261011_2044
 import * as migration_20261011_212140_hero_highlight_texts from './20261011_212140_hero_highlight_texts';
 import * as migration_20261011_220046_interior_pages_v2 from './20261011_220046_interior_pages_v2';
 import * as migration_20261011_223439_quote_lead from './20261011_223439_quote_lead';
+import * as migration_20261012_004448_tiptap_rich_text from './20261012_004448_tiptap_rich_text';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20261011_223439_quote_lead.up,
     down: migration_20261011_223439_quote_lead.down,
-    name: '20261011_223439_quote_lead'
+    name: '20261011_223439_quote_lead',
+  },
+  {
+    up: migration_20261012_004448_tiptap_rich_text.up,
+    down: migration_20261012_004448_tiptap_rich_text.down,
+    name: '20261012_004448_tiptap_rich_text'
   },
 ];

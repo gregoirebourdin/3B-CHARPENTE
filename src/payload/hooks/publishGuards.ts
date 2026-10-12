@@ -21,20 +21,17 @@ function walk(value: unknown, visit: (node: Record<string, unknown>, path: strin
   }
 }
 
-/** Collects internal links that could be broken: rich-text URLs and empty page links. */
+/** Collects internal links that could be broken: rich-text links and empty page links. */
 function collectLinks(data: unknown) {
   const urls: { url: string; path: string }[] = []
+  const refs: { ref: string; label: string; path: string }[] = []
   const issues: Issue[] = []
   walk(data, (node, path) => {
-    // Lexical link nodes
-    if ((node.type === 'link' || node.type === 'autolink') && node.fields && typeof node.fields === 'object') {
-      const fields = node.fields as { linkType?: string; url?: string; doc?: { value?: unknown } | null }
-      if (fields.linkType === 'internal' && !fields.doc?.value) {
-        issues.push({ path, message: 'Un lien de texte pointe vers une page supprimée.' })
-      }
-      if (fields.linkType === 'custom' && typeof fields.url === 'string' && fields.url.startsWith('/')) {
-        urls.push({ url: fields.url, path })
-      }
+    // Link marks of the rich texts (Tiptap): a page of the site (`ref`) or an address
+    if (node.type === 'link' && node.attrs && typeof node.attrs === 'object') {
+      const attrs = node.attrs as { href?: string | null; ref?: string | null }
+      if (attrs.ref) refs.push({ ref: attrs.ref, label: attrs.href ?? attrs.ref, path })
+      else if (typeof attrs.href === 'string' && attrs.href.startsWith('/') && !attrs.href.startsWith('//')) urls.push({ url: attrs.href, path })
     }
     // Link groups (src/payload/fields/link.ts)
     if (
@@ -47,7 +44,7 @@ function collectLinks(data: unknown) {
       issues.push({ path, message: `Le lien « ${node.label} » ne pointe vers aucune page.` })
     }
   })
-  return { urls, issues }
+  return { urls, refs, issues }
 }
 
 /**
@@ -66,8 +63,15 @@ export const publishGuard: CollectionBeforeChangeHook = async ({ data, originalD
     })
   }
 
-  const { urls, issues: linkIssues } = collectLinks(data)
+  const { urls, refs, issues: linkIssues } = collectLinks(data)
   issues.push(...linkIssues)
+  // A text linked to a page of the site: the page must still exist (its address may have changed, the site follows it).
+  for (const { ref, label, path } of refs) {
+    const [collectionSlug, id] = ref.split(':')
+    if (!collectionSlug || !id || !(['pages', 'services', 'projects', 'articles'] as string[]).includes(collectionSlug)) continue
+    const found = await req.payload.count({ collection: collectionSlug as LinkableCollection, where: { id: { equals: id } }, req, overrideAccess: true })
+    if (!found.totalDocs) issues.push({ path, message: `Le lien vers ${label} mène à une page supprimée.` })
+  }
   // Links to the document itself (its sommaire, « #editeur »…) are always fine,
   // under its new address as under the one it is leaving (a redirect will follow).
   const own = new Set(

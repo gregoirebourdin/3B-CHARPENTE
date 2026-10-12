@@ -1089,3 +1089,104 @@ html[data-theme='dark'] .tb-brand-logo__dark {
   background: var(--c-forest);
   color: var(--on-forest);
 }
+
+// ---------- Text editor (Tiptap, src/payload/admin/fields/RichTextField.tsx) ----------
+// Close to how the text reads on the site: 17 px, airy lines, green links.
+.tb-editor__content {
+  min-height: 132px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 14px 16px;
+  color: var(--c-ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  outline: none;
+
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  h2,
+  h3 {
+    margin: 1.2em 0 0;
+    color: var(--c-ink);
+    font-family: var(--font-heading, var(--font-body));
+    font-weight: 650;
+    line-height: 1.25;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  ul,
+  ol {
+    margin: 0.5em 0 0;
+    padding-left: 1.4em;
+
+    li + li {
+      margin-top: 0.3em;
+    }
+
+    li p {
+      margin: 0;
+    }
+  }
+
+  li::marker {
+    color: var(--c-accent);
+  }
+
+  blockquote {
+    margin: 0.75em 0 0;
+    padding: 4px 0 4px 16px;
+    border-left: 3px solid var(--c-sage);
+    color: var(--c-stone-text);
+  }
+
+  hr {
+    margin: 1.2em 0;
+    border: 0;
+    border-top: 1px solid var(--c-line-strong);
+  }
+
+  a {
+    color: var(--c-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.2em;
+    cursor: text;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  // Example text while the editor is empty
+  p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    color: var(--c-stone-text);
+    pointer-events: none;
+  }
+
+  &::selection,
+  *::selection {
+    background: color-mix(in srgb, var(--c-sage) 55%, transparent);
+  }
+}

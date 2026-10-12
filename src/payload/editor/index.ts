@@ -1,80 +1,44 @@
-import {
-  BlockquoteFeature,
-  BoldFeature,
-  FixedToolbarFeature,
-  HeadingFeature,
-  HorizontalRuleFeature,
-  InlineToolbarFeature,
-  ItalicFeature,
-  LinkFeature,
-  OrderedListFeature,
-  ParagraphFeature,
-  UnorderedListFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
 import type { Field } from 'payload'
 
-import { LINKABLE_COLLECTIONS } from '../utilities/routes'
-
-const linkFeature = LinkFeature({
-  enabledCollections: [...LINKABLE_COLLECTIONS],
-  // Internal links open in the same tab, external ones are handled by the renderer.
-  fields: ({ defaultFields }) => defaultFields.filter((field) => !('name' in field && field.name === 'newTab')),
-})
-
-/**
- * Short texts inside sections: paragraphs, bold, italic, links and lists.
- * No headings, so the H2/H3 hierarchy stays in the hands of the design.
- */
-export const basicEditor = lexicalEditor({
-  features: () => [
-    ParagraphFeature(),
-    BoldFeature(),
-    ItalicFeature(),
-    linkFeature,
-    UnorderedListFeature(),
-    OrderedListFeature(),
-    InlineToolbarFeature(),
-    FixedToolbarFeature(),
-  ],
-})
-
-/** Long texts (guides, legal notice): adds H2/H3, quotes and separators. */
-export const articleEditor = lexicalEditor({
-  features: () => [
-    ParagraphFeature(),
-    HeadingFeature({ enabledHeadingSizes: ['h2', 'h3'] }),
-    BoldFeature(),
-    ItalicFeature(),
-    linkFeature,
-    UnorderedListFeature(),
-    OrderedListFeature(),
-    BlockquoteFeature(),
-    HorizontalRuleFeature(),
-    InlineToolbarFeature(),
-    FixedToolbarFeature(),
-  ],
-})
+import { isRichTextEmpty } from '../../lib/richtext'
 
 type RichTextOptions = {
   name?: string
   label?: string
   required?: boolean
   description?: string
+  /**
+   * « basic »: texts inside sections (paragraphs, bold, italic, lists, links).
+   * « article »: guides and legal pages, with part titles, quotes and separators.
+   */
   editor?: 'basic' | 'article'
+  placeholder?: string
 }
 
-export const richTextField = ({
-  name = 'text',
-  label = 'Texte',
-  required = false,
-  description,
-  editor = 'basic',
-}: RichTextOptions = {}): Field => ({
+/**
+ * A rich text written with the Tiptap editor of the admin
+ * (src/payload/admin/fields/RichTextField.tsx), stored as Tiptap JSON in a
+ * jsonb column and drawn by src/components/rich-text/RichText.tsx.
+ */
+export const richTextField = ({ name = 'text', label = 'Texte', required = false, description, editor = 'basic', placeholder }: RichTextOptions = {}): Field => ({
   name,
-  type: 'richText',
+  type: 'json',
   label,
   required,
-  editor: editor === 'article' ? articleEditor : basicEditor,
-  admin: { description },
+  admin: {
+    description,
+    components: {
+      Field: { path: '@/payload/admin/fields/RichTextField#RichTextField', clientProps: { variant: editor, ...(placeholder ? { placeholder } : {}) } },
+    },
+  },
+  validate: (value: unknown) => (required && isRichTextEmpty(value) ? 'Ce texte est obligatoire.' : true),
+  typescriptSchema: [
+    () => ({
+      type: 'object',
+      description: 'Tiptap document (type « doc »).',
+      properties: { type: { type: 'string', enum: ['doc'] }, content: { type: 'array', items: { type: 'object', additionalProperties: true } } },
+      required: ['type'],
+      additionalProperties: true,
+    }),
+  ],
 })

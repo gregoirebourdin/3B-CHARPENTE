@@ -12,7 +12,8 @@ Ce document décrit comment le site est construit : la pile technique et pourquo
 | Photos et fichiers | **Vercel Blob** (authentification OIDC) | Stockage durable des photos, servi par le réseau de Vercel. Les photos sont converties en WebP (2 400 px au plus) et déclinées en vignette 480 px et image de partage 1 200 × 630. |
 | Hébergement | **Vercel** (fonctions en `fra1`, Francfort) | Déploiement à chaque envoi sur la branche, aperçus, tâches planifiées (sauvegarde quotidienne). |
 | Style du site | **CSS Modules + jetons CSS** (`src/styles/tokens.css`) | Zéro dépendance de style côté visiteur, CSS minimal par page, thème jour et nuit. |
-| Style de l’administration | **shadcn/ui** (Radix + Tailwind 4, préfixe `tw:`, sans remise à zéro) | Composants accessibles et cohérents, isolés : ils ne touchent jamais aux écrans de Payload. |
+| Style de l’administration | **shadcn/ui** (Radix + Tailwind 4, préfixe `tw:`, sans remise à zéro) | Composants accessibles et cohérents. Tous les champs de saisie sont les nôtres (texte, listes, cases, choix), branchés automatiquement sur chaque fiche (`src/payload/utilities/customFields.ts`). |
+| Éditeur de texte | **Tiptap 3** (`src/payload/admin/fields/RichTextField.tsx`) | Barre d’outils réduite à l’utile (gras, italique, listes, liens ; titres et citations pour les guides), liens choisis parmi les pages du site. Texte enregistré en JSON, affiché par le site sans JavaScript ; un lien vers une page suit cette page si son adresse change. |
 | E-mails | **Resend** (si la clé est fournie) | Notification de chaque demande et accusé de réception au visiteur. |
 | Polices | Nohemi (titres) et Inter (texte), **auto-hébergées** | Aucune requête vers un service tiers, pas de cookie, chargement optimisé par `next/font`. |
 

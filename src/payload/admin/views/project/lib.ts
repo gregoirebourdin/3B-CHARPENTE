@@ -1,5 +1,7 @@
 /** Helpers of the « Ajouter un chantier » wizard: photos, texts, requests. Browser only. */
 
+import { paragraphsToRichText } from '@/lib/richtext'
+
 export type ServiceOption = { id: number; title: string; shortLabel: string; icon: string }
 export type CommuneOption = { id: number; name: string; villages: string }
 
@@ -109,31 +111,7 @@ export async function api<T>(path: string, init: RequestInit & { json?: unknown 
 }
 
 /** Plain paragraphs (blank line between them) → the rich text format of the site. */
-export function toRichText(text: string) {
-  const paragraphs = text
-    .split(/\n\s*\n/)
-    .map((paragraph) => paragraph.replace(/\s*\n\s*/g, ' ').trim())
-    .filter(Boolean)
-  return {
-    root: {
-      type: 'root',
-      format: '',
-      indent: 0,
-      version: 1,
-      direction: 'ltr',
-      children: paragraphs.map((paragraph) => ({
-        type: 'paragraph',
-        format: '',
-        indent: 0,
-        version: 1,
-        direction: 'ltr',
-        textFormat: 0,
-        textStyle: '',
-        children: [{ type: 'text', text: paragraph, format: 0, detail: 0, mode: 'normal', style: '', version: 1 }],
-      })),
-    },
-  }
-}
+export const toRichText = paragraphsToRichText
 
 export const countWords = (text: string) => (text.trim() ? text.trim().split(/\s+/).length : 0)
 

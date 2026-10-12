@@ -347,37 +347,27 @@ export interface Form {
       )[]
     | null;
   submitButtonLabel?: string | null;
+  /**
+   * Tiptap document (type « doc »).
+   */
   confirmationMessage?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
+    type: 'doc';
+    content?: {
+      [k: string]: unknown;
+    }[];
     [k: string]: unknown;
-  } | null;
+  };
   successTitle?: string | null;
+  /**
+   * Tiptap document (type « doc »).
+   */
   errorMessage?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
+    type: 'doc';
+    content?: {
+      [k: string]: unknown;
+    }[];
     [k: string]: unknown;
-  } | null;
+  };
   /**
    * Laissez vide pour utiliser l’e-mail du réglage « Entreprise ».
    */
@@ -458,23 +448,15 @@ export interface Page {
      */
     titleAccent?: string | null;
     /**
-     * Deux ou trois phrases. Mettez en gras les mots importants.
+     * Tiptap document (type « doc »).
      */
     text?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
+      type: 'doc';
+      content?: {
+        [k: string]: unknown;
+      }[];
       [k: string]: unknown;
-    } | null;
+    };
     primaryCta?: {
       /**
        * Astuce : écrivez {telephone} pour afficher le numéro de l’entreprise.
@@ -766,23 +748,15 @@ export interface Service {
      */
     titleAccent?: string | null;
     /**
-     * Deux ou trois phrases. Mettez en gras les mots importants.
+     * Tiptap document (type « doc »).
      */
     text?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
+      type: 'doc';
+      content?: {
+        [k: string]: unknown;
+      }[];
       [k: string]: unknown;
-    } | null;
+    };
     primaryCta?: {
       /**
        * Astuce : écrivez {telephone} pour afficher le numéro de l’entreprise.
@@ -1068,21 +1042,13 @@ export interface Project {
    */
   summary: string;
   /**
-   * 40 à 70 mots : ce qui a été fait, où, avec quels matériaux. Des phrases simples.
+   * Tiptap document (type « doc »).
    */
   description: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
+    type: 'doc';
+    content?: {
+      [k: string]: unknown;
+    }[];
     [k: string]: unknown;
   };
   /**
@@ -1295,19 +1261,14 @@ export interface TextImageBlock {
    * Recopiez les mots du titre à afficher en vert. Plusieurs groupes : séparez-les par une virgule. Ex. : « simplement, durablement ».
    */
   titleAccent?: string | null;
+  /**
+   * Tiptap document (type « doc »).
+   */
   text: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
+    type: 'doc';
+    content?: {
+      [k: string]: unknown;
+    }[];
     [k: string]: unknown;
   };
   /**
@@ -1446,21 +1407,16 @@ export interface CardsBlock {
           | null;
         letter?: string | null;
         eyebrow?: string | null;
+        /**
+         * Tiptap document (type « doc »).
+         */
         text?: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
+          type: 'doc';
+          content?: {
+            [k: string]: unknown;
+          }[];
           [k: string]: unknown;
-        } | null;
+        };
         image?: (number | null) | Media;
         muted?: boolean | null;
         link?: {
@@ -1796,19 +1752,14 @@ export interface StepsBlock {
   steps?:
     | {
         title: string;
+        /**
+         * Tiptap document (type « doc »).
+         */
         text: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
+          type: 'doc';
+          content?: {
+            [k: string]: unknown;
+          }[];
           [k: string]: unknown;
         };
         image?: (number | null) | Media;
@@ -1871,41 +1822,31 @@ export interface ListBlock {
    * Une ou deux phrases sous le titre (facultatif).
    */
   intro?: string | null;
+  /**
+   * Tiptap document (type « doc »).
+   */
   text?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
+    type: 'doc';
+    content?: {
+      [k: string]: unknown;
+    }[];
     [k: string]: unknown;
-  } | null;
+  };
   style?: ('checks' | 'bullets' | 'numbered' | 'pills' | 'definitions') | null;
   inCard?: boolean | null;
   items?:
     | {
         title?: string | null;
+        /**
+         * Tiptap document (type « doc »).
+         */
         text?: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
+          type: 'doc';
+          content?: {
+            [k: string]: unknown;
+          }[];
           [k: string]: unknown;
-        } | null;
+        };
         link?: {
           /**
            * Astuce : écrivez {telephone} pour afficher le numéro de l’entreprise.
@@ -2062,21 +2003,16 @@ export interface CtaBlock {
    * Recopiez les mots du titre à afficher en vert. Plusieurs groupes : séparez-les par une virgule. Ex. : « simplement, durablement ».
    */
   titleAccent?: string | null;
+  /**
+   * Tiptap document (type « doc »).
+   */
   text?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
+    type: 'doc';
+    content?: {
+      [k: string]: unknown;
+    }[];
     [k: string]: unknown;
-  } | null;
+  };
   primary?: {
     /**
      * Astuce : écrivez {telephone} pour afficher le numéro de l’entreprise.
@@ -2188,21 +2124,16 @@ export interface ManifestoBlock {
    */
   titleAccent?: string | null;
   layout?: ('centered' | 'split' | 'columns') | null;
+  /**
+   * Tiptap document (type « doc »).
+   */
   text?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
+    type: 'doc';
+    content?: {
+      [k: string]: unknown;
+    }[];
     [k: string]: unknown;
-  } | null;
+  };
   items?:
     | {
         title?: string | null;
@@ -2268,21 +2199,16 @@ export interface SpotlightBlock {
    * Recopiez les mots du titre à afficher en vert. Plusieurs groupes : séparez-les par une virgule. Ex. : « simplement, durablement ».
    */
   titleAccent?: string | null;
+  /**
+   * Tiptap document (type « doc »).
+   */
   text?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
+    type: 'doc';
+    content?: {
+      [k: string]: unknown;
+    }[];
     [k: string]: unknown;
-  } | null;
+  };
   steps?:
     | {
         title: string;
@@ -2500,21 +2426,16 @@ export interface ServiceAreaBlock {
    * Recopiez les mots du titre à afficher en vert. Plusieurs groupes : séparez-les par une virgule. Ex. : « simplement, durablement ».
    */
   titleAccent?: string | null;
+  /**
+   * Tiptap document (type « doc »).
+   */
   text?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
+    type: 'doc';
+    content?: {
+      [k: string]: unknown;
+    }[];
     [k: string]: unknown;
-  } | null;
+  };
   sectors?:
     | {
         title: string;
@@ -2705,21 +2626,16 @@ export interface ContactFormBlock {
    */
   form: number | Form;
   showCompanyInfo?: boolean | null;
+  /**
+   * Tiptap document (type « doc »).
+   */
   privacyNotice?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
+    type: 'doc';
+    content?: {
+      [k: string]: unknown;
+    }[];
     [k: string]: unknown;
-  } | null;
+  };
   /**
    * Permet de faire un lien direct vers cette section : /page/#ancre.
    */
@@ -2733,19 +2649,14 @@ export interface ContactFormBlock {
  * via the `definition` "RichTextBlock".
  */
 export interface RichTextBlock {
+  /**
+   * Tiptap document (type « doc »).
+   */
   content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
+    type: 'doc';
+    content?: {
+      [k: string]: unknown;
+    }[];
     [k: string]: unknown;
   };
   showToc?: boolean | null;

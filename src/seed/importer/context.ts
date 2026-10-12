@@ -1,10 +1,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
 
-import { editorConfigFactory } from '@payloadcms/richtext-lexical'
 import type { Payload } from 'payload'
 
-import { articleEditor } from '../../payload/editor'
 
 export type Ref = { relationTo: 'pages' | 'services' | 'projects' | 'articles'; value: number }
 
@@ -12,7 +10,6 @@ export type Ref = { relationTo: 'pages' | 'services' | 'projects' | 'articles'; 
 export type SeedContext = {
   payload: Payload
   root: string
-  editorConfig: Awaited<ReturnType<typeof editorConfigFactory.fromEditor>>
   media: Map<string, number>
   pages: Map<string, number>
   services: Map<string, number>
@@ -37,7 +34,6 @@ export async function createContext(payload: Payload, root: string): Promise<See
   return {
     payload,
     root,
-    editorConfig: await editorConfigFactory.fromEditor({ config: payload.config, editor: articleEditor }),
     media: new Map(),
     pages: new Map(),
     services: new Map(),

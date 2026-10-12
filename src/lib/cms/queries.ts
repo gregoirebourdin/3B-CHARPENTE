@@ -239,6 +239,27 @@ export const findRedirect = cache(async (path: string): Promise<{ to: string; pe
   return { to, permanent: redirect.type !== '302' }
 })
 
+/**
+ * Current address of every published page, service, project and guide, by
+ * « collection:id »: links written in a text follow a page whose address changes.
+ */
+export const getLinkTargets = cache(async (): Promise<Map<string, string>> => {
+  const payload = await getPayloadClient()
+  const { pathFor } = await import('@/payload/utilities/routes')
+  const where = await published()
+  const targets = new Map<string, string>()
+  await Promise.all(
+    (['pages', 'services', 'projects', 'articles'] as const).map(async (collection) => {
+      const { docs } = await payload.find({ collection, where, depth: 0, limit: 1000, pagination: false, select: { slug: true, path: true } as never })
+      for (const doc of docs as { id: number; slug?: string | null; path?: string | null }[]) {
+        const path = pathFor(collection, doc)
+        if (path) targets.set(`${collection}:${doc.id}`, path)
+      }
+    }),
+  )
+  return targets
+})
+
 /* ---------------- Static generation ---------------- */
 
 export async function listPublished(collection: 'pages' | 'services' | 'projects' | 'articles') {
