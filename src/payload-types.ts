@@ -1672,7 +1672,7 @@ export interface ServicesGridBlock {
   mode?: ('all' | 'manual') | null;
   variant?: ('full' | 'compact') | null;
   /**
-   * Glissez pour changer l’ordre.
+   * Les flèches ↑ ↓ changent l’ordre.
    */
   services?: (number | Service)[] | null;
   cta?: {
