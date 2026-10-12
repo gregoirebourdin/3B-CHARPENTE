@@ -1,6 +1,6 @@
 # Points à valider avec Jean-Michel
 
-Export du 11 octobre 2026 : **516 points ouverts**, dont **52 importants**, sur 56 pages.
+Export du 12 octobre 2026 : **515 points ouverts**, dont **51 importants**, sur 56 pages.
 
 Chaque point est une information que le kit n’a pas pu confirmer. Le site est en ligne avec la **décision prudente** indiquée (rien n’est inventé : en cas de doute, l’information est omise ou formulée prudemment). Une fois la réponse connue, corrigez le contenu dans l’administration puis passez le point à « Réglé » (menu « Plus d’options » › « Points à valider »).
 
@@ -96,8 +96,6 @@ Chaque point est une information que le kit n’a pas pu confirmer. Le site est 
   _Décision appliquée :_ Mention RGE affichée (décision « Mentions RGE ») : « Artisan RGE » dans les preuves du héros et la meta description, « qualifiée QUALIBAT-RGE » dans le texte. Les mentions légales gardent le SIRET 00016.
 - **Rénover un chalet ou une maison ancienne dans les Hautes-Alpes : par où commencer ?** : SIRET RGE : la qualification est rattachée au SIRET 494 482 714 00024, les mentions légales indiquent 00016 ; à vérifier avant d’afficher RGE.
   _Décision appliquée :_ Mentions RGE gardées (« qualifiée QUALIBAT-RGE », domaines exacts, sans logo) ; SIRET affiché sur le site : 494 482 714 00016 (décision par défaut).
-- **Tout le site** : Police Nohemi (titres) : la licence fournie couvre-t-elle un site commercial (Pangram Pangram) ?
-  _Décision appliquée :_ Fichiers fournis par le client utilisés tels quels (auto-hébergés). Sans licence commerciale, remplacer la police des titres dans src/styles/fonts.ts par une police libre.
 - **Tout le site** : Diagnostic PEMD : Jean réalise-t-il lui-même le diagnostic réglementaire, ou intervient-il en appui d’un diagnostiqueur ?
   _Décision appliquée :_ Variante A partout : « expertise du gisement de bois, en amont ou en appui du diagnostic PEMD ».
 - **À propos** : Photos : portrait de Jean-Michel Tardy (indispensable), portraits de l’équipe, photo de groupe, atelier, photo du Tour de France, logos Scierie Savoldelli et RGE Qualibat ?
@@ -1294,8 +1292,6 @@ Chaque point est une information que le kit n’a pas pu confirmer. Le site est 
 
 ### Tout le site
 
-- **[important]** Police Nohemi (titres) : la licence fournie couvre-t-elle un site commercial (Pangram Pangram) ?
-  _Décision appliquée :_ Fichiers fournis par le client utilisés tels quels (auto-hébergés). Sans licence commerciale, remplacer la police des titres dans src/styles/fonts.ts par une police libre.
 - **[important]** Diagnostic PEMD : Jean réalise-t-il lui-même le diagnostic réglementaire, ou intervient-il en appui d’un diagnostiqueur ?
   _Décision appliquée :_ Variante A partout : « expertise du gisement de bois, en amont ou en appui du diagnostic PEMD ».
 - Scierie Savoldelli : accord pour la nommer comme partenaire et la photographier ?

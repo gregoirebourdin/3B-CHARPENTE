@@ -52,7 +52,7 @@ Rayons : 6, 8, 14, 22, 32 px et pilule. Espacements par pas de 4 px. Mouvement :
 - Surtitres en capitales espacées (0,14 em), **numérotés automatiquement** dans chaque page (compteur CSS).
 - Français soigné à l’import : apostrophes courbes, espaces insécables avant « : ; ? ! » et dans les guillemets.
 
-> **Licence de Nohemi** : le fichier a été fourni par le client. Vérifier auprès de Pangram Pangram que la licence couvre un site commercial (voir `docs/a-valider.md`). Inter est sous licence libre (SIL OFL).
+> **Licences** : Nohemi (Rajesh Rajput) est un *freeware* utilisable pour des projets commerciaux d’après l’EULA fournie avec la police (`src/fonts/Nohemi-EULA.pdf`), à condition de ne pas modifier les fichiers : ils sont servis tels quels. Inter est sous licence libre SIL OFL 1.1 ; seul son fichier « latin » est servi (`src/fonts/LICENCE.md`).
 
 ## 4. Composants signature
 
