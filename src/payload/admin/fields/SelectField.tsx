@@ -4,12 +4,12 @@ import { useField } from '@payloadcms/ui'
 import type { SelectFieldClientComponent } from 'payload'
 import { useCallback } from 'react'
 
-import { Select } from '../ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { FieldShell, fieldId, useFieldText } from './FieldShell'
 
 const NONE = '__none'
 
-/** Choice in a list, drawn by us (Radix Select) instead of Payload's. */
+/** Choice in a list: shadcn Select instead of Payload's own. */
 export const SelectField: SelectFieldClientComponent = (props) => {
   const { field, path: pathFromProps, readOnly, validate } = props
   const text = useFieldText()
@@ -35,17 +35,18 @@ export const SelectField: SelectFieldClientComponent = (props) => {
 
   return (
     <FieldShell field={field} path={path} type="select" required={required} hasDefault={hasDefault} customComponents={customComponents} showError={showError} errorMessage={errorMessage}>
-      <Select
-        id={id}
-        name={path}
-        value={typeof value === 'string' ? value : undefined}
-        onValueChange={(next) => setValue(next === NONE ? null : next)}
-        options={choices}
-        disabled={readOnly || disabled}
-        invalid={showError}
-        aria-describedby={`${id}-help`}
-        placeholder={text((field.admin as { placeholder?: string } | undefined)?.placeholder) || 'Choisir…'}
-      />
+      <Select name={path} value={typeof value === 'string' && value ? value : undefined} onValueChange={(next) => setValue(next === NONE ? null : next)} disabled={readOnly || disabled}>
+        <SelectTrigger id={id} aria-invalid={showError || undefined} aria-describedby={`${id}-help`}>
+          <SelectValue placeholder={text((field.admin as { placeholder?: string } | undefined)?.placeholder) || 'Choisir…'} />
+        </SelectTrigger>
+        <SelectContent>
+          {choices.map((choice) => (
+            <SelectItem key={choice.value} value={choice.value}>
+              {choice.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </FieldShell>
   )
 }

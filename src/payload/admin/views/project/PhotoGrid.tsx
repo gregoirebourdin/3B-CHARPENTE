@@ -19,7 +19,8 @@ import { useId, useRef, useState, type ChangeEvent, type DragEvent } from 'react
 import { Button } from '../../ui/button'
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle } from '../../ui/dialog'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../../ui/dropdown-menu'
-import { FieldError, fieldClass } from '../../ui/input'
+import { FieldError } from '../../ui/field'
+import { Input } from '../../ui/input'
 import { Disc } from '../../ui/page'
 import { cn, focusRing } from '../../ui/utils'
 
@@ -288,13 +289,13 @@ function SortablePhoto({
       <label className="tw:sr-only" htmlFor={`caption-${photo.key}`}>
         Légende de la photo {n}
       </label>
-      <input
+      <Input
         id={`caption-${photo.key}`}
         value={photo.caption}
         maxLength={160}
         placeholder="Légende (facultatif)"
         onChange={(event) => onCaption(photo.key, event.target.value)}
-        className={cn(fieldClass, 'tw:min-h-11 tw:px-3 tw:py-2 tw:text-[15px]')}
+        className="tw:px-3 tw:py-2 tw:text-[15px]"
       />
 
       <Dialog open={confirm} onOpenChange={setConfirm}>

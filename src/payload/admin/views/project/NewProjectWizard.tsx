@@ -11,8 +11,11 @@ import type { IconName } from '@/payload/utilities/icons'
 import { Badge } from '../../ui/badge'
 import { Button, Cta } from '../../ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../../ui/card'
-import { CheckboxCard } from '../../ui/checkbox'
-import { Field, FieldError, FieldHint, Input, Label, Optional, Textarea } from '../../ui/input'
+import { Optional } from '../../components/Optional'
+import { Checkbox } from '../../ui/checkbox'
+import { Field, FieldContent, FieldDescription, FieldError, FieldLabel, FieldLegend, FieldSet, FieldTitle } from '../../ui/field'
+import { Input } from '../../ui/input'
+import { Textarea } from '../../ui/textarea'
 import { notify } from '../../ui/notify'
 import { Alert, EmptyState, Page, PageHeader } from '../../ui/page'
 import { Stepper } from '../../ui/stepper'
@@ -304,10 +307,10 @@ export function NewProjectWizard({ services, communes, order }: { services: Serv
             {step === 0 ? (
               <>
                 <Field>
-                  <Label htmlFor="project-title">Titre du chantier</Label>
+                  <FieldLabel htmlFor="project-title">Titre du chantier</FieldLabel>
                   <Input
                     id="project-title"
-                    size="lg"
+                    className="tw:min-h-13 tw:text-[17px]"
                     value={title}
                     maxLength={110}
                     onChange={(event) => setTitle(event.target.value)}
@@ -318,53 +321,57 @@ export function NewProjectWizard({ services, communes, order }: { services: Serv
                   {err(0, errors.title) ? (
                     <FieldError id="project-title-help">{errors.title}</FieldError>
                   ) : (
-                    <FieldHint id="project-title-help">Ce qui a été fait, puis la commune. Il devient le titre de la page.</FieldHint>
+                    <FieldDescription id="project-title-help">Ce qui a été fait, puis la commune. Il devient le titre de la page.</FieldDescription>
                   )}
                 </Field>
 
                 <div className="tw:grid tw:gap-5 tw:desk:grid-cols-2">
                   <Field>
-                    <Label htmlFor="project-commune">
+                    <FieldLabel htmlFor="project-commune">
                       Commune <Optional />
-                    </Label>
+                    </FieldLabel>
                     <CommuneCombobox id="project-commune" communes={communes} value={communeId} onChange={setCommuneId} describedBy="project-commune-help" />
-                    <FieldHint id="project-commune-help">Laissez vide si le client ne souhaite pas qu’elle soit publiée.</FieldHint>
+                    <FieldDescription id="project-commune-help">Laissez vide si le client ne souhaite pas qu’elle soit publiée.</FieldDescription>
                   </Field>
                   <Field>
-                    <Label htmlFor="project-locality">
+                    <FieldLabel htmlFor="project-locality">
                       Lieu affiché <Optional />
-                    </Label>
+                    </FieldLabel>
                     <Input
                       id="project-locality"
-                      size="lg"
+                      className="tw:min-h-13 tw:text-[17px]"
                       value={locality}
                       maxLength={60}
                       onChange={(event) => setLocality(event.target.value)}
                       placeholder="Ex. : Le Casset, Prelles"
                       aria-describedby="project-locality-help"
                     />
-                    <FieldHint id="project-locality-help">Le village ou le hameau, s’il diffère de la commune.</FieldHint>
+                    <FieldDescription id="project-locality-help">Le village ou le hameau, s’il diffère de la commune.</FieldDescription>
                   </Field>
                 </div>
 
-                <fieldset className="tw:m-0 tw:grid tw:min-w-0 tw:gap-3 tw:border-0 tw:p-0" aria-describedby="project-services-help">
-                  <legend className="tw:mb-2 tw:p-0 tw:text-base tw:font-semibold">Prestations</legend>
+                <FieldSet aria-describedby="project-services-help">
+                  <FieldLegend variant="label">Prestations</FieldLegend>
                   <ul className="tw:m-0 tw:grid tw:list-none tw:grid-cols-3 tw:gap-3 tw:p-0 tw:max-wide:grid-cols-2 tw:max-desk:grid-cols-1">
                     {services.map((service) => {
                       const checked = serviceIds.includes(service.id)
                       const main = serviceIds[0] === service.id
                       return (
                         <li key={service.id}>
-                          <CheckboxCard
-                            checked={checked}
-                            onCheckedChange={() => setServiceIds((ids) => (checked ? ids.filter((id) => id !== service.id) : [...ids, service.id]))}
-                          >
-                            <Icon name={service.icon as IconName} className="tw:size-6 tw:shrink-0 tw:text-leaf" aria-hidden="true" />
-                            <span className="tw:grid tw:min-w-0">
-                              <span className="tw:text-base tw:font-semibold tw:leading-[1.25]">{service.title}</span>
-                              {main && serviceIds.length > 1 ? <span className="tw:text-sm tw:text-stone-text">Prestation principale</span> : null}
-                            </span>
-                          </CheckboxCard>
+                          <FieldLabel htmlFor={`service-${service.id}`}>
+                            <Field orientation="horizontal" className="tw:min-h-14 tw:items-center">
+                              <Checkbox
+                                id={`service-${service.id}`}
+                                checked={checked}
+                                onCheckedChange={() => setServiceIds((ids) => (checked ? ids.filter((id) => id !== service.id) : [...ids, service.id]))}
+                              />
+                              <Icon name={service.icon as IconName} className="tw:size-6 tw:shrink-0 tw:text-leaf" aria-hidden="true" />
+                              <FieldContent>
+                                <FieldTitle className="tw:leading-[1.25]">{service.title}</FieldTitle>
+                                {main && serviceIds.length > 1 ? <FieldDescription>Prestation principale</FieldDescription> : null}
+                              </FieldContent>
+                            </Field>
+                          </FieldLabel>
                         </li>
                       )
                     })}
@@ -372,9 +379,9 @@ export function NewProjectWizard({ services, communes, order }: { services: Serv
                   {err(0, errors.services) ? (
                     <FieldError id="project-services-help">{errors.services}</FieldError>
                   ) : (
-                    <FieldHint id="project-services-help">La première cochée est la prestation principale. Le chantier apparaîtra sur leurs pages.</FieldHint>
+                    <FieldDescription id="project-services-help">La première cochée est la prestation principale. Le chantier apparaîtra sur leurs pages.</FieldDescription>
                   )}
-                </fieldset>
+                </FieldSet>
               </>
             ) : null}
 
@@ -394,12 +401,12 @@ export function NewProjectWizard({ services, communes, order }: { services: Serv
             {step === 2 ? (
               <>
                 <Field>
-                  <Label htmlFor="project-summary">
+                  <FieldLabel htmlFor="project-summary">
                     Résumé pour les cartes
                     <span className={cn('tw:ml-auto tw:text-sm tw:font-normal tw:tabular-nums tw:text-stone-text', summary.length > SUMMARY_MAX && 'tw:font-semibold tw:text-error')}>
                       {summary.length} / {SUMMARY_MAX}
                     </span>
-                  </Label>
+                  </FieldLabel>
                   <Textarea
                     id="project-summary"
                     rows={2}
@@ -413,17 +420,17 @@ export function NewProjectWizard({ services, communes, order }: { services: Serv
                   {err(2, errors.summary) ? (
                     <FieldError id="project-summary-help">{errors.summary}</FieldError>
                   ) : (
-                    <FieldHint id="project-summary-help">Une phrase qui donne envie de voir le chantier. Elle s’affiche sous la photo.</FieldHint>
+                    <FieldDescription id="project-summary-help">Une phrase qui donne envie de voir le chantier. Elle s’affiche sous la photo.</FieldDescription>
                   )}
                 </Field>
 
                 <Field>
-                  <Label htmlFor="project-description">
+                  <FieldLabel htmlFor="project-description">
                     Le projet
                     <span className={cn('tw:ml-auto tw:text-sm tw:font-normal tw:tabular-nums tw:text-stone-text', words > 0 && (words < 40 || words > 70) && 'tw:text-ink')}>
                       {words} mot{words > 1 ? 's' : ''}
                     </span>
-                  </Label>
+                  </FieldLabel>
                   <Textarea
                     id="project-description"
                     rows={6}
@@ -436,12 +443,12 @@ export function NewProjectWizard({ services, communes, order }: { services: Serv
                   {err(2, errors.description) ? (
                     <FieldError id="project-description-help">{errors.description}</FieldError>
                   ) : (
-                    <FieldHint id="project-description-help">40 à 70 mots. Laissez une ligne vide pour commencer un nouveau paragraphe.</FieldHint>
+                    <FieldDescription id="project-description-help">40 à 70 mots. Laissez une ligne vide pour commencer un nouveau paragraphe.</FieldDescription>
                   )}
                 </Field>
 
                 <Field>
-                  <Label htmlFor="project-meta">
+                  <FieldLabel htmlFor="project-meta">
                     Description pour Google
                     <span
                       className={cn(
@@ -451,7 +458,7 @@ export function NewProjectWizard({ services, communes, order }: { services: Serv
                     >
                       {metaText.length} / {metaLength.min} à {metaLength.max}
                     </span>
-                  </Label>
+                  </FieldLabel>
                   <Textarea
                     id="project-meta"
                     rows={3}
@@ -467,10 +474,10 @@ export function NewProjectWizard({ services, communes, order }: { services: Serv
                   {err(2, errors.meta) ? (
                     <FieldError id="project-meta-help">{errors.meta}</FieldError>
                   ) : (
-                    <FieldHint id="project-meta-help" className="tw:flex tw:items-center tw:gap-1.5">
+                    <FieldDescription id="project-meta-help" className="tw:flex tw:items-center tw:gap-1.5">
                       <Sparkles aria-hidden="true" className="tw:size-4 tw:shrink-0 tw:text-leaf" />
                       Proposée à partir du résumé. Vous pouvez la reprendre : c’est le texte affiché sous le titre dans Google.
-                    </FieldHint>
+                    </FieldDescription>
                   )}
                 </Field>
               </>

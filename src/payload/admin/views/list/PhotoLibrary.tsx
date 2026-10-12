@@ -9,7 +9,7 @@ import { relativeFr } from '../../lib/time'
 import { Badge } from '../../ui/badge'
 import { Button } from '../../ui/button'
 import { Card } from '../../ui/card'
-import { IconField, Input } from '../../ui/input'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '../../ui/input-group'
 import { EmptyState, Page, PageHeader } from '../../ui/page'
 import { Segmented, SegmentedItem } from '../../ui/tabs'
 import { cn, focusRing } from '../../ui/utils'
@@ -85,8 +85,11 @@ export function PhotoLibrary({ photos, failed, createHref }: { photos: Photo[]; 
 
       <Card>
         <div className="tw:flex tw:flex-wrap tw:items-center tw:gap-3 tw:border-0 tw:border-b tw:border-solid tw:border-line tw:px-5 tw:py-4 tw:max-desk:px-4">
-          <IconField icon={<Search />} className="tw:min-w-[260px] tw:flex-1 tw:max-desk:min-w-full">
-            <Input
+          <InputGroup className="tw:min-w-[260px] tw:flex-1 tw:max-desk:min-w-full">
+            <InputGroupAddon>
+              <Search />
+            </InputGroupAddon>
+            <InputGroupInput
               type="search"
               value={query}
               onChange={(event) => {
@@ -96,7 +99,7 @@ export function PhotoLibrary({ photos, failed, createHref }: { photos: Photo[]; 
               placeholder="Ce que montre la photo, une commune…"
               aria-label="Chercher une photo"
             />
-          </IconField>
+          </InputGroup>
           {kinds.length > 1 ? (
             <Segmented aria-label="Type de photo" className="tw:max-desk:w-full tw:max-desk:overflow-x-auto">
               {[{ value: 'all' as const, label: 'Toutes', count: photos.length }, ...kinds].map((option) => (

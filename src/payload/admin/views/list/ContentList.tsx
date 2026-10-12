@@ -9,8 +9,8 @@ import { relativeFr } from '../../lib/time'
 import { Badge } from '../../ui/badge'
 import { Button, Cta } from '../../ui/button'
 import { Card } from '../../ui/card'
-import { IconField, Input } from '../../ui/input'
-import { Select } from '../../ui/select'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '../../ui/input-group'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select'
 import { EmptyState, Page, PageHeader } from '../../ui/page'
 import { Segmented, SegmentedItem } from '../../ui/tabs'
 import { cn, focusRing } from '../../ui/utils'
@@ -121,17 +121,26 @@ export function ContentList({ config, rows, filters, failed }: { config: ListCon
 
       <Card>
         <div className="tw:flex tw:flex-wrap tw:items-center tw:gap-3 tw:border-0 tw:border-b tw:border-solid tw:border-line tw:px-5 tw:py-4 tw:max-desk:px-4">
-          <IconField icon={<Search />} className="tw:min-w-[260px] tw:flex-1 tw:max-desk:min-w-full">
-            <Input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={config.searchPlaceholder} aria-label={`Chercher dans les ${many}`} />
-          </IconField>
+          <InputGroup className="tw:min-w-[260px] tw:flex-1 tw:max-desk:min-w-full">
+            <InputGroupAddon>
+              <Search />
+            </InputGroupAddon>
+            <InputGroupInput type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={config.searchPlaceholder} aria-label={`Chercher dans les ${many}`} />
+          </InputGroup>
           {filters.length ? (
-            <Select
-              value={filter || ALL}
-              onValueChange={(value) => setFilter(value === ALL ? '' : value)}
-              aria-label="Filtrer"
-              className="tw:w-[260px] tw:max-desk:w-full"
-              options={[{ value: ALL, label: config.filterLabel ?? 'Tout' }, ...filters.map((option) => ({ value: option.id, label: option.label }))]}
-            />
+            <Select value={filter || ALL} onValueChange={(value) => setFilter(value === ALL ? '' : value)}>
+              <SelectTrigger aria-label="Filtrer" className="tw:w-[260px] tw:max-desk:w-full">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={ALL}>{config.filterLabel ?? 'Tout'}</SelectItem>
+                {filters.map((option) => (
+                  <SelectItem key={option.id} value={option.id}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           ) : null}
           {counts.draft ? (
             <Segmented aria-label="Statut" className="tw:max-desk:w-full tw:max-desk:[&>*]:flex-1 tw:max-desk:[&>*]:justify-center">

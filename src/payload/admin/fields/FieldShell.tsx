@@ -5,7 +5,8 @@ import { RenderCustomComponent, useTranslation } from '@payloadcms/ui'
 import { mergeFieldStyles } from '@payloadcms/ui/shared'
 import type { CSSProperties, ReactNode } from 'react'
 
-import { FieldError, FieldHint, Label, Optional } from '../ui/input'
+import { Optional } from '../components/Optional'
+import { Field, FieldDescription, FieldError, FieldLabel, FieldTitle } from '../ui/field'
 import { cn } from '../ui/utils'
 
 type CustomComponents = { Label?: ReactNode; Description?: ReactNode; Error?: ReactNode; BeforeInput?: ReactNode; AfterInput?: ReactNode }
@@ -21,9 +22,10 @@ export function useFieldText() {
 }
 
 /**
- * Frame of every field of the administration: label (« facultatif » when it
- * is), the control, one line of help, and the error in place of the help.
- * Payload's layout classes (field-type, width in rows) are kept.
+ * Frame of every field of the administration, built with shadcn/ui's Field:
+ * FieldLabel (« facultatif » when it is), the shadcn control, a
+ * FieldDescription, and the FieldError in place of the description.
+ * Payload's layout classes (field-type, width in rows) are kept around it.
  */
 export function FieldShell({
   field,
@@ -68,7 +70,7 @@ export function FieldShell({
 
   return (
     <div className={cn('field-type', type, 'tb-field', admin.className, showError && 'error')} style={style}>
-      <div className="tw:group/field tw:grid tw:min-w-0 tw:gap-2">
+      <Field data-invalid={showError || undefined}>
         {labelAs === 'none' ? null : (
           <div className="tw:flex tw:min-w-0 tw:items-baseline tw:justify-between tw:gap-3">
             <RenderCustomComponent
@@ -76,15 +78,15 @@ export function FieldShell({
               Fallback={
                 label ? (
                   labelAs === 'label' ? (
-                    <Label htmlFor={id} className="tb-field__label tw:min-w-0">
+                    <FieldLabel htmlFor={id} className="tb-field__label tw:min-w-0">
                       {label}
                       {optional ? <span className="tb-optional"><Optional /></span> : null}
-                    </Label>
+                    </FieldLabel>
                   ) : (
-                    <span id={labelId} className="tb-field__label tw:flex tw:min-w-0 tw:flex-wrap tw:items-baseline tw:gap-x-1.5 tw:text-base tw:font-semibold tw:leading-[1.35] tw:text-ink">
+                    <FieldTitle id={labelId} className="tb-field__label tw:min-w-0 tw:flex-wrap tw:items-baseline tw:gap-x-1.5">
                       {label}
                       {optional ? <span className="tb-optional"><Optional /></span> : null}
-                    </span>
+                    </FieldTitle>
                   )
                 ) : null
               }
@@ -96,21 +98,21 @@ export function FieldShell({
         {children}
         {customComponents.AfterInput}
         {showError && errorMessage ? (
-          <RenderCustomComponent CustomComponent={customComponents.Error} Fallback={<FieldError id={helpId} role="alert">{errorMessage}</FieldError>} />
+          <RenderCustomComponent CustomComponent={customComponents.Error} Fallback={<FieldError id={helpId}>{errorMessage}</FieldError>} />
         ) : (
           <RenderCustomComponent
             CustomComponent={customComponents.Description}
             Fallback={
               description || optional ? (
-                <FieldHint id={helpId} className={cn(!description && 'tb-optional-hint-only')}>
+                <FieldDescription id={helpId} className={cn(!description && 'tb-optional-hint-only')}>
                   {optional ? <span className="tb-optional-hint">Facultatif. </span> : null}
                   {description}
-                </FieldHint>
+                </FieldDescription>
               ) : null
             }
           />
         )}
-      </div>
+      </Field>
     </div>
   )
 }

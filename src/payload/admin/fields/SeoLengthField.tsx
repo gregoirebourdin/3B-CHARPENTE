@@ -4,7 +4,8 @@ import { useField } from '@payloadcms/ui'
 import type { TextareaFieldClientProps, TextFieldClientProps } from 'payload'
 import { useCallback, useEffect, useRef } from 'react'
 
-import { Input, Textarea } from '../ui/input'
+import { Input } from '../ui/input'
+import { Textarea } from '../ui/textarea'
 import { cn } from '../ui/utils'
 import { FieldShell, fieldId } from './FieldShell'
 

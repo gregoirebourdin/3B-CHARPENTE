@@ -4,7 +4,7 @@ import { useField } from '@payloadcms/ui'
 import type { TextareaFieldClientComponent } from 'payload'
 import { useCallback, useEffect, useRef } from 'react'
 
-import { Textarea } from '../ui/input'
+import { Textarea } from '../ui/textarea'
 import { Counter, FieldShell, fieldId, useFieldText } from './FieldShell'
 
 /** Several lines of plain text; the box grows with what is written. */

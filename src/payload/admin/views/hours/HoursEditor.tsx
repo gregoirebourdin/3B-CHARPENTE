@@ -10,8 +10,12 @@ import type { Company } from '@/payload-types'
 
 import { Button, Cta } from '../../ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../ui/card'
-import { Field, FieldError, FieldHint, IconField, Input, Label, Optional } from '../../ui/input'
-import { Select } from '../../ui/select'
+import { Optional } from '../../components/Optional'
+import { Field, FieldDescription, FieldError, FieldLabel } from '../../ui/field'
+import { Input } from '../../ui/input'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '../../ui/input-group'
+import { Label } from '../../ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select'
 import { notify } from '../../ui/notify'
 import { Alert, EmptyState, Page, PageHeader, TextLink } from '../../ui/page'
 import { Switch } from '../../ui/switch'
@@ -204,15 +208,19 @@ export function HoursEditor({ initial }: { initial: Data | null }) {
                       <span id={`day-${day.day}`} className={cn('tw:text-base tw:font-semibold', !open && 'tw:text-stone-text')}>
                         {label}
                       </span>
-                      <Switch
-                        checked={open}
-                        onCheckedChange={(checked) =>
-                          setDay(index, checked ? { closed: false, opens: day.opens || '07:30', closes: day.closes || '17:00' } : { closed: true })
-                        }
-                        aria-label={`${label} ouvert`}
-                        onLabel="Ouvert"
-                        offLabel="Fermé"
-                      />
+                      <div className="tw:flex tw:min-h-11 tw:items-center tw:gap-2.5">
+                        <Switch
+                          id={`open-${day.day}`}
+                          checked={open}
+                          onCheckedChange={(checked) =>
+                            setDay(index, checked ? { closed: false, opens: day.opens || '07:30', closes: day.closes || '17:00' } : { closed: true })
+                          }
+                          aria-label={`${label} ouvert`}
+                        />
+                        <Label htmlFor={`open-${day.day}`} className={cn('tw:cursor-pointer', !open && 'tw:text-stone-text')}>
+                          {open ? 'Ouvert' : 'Fermé'}
+                        </Label>
+                      </div>
                     </div>
                     {open ? (
                       <div className="tw:grid tw:gap-2">
@@ -332,7 +340,7 @@ export function HoursEditor({ initial }: { initial: Data | null }) {
             </p>
             <p className="tw:m-0 tw:text-sm tw:text-on-night/75">{data.email}</p>
           </div>
-          <FieldHint>L’aperçu change dès que vous modifiez une case.</FieldHint>
+          <FieldDescription>L’aperçu change dès que vous modifiez une case.</FieldDescription>
         </aside>
       </div>
 
@@ -345,19 +353,28 @@ export function HoursEditor({ initial }: { initial: Data | null }) {
         </CardHeader>
         <CardContent className="tw:grid tw:gap-5 tw:desk:grid-cols-2">
           <FormField id="phone" label="Téléphone" error={err(errors.phone)} hint="Comme il s’affiche : 06 34 67 31 49">
-            <IconField icon={<Phone />}>
-              <Input id="phone" type="tel" inputMode="tel" autoComplete="tel" value={data.phone} onChange={(e) => setData({ ...data, phone: e.target.value })} aria-invalid={Boolean(err(errors.phone))} aria-describedby="phone-help" />
-            </IconField>
+            <InputGroup>
+              <InputGroupAddon>
+                <Phone />
+              </InputGroupAddon>
+              <InputGroupInput id="phone" type="tel" inputMode="tel" autoComplete="tel" value={data.phone} onChange={(e) => setData({ ...data, phone: e.target.value })} aria-invalid={Boolean(err(errors.phone))} aria-describedby="phone-help" />
+            </InputGroup>
           </FormField>
           <FormField id="email" label="E-mail" error={err(errors.email)} hint="Une seule adresse.">
-            <IconField icon={<Mail />}>
-              <Input id="email" type="email" autoComplete="email" value={data.email} onChange={(e) => setData({ ...data, email: e.target.value })} aria-invalid={Boolean(err(errors.email))} aria-describedby="email-help" />
-            </IconField>
+            <InputGroup>
+              <InputGroupAddon>
+                <Mail />
+              </InputGroupAddon>
+              <InputGroupInput id="email" type="email" autoComplete="email" value={data.email} onChange={(e) => setData({ ...data, email: e.target.value })} aria-invalid={Boolean(err(errors.email))} aria-describedby="email-help" />
+            </InputGroup>
           </FormField>
           <FormField id="street" label="Adresse" error={err(errors.street)} className="tw:desk:col-span-2">
-            <IconField icon={<MapPin />}>
-              <Input id="street" autoComplete="street-address" value={data.address.street} onChange={(e) => setData({ ...data, address: { ...data.address, street: e.target.value } })} aria-invalid={Boolean(err(errors.street))} aria-describedby="street-help" />
-            </IconField>
+            <InputGroup>
+              <InputGroupAddon>
+                <MapPin />
+              </InputGroupAddon>
+              <InputGroupInput id="street" autoComplete="street-address" value={data.address.street} onChange={(e) => setData({ ...data, address: { ...data.address, street: e.target.value } })} aria-invalid={Boolean(err(errors.street))} aria-describedby="street-help" />
+            </InputGroup>
           </FormField>
           <div className="tw:grid tw:grid-cols-[132px_minmax(0,1fr)] tw:gap-3 tw:desk:col-span-2 tw:desk:grid-cols-[160px_minmax(0,1fr)]">
             <FormField id="postalCode" label="Code postal" error={err(errors.postalCode)}>
@@ -414,30 +431,32 @@ function TimeInput({
   const current = (value ?? '').slice(0, 5)
   const options = current && !TIMES.includes(current) ? [...TIMES, current].sort() : TIMES
   return (
-    <Select
-      aria-label={label}
-      value={current}
-      onValueChange={onChange}
-      invalid={invalid}
-      aria-describedby={describedBy}
-      placeholder="—"
-      className="tw:w-[112px] tw:tabular-nums"
-      options={options.map((time) => ({ value: time, label: spoken(time) }))}
-    />
+    <Select value={current || undefined} onValueChange={onChange}>
+      <SelectTrigger aria-label={label} aria-invalid={invalid || undefined} aria-describedby={describedBy} className="tw:w-[112px] tw:tabular-nums">
+        <SelectValue placeholder="—" />
+      </SelectTrigger>
+      <SelectContent>
+        {options.map((time) => (
+          <SelectItem key={time} value={time}>
+            {spoken(time)}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   )
 }
 
 function FormField({ id, label, hint, error, className, children }: { id: string; label: ReactNode; hint?: string; error?: string | null; className?: string; children: ReactNode }) {
   return (
     <Field className={className}>
-      <Label htmlFor={id}>{label}</Label>
+      <FieldLabel htmlFor={id}>{label}</FieldLabel>
       {children}
       {error ? (
-        <FieldError id={`${id}-help`} role="alert">
+        <FieldError id={`${id}-help`}>
           {error}
         </FieldError>
       ) : hint ? (
-        <FieldHint id={`${id}-help`}>{hint}</FieldHint>
+        <FieldDescription id={`${id}-help`}>{hint}</FieldDescription>
       ) : null}
     </Field>
   )

@@ -4,12 +4,12 @@ import { useField } from '@payloadcms/ui'
 import type { CheckboxFieldClientComponent } from 'payload'
 import { useCallback } from 'react'
 
-import { CheckboxBox } from '../ui/checkbox'
-import { FieldError, FieldHint } from '../ui/input'
+import { Checkbox } from '../ui/checkbox'
+import { Field, FieldContent, FieldDescription, FieldError, FieldLabel } from '../ui/field'
 import { cn } from '../ui/utils'
 import { fieldId, useFieldText } from './FieldShell'
 
-/** Yes / no: the box and its sentence on one line, help underneath. */
+/** Yes / no: shadcn Checkbox and its FieldLabel on one line, help underneath. */
 export const CheckboxField: CheckboxFieldClientComponent = (props) => {
   const { field, path: pathFromProps, readOnly, validate } = props
   const text = useFieldText()
@@ -29,8 +29,8 @@ export const CheckboxField: CheckboxFieldClientComponent = (props) => {
 
   return (
     <div className={cn('field-type checkbox tb-field', showError && 'error')} style={{ flex: '1 1 auto' }}>
-      <div className="tw:flex tw:min-h-11 tw:items-start tw:gap-3 tw:py-[11px]">
-        <CheckboxBox
+      <Field orientation="horizontal" data-invalid={showError || undefined} className="tw:min-h-11 tw:py-[11px]">
+        <Checkbox
           id={id}
           checked={Boolean(value)}
           onCheckedChange={(checked) => setValue(checked === true)}
@@ -38,17 +38,19 @@ export const CheckboxField: CheckboxFieldClientComponent = (props) => {
           aria-invalid={showError || undefined}
           aria-describedby={`${id}-help`}
         />
-        <label htmlFor={id} className="tw:grid tw:cursor-pointer tw:gap-1 tw:text-base tw:leading-[1.35] tw:text-ink">
-          <span className="tw:font-semibold">{customComponents?.Label ?? label}</span>
+        <FieldContent>
+          <FieldLabel htmlFor={id} className="tw:cursor-pointer">
+            {customComponents?.Label ?? label}
+          </FieldLabel>
           {showError && errorMessage ? (
             <FieldError id={`${id}-help`}>{errorMessage}</FieldError>
           ) : customComponents?.Description ? (
             customComponents.Description
           ) : description ? (
-            <FieldHint id={`${id}-help`}>{description}</FieldHint>
+            <FieldDescription id={`${id}-help`}>{description}</FieldDescription>
           ) : null}
-        </label>
-      </div>
+        </FieldContent>
+      </Field>
     </div>
   )
 }

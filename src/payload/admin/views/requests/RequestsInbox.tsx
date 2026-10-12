@@ -9,7 +9,10 @@ import { relativeFr } from '../../lib/time'
 import { Badge } from '../../ui/badge'
 import { Button, Cta } from '../../ui/button'
 import { Card } from '../../ui/card'
-import { FieldHint, IconField, Input, Label, Textarea } from '../../ui/input'
+import { FieldDescription } from '../../ui/field'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '../../ui/input-group'
+import { Label } from '../../ui/label'
+import { Textarea } from '../../ui/textarea'
 import { notify } from '../../ui/notify'
 import { EmptyState, Page, PageHeader } from '../../ui/page'
 import { TabCount, Tabs, TabsList, TabsTrigger } from '../../ui/tabs'
@@ -192,9 +195,12 @@ export function RequestsInbox({ requests, initialId, failed }: { requests: Inbox
                   <TabsTrigger value="all">Toutes</TabsTrigger>
                 </TabsList>
               </Tabs>
-              <IconField icon={<Search />}>
-                <Input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Un nom, une commune…" aria-label="Chercher une demande" />
-              </IconField>
+              <InputGroup>
+                <InputGroupAddon>
+                  <Search />
+                </InputGroupAddon>
+                <InputGroupInput type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Un nom, une commune…" aria-label="Chercher une demande" />
+              </InputGroup>
             </div>
             {visible.length ? (
               <ul className="tw:m-0 tw:flex-1 tw:list-none tw:overflow-y-auto tw:p-0">
@@ -394,7 +400,7 @@ function RequestDetail({
             <Label htmlFor={`notes-${request.id}`}>Notes pour vous</Label>
             <Textarea id={`notes-${request.id}`} value={notes} onChange={(event) => setNotes(event.target.value)} placeholder="Ex. : rappelé le 12, visite prévue mardi." rows={3} />
             <div className="tw:flex tw:flex-wrap tw:items-center tw:justify-between tw:gap-3">
-              <FieldHint>Visibles seulement dans l’administration.</FieldHint>
+              <FieldDescription>Visibles seulement dans l’administration.</FieldDescription>
               <Button variant="outline" disabled={pending || notes === request.notes} onClick={() => onNotes(notes)}>
                 Enregistrer la note
               </Button>
