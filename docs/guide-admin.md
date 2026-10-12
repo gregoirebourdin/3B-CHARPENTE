@@ -44,6 +44,8 @@ Chaque demande arrive aussi dans votre boîte e-mail.
 
 Les petites phrases fixes (boutons, libellés, page 404) sont dans **Réglages** → **Textes du site**.
 
+**Choisir une page, une prestation, une commune, des questions.** Un clic sur la liste l’ouvre ; tapez quelques lettres, sans vous soucier des accents (« briancon » trouve Briançon), puis cliquez sur le bon nom. Quand on peut en choisir plusieurs (prestations d’un chantier, questions d’une FAQ), ils s’affichent l’un sous l’autre, numérotés : **↑ ↓** changent l’ordre (le premier compte le plus : « La première est la prestation principale »), le crayon ouvre le document pour le corriger sans quitter la page, la croix le retire. **Créer…**, en bas de la liste, ajoute une commune ou une question qui manque. Les étiquettes d’un chantier se tapent une à une, chacune validée par Entrée.
+
 **Écrire court, c’est ce qui se lit.** Trois phrases par paragraphe au plus ; une énumération va dans une liste ; une précision va dans un encadré. Pour aérer une page, **Ajouter une section** propose :
 
 | Section | À quoi elle sert |

@@ -6,6 +6,7 @@ import { RichTextField as RichTextField_683408378ded3c8ffb40e97ab56a1893 } from 
 import { TextareaField as TextareaField_cf2146a93c0bced3b73a817374b1881e } from '@/payload/admin/fields/TextareaField'
 import { EmailCell as EmailCell_206c2b7370dc2af2d6b41dcc7c87a1ac } from '@/payload/admin/components/ContactCell'
 import { ReplyActions as ReplyActions_206c2b7370dc2af2d6b41dcc7c87a1ac } from '@/payload/admin/components/ContactCell'
+import { RelationshipField as RelationshipField_c42156fb661f0de1aa87a7027301843e } from '@/payload/admin/fields/RelationshipField'
 import { UploadField as UploadField_46a14ce77a751fc702c5b97d6042c543 } from '@/payload/admin/fields/UploadField'
 import { BlockRowLabel as BlockRowLabel_957edb9058d331c66bc65bc7c33dff47 } from '@/payload/admin/components/BlockRowLabel'
 import { ExplorerNotice as ExplorerNotice_6037e6e625d7e068ef472f1710f335b4 } from '@/payload/admin/components/Notice'
@@ -16,6 +17,7 @@ import { GooglePreview as GooglePreview_4e605487b7433ef7806d344646689bf5 } from 
 import { SeoLengthField as SeoLengthField_17a47c89d436e56e46778841bf7ee565 } from '@/payload/admin/fields/SeoLengthField'
 import { ContentListView as ContentListView_d351058d3534fe5573a96dce1ffca315 } from '@/payload/admin/views/list/ContentListView'
 import { DateField as DateField_6015cd4fbe7d848e3aac64676dd21a00 } from '@/payload/admin/fields/DateField'
+import { TagsField as TagsField_a7562b4ca4936fa39ff0de35744d477b } from '@/payload/admin/fields/TagsField'
 import { PhotoLibraryView as PhotoLibraryView_c64f82810f06f622896fcbe0a97e7440 } from '@/payload/admin/views/list/PhotoLibraryView'
 import { RadioField as RadioField_cc4cb1b9fce64d43e3c6d253e2a7f93f } from '@/payload/admin/fields/RadioField'
 import { AdminNav as AdminNav_05184afed72cf43bcceaeb537700561f } from '@/payload/admin/nav/AdminNav'
@@ -41,6 +43,7 @@ export const importMap = {
   "@/payload/admin/fields/TextareaField#TextareaField": TextareaField_cf2146a93c0bced3b73a817374b1881e,
   "@/payload/admin/components/ContactCell#EmailCell": EmailCell_206c2b7370dc2af2d6b41dcc7c87a1ac,
   "@/payload/admin/components/ContactCell#ReplyActions": ReplyActions_206c2b7370dc2af2d6b41dcc7c87a1ac,
+  "@/payload/admin/fields/RelationshipField#RelationshipField": RelationshipField_c42156fb661f0de1aa87a7027301843e,
   "@/payload/admin/fields/UploadField#UploadField": UploadField_46a14ce77a751fc702c5b97d6042c543,
   "@/payload/admin/components/BlockRowLabel#BlockRowLabel": BlockRowLabel_957edb9058d331c66bc65bc7c33dff47,
   "@/payload/admin/components/Notice#ExplorerNotice": ExplorerNotice_6037e6e625d7e068ef472f1710f335b4,
@@ -51,6 +54,7 @@ export const importMap = {
   "@/payload/admin/fields/SeoLengthField#SeoLengthField": SeoLengthField_17a47c89d436e56e46778841bf7ee565,
   "@/payload/admin/views/list/ContentListView#ContentListView": ContentListView_d351058d3534fe5573a96dce1ffca315,
   "@/payload/admin/fields/DateField#DateField": DateField_6015cd4fbe7d848e3aac64676dd21a00,
+  "@/payload/admin/fields/TagsField#TagsField": TagsField_a7562b4ca4936fa39ff0de35744d477b,
   "@/payload/admin/views/list/PhotoLibraryView#PhotoLibraryView": PhotoLibraryView_c64f82810f06f622896fcbe0a97e7440,
   "@/payload/admin/fields/RadioField#RadioField": RadioField_cc4cb1b9fce64d43e3c6d253e2a7f93f,
   "@/payload/admin/nav/AdminNav#AdminNav": AdminNav_05184afed72cf43bcceaeb537700561f,

@@ -45,7 +45,7 @@ export const ServicesGridBlock: Block = {
       label: 'Prestations',
       admin: {
         condition: (_, siblingData) => siblingData?.mode === 'manual',
-        description: 'Glissez pour changer l’ordre.',
+        description: 'Les flèches ↑ ↓ changent l’ordre.',
       },
     },
     optionalLink({ name: 'cta', label: 'Bouton sous les cartes (facultatif)' }),

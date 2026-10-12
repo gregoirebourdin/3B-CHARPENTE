@@ -13,10 +13,11 @@ const COMPONENTS: Partial<Record<Field['type'], string>> = {
   radio: `${BASE}/RadioField#RadioField`,
   upload: `${BASE}/UploadField#UploadField`,
   date: `${BASE}/DateField#DateField`,
+  relationship: `${BASE}/RelationshipField#RelationshipField`,
 }
 
 /** Types whose component also handles lists of values (hasMany). */
-const HANDLES_MANY = new Set<Field['type']>(['upload'])
+const HANDLES_MANY = new Set<Field['type']>(['upload', 'relationship', 'text'])
 
 /** Our date picker chooses a day: dates with a time, a month or a time zone keep Payload's. */
 const isDayOnly = (field: AnyField) => {
@@ -43,10 +44,12 @@ function withComponents(fields: Field[] | undefined): Field[] | undefined {
     if (field.type === 'blocks' && field.blocks) {
       return { ...field, blocks: field.blocks.map((block) => (typeof block === 'string' ? block : withBlock(block))) } as Field
     }
-    const component = COMPONENTS[field.type]
+    // A list of words (text with hasMany): our tag field.
+    const component = field.type === 'text' && field.hasMany ? `${BASE}/TagsField#TagsField` : COMPONENTS[field.type]
     // Fields with their own component (SEO counters, notices…), hidden ones and lists of values keep theirs.
     if (!component || field.admin?.hidden || field.admin?.components?.Field || (field.hasMany && !HANDLES_MANY.has(field.type))) return input
     if (field.type === 'date' && !isDayOnly(field)) return input
+    if (field.type === 'relationship' && (field.admin as { appearance?: string } | undefined)?.appearance === 'drawer') return input
     return { ...field, admin: { ...field.admin, components: { ...field.admin?.components, Field: component } } } as Field
   })
 }
