@@ -183,6 +183,7 @@ export const GalleryBlock: Block = {
       labels: { singular: 'Photo', plural: 'Photos' },
       minRows: 1,
       maxRows: 40,
+      admin: { initCollapsed: true, components: { RowLabel: '@/payload/admin/components/PhotoRowLabel#PhotoRowLabel' } },
       fields: [
         { name: 'image', type: 'upload', relationTo: 'media', required: true, label: 'Photo' },
         {

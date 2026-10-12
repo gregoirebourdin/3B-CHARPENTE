@@ -217,6 +217,8 @@ export const Projects: CollectionConfig = {
               maxRows: 40,
               admin: {
                 description: 'Glissez-déposez pour changer l’ordre (ordre du chantier : avant, taille, levage, terminé).',
+                initCollapsed: true,
+                components: { RowLabel: '@/payload/admin/components/PhotoRowLabel#PhotoRowLabel' },
               },
               fields: [
                 { name: 'image', type: 'upload', relationTo: 'media', required: true, label: 'Photo' },

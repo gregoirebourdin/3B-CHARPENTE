@@ -968,6 +968,41 @@ html[data-theme='dark'] .tb-brand-logo__dark {
   border-radius: 6px;
 }
 
+// A photo's own page: the picture large enough to see what it shows
+// (Payload shows a 112 px square). The file name next to it opens it full size.
+.file-field .file-details {
+  overflow: hidden;
+
+  header {
+    align-items: stretch;
+  }
+
+  .file-details__thumbnail {
+    width: min(100%, 420px);
+    max-height: none;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+    border-radius: 0;
+    background: var(--c-night);
+
+    img {
+      display: block;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .file-details__main-detail {
+    flex: 1 1 280px;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  .file-meta__url a {
+    overflow-wrap: anywhere;
+  }
+}
+
 // Empty photo field: a dashed drop zone, like the chantier assistant
 .dropzone,
 .upload__dropzoneContent {

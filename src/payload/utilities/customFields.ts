@@ -11,7 +11,11 @@ const COMPONENTS: Partial<Record<Field['type'], string>> = {
   select: `${BASE}/SelectField#SelectField`,
   checkbox: `${BASE}/CheckboxField#CheckboxField`,
   radio: `${BASE}/RadioField#RadioField`,
+  upload: `${BASE}/UploadField#UploadField`,
 }
+
+/** Types whose component also handles lists of values (hasMany). */
+const HANDLES_MANY = new Set<Field['type']>(['upload'])
 
 type AnyField = Field & { admin?: { hidden?: boolean; components?: { Field?: unknown } }; hasMany?: boolean; fields?: Field[]; tabs?: { fields: Field[] }[]; blocks?: (Block | string)[] }
 
@@ -34,7 +38,7 @@ function withComponents(fields: Field[] | undefined): Field[] | undefined {
     }
     const component = COMPONENTS[field.type]
     // Fields with their own component (SEO counters, notices…), hidden ones and lists of values keep theirs.
-    if (!component || field.admin?.hidden || field.admin?.components?.Field || field.hasMany) return input
+    if (!component || field.admin?.hidden || field.admin?.components?.Field || (field.hasMany && !HANDLES_MANY.has(field.type))) return input
     return { ...field, admin: { ...field.admin, components: { ...field.admin?.components, Field: component } } } as Field
   })
 }

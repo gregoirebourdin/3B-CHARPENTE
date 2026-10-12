@@ -9,6 +9,8 @@ type MediaDoc = {
   kind?: Photo['kind'] | null
   filename?: string | null
   url?: string | null
+  width?: number | null
+  height?: number | null
   sizes?: { thumbnail?: { url?: string | null } | null } | null
   updatedAt: string
 }
@@ -29,7 +31,7 @@ export async function PhotoLibraryView({ payload, user, hasCreatePermission, new
       limit: 2000,
       pagination: false,
       sort: '-createdAt',
-      select: { alt: true, caption: true, kind: true, filename: true, url: true, sizes: { thumbnail: true }, updatedAt: true },
+      select: { alt: true, caption: true, kind: true, filename: true, url: true, width: true, height: true, sizes: { thumbnail: true }, updatedAt: true },
     })
     photos = (docs as unknown as MediaDoc[]).map((doc) => ({
       id: doc.id,
@@ -38,6 +40,9 @@ export async function PhotoLibraryView({ payload, user, hasCreatePermission, new
       kind: doc.kind ?? 'chantier',
       filename: doc.filename ?? '',
       thumbnail: doc.sizes?.thumbnail?.url || doc.url || null,
+      full: doc.url || doc.sizes?.thumbnail?.url || null,
+      width: doc.width ?? null,
+      height: doc.height ?? null,
       updatedAt: doc.updatedAt,
     }))
   } catch (error) {

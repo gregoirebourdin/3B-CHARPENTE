@@ -10,7 +10,7 @@ export const Dialog = DialogPrimitive.Root
 export const DialogTrigger = DialogPrimitive.Trigger
 export const DialogClose = DialogPrimitive.Close
 
-export function DialogContent({ className, children, ...props }: ComponentProps<typeof DialogPrimitive.Content>) {
+export function DialogContent({ className, children, showCloseButton = true, ...props }: ComponentProps<typeof DialogPrimitive.Content> & { showCloseButton?: boolean }) {
   return (
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay className="tw:fixed tw:inset-0 tw:z-[1000] tw:bg-night/50" />
@@ -23,10 +23,12 @@ export function DialogContent({ className, children, ...props }: ComponentProps<
         {...props}
       >
         {children}
-        <DialogPrimitive.Close className="tw:absolute tw:top-3 tw:right-3 tw:grid tw:size-11 tw:cursor-pointer tw:place-items-center tw:rounded-xs tw:border-0 tw:bg-transparent tw:text-stone-text tw:hover:bg-surface tw:hover:text-ink">
-          <XIcon className="tw:size-5" />
-          <span className="tw:sr-only">Fermer</span>
-        </DialogPrimitive.Close>
+        {showCloseButton ? (
+          <DialogPrimitive.Close className="tw:absolute tw:top-3 tw:right-3 tw:grid tw:size-11 tw:cursor-pointer tw:place-items-center tw:rounded-xs tw:border-0 tw:bg-transparent tw:text-stone-text tw:hover:bg-surface tw:hover:text-ink">
+            <XIcon className="tw:size-5" />
+            <span className="tw:sr-only">Fermer</span>
+          </DialogPrimitive.Close>
+        ) : null}
       </DialogPrimitive.Content>
     </DialogPrimitive.Portal>
   )

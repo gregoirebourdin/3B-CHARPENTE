@@ -6,8 +6,10 @@ import { RichTextField as RichTextField_683408378ded3c8ffb40e97ab56a1893 } from 
 import { TextareaField as TextareaField_cf2146a93c0bced3b73a817374b1881e } from '@/payload/admin/fields/TextareaField'
 import { EmailCell as EmailCell_206c2b7370dc2af2d6b41dcc7c87a1ac } from '@/payload/admin/components/ContactCell'
 import { ReplyActions as ReplyActions_206c2b7370dc2af2d6b41dcc7c87a1ac } from '@/payload/admin/components/ContactCell'
+import { UploadField as UploadField_46a14ce77a751fc702c5b97d6042c543 } from '@/payload/admin/fields/UploadField'
 import { BlockRowLabel as BlockRowLabel_957edb9058d331c66bc65bc7c33dff47 } from '@/payload/admin/components/BlockRowLabel'
 import { ExplorerNotice as ExplorerNotice_6037e6e625d7e068ef472f1710f335b4 } from '@/payload/admin/components/Notice'
+import { PhotoRowLabel as PhotoRowLabel_213ad8027b058cdc3da5cfbaab43caf9 } from '@/payload/admin/components/PhotoRowLabel'
 import { ProofsNotice as ProofsNotice_6037e6e625d7e068ef472f1710f335b4 } from '@/payload/admin/components/Notice'
 import { ReviewsNotice as ReviewsNotice_6037e6e625d7e068ef472f1710f335b4 } from '@/payload/admin/components/Notice'
 import { GooglePreview as GooglePreview_4e605487b7433ef7806d344646689bf5 } from '@/payload/admin/fields/GooglePreview'
@@ -38,8 +40,10 @@ export const importMap = {
   "@/payload/admin/fields/TextareaField#TextareaField": TextareaField_cf2146a93c0bced3b73a817374b1881e,
   "@/payload/admin/components/ContactCell#EmailCell": EmailCell_206c2b7370dc2af2d6b41dcc7c87a1ac,
   "@/payload/admin/components/ContactCell#ReplyActions": ReplyActions_206c2b7370dc2af2d6b41dcc7c87a1ac,
+  "@/payload/admin/fields/UploadField#UploadField": UploadField_46a14ce77a751fc702c5b97d6042c543,
   "@/payload/admin/components/BlockRowLabel#BlockRowLabel": BlockRowLabel_957edb9058d331c66bc65bc7c33dff47,
   "@/payload/admin/components/Notice#ExplorerNotice": ExplorerNotice_6037e6e625d7e068ef472f1710f335b4,
+  "@/payload/admin/components/PhotoRowLabel#PhotoRowLabel": PhotoRowLabel_213ad8027b058cdc3da5cfbaab43caf9,
   "@/payload/admin/components/Notice#ProofsNotice": ProofsNotice_6037e6e625d7e068ef472f1710f335b4,
   "@/payload/admin/components/Notice#ReviewsNotice": ReviewsNotice_6037e6e625d7e068ef472f1710f335b4,
   "@/payload/admin/fields/GooglePreview#GooglePreview": GooglePreview_4e605487b7433ef7806d344646689bf5,

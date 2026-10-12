@@ -60,14 +60,32 @@ Si un texte paraît long dans l’aperçu, coupez-le en deux paragraphes ou pass
 ![Haut de page d’une page](captures/admin/12-page-haut-de-page.webp)
 ![Sections d’une page, chacune avec son titre](captures/admin/13-page-sections.webp)
 
-## 3. Remplacer une photo
+## 3. Les photos
+
+**Voir une photo en grand.** Partout (dans **Photos**, sur une page, sur un chantier), un clic sur la photo l’ouvre en grand. Les flèches à l’écran ou du clavier passent à la suivante ; **Fermer** ou la touche Échap referme.
+
+**Changer la photo d’une page ou d’un chantier.** Chaque champ photo montre la photo choisie, avec ses boutons :
+
+- **Changer** ouvre vos photos : cliquez sur celle à mettre à la place (la loupe l’affiche d’abord en grand). La photo déjà en place est marquée « Déjà choisie ».
+- **Envoyer une nouvelle photo** (dans la même fenêtre) ajoute une photo de votre ordinateur et la met directement dans le champ.
+- **Description** corrige le texte alternatif et la légende de la photo, sans quitter la page.
+- **Retirer** vide le champ (la photo reste dans **Photos**).
+
+Certains champs ne proposent que les photos qui conviennent : le fond assombri d’un haut de page n’accepte que les photos « Ambiance ». Dans les galeries, chaque ligne repliée montre sa vignette et sa légende.
+
+![Champ photo d’un chantier](captures/admin/24-champ-photo.webp)
+![Choisir une photo](captures/admin/25-choisir-photo.webp)
+![Une photo en grand](captures/admin/26-photo-en-grand.webp)
+
+**Remplacer une photo partout sur le site.**
 
 1. Cliquez sur **Photos** et cherchez la photo par ce qu’elle montre ou par sa commune.
-2. Ouvrez-la, cliquez sur la **croix** à droite du fichier, puis déposez la nouvelle photo.
+2. Cliquez sur sa description pour l’ouvrir, cliquez sur la **croix** à droite du fichier, puis déposez la nouvelle photo.
 3. Vérifiez le **texte alternatif** : il décrit la photo aux personnes aveugles et à Google.
 4. **Enregistrer**. Toutes les pages qui utilisaient la photo affichent la nouvelle.
 
 ![Photothèque](captures/admin/16-photos.webp)
+![Fiche d’une photo](captures/admin/17-photo-fiche.webp)
 ![Remplacer le fichier d’une photo](captures/admin/18-photo-remplacer.webp)
 
 ## 4. Ajouter un chantier
