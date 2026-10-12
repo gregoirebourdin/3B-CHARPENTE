@@ -20,7 +20,7 @@ export const toneField: Field = {
   defaultValue: 'cream',
   options: [
     { label: 'Crème (par défaut)', value: 'cream' },
-    { label: 'Clair (gris-vert très pâle)', value: 'light' },
+    { label: 'Blanc', value: 'light' },
   ],
   admin: { description: 'Alternez les fonds pour rythmer la page.' },
 }

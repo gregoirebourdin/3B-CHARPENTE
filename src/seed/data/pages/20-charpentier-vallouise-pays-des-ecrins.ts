@@ -15,15 +15,16 @@ export const page: SeedPage = {
     variant: 'map',
     kicker: 'Charpente · Isolation · Réemploi · Balcons',
     title: "Charpentier à **L'Argentière-la-Bessée**, en Vallouise et dans le Pays des Écrins",
-    text: "3B Charpente est installée au 5 rue Saint-Michel, à L'Argentière-la-Bessée, là où la Gyronde rejoint la Durance. C'est ici, dans le Pays des Écrins, que se trouve la moitié de nos chantiers publiés : charpentes, toitures, chalets, balcons et abris. Nous travaillons le **bois des Hautes-Alpes** et des **isolants biosourcés**.",
+    text: 'Nous sommes installés ici, au 5 rue Saint-Michel, là où la Gyronde rejoint la Durance. **La moitié de nos chantiers publiés** sont dans le Pays des Écrins : charpentes, toitures, chalets, balcons, abris.',
     primaryCta: { label: 'Demander mon devis', href: '/contact/' },
     secondaryCta: {
       label: 'Voir nos chantiers du secteur',
       href: '/charpentier-vallouise-pays-des-ecrins/#chantiers',
     },
     proofs: [
-      { label: 'Depuis 2007', icon: 'calendar' },
-      { label: 'Entreprise RGE', icon: 'medal' },
+      { label: 'Depuis 2007', text: "à L'Argentière-la-Bessée", icon: 'calendar' },
+      { label: 'Entreprise RGE', text: 'Qualibat', icon: 'medal' },
+      { label: '11 chantiers', text: 'dans le Pays des Écrins', icon: 'mapPin' },
     ],
     images: [
       'refection-d-une-charpente-a-l-argentiere-la-bessee/lucarne en cours de levage.JPG',
@@ -31,9 +32,9 @@ export const page: SeedPage = {
       'renovation-et-isolation-d-un-chalet-a-vallouise/10. Terrasse en mélèze et ses assemblages traditionnels.JPG',
     ],
   },
-  tldr: "3B Charpente est un charpentier installé à L'Argentière-la-Bessée depuis 2007, au cœur du Pays des Écrins. Onze de nos chantiers publiés se trouvent dans le secteur : réfection de charpente, isolation de toiture, chalet rénové à Vallouise, surélévation à Pelvoux, balcons, terrasse et abris. Bois des Hautes-Alpes, isolants biosourcés et bois de réemploi.",
+  tldr: "3B Charpente, charpentier à L'Argentière-la-Bessée depuis 2007, au cœur du Pays des Écrins. Onze de nos chantiers publiés sont dans le secteur : réfection de charpente, isolation de toiture, chalet rénové à Vallouise, surélévation à Pelvoux, balcons, terrasse et abris. Bois des Hautes-Alpes, isolants biosourcés, bois de réemploi.",
   layout: [
-    // Section 3 — Nos chantiers à L'Argentière-la-Bessée
+    // Nos chantiers à L'Argentière-la-Bessée
     {
       type: 'projects',
       anchor: 'chantiers',
@@ -45,28 +46,29 @@ export const page: SeedPage = {
         {
           project: 'refection-d-une-charpente-a-l-argentiere-la-bessee',
           title: "Réfection d'une charpente avec lucarne",
-          text: "Dépose de l'ancienne charpente, tenon taillé à la besaiguë, trait de Jupiter, assemblage à blanc, levage des fermes, lucarne, bardage et plancher en mélèze.",
+          text: 'Tenon taillé à la besaiguë, trait de Jupiter, assemblage à blanc, lucarne, plancher en mélèze.',
         },
         {
           project: 'isolation-d-une-toiture-ancienne-a-l-argentiere-la-bessee',
           title: "Isolation d'une toiture ancienne",
-          text: "Renfort de la charpente, étanchéité à l'air, panneaux en fibre de bois, fenêtre de toit et couverture.",
+          text: "Charpente renforcée, étanchéité à l'air, fibre de bois, fenêtre de toit.",
         },
         {
           project: 'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee',
           title: "Rénovation d'une maison d'habitation",
-          text: 'Pignon vitré, bardage en vieux bois, garde-corps en bois de réemploi, escalier balancé et balcon.',
+          text: 'Pignon vitré, bardage en vieux bois, garde-corps de réemploi, escalier balancé.',
         },
         {
           project: 'abris-voiture-a-l-argentiere-la-bessee',
           title: 'Abri voiture en charpente traditionnelle',
-          text: 'Une ferme avec poinçon et entrait cintré, assemblée par tenons et mortaises chevillés.',
+          text: 'Poinçon, entrait cintré, tenons et mortaises chevillés.',
         },
       ],
     },
-    // Section 4 — Nos chantiers en Vallouise et dans le Pays des Écrins
+    // Nos chantiers en Vallouise et dans le Pays des Écrins
     {
       type: 'projects',
+      tone: 'light',
       kicker: 'Dans le Pays des Écrins',
       title: 'De **Vallouise** à La Roche-de-Rame',
       mode: 'manual',
@@ -75,56 +77,67 @@ export const page: SeedPage = {
         {
           project: 'renovation-et-isolation-d-un-chalet-a-vallouise',
           title: 'Chalet rénové et isolé',
-          text: "Un chalet des années 1980 entièrement rénové : 28 cm d'isolants biosourcés dans les murs, 32 cm en toiture, bardage en mélèze et terrasse agrandie.",
+          text: "28 cm d'isolant biosourcé dans les murs, 32 cm en toiture, terrasse agrandie.",
         },
         {
           project: 'surelevation-a-pelvoux',
           title: 'Surélévation',
-          text: 'Une surélévation, avec une dépassée de toit portée par des consoles.',
+          text: 'Une dépassée de toit portée par des consoles.',
         },
         {
           project: 'creation-d-un-abris-de-jardin-a-pelvoux',
           title: 'Abri de jardin',
-          text: "Un abri de jardin, du levage de la structure à l'abri terminé.",
+          text: "Du levage de la structure à l'abri terminé.",
         },
         {
           project: 'renovation-energetique-et-ouverture-d-une-lucarne-a-saint-martin-de-queyriere',
           title: 'Rénovation énergétique et lucarne',
-          text: "Ouverture d'une lucarne, étanchéité à l'air et caissons d'isolation.",
+          text: "Lucarne ouverte, étanchéité à l'air, caissons d'isolation.",
         },
         {
           project: 'renovation-d-une-maison-d-habitation-sur-la-commune-de-prelles',
           title: 'Maison en mélèze de pays',
-          text: 'Taille de la charpente, assemblage à blanc, levage du solivage, terrasse en mélèze et garde-corps bois-métal.',
+          text: 'Charpente taillée, terrasse en mélèze, garde-corps bois-métal.',
         },
         {
           project: 'construction-d-une-terrasse-couverte-a-champcella',
           title: 'Terrasse couverte',
-          text: 'Terrasse couverte avec local technique, abri voiture dans le prolongement du toit, plancher en mélèze de pays.',
+          text: 'Local technique et abri voiture sous le même toit.',
         },
         {
           project: 'creation-d-un-balcon-a-la-roche-de-rame',
           title: 'Balcon en mélèze',
-          text: 'Un balcon en mélèze porté par des portiques, avec sa balustrade.',
+          text: 'Porté par des portiques, avec sa balustrade.',
         },
       ],
     },
-    // Section 5 — Le bâti du pays
+    // Le bâti du pays
     {
       type: 'textImage',
       kicker: 'Le bâti du pays',
       title: 'Maisons de pays, chalets et **vieux bois**',
-      text: "Entre L'Argentière-la-Bessée et les villages de la Vallouise, le bâti raconte plusieurs époques : maisons de pays en pierre et en bois, granges, chalets des années 1980 comme celui que nous avons rénové à Vallouise, maisons plus récentes. Quand la charpente d'origine peut être gardée, nous la reprenons et la renforçons. Quand elle ne peut plus l'être, nous la refaisons, comme à L'Argentière-la-Bessée.\n\nIci, l'hiver est long et l'altitude monte vite, des bords de la Durance aux hameaux de Pelvoux, au pied des Écrins. Les toitures doivent porter la neige, et une bonne isolation change le confort d'hiver comme d'été. Aux portes du Parc national des Écrins comme ailleurs, renseignez-vous en mairie sur les règles d'urbanisme avant de modifier un toit ou une façade.\n\nLe réemploi a toute sa place dans ce bâti. Les vieux bois récupérés lors d'une déconstruction peuvent retrouver une place dans une rénovation. C'est le cas du bardage en vieux bois et du garde-corps de réemploi de la maison rénovée à L'Argentière-la-Bessée.",
+      text: "Maisons de pays en pierre et en bois, granges, chalets des années 1980, maisons récentes : **le bâti raconte plusieurs époques**. L'hiver est long, et l'altitude monte vite des bords de la Durance aux hameaux de Pelvoux.",
+      points: [
+        'Une charpente qui peut être gardée, nous la reprenons et la renforçons ; sinon, nous la refaisons',
+        "Les toitures portent la neige : une bonne isolation change le confort d'hiver comme d'été",
+        "Les vieux bois de déconstruction retrouvent une place, comme le bardage de L'Argentière-la-Bessée",
+      ],
       images: [
         'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/06Bardage vieux bois.JPG',
       ],
       imagePosition: 'right',
     },
-    // Section 6 — Nos prestations dans le Pays des Écrins
+    {
+      type: 'callout',
+      kind: 'tip',
+      text: "Aux portes du Parc national des Écrins comme ailleurs, renseignez-vous en mairie sur les règles d'urbanisme avant de modifier un toit ou une façade.",
+    },
+    // Nos prestations
     {
       type: 'cards',
       variant: 'index',
       columns: 3,
+      tone: 'light',
       kicker: 'Ce que nous faisons',
       title: 'Nos **prestations** en Vallouise et autour',
       items: [
@@ -146,19 +159,19 @@ export const page: SeedPage = {
         {
           title: 'Isolation biosourcée',
           icon: 'leaf',
-          text: 'Chanvre, lin, coton, fibre de bois ou ouate de cellulose, posés par une entreprise RGE.',
+          text: 'Chanvre, lin, coton, fibre de bois ou ouate, posés par une entreprise RGE.',
           link: { label: 'Isolation biosourcée', href: '/isolation-biosourcee/' },
         },
         {
           title: 'Isolation de toiture',
           icon: 'layers',
-          text: 'Isoler un toit ancien, y compris par le sarking : un isolant continu posé au-dessus des chevrons.',
+          text: 'Isoler un toit ancien, y compris par sarking, au-dessus des chevrons.',
           link: { label: 'Isolation de toiture', href: '/isolation-toiture-sarking/' },
         },
         {
           title: 'Isolation des murs',
           icon: 'wall',
-          text: "L'ITE, ou isolation thermique par l'extérieur, et l'isolation par l'intérieur du bâti ancien.",
+          text: "Par l'extérieur (ITE), ou par l'intérieur pour le bâti ancien.",
           link: { label: 'Isolation des murs', href: '/isolation-murs-ite/' },
         },
         {
@@ -176,35 +189,42 @@ export const page: SeedPage = {
         {
           title: 'Escaliers sur mesure',
           icon: 'stairs',
-          text: 'Quart tournant, balancé ou en bois debout, dessinés pour votre maison.',
+          text: 'Quart tournant, balancé ou en bois debout.',
           link: { label: 'Escaliers sur mesure', href: '/escalier-bois-sur-mesure/' },
         },
         {
           title: 'Balcons, terrasses et abris',
           icon: 'balcony',
-          text: 'Balcons, terrasses couvertes, abris voiture et abris de jardin.',
+          text: 'Balcons, terrasses couvertes, abris voiture et de jardin.',
           link: { label: 'Balcons, terrasses et abris', href: '/balcon-terrasse-abri-bois/' },
         },
       ],
     },
-    // Section 7 — Bois local et réemploi
+    // Bois local et réemploi
     {
       type: 'manifesto',
       layout: 'split',
       kicker: 'Bois local et réemploi',
       title: 'Du bois **local**, et du bois qui **reprend vie**',
-      text: "Notre bois vient des Hautes-Alpes : « principalement du mélèze et du sapin provenant des Hautes-Alpes et sciés par notre partenaire local : la Scierie Savoldelli ». C'est aussi depuis L'Argentière-la-Bessée que 3B Récup', notre initiative dédiée au réemploi des matériaux et à la déconstruction sélective, intervient. Nous déposons la structure bois sur le chantier de déconstruction ; le bois est trié, nettoyé et usiné dans nos ateliers, puis reposé sur nos chantiers. Notre qualification RGE ouvre l'accès aux aides publiques à la rénovation énergétique, sous conditions.\n\n[Le bois de réemploi](/3b-recup/bois-de-reemploi/)",
+      text: "Surtout du **mélèze et du sapin des Hautes-Alpes**, sciés par notre partenaire local, la Scierie Savoldelli. Et c'est d'ici, de L'Argentière-la-Bessée, que part 3B Récup', notre filière de déconstruction et de réemploi.",
+      items: [
+        { title: 'Déposer', text: 'La structure bois, sur le chantier de déconstruction.' },
+        { title: 'Préparer', text: 'Le bois est trié, nettoyé et usiné dans nos ateliers.' },
+        { title: 'Reposer', text: 'Sur nos chantiers : bardage, garde-corps, charpente.' },
+      ],
+      emphasis:
+        "Notre qualification RGE ouvre l'accès aux aides publiques à la rénovation, sous conditions.",
       image:
         'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/08Garde corps en bois de réemploi.JPG',
-      cta: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
+      cta: { label: 'Le bois de réemploi', href: '/3b-recup/bois-de-reemploi/' },
     },
-    // Section 8 — Communes desservies
+    // Communes desservies
     {
       type: 'serviceArea',
       tone: 'cream',
       kicker: 'Où nous intervenons',
       title: 'Tout le **Pays des Écrins**',
-      text: "Nous intervenons dans les communes du Pays des Écrins, autour de notre base de L'Argentière-la-Bessée : L'Argentière-la-Bessée, Vallouise-Pelvoux (Vallouise, Pelvoux), Saint-Martin-de-Queyrières (dont Prelles), Champcella, La Roche-de-Rame et les communes voisines. Plus largement, « nous intervenons dans les Hautes-Alpes mais aussi en région PACA et Rhône-Alpes ».",
+      text: "L'Argentière-la-Bessée, Vallouise-Pelvoux, Saint-Martin-de-Queyrières (dont Prelles), Champcella, La Roche-de-Rame et les communes voisines. Plus largement, les Hautes-Alpes, la région PACA et Rhône-Alpes.",
       sectors: [
         {
           title: 'Charpentier à Briançon',
@@ -219,9 +239,10 @@ export const page: SeedPage = {
       ],
       showMap: false,
     },
-    // Section 9 — FAQ
+    // FAQ
     {
       type: 'faq',
+      tone: 'light',
       kicker: 'Questions fréquentes',
       title: 'Vos questions sur un chantier en **Vallouise** et autour',
       faqs: [
@@ -232,12 +253,13 @@ export const page: SeedPage = {
         'charpentier-vallouise-pays-des-ecrins-q5',
       ],
     },
-    // Section 10 — Appel à l'action, coordonnées et plan d'accès
+    // Appel à l'action
     {
       type: 'cta',
       variant: 'card',
-      title: 'Un projet près de **chez nous** ?',
-      text: "Chaque projet chez 3B Charpente débute par une étude sur mesure. Nous sommes à L'Argentière-la-Bessée : parlons du vôtre.",
+      kicker: 'Votre projet',
+      title: 'Un projet près de **chez nous** ?',
+      text: "Nous sommes à L'Argentière-la-Bessée. Chaque projet débute par une étude sur mesure : parlons du vôtre.",
       primary: { label: 'Demander mon devis', href: '/contact/' },
       secondary: { label: 'Appeler le {telephone}', href: 'tel' },
       showAddress: true,
@@ -247,37 +269,37 @@ export const page: SeedPage = {
     {
       key: 'charpentier-vallouise-pays-des-ecrins-q1',
       topic: 'secteurs',
-      question: 'Où se trouve 3B Charpente ?',
+      question: 'Où se trouve 3B Charpente ?',
       answer:
-        "3B Charpente est installée au 5 rue Saint-Michel, 05120 L'Argentière-la-Bessée, dans les Hautes-Alpes. C'est l'entreprise individuelle de Jean-Michel Tardy, charpentier formé chez les Compagnons du Devoir, créée en 2007. Vous pouvez nous joindre au 06 34 67 31 49 ou par e-mail à tardy@3bcharpente.fr.",
+        "Au 5 rue Saint-Michel, 05120 L'Argentière-la-Bessée, dans les Hautes-Alpes. C'est l'entreprise individuelle de Jean-Michel Tardy, charpentier formé chez les Compagnons du Devoir, créée en 2007. Joignez-nous au 06 34 67 31 49 ou à tardy@3bcharpente.fr.",
     },
     {
       key: 'charpentier-vallouise-pays-des-ecrins-q2',
       topic: 'secteurs',
-      question: 'Intervenez-vous à Vallouise et à Pelvoux ?',
+      question: 'Intervenez-vous à Vallouise et à Pelvoux ?',
       answer:
-        "Oui. À Vallouise, nous avons rénové et isolé un chalet des années 1980 et agrandi son balcon en terrasse. À Pelvoux, nous avons réalisé une surélévation et un abri de jardin. Nous intervenons aussi dans les communes voisines du Pays des Écrins, de L'Argentière-la-Bessée à Saint-Martin-de-Queyrières, Champcella et La Roche-de-Rame.",
+        "Oui. À Vallouise, nous avons rénové et isolé un chalet des années 1980 et agrandi son balcon en terrasse. À Pelvoux, une surélévation et un abri de jardin. Et dans tout le Pays des Écrins, de L'Argentière-la-Bessée à Saint-Martin-de-Queyrières, Champcella et La Roche-de-Rame.",
     },
     {
       key: 'charpentier-vallouise-pays-des-ecrins-q3',
       topic: 'secteurs',
-      question: 'Pouvez-vous rénover et isoler un chalet ?',
+      question: 'Pouvez-vous rénover et isoler un chalet ?',
       answer:
-        "Oui. À Vallouise, nous avons entièrement rénové et isolé un chalet des années 1980 : 28 cm de laine de chanvre, lin et coton et de fibre de bois dans les murs, 32 cm en toiture. Une partie des façades a reçu un bardage en mélèze, l'autre un enduit sur fibre de bois. Des ouvertures ont été créées ou modifiées, et la terrasse a été agrandie.",
+        "Oui. À Vallouise, un chalet des années 1980 entièrement rénové et isolé : 28 cm de laine de chanvre, lin et coton et de fibre de bois dans les murs, 32 cm en toiture. Bardage en mélèze d'un côté, enduit sur fibre de bois de l'autre, ouvertures créées ou modifiées, terrasse agrandie.",
     },
     {
       key: 'charpentier-vallouise-pays-des-ecrins-q4',
       topic: 'secteurs',
-      question: 'Utilisez-vous du bois de réemploi dans vos rénovations ?',
+      question: 'Utilisez-vous du bois de réemploi dans vos rénovations ?',
       answer:
-        "Oui. À L'Argentière-la-Bessée, une maison que nous avons rénovée a reçu un bardage en vieux bois et un garde-corps en bois de réemploi. Avec 3B Récup', nous intervenons sur des chantiers de déconstruction ; le bois récupéré est trié, nettoyé et usiné dans nos ateliers, puis réemployé sur nos chantiers de construction et de rénovation.",
+        "Oui. À L'Argentière-la-Bessée, une maison rénovée a reçu un bardage en vieux bois et un garde-corps en bois de réemploi. Avec 3B Récup', le bois de déconstruction est trié, nettoyé et usiné dans nos ateliers, puis réemployé sur nos chantiers.",
     },
     {
       key: 'charpentier-vallouise-pays-des-ecrins-q5',
       topic: 'secteurs',
-      question: 'Réalisez-vous aussi les petits ouvrages : abri, balcon, terrasse ?',
+      question: 'Réalisez-vous aussi les petits ouvrages : abri, balcon, terrasse ?',
       answer:
-        "Oui. Nous avons créé un abri de jardin à Pelvoux, un abri voiture en charpente traditionnelle à L'Argentière-la-Bessée, un balcon en mélèze à La Roche-de-Rame et une terrasse couverte à Champcella. Petit ou grand, chaque projet commence par une étude sur mesure, puis un devis détaillé, adapté à votre projet.",
+        "Oui : un abri de jardin à Pelvoux, un abri voiture en charpente traditionnelle à L'Argentière-la-Bessée, un balcon en mélèze à La Roche-de-Rame, une terrasse couverte à Champcella. Petit ou grand, chaque projet commence par une étude sur mesure, puis un devis détaillé.",
     },
   ],
   photoAlts: [

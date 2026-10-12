@@ -12,7 +12,7 @@ export const project: SeedProject = {
   heroImage: 'creation-d-un-balcon-terrasse-a-gresse-en-vercors/de face.JPG',
   summary: "Un balcon terrasse, du dessin à la réalisation, vu de face, d'en haut et d'en bas.",
   description:
-    "Hors des Hautes-Alpes, à Gresse-en-Vercors, en Isère, nous avons créé un balcon-terrasse. Comme chaque projet chez nous, il a commencé par une étude sur mesure et un dessin. Comme tous nos balcons, il est conçu pour s'intégrer à l'environnement de montagne et à l'âme de la maison. Basés dans le nord des Hautes-Alpes, nous intervenons aussi en région PACA et en Rhône-Alpes.",
+    "Hors des Hautes-Alpes, à Gresse-en-Vercors, en Isère, nous avons créé un balcon-terrasse. Comme chaque projet chez nous, il a commencé par une étude sur mesure et un dessin.\n\nComme tous nos balcons, il est conçu pour s'intégrer à l'environnement de montagne et à l'âme de la maison. Basés dans le nord des Hautes-Alpes, nous intervenons aussi en région PACA et en Rhône-Alpes.",
   steps: [
     {
       title: 'Le dessin',

@@ -10,179 +10,159 @@ import type { ListBlock as Data } from '@/payload-types'
 import styles from './List.module.css'
 import type { BlockProps } from './types'
 
+type Item = NonNullable<Data['items']>[number]
+
+/**
+ * Short lines instead of a paragraph: green checks, bullets, numbers, link
+ * chips, or terms with a one-line explanation. With a text or a photo, the
+ * heading, text and photo stay on the left and the list runs on the right.
+ */
 export function List({ block, context }: BlockProps<Data>) {
   const style = block.style ?? 'checks'
   const cta = resolveLink(block.cta, context.company)
   const image = isMedia(block.image) ? block.image : null
-  const Tag = style === 'numbered' ? 'ol' : 'ul'
+  const items = block.items ?? []
+  const title = (item: Item) => (item.title ? fillTokens(item.title, context.company) : '')
 
-  const list = (
-    <Tag
-      className={`${styles.list} ${styles[style]}`}
-      data-many={(block.items?.length ?? 0) > 5 ? '' : undefined}
-    >
-      {(block.items ?? []).map((item, index) => {
-        const link = resolveLink(item.link, context.company)
-        if (style === 'pills') {
-          // A pill is one link: its title is the label.
-          const label = item.title ? fillTokens(item.title, context.company) : link?.label
+  // Short terms (years, « Ensuite », « Puis ») read as a frieze, like steps.
+  const frieze = style === 'definitions' && items.length > 1 && items.every((item) => title(item).length <= 12)
+
+  let list
+  if (style === 'pills') {
+    list = (
+      <ul className={styles.pills}>
+        {items.map((item, index) => {
+          const link = resolveLink(item.link, context.company)
+          const label = title(item) || link?.label
           return (
             <li key={item.id ?? index}>
               {link ? (
-                <CmsLink link={link} className={styles.pill}>
+                <CmsLink link={link} className={styles.pill} arrow>
                   {label}
-                  <Icon name="arrowRight" size={16} />
                 </CmsLink>
               ) : (
                 <span className={styles.pill}>{label}</span>
               )}
             </li>
           )
-        }
-        // A link that only repeats the title becomes the title itself.
-        const titleIsLink =
-          Boolean(link && item.title) &&
-          style !== 'definitions' &&
-          link!.label.trim().toLowerCase() === item.title!.trim().toLowerCase()
-        return (
-          <li key={item.id ?? index} className={styles.item}>
-            {style === 'checks' ? (
-              <span className={styles.check}>
-                <Icon name="check" size={16} />
-              </span>
-            ) : null}
-            {style === 'numbered' ? (
-              <span className={styles.number}>{String(index + 1).padStart(2, '0')}</span>
-            ) : null}
-            <div className={styles.itemBody}>
-              {item.title ? (
-                style === 'definitions' ? (
-                  <h3 className={styles.term}>{fillTokens(item.title, context.company)}</h3>
-                ) : titleIsLink ? (
-                  <CmsLink link={link} className={`${styles.itemTitle} ${styles.titleLink}`}>
-                    {fillTokens(item.title, context.company)}
-                    <Icon name="arrowRight" size={16} />
+        })}
+      </ul>
+    )
+  } else if (style === 'definitions') {
+    list = (
+      <dl className={frieze ? styles.frieze : styles.defs} data-count={items.length}>
+        {items.map((item, index) => {
+          const link = resolveLink(item.link, context.company)
+          return (
+            <div key={item.id ?? index} className={styles.def} data-reveal="">
+              <dt className={styles.term} data-year={/^\d{4}$/.test(title(item)) ? '' : undefined}>
+                {title(item)}
+              </dt>
+              <dd className={styles.definition}>
+                {item.text ? <RichText data={item.text} /> : null}
+                {link ? (
+                  <CmsLink link={link} className={styles.link} arrow>
+                    {link.label}
                   </CmsLink>
-                ) : (
-                  <strong className={styles.itemTitle}>
-                    {fillTokens(item.title, context.company)}
-                  </strong>
-                )
-              ) : null}
-              {item.text ? <RichText data={item.text} /> : null}
-              {link && !titleIsLink ? (
-                <CmsLink link={link} className={`${styles.link} link-underline`}>
-                  {link.label}
-                  <Icon name="arrowRight" size={16} />
-                </CmsLink>
-              ) : null}
+                ) : null}
+              </dd>
             </div>
-          </li>
-        )
-      })}
-    </Tag>
-  )
+          )
+        })}
+      </dl>
+    )
+  } else {
+    const Tag = style === 'numbered' ? 'ol' : 'ul'
+    list = (
+      <Tag className={`${styles.list} ${styles[style]}`} data-many={items.length > 4 && !image && !block.text ? '' : undefined}>
+        {items.map((item, index) => {
+          const link = resolveLink(item.link, context.company)
+          const titleIsLink = Boolean(link && item.title) && link!.label.trim().toLowerCase() === item.title!.trim().toLowerCase()
+          return (
+            <li key={item.id ?? index} className={styles.item}>
+              <span className={styles.mark} aria-hidden="true">
+                {style === 'checks' ? <Icon name="check" size={15} /> : style === 'numbered' ? String(index + 1).padStart(2, '0') : null}
+              </span>
+              <div className={styles.itemBody}>
+                {item.title ? (
+                  titleIsLink ? (
+                    <CmsLink link={link} className={`${styles.itemTitle} ${styles.titleLink}`} arrow>
+                      {title(item)}
+                    </CmsLink>
+                  ) : (
+                    <strong className={styles.itemTitle}>{title(item)}</strong>
+                  )
+                ) : null}
+                {item.text ? <RichText data={item.text} className={styles.itemText} /> : null}
+                {link && !titleIsLink ? (
+                  <CmsLink link={link} className={styles.link} arrow>
+                    {link.label}
+                  </CmsLink>
+                ) : null}
+              </div>
+            </li>
+          )
+        })}
+      </Tag>
+    )
+  }
 
-  if (style === 'definitions') {
-    // A lexicon between hairlines: numbered terms, or years and short words set large like a frieze.
-    const items = block.items ?? []
-    const frieze = items.length > 1 && items.every((item) => (item.title ?? '').length <= 12)
-    const cols = Math.min(items.length, frieze ? 5 : 4)
+  const heading = (
+    <SectionHeading kicker={block.kicker} title={block.title} accent={block.titleAccent} intro={block.intro} className={styles.heading} />
+  )
+  const footer = cta ? (
+    <div className={styles.cta}>
+      <CmsLink link={cta} variant="outline" arrow />
+    </div>
+  ) : null
+
+  // « Voir aussi » chips with only a kicker: one compact line.
+  if (style === 'pills' && !block.title && !block.intro && !block.text && !cta) {
+    return (
+      <Section tone={block.tone} anchor={block.anchor} spacing="tight">
+        <div className={styles.pillRow} data-reveal="">
+          {block.kicker ? <p className="kicker">{block.kicker}</p> : null}
+          {list}
+        </div>
+      </Section>
+    )
+  }
+
+  // A frieze, chips or a bare list: the heading above, the list across the page.
+  if (frieze || style === 'pills' || (!image && !block.text)) {
     return (
       <Section tone={block.tone} anchor={block.anchor}>
-        <div className={image ? styles.lexTop : styles.lexHead}>
-          <div className={styles.lexCopy}>
-            <SectionHeading
-              kicker={block.kicker}
-              title={block.title}
-              accent={block.titleAccent}
-              intro={block.intro}
-              className={styles.lexHeading}
-            />
-            {block.text && image ? (
-              <div className={styles.lexText} data-reveal="">
-                <RichText data={block.text} />
-              </div>
-            ) : null}
-          </div>
-          {block.text && !image ? (
-            <div className={styles.lexText} data-reveal="">
-              <RichText data={block.text} />
-            </div>
-          ) : null}
-          {image ? (
-            <figure className={styles.lexFigure} data-reveal="">
-              <div className={styles.lexFrame}>
-                <Media media={image} fill sizes="(min-width: 1000px) 460px, 92vw" />
-              </div>
-              {block.caption ? <figcaption>{block.caption}</figcaption> : null}
-            </figure>
-          ) : null}
+        {block.kicker || block.title || block.intro ? heading : null}
+        {block.text ? <RichText data={block.text} className={styles.lead} /> : null}
+        <div className={block.inCard ? styles.card : undefined} data-reveal="">
+          {list}
         </div>
-        <dl
-          className={`${styles.lexicon} ${frieze ? styles.frieze : ''}`}
-          data-cols={cols}
-          data-reveal=""
-        >
-          {items.map((item, index) => {
-            const link = resolveLink(item.link, context.company)
-            const term = item.title ? fillTokens(item.title, context.company) : ''
-            return (
-              <div key={item.id ?? index} className={styles.entry}>
-                <dt className={styles.entryTerm} data-year={/^\d{4}$/.test(term) ? '' : undefined}>
-                  {frieze ? null : (
-                    <span className={styles.entryNum}>{String(index + 1).padStart(2, '0')}</span>
-                  )}
-                  {term}
-                </dt>
-                <dd className={styles.entryText}>
-                  {item.text ? <RichText data={item.text} /> : null}
-                  {link ? (
-                    <CmsLink link={link} className={`${styles.link} link-underline`}>
-                      {link.label}
-                      <Icon name="arrowRight" size={16} />
-                    </CmsLink>
-                  ) : null}
-                </dd>
-              </div>
-            )
-          })}
-        </dl>
-        {cta ? (
-          <div className={styles.cta}>
-            <CmsLink link={cta} variant="outline" arrow />
-          </div>
-        ) : null}
+        {footer}
       </Section>
     )
   }
 
   return (
     <Section tone={block.tone} anchor={block.anchor}>
-      <div className={image ? styles.withImage : undefined}>
-        <div className={styles.main}>
-          <SectionHeading
-            kicker={block.kicker}
-            title={block.title}
-            accent={block.titleAccent}
-            intro={block.intro}
-          />
-          <div className={block.inCard ? styles.card : undefined} data-reveal="">
-            {block.text ? <RichText data={block.text} className={styles.text} /> : null}
-            {list}
-          </div>
-          {cta ? (
-            <div className={styles.cta}>
-              <CmsLink link={cta} variant="outline" arrow />
-            </div>
+      <div className={styles.split}>
+        <div className={styles.aside}>
+          {heading}
+          {block.text ? <RichText data={block.text} className={styles.text} /> : null}
+          {image ? (
+            <figure className={styles.figure} data-reveal="">
+              <div className={styles.photo}>
+                <Media media={image} fill sizes="(min-width: 1000px) 460px, 92vw" />
+              </div>
+              {block.caption ? <figcaption>{block.caption}</figcaption> : null}
+            </figure>
           ) : null}
         </div>
-        {image ? (
-          <figure className={styles.figure} data-reveal="">
-            <Media media={image} sizes="(min-width: 1000px) 480px, 92vw" />
-            {block.caption ? <figcaption>{block.caption}</figcaption> : null}
-          </figure>
-        ) : null}
+        <div className={styles.main}>
+          <div className={block.inCard ? styles.card : undefined} data-reveal="">
+            {list}
+          </div>
+          {footer}
+        </div>
       </div>
     </Section>
   )

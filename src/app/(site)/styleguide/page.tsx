@@ -24,8 +24,11 @@ const COLORS: { token: string; role: string }[] = [
   { token: '--c-forest', role: 'Boutons, bandeaux' },
   { token: '--c-forest-deep', role: 'Survol forêt' },
   { token: '--c-accent', role: 'Mots en vert' },
-  { token: '--c-sage', role: 'Pastilles, disques' },
-  { token: '--c-sage-soft', role: 'Teinte sauge' },
+  { token: '--c-sage', role: 'Accents sur fond sombre' },
+  { token: '--c-sage-soft', role: 'Surtitres, carrés d’icône' },
+  { token: '--c-sage-tint', role: '« En bref », encadrés, points forts' },
+  { token: '--c-paper', role: 'Sections blanches' },
+  { token: '--c-ink-2', role: 'Texte courant' },
   { token: '--c-night', role: 'Pied de page, panneaux sombres' },
   { token: '--c-error', role: 'Erreurs' },
 ]
@@ -33,6 +36,9 @@ const COLORS: { token: string; role: string }[] = [
 const BLOCK_NAMES: Record<LayoutBlock['blockType'], string> = {
   textImage: 'Texte et photo',
   cards: 'Cartes',
+  figures: 'Chiffres clés',
+  callout: 'Encadré',
+  prosCons: 'Points forts et points d’attention',
   servicesGrid: 'Prestations',
   projects: 'Chantiers',
   projectsExplorer: 'Explorateur des réalisations',

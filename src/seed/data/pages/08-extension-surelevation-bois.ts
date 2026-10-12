@@ -4,8 +4,6 @@
  */
 import type { SeedService } from '../../types'
 
-const md = (...paragraphs: string[]) => paragraphs.join('\n\n')
-
 const HERO_PHOTO =
   "surelevation-en-ossature-bois-d-une-maison-a-briancon/2.1 levage d'un mur pignon.JPG"
 
@@ -18,7 +16,7 @@ export const service: SeedService = {
   filterKey: 'extension-surelevation',
   order: 7,
   icon: 'arrowUp',
-  cardText: 'Gagner une pièce ou un étage sans tout reconstruire, comme à Briançon et à Pelvoux.',
+  cardText: 'Une pièce ou un étage en plus, en ossature bois légère.',
   cardLinkLabel: 'Agrandir ma maison',
   image: HERO_PHOTO,
   schema: {
@@ -38,77 +36,90 @@ export const service: SeedService = {
     variant: 'photo',
     kicker: 'Agrandir en bois',
     title: 'Extension et **surélévation bois** à Briançon et dans les **Hautes-Alpes**',
-    text: "Surélever, ajouter une pièce, couvrir une terrasse : une structure en **ossature bois**, légère et **préparée dans notre atelier**, s'adapte à une maison existante. Nous la construisons en **bois des Hautes-Alpes** et l'isolons avec des **matériaux biosourcés**.",
+    text: "Surélever, ajouter une pièce, couvrir une terrasse : une **ossature bois**, légère et **préparée dans notre atelier**, s'adapte à votre maison. En **bois des Hautes-Alpes**, isolée avec des **matériaux biosourcés**.",
     primaryCta: { label: 'Demander mon devis', href: '/contact/' },
     secondaryCta: {
       label: 'Voir la surélévation de Briançon',
       href: '/extension-surelevation-bois/#briancon',
     },
-    proofs: [{ label: 'Depuis 2007' }, { label: 'Bois des Hautes-Alpes' }],
+    proofs: [
+      { label: 'Depuis 2007', text: "à L'Argentière-la-Bessée", icon: 'calendar' },
+      { label: 'Bois des Hautes-Alpes', text: 'mélèze et sapin', icon: 'tree' },
+      { label: "Préparée à l'atelier", text: 'moins de temps toit ouvert', icon: 'saw' },
+    ],
     images: [HERO_PHOTO, 'surelevation-a-pelvoux/chantier terminé.jpg'],
     caption: "Levage d'un mur pignon en ossature bois, surélévation d'une maison à Briançon.",
+    photoTag: 'Briançon',
+    sheet: [
+      { label: 'Agrandir', value: 'Surélévation, extension, terrasse couverte' },
+      { label: 'Structure', value: 'Ossature bois légère' },
+      { label: 'Isolation', value: 'Laine de bois, ouate, fibre de bois' },
+    ],
   },
 
-  tldr: "3B Charpente, charpentier à L'Argentière-la-Bessée depuis 2007, agrandit les maisons des Hautes-Alpes avec des structures bois : surélévation, extension, terrasse couverte. Légère, l'ossature bois ménage la maison existante. Nous avons notamment surélevé une maison à Briançon, en ossature bois isolée en laine de bois, et une maison à Pelvoux.",
+  tldr: "3B Charpente, charpentier à L'Argentière-la-Bessée depuis 2007, agrandit les maisons des Hautes-Alpes en bois : surélévation, extension, terrasse couverte. Légère, l'ossature bois ménage la maison existante. Exemples : une surélévation à Briançon, en ossature bois isolée en laine de bois, et une autre à Pelvoux.",
 
   layout: [
-    // 3.4 Surélévation ou extension
+    // Surélévation ou extension
     {
       type: 'cards',
       variant: 'icon',
       columns: 2,
       kicker: "Deux façons d'agrandir",
-      title: 'Surélévation ou extension : **que choisir** ?',
+      title: 'Surélévation ou extension : **que choisir** ?',
       intro:
-        "Dans les deux cas, le bois a des atouts : il est léger, se prépare à l'atelier et se pose à sec, sans temps de séchage comme le béton.",
+        "Dans les deux cas, le bois est léger, se prépare à l'atelier et se pose à sec, sans temps de séchage comme le béton.",
       items: [
         {
           title: 'La surélévation',
           icon: 'arrowUp',
-          text: "Surélever, c'est ajouter un niveau ou rehausser la toiture pour rendre les combles habitables. On gagne de la surface sans toucher au terrain, souvent avec une vue plus dégagée. La maison existante doit pouvoir porter le nouveau volume.",
+          text: 'Un niveau en plus, ou des combles rendus habitables : on gagne de la surface sans toucher au terrain, souvent avec plus de vue.',
         },
         {
           title: "L'extension",
           icon: 'house',
-          text: "Une extension agrandit la maison au sol, sur le côté. Elle convient quand le terrain le permet et qu'on ne veut pas charger la structure existante. Tout se joue à la jonction avec l'existant : toiture, étanchéité, isolation.",
+          text: "La maison s'agrandit au sol, sans charger l'existant. Tout se joue à la jonction : toiture, étanchéité, isolation.",
         },
       ],
     },
 
-    // 3.5 Avant de surélever
+    // Avant de surélever
     {
       type: 'list',
       style: 'numbered',
-      inCard: true,
       tone: 'light',
       kicker: 'Avant de vous lancer',
       title: 'Trois questions **avant de surélever**',
+      text: 'À se poser dès le début du projet, avec nous et avec votre mairie.',
       items: [
         {
-          title: 'La maison peut-elle porter ?',
-          text: "Murs, planchers et fondations doivent supporter le nouveau niveau. Une ossature bois pèse bien moins qu'une maçonnerie, mais une vérification de la structure reste indispensable.",
+          title: 'La maison peut-elle porter ?',
+          text: "Murs, planchers et fondations doivent supporter le nouveau niveau. L'ossature bois est légère, mais on vérifie toujours la structure.",
         },
         {
-          title: "Le plan local d'urbanisme l'autorise-t-il ?",
-          text: "Il fixe une hauteur maximale et parfois l'aspect des toitures. Une surélévation demande en général un permis de construire, parfois une déclaration préalable selon la surface créée.",
+          title: "Le plan local d'urbanisme l'autorise-t-il ?",
+          text: "Il fixe une hauteur maximale, parfois l'aspect du toit. Il faut en général un permis de construire, parfois une déclaration préalable.",
         },
         {
-          title: "Comment rester hors d'eau ?",
-          text: "Le toit est ouvert pendant une partie du chantier. Préparer la structure à l'atelier réduit le temps où la maison est découverte.",
+          title: "Comment rester hors d'eau ?",
+          text: "Le toit est ouvert une partie du chantier. Préparer la structure à l'atelier réduit ce temps.",
         },
       ],
     },
 
-    // 3.6 Chantier : surélévation en ossature bois à Briançon
+    // Chantier : surélévation en ossature bois à Briançon
     {
       type: 'textImage',
       anchor: 'briancon',
       kicker: 'Chantier à Briançon',
       title: 'Une surélévation **en ossature bois** à Briançon',
-      text: md(
-        "Sur cette maison de [Briançon](/charpentier-briancon/), nous avons levé les murs pignons en ossature bois, puis les pannes porteuses : des pièces de 14 × 30 cm de section, entaillées. Leurs extrémités portent des décors de pannes, ces abouts sculptés qu'on retrouve sur les maisons de montagne.",
-        "La toiture repose sur des panneaux trois plis en épicéa, trois couches de bois croisées et collées. Ils assurent à la fois le contreventement (la rigidité de la structure) et l'étanchéité à l'air, et restent apparents au plafond. L'isolation est un remplissage en laine de bois, un isolant biosourcé. La dépassée de toit, ce débord qui protège la façade, termine l'ouvrage.",
-      ),
+      text: 'Sur cette maison de [Briançon](/charpentier-briancon/), nous avons levé les **murs pignons en ossature bois**, puis les pannes porteuses entaillées.',
+      points: [
+        'Des pannes de 14 × 30 cm, aux abouts sculptés comme sur les maisons de montagne',
+        "Des panneaux trois plis en épicéa : rigidité et étanchéité à l'air, apparents au plafond",
+        'Un remplissage en laine de bois, isolant biosourcé',
+        'Une dépassée de toit pour protéger la façade',
+      ],
       images: [
         'surelevation-en-ossature-bois-d-une-maison-a-briancon/91.1façade sud finie.jpg',
         'surelevation-en-ossature-bois-d-une-maison-a-briancon/6.1 panneaux trois plis épicéa apparents du dessous.JPG',
@@ -121,15 +132,13 @@ export const service: SeedService = {
       },
     },
 
-    // 3.7 Chantier : surélévation à Pelvoux
+    // Chantier : surélévation à Pelvoux
     {
       type: 'textImage',
+      tone: 'light',
       kicker: 'Chantier à Pelvoux',
       title: 'Une surélévation **au pied des Écrins**',
-      text: md(
-        "À [Pelvoux](/charpentier-vallouise-pays-des-ecrins/), la surélévation s'est faite par étapes, comme le montrent les photos du chantier : la maison avant, les travaux en cours, puis le chantier terminé.",
-        'Les dépassées de toit reposent sur des consoles : des pièces de bois en porte-à-faux, fixées au mur, qui soutiennent le débord de toiture. Un détail de charpentier qui compte, là où la neige charge les toits.',
-      ),
+      text: "À [Pelvoux](/charpentier-vallouise-pays-des-ecrins/), la surélévation s'est faite par étapes : la maison avant, les travaux, puis le chantier terminé.\n\nLes dépassées de toit reposent sur des **consoles**, des pièces de bois en porte-à-faux fixées au mur. Un détail qui compte, là où la neige charge les toits.",
       images: [
         'surelevation-a-pelvoux/avnat.JPG',
         'surelevation-a-pelvoux/console de dépassée de toit.JPG',
@@ -139,16 +148,17 @@ export const service: SeedService = {
       cta: { label: 'Voir toutes les photos', href: '/realisations/surelevation-a-pelvoux/' },
     },
 
-    // 3.8 Extensions et espaces couverts
+    // Extensions et espaces couverts
     {
       type: 'textImage',
-      tone: 'light',
       kicker: 'Extensions',
       title: 'Agrandir **de plain-pied**',
-      text: md(
-        "Une extension en ossature bois suit les mêmes principes qu'une maison neuve : structure légère, [isolants biosourcés](/isolation-biosourcee/), bardage ou enduit. Le point clé est la jonction avec la maison existante : raccord de toiture, étanchéité et continuité de l'isolation.",
-        "Agrandir, c'est aussi gagner un espace extérieur couvert. À Champcella, nous avons construit une terrasse couverte et un local technique, avec un abri voiture dans le prolongement de la toiture. À Vallouise, la dépassée nord du chalet a été agrandie et le balcon transformé en terrasse.",
-      ),
+      text: "Une extension en ossature bois suit les principes d'une maison neuve : structure légère, [isolants biosourcés](/isolation-biosourcee/), bardage ou enduit. Le point clé : **la jonction avec la maison existante**.",
+      points: [
+        "Toiture raccordée, étanchéité et isolation continues jusqu'à l'existant",
+        'À Champcella : terrasse couverte, local technique et abri voiture dans le prolongement du toit',
+        'À Vallouise : dépassée nord agrandie, balcon transformé en terrasse',
+      ],
       images: [
         'construction-d-une-terrasse-couverte-a-champcella/terrasse couverte et local technique.JPG',
         'renovation-et-isolation-d-un-chalet-a-vallouise/05. Dépassée Nord agrandie.JPG',
@@ -157,52 +167,56 @@ export const service: SeedService = {
       cta: { label: 'Terrasses couvertes et abris bois', href: '/balcon-terrasse-abri-bois/' },
     },
 
-    // 3.9 Notre méthode
+    // Notre méthode
     {
       type: 'steps',
       variant: 'tabs',
+      tone: 'light',
       kicker: 'Notre méthode',
       title: 'Six étapes, **de la visite au bardage**',
       steps: [
         {
           title: 'Visite et relevé',
-          text: "Chaque projet chez 3B Charpente débute par une étude sur mesure : visite, cotes de l'existant, écoute de vos besoins.",
+          text: "Chaque projet débute par une étude sur mesure : visite, cotes de l'existant, écoute de vos besoins.",
         },
         {
           title: 'Dessin',
-          text: "Nous dessinons l'agrandissement et vous proposons une esthétique en accord avec la maison.",
+          text: "Nous dessinons l'agrandissement, dans une esthétique en accord avec la maison.",
         },
         {
           title: "Traçage et taille à l'atelier",
-          text: 'Les pièces de charpente et de structure sont tracées et taillées dans notre atelier, selon le savoir-faire que Jean-Michel Tardy, notre fondateur, a appris chez les Compagnons du Devoir.',
+          text: "Pièces tracées et taillées à l'atelier, selon le savoir-faire appris par Jean-Michel Tardy chez les Compagnons du Devoir.",
         },
         {
           title: "Levage et mise hors d'eau",
-          text: 'Sur place, la structure est levée, puis la toiture refermée.',
+          text: 'La structure est levée sur place, puis la toiture refermée.',
+          image:
+            'surelevation-en-ossature-bois-d-une-maison-a-briancon/3.1 pannes levéesP8290281.JPG',
         },
         {
           title: "Isolation et étanchéité à l'air",
-          text: "Laine de bois, ouate de cellulose ou fibre de bois, et une étanchéité à l'air continue jusqu'au raccord avec l'existant.",
+          text: "Laine de bois, ouate de cellulose ou fibre de bois, et une étanchéité à l'air continue jusqu'à l'existant.",
+          image:
+            'surelevation-en-ossature-bois-d-une-maison-a-briancon/8.1 remplissage en laine de bois.JPG',
         },
         {
           title: 'Bardage et finitions bois',
-          text: 'Bardage en mélèze, dépassées de toit, menuiseries extérieures : la maison retrouve une façade cohérente.',
+          text: 'Bardage en mélèze, dépassées de toit, menuiseries extérieures : une façade cohérente.',
         },
       ],
     },
 
-    // 3.10 3B Récup'
+    // 3B Récup'
     {
       type: 'cta',
-      variant: 'card',
-      badge: '3B Récup’',
-      kicker: "3B Récup'",
+      variant: 'slim',
+      icon: 'recycle',
       title: 'La toiture déposée **peut resservir**',
-      text: "Une surélévation commence souvent par la dépose de la toiture existante. Avec 3B Récup', ses bois sains ne partent pas à la benne : ils sont triés, nettoyés et usinés dans notre atelier, puis réemployés sur nos chantiers, en bardage vieux bois, en garde-corps ou en pièces de charpente.",
+      text: "Une surélévation commence souvent par la dépose du toit. Avec 3B Récup', ses bois sains sont triés, usinés à l'atelier, puis réemployés : bardage, garde-corps, charpente.",
       primary: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
     },
 
-    // 3.11 Réalisations
+    // Réalisations
     {
       type: 'projects',
       mode: 'manual',
@@ -214,28 +228,28 @@ export const service: SeedService = {
         {
           project: 'surelevation-en-ossature-bois-d-une-maison-a-briancon',
           title: 'Surélévation en ossature bois à Briançon',
-          text: 'Murs pignons, pannes porteuses de 14 × 30 cm, panneaux trois plis en épicéa, laine de bois.',
+          text: 'Murs pignons, pannes de 14 × 30 cm, trois plis en épicéa, laine de bois.',
         },
         {
           project: 'surelevation-a-pelvoux',
           title: 'Surélévation à Pelvoux',
-          text: 'Une surélévation menée par étapes, avec ses consoles de dépassée de toit.',
+          text: 'Une surélévation menée par étapes, avec ses consoles de dépassée.',
         },
         {
           project: 'renovation-et-isolation-d-un-chalet-a-vallouise',
           title: 'Chalet rénové à Vallouise, balcon agrandi en terrasse',
-          text: 'Dépassée nord agrandie, balcon transformé en terrasse, murs et toiture isolés en matériaux biosourcés.',
+          text: 'Dépassée nord agrandie, balcon devenu terrasse, isolation biosourcée.',
         },
         {
           project: 'construction-d-une-terrasse-couverte-a-champcella',
           title: 'Terrasse couverte à Champcella',
-          text: 'Terrasse couverte, local technique et abri voiture dans le prolongement de la toiture.',
+          text: 'Terrasse couverte, local technique et abri voiture sous le même toit.',
         },
       ],
       cta: { label: 'Toutes nos réalisations', href: '/realisations/' },
     },
 
-    // 3.12 Prestations liées
+    // Prestations liées
     {
       type: 'servicesGrid',
       mode: 'manual',
@@ -244,9 +258,10 @@ export const service: SeedService = {
       services: ['maison-ossature-bois', 'charpente-bois', 'balcon-terrasse-abri-bois'],
     },
 
-    // 3.13 FAQ
+    // FAQ
     {
       type: 'faq',
+      tone: 'light',
       kicker: 'Questions fréquentes',
       title: "Vos questions sur **l'extension et la surélévation**",
       faqs: [
@@ -259,12 +274,13 @@ export const service: SeedService = {
       ],
     },
 
-    // 3.14 Appel à l'action final
+    // Appel à l'action final
     {
       type: 'cta',
       variant: 'card',
-      title: 'Besoin de **place en plus** ?',
-      text: 'Chaque projet chez 3B Charpente débute par une étude sur mesure. Nous venons voir votre maison, nous discutons de vos besoins et vous proposons un devis détaillé.',
+      kicker: 'Votre projet',
+      title: 'Besoin de **place en plus** ?',
+      text: 'Nous venons voir votre maison, nous parlons de vos besoins, puis nous vous proposons un devis détaillé.',
       primary: { label: 'Demander mon devis', href: '/contact/' },
       secondary: { label: 'Appeler le {telephone}', href: 'tel' },
       showAddress: true,
@@ -275,44 +291,44 @@ export const service: SeedService = {
     {
       key: 'extension-surelevation-bois-q1',
       topic: 'ossature',
-      question: "Peut-on surélever n'importe quelle maison ?",
+      question: "Peut-on surélever n'importe quelle maison ?",
       answer:
-        "Non, pas sans vérification. Les murs, les planchers et les fondations doivent pouvoir porter le nouveau niveau, et le plan local d'urbanisme doit autoriser la hauteur. Le bois aide beaucoup : une ossature bois pèse bien moins qu'une maçonnerie. C'est pour cela qu'on choisit souvent le bois pour surélever une maison existante.",
+        "Non, pas sans vérification. Murs, planchers et fondations doivent pouvoir porter le nouveau niveau, et le plan local d'urbanisme doit autoriser la hauteur. Le bois aide beaucoup : une ossature bois pèse bien moins qu'une maçonnerie. C'est pour cela qu'on le choisit souvent pour surélever.",
     },
     {
       key: 'extension-surelevation-bois-q2',
       topic: 'ossature',
-      question: 'Faut-il un permis de construire pour une surélévation ou une extension ?',
+      question: 'Faut-il un permis de construire pour une surélévation ou une extension ?',
       answer:
-        "Le plus souvent, oui. Une surélévation change la hauteur et l'aspect de la maison : un permis de construire est en général demandé, parfois une simple déclaration préalable selon la surface créée et la zone. Si la surface de plancher totale dépasse 150 m² après travaux, l'architecte est obligatoire. Renseignez-vous en mairie dès le début du projet.",
+        "Le plus souvent, oui : un permis de construire, parfois une simple déclaration préalable selon la surface créée et la zone. Au-delà de 150 m² de surface de plancher totale après travaux, l'architecte est obligatoire. Renseignez-vous en mairie dès le début du projet.",
     },
     {
       key: 'extension-surelevation-bois-q3',
       topic: 'ossature',
-      question: 'Combien coûte une surélévation en bois ?',
+      question: 'Combien coûte une surélévation en bois ?',
       answer:
-        "Le prix dépend de la surface créée, de l'état de la maison existante, de l'accès au chantier, de la toiture à déposer, des isolants et des finitions. Sans voir la maison, un chiffre serait trompeur. Chaque projet chez 3B Charpente débute par une étude sur mesure : nous venons sur place et vous proposons un devis détaillé.",
+        "Sans voir la maison, un chiffre serait trompeur. Le prix dépend de la surface créée, de l'état de l'existant, de l'accès, de la toiture à déposer, des isolants et des finitions. Nous venons sur place, puis nous vous proposons un devis détaillé.",
     },
     {
       key: 'extension-surelevation-bois-q4',
       topic: 'ossature',
-      question: 'Peut-on habiter la maison pendant une surélévation ?',
+      question: 'Peut-on habiter la maison pendant une surélévation ?',
       answer:
-        "Cela dépend du chantier. Une extension se construit à côté de la maison, qui reste en général habitable. Une surélévation touche la toiture : il faut organiser la dépose et la mise hors d'eau pour limiter le temps où la maison est ouverte. Préparer la structure à l'atelier y aide. Nous en parlons dès l'étude pour organiser le chantier avec vous.",
+        "Cela dépend du chantier. Une extension se construit à côté : la maison reste en général habitable. Une surélévation touche le toit : on organise la dépose et la mise hors d'eau pour limiter le temps où la maison est ouverte, et la préparation à l'atelier y aide. Nous en parlons dès l'étude.",
     },
     {
       key: 'extension-surelevation-bois-q5',
       topic: 'ossature',
-      question: 'Quelle isolation pour une extension ou une surélévation en bois ?',
+      question: 'Quelle isolation pour une extension ou une surélévation en bois ?',
       answer:
-        "Des isolants biosourcés, comme sur nos autres chantiers : ouate de cellulose, panneaux de fibre de bois, laine de bois. À Briançon, la surélévation est isolée par un remplissage en laine de bois, sous des panneaux trois plis en épicéa qui assurent aussi l'étanchéité à l'air. Le raccord avec l'isolation de la maison existante doit être continu.",
+        "Des isolants biosourcés : ouate de cellulose, fibre de bois, laine de bois. À Briançon, la surélévation est isolée en laine de bois, sous des panneaux trois plis en épicéa qui font aussi l'étanchéité à l'air. Le raccord avec l'isolation de la maison existante doit être continu.",
     },
     {
       key: 'extension-surelevation-bois-q6',
       topic: 'ossature',
-      question: 'Peut-on faire une extension bois sur une maison en pierre ou en béton ?',
+      question: 'Peut-on faire une extension bois sur une maison en pierre ou en béton ?',
       answer:
-        "Oui, c'est courant. L'ossature bois se fixe sur la maçonnerie existante, avec un soin particulier à la jonction : étanchéité à l'eau, étanchéité à l'air et continuité de l'isolant. La façade peut rester dans l'esprit de la maison, avec un enduit, ou affirmer le bois avec un bardage en mélèze.",
+        "Oui, c'est courant. L'ossature bois se fixe sur la maçonnerie, avec un soin particulier à la jonction : étanchéité à l'eau, étanchéité à l'air, continuité de l'isolant. La façade peut rester dans l'esprit de la maison avec un enduit, ou affirmer le bois avec un bardage en mélèze.",
     },
   ],
 

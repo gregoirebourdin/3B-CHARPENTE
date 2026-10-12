@@ -1,72 +1,49 @@
+/* ---------- Forest panel ---------- */
 .wrap {
-  position: relative;
+  padding-block: calc(var(--section-pad) * 0.6);
 }
 
-/* Forest panel: always dark, in both themes. */
 .panel {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: #2c4f2d;
+  padding: clamp(2.25rem, 5vw, 4rem);
+  border-radius: var(--radius-xl);
+  background: var(--band-bg);
   color: #ffffff;
 }
 
-:global(:root[data-theme='dark']) .panel {
-  background: #1f3a22;
-}
-
-@media (prefers-color-scheme: dark) {
-  :global(:root:not([data-theme='light'])) .panel {
-    background: #1f3a22;
-  }
-}
-
-.band .panel {
-  padding-block: clamp(4.5rem, 8vw, 7.5rem);
-}
-
-.card {
-  padding-block: var(--section-pad);
-}
-
-/* After a section on the same cream ground, its padding already gives the air above. */
-:global([data-tone='cream']) + .card,
-.card + .card {
-  padding-top: 0;
-}
-
-/* After a section with its own padding, the card needs no extra space above. */
-.card .panel {
-  padding: clamp(2.25rem, 6vw, 5rem);
-  border-radius: var(--radius-xl);
-}
-
 .inner {
-  position: relative;
-  z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
   align-items: center;
-  gap: clamp(2rem, 5vw, 4.5rem);
 }
 
 .copy {
-  display: grid;
-  justify-items: start;
-  gap: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
 }
 
 .badge {
-  padding: 6px 14px;
+  display: inline-flex;
+  padding: 5px 12px;
   border-radius: var(--radius-pill);
   background: #a3d2a3;
   color: #102311;
-  font-size: var(--fs-xs);
+  font-size: 0.8125rem;
   font-weight: 650;
 }
 
 .kicker {
-  color: #a3d2a3;
+  background: rgb(163 210 163 / 0.16) !important;
+  color: #a3d2a3 !important;
+}
+
+.kicker::before {
+  background: #a3d2a3 !important;
 }
 
 .title {
@@ -79,14 +56,17 @@
 }
 
 .text {
-  display: grid;
-  gap: 0.8em;
-  max-width: 52ch;
-  color: rgb(255 255 255 / 0.84);
-  font-size: 1.0625rem;
+  max-width: 56ch;
+  color: rgb(238 241 232 / 0.86);
+  font-size: var(--fs-lead);
+  line-height: 1.55;
 }
 
-.text a {
+.text p + p {
+  margin-top: var(--space-3);
+}
+
+.text strong {
   color: #ffffff;
 }
 
@@ -95,60 +75,65 @@
 }
 
 .address {
-  color: rgb(255 255 255 / 0.72);
+  color: rgb(238 241 232 / 0.7);
   font-size: var(--fs-small);
 }
 
-/* Phone, hours, address. */
+/* The phone card: number, opening hours, address. */
 .contact {
-  display: grid;
-  gap: 14px;
-  padding: 26px;
-  border: 1px solid rgb(255 255 255 / 0.2);
-  border-radius: var(--radius-lg);
-  background: rgb(255 255 255 / 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 28px;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: var(--radius-md);
+  background: rgb(255 255 255 / 0.07);
 }
 
 .cardLabel {
-  color: rgb(255 255 255 / 0.7);
-  font-size: 0.75rem;
+  color: #a3d2a3;
+  font-size: 0.8125rem;
   font-weight: 650;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .phone {
   color: #ffffff;
   font-family: var(--font-heading);
-  font-size: clamp(1.625rem, 1.2rem + 1.2vw, 2.125rem);
+  font-size: clamp(1.875rem, 1.4rem + 1.6vw, 2.5rem);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  line-height: 1;
   text-decoration: none;
 }
 
 .phone:hover {
-  color: #a3d2a3;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 .hours {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 4px;
   margin: 0;
   padding: 0;
-  color: rgb(255 255 255 / 0.8);
-  font-size: 0.9rem;
+  color: rgb(238 241 232 / 0.86);
+  font-size: 0.95rem;
   list-style: none;
 }
 
 .cardAddress {
-  color: rgb(255 255 255 / 0.7);
-  font-size: 0.875rem;
+  color: rgb(238 241 232 / 0.7);
+  font-size: 0.9rem;
 }
 
 .image {
   position: relative;
-  overflow: hidden;
   aspect-ratio: 4 / 3;
+  overflow: hidden;
   border-radius: var(--radius-lg);
 }
 
@@ -156,49 +141,66 @@
   object-fit: cover;
 }
 
-/* ---------- Slim ---------- */
+/* ---------- Discreet: a pale sage line ---------- */
 .slimWrap {
-  padding-block: var(--space-8);
+  padding-block: calc(var(--section-pad) * 0.4);
 }
 
 .slim {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-5) var(--space-8);
-  padding: var(--space-6) var(--space-8);
-  border: 1px solid var(--c-line);
-  border-radius: var(--radius-lg);
-  background: var(--bg-card);
+  gap: var(--space-4) var(--space-6);
+  padding: 22px 26px;
+  border: 1px solid color-mix(in srgb, var(--fg-accent) 18%, transparent);
+  border-radius: var(--radius-md);
+  background: var(--c-sage-tint);
 }
 
 .slimIcon {
   display: grid;
   flex: none;
   place-items: center;
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: var(--pill-bg);
-  color: var(--pill-fg);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-btn);
+  background: var(--c-sage-soft);
+  color: var(--c-forest);
 }
 
 .slimBody {
-  display: grid;
+  display: flex;
   flex: 1 1 320px;
-  gap: var(--space-2);
+  flex-direction: column;
+  gap: 4px;
 }
 
 .slimTitle {
-  font-size: var(--fs-h3);
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
 }
 
 .slimText {
-  color: var(--fg-muted);
+  color: var(--fg-body);
+  font-size: 1rem;
 }
 
 @media (max-width: 900px) {
   .inner {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .panel {
+    margin-inline: calc(var(--gutter) * -0.5);
+    padding: var(--space-8) var(--space-5);
+    border-radius: var(--radius-lg);
+  }
+
+  .contact {
+    padding: 22px;
   }
 }

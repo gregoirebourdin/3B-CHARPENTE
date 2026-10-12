@@ -191,9 +191,9 @@ input:focus-visible + .fileButton,
   place-items: center;
   width: 60px;
   height: 60px;
-  border-radius: 50%;
-  background: var(--pill-bg);
-  color: var(--pill-fg);
+  border-radius: var(--radius-btn);
+  background: var(--c-sage-soft);
+  color: var(--c-forest);
 }
 
 .successTitle {

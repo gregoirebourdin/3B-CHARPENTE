@@ -18,7 +18,7 @@
   display: grid;
   gap: 1em;
   max-width: 60ch;
-  color: color-mix(in srgb, var(--fg) 84%, var(--bg));
+  color: var(--fg-body);
   font-size: 1.125rem;
 }
 
@@ -53,9 +53,9 @@
   place-items: center;
   width: 38px;
   height: 38px;
-  border-radius: 50%;
-  background: var(--pill-bg);
-  color: var(--pill-fg);
+  border-radius: var(--radius-btn);
+  background: var(--c-sage-soft);
+  color: var(--c-forest);
 }
 
 .sectorBody {

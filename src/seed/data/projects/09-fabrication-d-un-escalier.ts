@@ -11,7 +11,7 @@ export const project: SeedProject = {
   heroImage: 'fabrication-d-un-escalier/frêne et aluminium.JPG',
   summary: 'Un escalier en frêne et aluminium, de la fabrication à son arrivée sur place.',
   description:
-    "Nous avons fabriqué un escalier sur mesure qui associe le frêne et l'aluminium. Le frêne est un bois feuillu, clair et dur, qui résiste bien à l'usure : il convient aux marches. L'aluminium est un métal léger qui ne rouille pas. Comme tous nos escaliers, celui-ci est fait sur mesure : il est dessiné pour son emplacement exact, selon la hauteur à monter, la place disponible et la forme de la trémie, c'est-à-dire l'ouverture dans le plancher.",
+    "Nous avons fabriqué un escalier sur mesure qui associe le frêne et l'aluminium. Le frêne est un bois feuillu, clair et dur, qui résiste bien à l'usure : il convient aux marches.\n\nL'aluminium est un métal léger qui ne rouille pas. Comme tous nos escaliers, celui-ci est fait sur mesure : il est dessiné pour son emplacement exact, selon la hauteur à monter, la place disponible et la forme de la trémie, c'est-à-dire l'ouverture dans le plancher.",
   steps: [
     {
       title: 'Fabrication',

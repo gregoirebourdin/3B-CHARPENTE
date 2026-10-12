@@ -16,7 +16,7 @@ Le contenu du site est transcrit **fidèlement** des fiches `3b-charpente-kit/do
 
 ## Règles de transcription
 
-1. **Le texte vient des fiches, mot pour mot.** On peut raccourcir une phrase qui casse la mise en page, jamais ajouter un fait. Les espaces insécables des fiches sont conservées.
+1. **Les faits viennent des fiches, la forme est réécrite.** Le texte des fiches a été resserré pour se lire en diagonale (règles dans `docs/design.md` § 2 : 3 phrases par paragraphe, listes, encadrés, chiffres clés). On ne change ni le H1, ni le titre et la description SEO, ni les questions de FAQ, ni les liens internes ; on n'ajoute jamais un fait. Les espaces insécables sont conservées.
 2. **Mentions `[À VALIDER …]` / `[À COMPLÉTER …]`** : on applique `docs/decisions-par-defaut.md` (sinon on retire la phrase ou l'élément sans laisser de trou) et on ajoute une entrée dans `validationPoints` : question + décision appliquée.
 3. **Titres** : les mots entre `**` de la fiche restent entre `**` (ils passeront en vert). Dans les paragraphes, `**` = gras.
 4. **Sections communes** (en-tête, pied de page, fil d'Ariane) : ne pas les transcrire, elles sont globales.

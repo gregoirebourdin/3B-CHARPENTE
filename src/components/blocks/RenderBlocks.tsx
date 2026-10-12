@@ -3,16 +3,19 @@ import type { ComponentType } from 'react'
 import type { Page } from '@/payload-types'
 
 import { Articles } from './Articles'
+import { Callout } from './Callout'
 import { Cards } from './Cards'
 import { ComparisonTable } from './ComparisonTable'
 import { ContactForm } from './ContactForm'
 import { Cta } from './Cta'
 import { Faq } from './Faq'
+import { Figures } from './Figures'
 import { Gallery } from './Gallery'
 import { List } from './List'
 import { Manifesto } from './Manifesto'
 import { Projects } from './Projects'
 import { ProjectsExplorer } from './ProjectsExplorer'
+import { ProsCons } from './ProsCons'
 import { Proofs } from './Proofs'
 import { Quote } from './Quote'
 import { Reviews } from './Reviews'
@@ -34,6 +37,9 @@ export type LayoutBlock = NonNullable<Page['layout']>[number]
 const REGISTRY: { [K in LayoutBlock['blockType']]: ComponentType<{ block: Extract<LayoutBlock, { blockType: K }>; context: BlockContext }> } = {
   textImage: TextImage,
   cards: Cards,
+  figures: Figures,
+  callout: Callout,
+  prosCons: ProsCons,
   servicesGrid: ServicesGrid,
   projects: Projects,
   projectsExplorer: ProjectsExplorer,

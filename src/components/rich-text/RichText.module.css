@@ -8,13 +8,40 @@
 .prose ul,
 .prose ol {
   display: grid;
-  gap: 0.45em;
-  padding-left: 1.25em;
+  gap: 0.5em;
+  padding-left: 1.4em;
 }
 
-.inline li::marker,
-.prose li::marker {
+.inline ul,
+.prose ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.inline ul > li,
+.prose ul > li {
+  position: relative;
+  padding-left: 1.4em;
+}
+
+/* A small turned square: the carpenter's mark of the site. */
+.inline ul > li::before,
+.prose ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0.2em;
+  top: 0.68em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--fg-accent);
+  transform: rotate(45deg);
+}
+
+.inline ol > li::marker,
+.prose ol > li::marker {
   color: var(--fg-accent);
+  font-weight: 700;
 }
 
 .inline a,
@@ -34,8 +61,13 @@
 }
 
 .prose {
-  font-size: var(--fs-body);
-  line-height: 1.72;
+  color: var(--fg-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+.prose strong {
+  color: var(--fg);
 }
 
 .prose > * + * {
@@ -43,15 +75,16 @@
 }
 
 .prose h2 {
-  margin-top: 2.2em;
-  font-size: clamp(1.6rem, 1.3rem + 1.1vw, 2.15rem);
-  font-weight: 600;
+  margin-top: 2em;
+  font-size: clamp(1.625rem, 1.25rem + 1.2vw, 2.125rem);
+  font-weight: 700;
+  line-height: 1.1;
   scroll-margin-top: calc(var(--header-h) + var(--space-6));
 }
 
 .prose h3 {
-  margin-top: 1.8em;
-  font-size: clamp(1.2rem, 1.1rem + 0.45vw, 1.4rem);
+  margin-top: 1.6em;
+  font-size: 1.25rem;
   scroll-margin-top: calc(var(--header-h) + var(--space-6));
 }
 
@@ -65,10 +98,11 @@
 }
 
 .prose blockquote {
-  padding: var(--space-4) var(--space-6);
-  border-left: 3px solid var(--fg-accent);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  background: var(--bg-alt);
+  padding: var(--space-5) var(--space-6);
+  border: 1px solid color-mix(in srgb, var(--fg-accent) 18%, transparent);
+  border-radius: var(--radius-md);
+  background: var(--c-sage-tint);
+  color: var(--fg);
   font-size: var(--fs-lead);
 }
 

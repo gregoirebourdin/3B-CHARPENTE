@@ -61,6 +61,9 @@ export function link(ctx: SeedContext, value?: SeedLink | null): Json | undefine
   return { label, type: 'internal', reference: ref, anchor: anchor || undefined }
 }
 
+/** An absent link, written out in full: an update must also clear what an older import left there. */
+const NO_LINK = { label: null, type: 'internal', reference: null, url: null, anchor: null }
+
 const linkRows = (ctx: SeedContext, values?: SeedLink[] | null) => (values ?? []).map((value) => ({ link: link(ctx, value) }))
 
 export function hero(ctx: SeedContext, value: SeedHero): Json {
@@ -71,8 +74,8 @@ export function hero(ctx: SeedContext, value: SeedHero): Json {
     title,
     titleAccent,
     text: richText(ctx, value.text),
-    primaryCta: link(ctx, value.primaryCta) ?? {},
-    secondaryCta: link(ctx, value.secondaryCta) ?? {},
+    primaryCta: link(ctx, value.primaryCta) ?? NO_LINK,
+    secondaryCta: link(ctx, value.secondaryCta) ?? NO_LINK,
     proofs: (value.proofs ?? []).map((proof) => ({ label: proof.label, text: proof.text, icon: proof.icon ?? 'check' })),
     images: photos(ctx, value.images),
     highlight: value.highlight ? (ctx.projects.get(value.highlight) ?? null) : null,
@@ -116,8 +119,9 @@ export function block(ctx: SeedContext, value: SeedBlock): Json {
         badge: value.badge,
         caption: value.caption,
         twoColumns: value.twoColumns ?? false,
+        points: (value.points ?? []).map((text) => ({ text })),
         links: linkRows(ctx, value.links),
-        cta: link(ctx, value.cta) ?? {},
+        cta: link(ctx, value.cta) ?? NO_LINK,
       }
     case 'cards':
       return {
@@ -133,10 +137,10 @@ export function block(ctx: SeedContext, value: SeedBlock): Json {
           text: richText(ctx, item.text),
           image: photo(ctx, item.image),
           muted: item.muted ?? false,
-          link: link(ctx, item.link) ?? {},
+          link: link(ctx, item.link) ?? NO_LINK,
         })),
         asideImage: photo(ctx, value.asideImage),
-        cta: link(ctx, value.cta) ?? {},
+        cta: link(ctx, value.cta) ?? NO_LINK,
       }
     case 'servicesGrid':
       return {
@@ -145,7 +149,7 @@ export function block(ctx: SeedContext, value: SeedBlock): Json {
         mode: value.mode ?? (value.services?.length ? 'manual' : 'all'),
         variant: value.variant ?? 'full',
         services: ids(ctx.services, value.services, 'Prestation'),
-        cta: link(ctx, value.cta) ?? {},
+        cta: link(ctx, value.cta) ?? NO_LINK,
       }
     case 'projects':
       return {
@@ -163,7 +167,7 @@ export function block(ctx: SeedContext, value: SeedBlock): Json {
         service: value.service ? ids(ctx.services, [value.service], 'Prestation')[0] : undefined,
         communes: ids(ctx.communes, value.communes, 'Commune'),
         sector: value.sector ? ids(ctx.pages, [value.sector], 'Page secteur')[0] : undefined,
-        cta: link(ctx, value.cta) ?? {},
+        cta: link(ctx, value.cta) ?? NO_LINK,
       }
     case 'projectsExplorer':
       return {
@@ -173,7 +177,7 @@ export function block(ctx: SeedContext, value: SeedBlock): Json {
         communeFilterLabel: value.communeFilterLabel,
         recupFilterLabel: value.recupFilterLabel,
         emptyMessage: value.emptyMessage,
-        emptyCta: link(ctx, value.emptyCta) ?? {},
+        emptyCta: link(ctx, value.emptyCta) ?? NO_LINK,
         groups: value.groups.map((group) => ({
           ...heading(group),
           links: linkRows(ctx, group.links),
@@ -187,7 +191,7 @@ export function block(ctx: SeedContext, value: SeedBlock): Json {
         variant: value.variant ?? 'tabs',
         isHowTo: value.isHowTo ?? false,
         steps: value.steps.map((step) => ({ title: step.title, text: richText(ctx, step.text), image: photo(ctx, step.image) })),
-        cta: link(ctx, value.cta) ?? {},
+        cta: link(ctx, value.cta) ?? NO_LINK,
       }
     case 'list':
       return {
@@ -196,10 +200,10 @@ export function block(ctx: SeedContext, value: SeedBlock): Json {
         style: value.style ?? 'checks',
         inCard: value.inCard ?? false,
         text: richText(ctx, value.text),
-        items: value.items.map((item) => ({ title: item.title, text: richText(ctx, item.text), link: link(ctx, item.link) ?? {} })),
+        items: value.items.map((item) => ({ title: item.title, text: richText(ctx, item.text), link: link(ctx, item.link) ?? NO_LINK })),
         image: photo(ctx, value.image),
         caption: value.caption,
-        cta: link(ctx, value.cta) ?? {},
+        cta: link(ctx, value.cta) ?? NO_LINK,
       }
     case 'faq':
       return { blockType: 'faq', ...heading(value), faqs: ids(ctx.faqs, value.faqs, 'Question fréquente') }
@@ -214,8 +218,8 @@ export function block(ctx: SeedContext, value: SeedBlock): Json {
         titleAccent,
         anchor: value.anchor,
         text: richText(ctx, value.text),
-        primary: link(ctx, value.primary) ?? {},
-        secondary: link(ctx, value.secondary) ?? {},
+        primary: link(ctx, value.primary) ?? NO_LINK,
+        secondary: link(ctx, value.secondary) ?? NO_LINK,
         icon: value.icon,
         showAddress: value.showAddress ?? false,
         image: photo(ctx, value.image),
@@ -232,10 +236,10 @@ export function block(ctx: SeedContext, value: SeedBlock): Json {
         layout: value.layout ?? 'centered',
         text: richText(ctx, value.text),
         items: (value.items ?? []).map((item) => ({ title: item.title, text: item.text })),
-        quote: value.quote ?? {},
+        quote: value.quote ?? NO_LINK,
         emphasis: value.emphasis,
         image: photo(ctx, value.image),
-        cta: link(ctx, value.cta) ?? {},
+        cta: link(ctx, value.cta) ?? NO_LINK,
       }
     }
     case 'spotlight': {
@@ -249,7 +253,7 @@ export function block(ctx: SeedContext, value: SeedBlock): Json {
         anchor: value.anchor,
         text: richText(ctx, value.text),
         steps: (value.steps ?? []).map((step) => ({ title: step.title, text: step.text })),
-        primary: link(ctx, value.primary) ?? {},
+        primary: link(ctx, value.primary) ?? NO_LINK,
         links: linkRows(ctx, value.links),
         images: photos(ctx, value.images),
       }
@@ -305,7 +309,7 @@ export function block(ctx: SeedContext, value: SeedBlock): Json {
         ...heading(value),
         mode: value.mode ?? 'all',
         articles: ids(ctx.articles, value.articles, 'Guide'),
-        cta: link(ctx, value.cta) ?? {},
+        cta: link(ctx, value.cta) ?? NO_LINK,
       }
     case 'contactForm':
       return {
@@ -314,6 +318,31 @@ export function block(ctx: SeedContext, value: SeedBlock): Json {
         form: ids(ctx.forms, [value.form], 'Formulaire')[0],
         showCompanyInfo: value.showCompanyInfo ?? true,
         privacyNotice: richText(ctx, value.privacyNotice),
+      }
+    case 'figures':
+      return {
+        blockType: 'figures',
+        ...heading(value),
+        items: value.items.map((item) => ({ value: item.value, unit: item.unit, label: item.label })),
+      }
+    case 'callout':
+      return {
+        blockType: 'callout',
+        kind: value.kind ?? 'tip',
+        title: value.title,
+        text: richText(ctx, value.text),
+        link: link(ctx, value.link) ?? NO_LINK,
+        tone: value.tone ?? 'cream',
+        anchor: value.anchor,
+      }
+    case 'prosCons':
+      return {
+        blockType: 'prosCons',
+        ...heading(value),
+        prosLabel: value.prosLabel ?? 'Points forts',
+        consLabel: value.consLabel ?? 'Points d’attention',
+        pros: value.pros.map((text) => ({ text })),
+        cons: (value.cons ?? []).map((text) => ({ text })),
       }
     case 'richText':
       return {

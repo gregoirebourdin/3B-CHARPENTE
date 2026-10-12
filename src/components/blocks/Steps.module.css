@@ -1,441 +1,190 @@
-/* ---------- Contact sheet: the photos of the steps ---------- */
-.sheet {
+.num {
+  color: var(--fg-accent);
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.title {
+  font-size: var(--fs-h3);
+}
+
+.text {
+  color: var(--fg-body);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.text p + p {
+  margin-top: var(--space-2);
+}
+
+.text a {
+  color: var(--fg-accent);
+  font-weight: 600;
+}
+
+/* ---------- Detailed steps: heading on the left, the list on the right ---------- */
+.split {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  margin: 0 0 clamp(2.5rem, 5vw, 3.5rem);
-  padding: 0;
-  list-style: none;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
 }
 
-.sheet[data-count='1'] {
-  grid-template-columns: minmax(0, 1fr);
-  max-width: 560px;
+.aside {
+  position: sticky;
+  top: calc(var(--header-h) + var(--space-8));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
 }
 
-.sheet[data-count='2'] {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.heading {
+  margin-bottom: 0;
 }
 
-.sheet[data-count='3'] {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.sheetItem {
+.asidePhoto {
   position: relative;
-  overflow: hidden;
+  width: 100%;
   aspect-ratio: 4 / 3;
-  border-radius: var(--radius-md);
-  background: var(--bg-alt);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
 }
 
-.sheetItem img {
+.asidePhoto img {
   object-fit: cover;
 }
 
-.sheetTag {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  max-width: calc(100% - 24px);
-  padding: 6px 10px;
-  border-radius: var(--radius-sm);
-  background: rgb(248 244 238 / 0.94);
-  color: #102311;
-  font-size: 0.8125rem;
-  font-weight: 650;
-  line-height: 1.3;
-  backdrop-filter: blur(6px);
+.list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--c-line);
+  list-style: none;
 }
 
-.sheetTag b {
-  margin-right: 4px;
-  color: #336233;
-  font-family: var(--font-heading);
-  font-weight: 700;
+.list > li {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+  gap: var(--space-5);
+  align-items: start;
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--c-line);
 }
 
-/* ---------- Frieze ---------- */
-.frieze {
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.thumb {
   position: relative;
+  width: 132px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-btn);
+  background: var(--c-surface);
+}
+
+.thumb img {
+  object-fit: cover;
+}
+
+/* ---------- Frieze: short steps side by side ---------- */
+.row {
   display: grid;
   grid-template-columns: repeat(var(--steps, 5), minmax(0, 1fr));
-  gap: 28px;
+  gap: var(--space-4);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.frieze::before {
-  content: '';
-  position: absolute;
-  top: 27px;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--c-line-strong);
-}
-
-.frieze li {
-  position: relative;
-  display: grid;
-  align-content: start;
-  gap: var(--space-3);
-}
-
-.num {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 56px;
-  height: 56px;
-  border: 1px solid var(--c-line-strong);
-  border-radius: 50%;
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-heading);
-  font-size: 1.125rem;
-  font-weight: 700;
-}
-
-:global([data-tone='light']) .num {
-  background: var(--bg-alt);
-}
-
-.frieze li:first-child .num {
-  border-color: var(--btn-bg);
-  background: var(--btn-bg);
-  color: var(--btn-fg);
-}
-
-.title {
-  font-size: 1.1875rem;
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-.text {
-  color: var(--fg-muted);
-  font-size: 0.9375rem;
-}
-
-/* Long methods: rows of three, each with its own rule. */
-@media (min-width: 1081px) {
-  .rows {
-    gap: 48px 32px;
-  }
-
-  .rows::before {
-    display: none;
-  }
-
-  .rows li::after {
-    content: '';
-    position: absolute;
-    top: 27px;
-    left: 68px;
-    right: -24px;
-    height: 1px;
-    background: var(--c-line-strong);
-  }
-
-  .rows li:nth-child(3n)::after,
-  .rows li:last-child::after {
-    right: 0;
-    background: linear-gradient(90deg, var(--c-line-strong), transparent);
-  }
-
-  .rows .text {
-    max-width: 40ch;
-  }
-}
-
-.cta {
+.row > li {
   display: flex;
-  margin-top: var(--space-10);
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 24px;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-md);
+  background: var(--c-card);
 }
 
-/* ---------- A method that loops (3B Récup'): forest panel and cycle ---------- */
-.cycleWrap {
-  position: relative;
-  padding-block: var(--section-pad);
+.row .num {
+  font-size: 2rem;
 }
 
-.panel {
-  --fg: #ffffff;
-  --fg-muted: rgb(255 255 255 / 0.78);
-  --fg-accent: #a3d2a3;
-  --c-line: rgb(255 255 255 / 0.18);
-  --c-line-strong: rgb(255 255 255 / 0.36);
-  --bg: #2c4f2d;
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  padding: clamp(2rem, 5vw, 4.5rem);
-  border-radius: var(--radius-xl);
-  background: #2c4f2d;
-  color: #ffffff;
+.row .text {
+  font-size: 0.94rem;
 }
 
-:global(:root[data-theme='dark']) .panel {
-  --bg: #1f3a22;
-  background: #1f3a22;
-}
-
-@media (prefers-color-scheme: dark) {
-  :global(:root:not([data-theme='light'])) .panel {
-    --bg: #1f3a22;
-    background: #1f3a22;
-  }
-}
-
-.panelRings {
-  position: absolute;
-  left: -220px;
-  bottom: -260px;
-  z-index: -1;
-  width: 620px;
-  height: 620px;
-  background: #a3d2a3;
-  opacity: 0.16;
-  pointer-events: none;
-  -webkit-mask: var(--rings-url) center / contain no-repeat;
-  mask: var(--rings-url) center / contain no-repeat;
-}
-
-.panelTop {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-  align-items: center;
-  gap: clamp(2rem, 5vw, 4.5rem);
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-}
-
-.panelHeading {
-  margin-bottom: 0;
-}
-
-.cycle {
-  position: relative;
-  width: 100%;
-  max-width: 440px;
-  justify-self: center;
-}
-
-.cycle svg {
-  position: relative;
-  width: 100%;
-  height: auto;
-  overflow: visible;
-}
-
-.cycleRings {
-  position: absolute;
-  inset: 31%;
-  background: #a3d2a3;
-  opacity: 0.55;
-  -webkit-mask: var(--rings-url) center / contain no-repeat;
-  mask: var(--rings-url) center / contain no-repeat;
-}
-
-.cycleArc {
-  fill: none;
-  stroke: rgb(255 255 255 / 0.6);
-  stroke-width: 1.6;
-}
-
-.cycleArrow {
-  fill: none;
-  stroke: rgb(255 255 255 / 0.85);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.cycleNode {
-  fill: #a3d2a3;
-}
-
-.cycleNum {
-  fill: #102311;
-  font-family: var(--font-heading);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.cycleLabel {
-  fill: #ffffff;
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 650;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-/* The frieze on the forest panel: hairlines instead of circles on cream. */
-.onForest {
-  grid-template-columns: repeat(var(--steps, 5), minmax(0, 1fr));
-  gap: 0;
-  padding-top: var(--space-6);
-  border-top: 1px solid var(--c-line);
-}
-
-.onForest::before {
-  display: none;
-}
-
-.onForest li {
-  padding: 0 clamp(0.75rem, 1.4vw, 1.25rem);
-  border-left: 1px solid var(--c-line);
-}
-
-.onForest li:first-child {
-  padding-left: 0;
-  border-left: 0;
-}
-
-.onForest .num {
-  width: 40px;
-  height: 40px;
-  border-color: #a3d2a3;
-  background: transparent;
-  color: #a3d2a3;
-  font-size: 0.9375rem;
-}
-
-.onForest li:first-child .num {
-  border-color: #a3d2a3;
-  background: #a3d2a3;
-  color: #102311;
-}
-
-.onForest .title {
-  color: #ffffff;
-  font-size: 1.0625rem;
-}
-
-.onForest .text {
-  color: rgb(255 255 255 / 0.78);
-  font-size: 0.875rem;
-}
-
-.onForest .text a {
-  color: #ffffff;
-}
-
-/* ---------- In a guide: one column ---------- */
-:global(.article-body) .frieze {
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0;
-}
-
-:global(.article-body) .frieze::before {
-  top: 0;
-  bottom: 0;
-  left: 27px;
-  right: auto;
-  width: 1px;
-  height: auto;
-}
-
-:global(.article-body) .frieze li {
-  grid-template-columns: 56px minmax(0, 1fr);
-  column-gap: 20px;
-  padding-bottom: 28px;
-}
-
-:global(.article-body) .frieze li::after {
-  display: none;
-}
-
-:global(.article-body) .frieze li > :not(.num) {
-  grid-column: 2;
-}
-
-:global(.article-body) .num {
-  grid-row: 1 / span 2;
-}
-
-:global(.article-body) .sheet {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-/* ---------- Tablets and phones: a vertical frieze ---------- */
 @media (max-width: 1080px) {
-  .frieze,
-  .onForest {
+  .split {
     grid-template-columns: minmax(0, 1fr);
-    gap: 0;
   }
 
-  .frieze::before {
-    top: 0;
-    bottom: 0;
-    left: 27px;
-    right: auto;
-    width: 1px;
-    height: auto;
+  .aside {
+    position: static;
   }
 
-  .frieze li {
-    grid-template-columns: 56px minmax(0, 1fr);
-    column-gap: 20px;
-    padding-bottom: 28px;
+  .row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
 
-  .frieze li > :not(.num) {
-    grid-column: 2;
+@media (max-width: 720px) {
+  .list > li {
+    grid-template-columns: 52px minmax(0, 1fr);
   }
 
   .num {
-    grid-row: 1 / span 2;
+    font-size: 2rem;
   }
 
-  .onForest li {
-    grid-template-columns: 40px minmax(0, 1fr);
-    column-gap: 16px;
-    padding: 0 0 22px;
-    border-left: 0;
+  .thumb {
+    display: none;
   }
 
-  .onForest::before {
-    display: block;
-    left: 20px;
-    top: var(--space-6);
-    background: var(--c-line);
-  }
-
-  .sheet {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .panelTop {
+  .row {
     grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--c-line);
+  }
+
+  .row > li {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 2px var(--space-4);
+    padding: var(--space-5) 0;
+    border: 0;
+    border-bottom: 1px solid var(--c-line);
+    border-radius: 0;
+    background: none;
+  }
+
+  .row .num {
+    grid-row: span 2;
   }
 }
 
-@media (max-width: 560px) {
-  .sheet[data-count='3'] {
+/* Inside a guide's reading column. */
+@container (max-width: 860px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aside {
+    position: static;
+  }
+
+  .row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .sheet {
-    gap: 10px;
-  }
-
-  .sheetTag {
-    left: 8px;
-    bottom: 8px;
-    padding: 4px 7px;
-    font-size: 0.75rem;
-  }
-
-  .cycle {
-    max-width: 340px;
-  }
-
-  .cycleLabel {
-    font-size: 15px;
   }
 }

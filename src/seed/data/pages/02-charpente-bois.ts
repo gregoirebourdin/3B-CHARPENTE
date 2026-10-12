@@ -15,8 +15,7 @@ export const service: SeedService = {
   filterKey: 'charpente-bois',
   order: 1,
   icon: 'roof',
-  cardText:
-    "Des charpentes taillées à l'ancienne, tenons, mortaises et chevilles, en mélèze et sapin du pays.",
+  cardText: "Taillée à l'atelier, assemblée bois sur bois, en mélèze et sapin du pays.",
   cardLinkLabel: 'Voir la charpente bois',
   image: HERO,
   schema: {
@@ -36,10 +35,14 @@ export const service: SeedService = {
     variant: 'photo',
     kicker: 'Charpentier dans les Hautes-Alpes depuis 2007',
     title: 'Charpente bois **traditionnelle** dans les **Hautes-Alpes**',
-    text: 'Nous traçons, taillons et assemblons vos charpentes **dans notre atelier**, en **mélèze et sapin des Hautes-Alpes**, avant de les lever sur votre maison. Des assemblages bois sur bois, un métier appris chez les **Compagnons du Devoir**, et une étude sur mesure pour chaque projet.',
+    text: 'Nous traçons, taillons et assemblons votre charpente **dans notre atelier**, en **mélèze et sapin des Hautes-Alpes**, puis nous la levons chez vous.',
     primaryCta: { label: 'Demander mon devis', href: '/contact/' },
     secondaryCta: { label: 'Voir nos charpentes', href: '/charpente-bois/#realisations' },
-    proofs: [{ label: 'Depuis 2007' }, { label: 'Bois des Hautes-Alpes' }],
+    proofs: [
+      { label: 'Depuis 2007', text: "à L'Argentière-la-Bessée", icon: 'calendar' },
+      { label: 'Bois des Hautes-Alpes', text: 'mélèze et sapin', icon: 'tree' },
+      { label: 'Compagnons du Devoir', text: 'notre formation', icon: 'ruler' },
+    ],
     images: [HERO],
     caption: "Levage des fermes, réfection d'une charpente à L'Argentière-la-Bessée.",
     photoTag: "L'Argentière-la-Bessée",
@@ -51,43 +54,37 @@ export const service: SeedService = {
   },
 
   // Savoldelli nommée une seule fois sur la page (section « Nos bois ») : voir validationPoints.
-  tldr: "3B Charpente, charpentier installé à L'Argentière-la-Bessée depuis 2007, conçoit et réalise des charpentes bois traditionnelles dans les Hautes-Alpes : charpentes neuves, réfections, charpentes apparentes, abris et terrasses couvertes. Les pièces sont tracées et taillées dans notre atelier, surtout en mélèze et sapin des Hautes-Alpes, puis assemblées et levées sur place.",
+  tldr: "3B Charpente, charpentier à L'Argentière-la-Bessée depuis 2007, réalise des charpentes bois traditionnelles dans les Hautes-Alpes : charpentes neuves, réfections, charpentes apparentes, abris et terrasses couvertes. Les pièces sont tracées et taillées dans notre atelier, en mélèze et sapin des Hautes-Alpes, puis levées sur place.",
 
   layout: [
-    // 3.4 Qu'est-ce qu'une charpente traditionnelle ?
+    // Qu'est-ce qu'une charpente traditionnelle ?
     {
       type: 'list',
       style: 'definitions',
       tone: 'light',
       kicker: 'Le métier',
-      title: "Une charpente **traditionnelle**, c'est quoi ?",
-      text: "Une charpente traditionnelle est faite de pièces de bois massif, taillées sur mesure et assemblées bois sur bois. Elle porte la couverture, encaisse le poids de la neige et, quand elle reste apparente, donne son caractère à la maison.\n\nÀ la différence des fermettes industrielles (petites fermes en W reliées par des connecteurs métalliques), elle laisse en général plus d'espace libre sous le toit : utile si vous voulez un jour aménager les combles.",
+      title: "Une charpente **traditionnelle**, c'est quoi ?",
+      text: 'Des pièces de **bois massif**, taillées sur mesure et assemblées bois sur bois. Elle porte la couverture, encaisse le poids de la neige et, apparente, donne son caractère à la maison.',
       items: [
-        {
-          title: 'Ferme',
-          text: "le triangle qui porte le toit. Ses pièces principales sont les arbalétriers (inclinés), l'entrait (la pièce horizontale du bas) et le poinçon (la pièce verticale du centre).",
-        },
-        {
-          title: 'Pannes et chevrons',
-          text: 'les pannes sont des poutres horizontales posées sur les fermes ; elles portent les chevrons, sur lesquels repose la couverture.',
-        },
-        {
-          title: 'Tenon-mortaise chevillé',
-          text: "le tenon, taillé au bout d'une pièce, entre dans la mortaise creusée dans l'autre. Une cheville en bois traverse le tout et serre l'assemblage.",
-        },
-        {
-          title: 'Assemblage à blanc',
-          text: "la charpente est montée une première fois à l'atelier pour vérifier chaque pièce, puis démontée et transportée jusqu'au chantier.",
-        },
+        { title: 'Ferme', text: 'Le triangle qui porte le toit : arbalétriers inclinés, entrait en bas, poinçon au centre.' },
+        { title: 'Pannes et chevrons', text: 'Les pannes, posées sur les fermes, portent les chevrons ; les chevrons portent la couverture.' },
+        { title: 'Tenon-mortaise chevillé', text: "Le tenon entre dans la mortaise ; une cheville en bois traverse et serre l'assemblage." },
+        { title: 'Assemblage à blanc', text: "La charpente est montée une première fois à l'atelier pour tout vérifier, puis démontée." },
       ],
-      image: 'abris-voiture-a-l-argentiere-la-bessee/tenons mortaise chevillé.JPG',
+      image: 'abris-voiture-a-l-argentiere-la-bessee/tenons mortaise chevillé.JPG',
       caption: "Tenons et mortaises chevillés sur un abri voiture à L'Argentière-la-Bessée.",
     },
+    {
+      type: 'callout',
+      kind: 'tip',
+      tone: 'light',
+      text: "Contrairement aux fermettes industrielles (petites fermes en W reliées par des connecteurs métalliques), une charpente traditionnelle laisse de la place sous le toit : utile pour **aménager les combles** un jour.",
+    },
 
-    // 3.5 Ce que nous réalisons
+    // Ce que nous réalisons
     {
       type: 'cards',
-      variant: 'index',
+      variant: 'icon',
       columns: 3,
       kicker: 'Nos charpentes',
       title: "Du neuf à l'ancien, **une charpente pour chaque projet**",
@@ -95,169 +92,176 @@ export const service: SeedService = {
         {
           title: 'Charpente neuve',
           icon: 'roof',
-          text: 'Pour une maison neuve, une maison ossature bois ou une annexe. Apparente ou cachée, nous la dessinons avec vous.',
+          text: 'Pour une maison neuve, une ossature bois ou une annexe. Apparente ou cachée, dessinée avec vous.',
           link: { label: 'Maison ossature bois', href: '/maison-ossature-bois/' },
         },
         {
           title: 'Réfection de charpente ancienne',
           icon: 'hammer',
-          text: "Remplacer des pièces abîmées, reprendre des fermes, refaire une charpente entière : nous l'avons fait à L'Argentière-la-Bessée et à Briançon.",
-          link: {
-            label: 'Rénovation de charpente et combles',
-            href: '/renovation-charpente-combles/',
-          },
+          text: "Remplacer des pièces, reprendre des fermes ou tout refaire, comme à L'Argentière-la-Bessée et à Briançon.",
+          link: { label: 'Rénovation de charpente et combles', href: '/renovation-charpente-combles/' },
         },
         {
           title: 'Lucarnes et fenêtres de toit',
           icon: 'window',
-          text: "Une ouverture dans le toit se prépare dans la charpente : chevêtre (la pièce qui encadre l'ouverture), jouées de lucarne, encadrements.",
+          text: "L'ouverture se prépare dans la charpente : chevêtre (la pièce qui encadre l'ouverture), jouées, encadrements.",
           link: { label: 'Créer une lucarne', href: '/renovation-charpente-combles/#lucarnes' },
         },
         {
           title: 'Surélévation et extension',
           icon: 'arrowUp',
-          text: 'Une structure bois légère posée sur une maison existante, comme à Pelvoux ou à Briançon.',
+          text: 'Une structure bois légère posée sur la maison existante, comme à Pelvoux ou à Briançon.',
           link: { label: 'Extension et surélévation bois', href: '/extension-surelevation-bois/' },
         },
         {
           title: 'Abris, carports et terrasses couvertes',
           icon: 'balcony',
-          text: 'Des ouvrages plus petits, mais les mêmes assemblages : poinçon, entrait cintré, tenons chevillés.',
+          text: 'Des ouvrages plus petits, les mêmes assemblages : poinçon, entrait cintré, tenons chevillés.',
           link: { label: 'Balcons, terrasses et abris', href: '/balcon-terrasse-abri-bois/' },
+        },
+        {
+          title: 'Un autre projet ?',
+          icon: 'phone',
+          text: 'Racontez-le-nous en quelques lignes : nous venons voir et nous en parlons.',
+          link: { label: 'Demander mon devis', href: '/contact/' },
         },
       ],
     },
 
-    // 3.6 Notre méthode
+    // Notre méthode
     {
       type: 'steps',
       variant: 'tabs',
       tone: 'light',
       kicker: 'Notre méthode',
       title: "De l'étude **au levage**, en six étapes",
+      intro: "Une bonne partie du travail se fait à l'atelier : sur le chantier, tout s'assemble sans surprise.",
       steps: [
         {
           title: 'Rencontre et étude sur mesure',
-          text: 'Chaque projet chez 3B Charpente débute par une étude sur mesure. Nous venons voir la maison, prenons les cotes et écoutons ce que vous voulez en faire.',
-          image: 'refection-d-une-charpente-a-l-argentiere-la-bessee/préparation de chantier.JPG',
+          text: 'Nous venons voir la maison, prenons les cotes et écoutons votre projet.',
+          image: 'refection-d-une-charpente-a-l-argentiere-la-bessee/assamblage à blanc.JPG',
         },
         {
           title: 'Dessin et choix des bois',
-          text: 'Nous dessinons la charpente et vous proposons une esthétique : apparente ou non, forme des fermes, décors de pannes. Vous validez avant que la première pièce soit taillée.',
+          text: 'Apparente ou non, forme des fermes, décors de pannes : vous validez avant la première coupe.',
         },
         {
           title: 'Traçage',
-          text: "Chaque pièce est tracée avant d'être coupée. Ce savoir, que les charpentiers appellent « le trait », s'apprend sur le Tour de France des Compagnons.",
+          text: "Chaque pièce est tracée avant d'être coupée : « le trait », appris sur le Tour de France des Compagnons.",
         },
         {
           title: "Taille à l'atelier",
-          text: "Tenons, mortaises, embrèvements (des entailles en biais qui transmettent l'effort d'une pièce à l'autre) : les assemblages sont taillés dans notre atelier, parfois encore à la besaiguë, l'outil à deux tranchants des charpentiers.",
+          text: "Tenons, mortaises, embrèvements : taillés à l'atelier, parfois encore à la besaiguë, l'outil à deux tranchants des charpentiers.",
           image:
-            "refection-d-une-charpente-a-l-argentiere-la-bessee/taille d'un tenon à double embrèvement à la besaïgue.JPG",
+            "refection-d-une-charpente-a-l-argentiere-la-bessee/taille d'un tenon à double embrèvement à la besaïgue.JPG",
         },
         {
           title: 'Assemblage à blanc',
-          text: "La charpente est montée une première fois à l'atelier. Tout est vérifié avant le transport, pour limiter les ajustements sur le chantier.",
-          image: 'refection-d-une-charpente-a-l-argentiere-la-bessee/assamblage à blanc.JPG',
+          text: "Un premier montage à l'atelier : tout est vérifié avant le transport.",
         },
         {
           title: 'Levage et couverture',
-          text: "Sur place, nous levons les fermes, les pannes et les chevrons. Viennent ensuite, si vous nous les confiez, l'isolation biosourcée, la couverture et le bardage.",
+          text: "Fermes, pannes et chevrons levés sur place ; puis l'isolation biosourcée et la couverture, si vous nous les confiez.",
           image: 'maison-a-ossature-bois-dans-les-monts-du-lyonnais/couverture terminée.jpg',
         },
       ],
     },
 
-    // 3.7 Nos bois
+    // Nos bois
     {
-      type: 'textImage',
-      tone: 'cream',
+      type: 'list',
+      style: 'definitions',
       kicker: 'Nos bois',
       title: 'Du **mélèze et du sapin** des Hautes-Alpes',
-      text: "Nous travaillons principalement du mélèze et du sapin provenant des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli. Un bois qui a poussé dans le département, c'est moins de transport et une filière locale qui vit.\n\nLe mélèze, essence de montagne, est apprécié pour sa tenue en extérieur et sa teinte chaude. Le sapin, plus léger, est un bois de structure courant. Selon le projet, d'autres essences entrent en jeu : douglas pour un bardage, épicéa pour des panneaux trois plis, frêne pour un escalier.\n\nEt quand une vieille charpente est déposée, ses pièces saines peuvent resservir : une **ferme en vieux bois** a ainsi retrouvé sa place lors d'une réfection de toiture.",
-      images: [
-        'refection-d-une-charpente-a-l-argentiere-la-bessee/plancher en mélèze.JPG',
-        'refection-d-une-toiture-a-ronatlon/ferme en vieux bois .JPG',
+      text: "Nous travaillons surtout du bois qui a poussé dans le département, scié par notre partenaire local, la Scierie Savoldelli : **moins de transport**, une filière locale qui vit.",
+      items: [
+        { title: 'Mélèze', text: 'Essence de montagne : tient bien en extérieur, teinte chaude, belle en apparent.' },
+        { title: 'Sapin', text: 'Plus léger : le bois de structure courant.' },
+        { title: 'Selon le projet', text: 'Douglas pour un bardage, épicéa en panneaux trois plis, frêne pour un escalier.' },
+        {
+          title: 'Vieux bois',
+          text: "Les pièces saines d'une charpente déposée peuvent resservir, comme cette **ferme en vieux bois** reposée lors d'une réfection de toiture.",
+          link: { label: "Le bois de réemploi avec 3B Récup'", href: '/3b-recup/' },
+        },
       ],
-      imagePosition: 'right',
-      caption:
-        "Plancher en mélèze posé lors de la réfection d'une charpente à L'Argentière-la-Bessée.",
-      links: [{ label: "Le bois de réemploi avec 3B Récup'", href: '/3b-recup/' }],
+      image: 'refection-d-une-charpente-a-l-argentiere-la-bessee/plancher en mélèze.JPG',
+      caption: "Plancher en mélèze posé lors de la réfection d'une charpente à L'Argentière-la-Bessée.",
     },
 
-    // 3.8 Le savoir-faire
+    // Le savoir-faire
     {
       type: 'manifesto',
       layout: 'split',
       kicker: 'Le savoir-faire',
       title: 'Un charpentier formé chez les **Compagnons du Devoir**',
-      text: "Jean-Michel Tardy a commencé la charpente en 1995, apprenti à 16 ans dans une entreprise de Savoie. Il a passé son CAP dans un CFA des Compagnons du Devoir, puis fait son Tour de France, dans des entreprises de France métropolitaine, de Martinique et d'Autriche. Après deux ans comme formateur à L'Argentière-la-Bessée, il a créé 3B Charpente en 2007.\n\nCe savoir-faire se voit dans les détails : un trait de Jupiter, assemblage en forme d'éclair qui aboute deux pièces dans leur longueur ; un tenon à double embrèvement taillé à la main ; un entrait cintré pour un simple abri voiture.",
       quote: {
-        text: "Ce qui compte pour lui : « le travail en équipe, l'écoute apportée aux clients, la belle ouvrage, la joie de venir travailler le matin ».",
+        text: '« Le travail en équipe, l’écoute apportée aux clients, la belle ouvrage, la joie de venir travailler le matin. »',
         author: 'Jean-Michel Tardy, fondateur de 3B Charpente',
       },
-      image: 'refection-d-une-charpente-a-l-argentiere-la-bessee/trait de jupiter assemblé.JPG',
+      items: [
+        { title: '1995', text: 'Apprenti à 16 ans dans une entreprise de Savoie.' },
+        { title: 'CAP', text: 'Dans un CFA des Compagnons du Devoir, puis le Tour de France : métropole, Martinique, Autriche.' },
+        { title: '2007', text: "Après deux ans comme formateur à L'Argentière-la-Bessée, il crée 3B Charpente." },
+      ],
+      text: "Ce savoir-faire se voit dans les détails : un **trait de Jupiter** (assemblage en forme d'éclair qui aboute deux pièces), un tenon à double embrèvement taillé à la main, un entrait cintré pour un simple abri voiture.",
+      image: 'refection-d-une-charpente-a-l-argentiere-la-bessee/trait de jupiter assemblé.JPG',
       cta: { label: "Découvrir l'équipe", href: '/a-propos/' },
     },
 
-    // 3.9 Réalisations
+    // Réalisations
     {
       type: 'projects',
       mode: 'manual',
       anchor: 'realisations',
-      label: 'brand',
+      label: 'commune',
       kicker: 'Nos chantiers',
       title: 'Des charpentes **levées près de chez vous**',
       items: [
         {
           project: 'refection-d-une-charpente-a-l-argentiere-la-bessee',
-          title: "Réfection d'une charpente à L'Argentière-la-Bessée",
-          text: "Dépose de l'ancienne charpente, taille, assemblage à blanc, levage des fermes et des lucarnes, plancher et bardage en mélèze.",
+          title: "Réfection d'une charpente",
+          text: 'Dépose, taille, levage des fermes et des lucarnes, bardage en mélèze.',
         },
         {
           project: 'abris-voiture-a-l-argentiere-la-bessee',
-          title: "Abri voiture à L'Argentière-la-Bessée",
-          text: 'Une ferme à poinçon et entrait cintré, assemblée par tenons et mortaises chevillés.',
+          title: 'Abri voiture',
+          text: 'Une ferme à poinçon et entrait cintré, tenons et mortaises chevillés.',
         },
         {
           project: 'renovation-d-une-maison-d-habitation-sur-la-commune-de-prelles',
-          title: "Rénovation d'une maison à Prelles",
-          text: 'Charpente taillée en mélèze pays (du mélèze local), assemblée à blanc, puis levée avec le solivage.',
+          title: "Rénovation d'une maison",
+          text: 'Charpente en mélèze du pays, assemblée à blanc, levée avec le solivage.',
         },
         {
           project: 'rehabilitation-d-une-ancienne-forge-a-la-salle-les-alpes',
-          title: 'Ancienne forge à La Salle-les-Alpes',
-          text: "Taille de la charpente, levage de la toiture et couverture d'un bâtiment réhabilité à Serre Chevalier.",
+          title: 'Ancienne forge',
+          text: 'Charpente taillée, toiture levée et couverte à Serre Chevalier.',
         },
       ],
       cta: { label: 'Toutes nos réalisations', href: '/realisations/' },
     },
 
-    // 3.10 3B Récup'
+    // 3B Récup'
     {
       type: 'cta',
-      variant: 'card',
-      badge: '3B Récup’',
-      kicker: "3B Récup'",
+      variant: 'slim',
+      icon: 'recycle',
       title: "Une vieille charpente **n'est pas un déchet**",
-      text: "Avec 3B Récup', notre activité de déconstruction sélective et de réemploi, nous déposons charpentes, solivages et murs à ossature bois. Les pièces saines sont triées, nettoyées et usinées dans notre atelier, puis reposées sur nos chantiers. Nous donnons ainsi une nouvelle vie au matériau bois : une ferme en vieux bois, un bardage vieux bois, un garde-corps en bois de réemploi.",
+      text: "Avec 3B Récup', ses pièces saines sont triées, usinées à l'atelier, puis reposées : ferme, bardage ou garde-corps en vieux bois.",
       primary: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
     },
 
-    // 3.11 Prestations liées
+    // Prestations liées
     {
       type: 'servicesGrid',
       mode: 'manual',
       variant: 'compact',
       title: 'Vos **autres projets** bois',
-      services: [
-        'renovation-charpente-combles',
-        'maison-ossature-bois',
-        'extension-surelevation-bois',
-      ],
+      services: ['renovation-charpente-combles', 'maison-ossature-bois', 'extension-surelevation-bois'],
     },
 
-    // 3.12 FAQ
+    // FAQ
     {
       type: 'faq',
       tone: 'light',
@@ -273,12 +277,13 @@ export const service: SeedService = {
       ],
     },
 
-    // 3.13 Appel à l'action final
+    // Appel à l'action final
     {
       type: 'cta',
       variant: 'card',
-      title: 'Prêt à **transformer votre espace** ?',
-      text: "Chaque projet chez 3B Charpente débute par une étude sur mesure. Parlez-nous de votre charpente : nous discuterons de vos besoins lors d'une rencontre et vous proposerons un devis détaillé.",
+      kicker: 'Votre charpente',
+      title: 'Prêt à **transformer votre maison** ?',
+      text: 'Chaque projet commence par une étude sur mesure. Parlez-nous de votre charpente : nous venons voir, puis nous vous proposons un devis détaillé.',
       primary: { label: 'Demander mon devis', href: '/contact/' },
       secondary: { label: 'Appeler le {telephone}', href: 'tel' },
       showAddress: true,
@@ -288,45 +293,45 @@ export const service: SeedService = {
   faqs: [
     {
       key: 'charpente-bois-q1',
-      question: 'Quel bois utiliser pour une charpente traditionnelle ?',
+      question: 'Quel bois utiliser pour une charpente traditionnelle ?',
       answer:
-        "Nous utilisons principalement du mélèze et du sapin des Hautes-Alpes, sciés par notre partenaire local. Le mélèze, essence de montagne, tient bien en extérieur et se prête aux pièces apparentes. Le sapin, plus léger, est un bois de structure courant. Le choix dépend de la portée, de l'exposition et de l'aspect recherché : nous en parlons ensemble lors de l'étude.",
+        "Surtout du mélèze et du sapin des Hautes-Alpes, sciés par notre partenaire local. Le mélèze, essence de montagne, tient bien en extérieur et se prête aux pièces apparentes ; le sapin, plus léger, est un bois de structure courant. Le choix dépend de la portée, de l'exposition et de l'aspect voulu : nous en parlons lors de l'étude.",
       topic: 'charpente',
     },
     {
       key: 'charpente-bois-q2',
-      question: 'Combien coûte une charpente bois traditionnelle ?',
+      question: 'Combien coûte une charpente bois traditionnelle ?',
       answer:
-        "Le prix dépend de la surface et de la forme du toit, des sections de bois, du type d'assemblages, de l'accès au chantier et des travaux associés (isolation, couverture). Un prix au mètre carré donné sans voir le projet serait trompeur. Contactez-nous : nous discuterons de vos besoins lors d'une rencontre et vous proposerons un devis détaillé adapté à votre projet.",
+        "Cela dépend de la surface et de la forme du toit, des sections de bois, des assemblages, de l'accès au chantier et des travaux associés (isolation, couverture). Un prix au mètre carré sans voir le projet serait trompeur : nous vous proposons un devis détaillé après une rencontre.",
       topic: 'charpente',
     },
     {
       key: 'charpente-bois-q3',
       question:
-        'Quelle différence entre une charpente traditionnelle et une charpente en fermettes ?',
+        'Quelle différence entre une charpente traditionnelle et une charpente en fermettes ?',
       answer:
-        'La charpente traditionnelle est faite de pièces massives (fermes, pannes, chevrons) taillées sur mesure et assemblées bois sur bois. La charpente industrielle utilise des fermettes : de petites fermes en W, rapprochées et reliées par des connecteurs métalliques. Les fermettes occupent le volume sous le toit ; une charpente traditionnelle laisse en général les combles plus libres et peut rester apparente.',
+        "La charpente traditionnelle est faite de pièces massives (fermes, pannes, chevrons) taillées sur mesure et assemblées bois sur bois. Les fermettes sont de petites fermes en W, rapprochées et reliées par des connecteurs métalliques : elles occupent le volume sous le toit, quand une charpente traditionnelle laisse les combles plus libres et peut rester apparente.",
       topic: 'charpente',
     },
     {
       key: 'charpente-bois-q4',
-      question: 'Combien de temps faut-il pour faire une charpente ?',
+      question: 'Combien de temps faut-il pour faire une charpente ?',
       answer:
-        "Le délai peut varier selon la complexité et la taille du projet. Nous vous fournirons un calendrier estimatif lors de notre première rencontre. Une bonne partie du travail se fait à l'atelier : traçage, taille et assemblage à blanc. Sur le chantier, il reste le levage, puis l'isolation et la couverture si vous nous les confiez.",
+        "Cela dépend de la taille et de la complexité du projet : vous recevez un calendrier estimatif dès la première rencontre. Une bonne partie du travail se fait à l'atelier (traçage, taille, assemblage à blanc). Sur le chantier restent le levage, puis l'isolation et la couverture si vous nous les confiez.",
       topic: 'charpente',
     },
     {
       key: 'charpente-bois-q5',
-      question: 'Intervenez-vous à Briançon et en dehors des Hautes-Alpes ?',
+      question: 'Intervenez-vous à Briançon et en dehors des Hautes-Alpes ?',
       answer:
-        "Oui. Basés à L'Argentière-la-Bessée, dans le nord des Hautes-Alpes, nous intervenons dans tout le département : Briançon, la Vallouise, Serre Chevalier, le Pays des Écrins. Nous travaillons aussi en région PACA et Rhône-Alpes, par exemple pour une maison à ossature bois dans les monts du Lyonnais ou un balcon terrasse à Gresse-en-Vercors.",
+        "Oui. Depuis L'Argentière-la-Bessée, nous intervenons dans tout le département : Briançon, la Vallouise, Serre Chevalier, le Pays des Écrins. Et aussi en région PACA et Rhône-Alpes, comme pour une maison à ossature bois dans les monts du Lyonnais ou un balcon terrasse à Gresse-en-Vercors.",
       topic: 'secteurs',
     },
     {
       key: 'charpente-bois-q6',
-      question: 'Peut-on garder ou réutiliser une vieille charpente ?',
+      question: 'Peut-on garder ou réutiliser une vieille charpente ?',
       answer:
-        "Souvent, au moins en partie. Une charpente ancienne se répare : remplacement de pièces, reprise des fermes, rallonge par un trait de Jupiter. Quand elle doit être déposée, 3B Récup', notre activité de réemploi, trie les pièces saines, les nettoie et les usine à l'atelier pour les remettre en œuvre, comme cette ferme en vieux bois reposée lors d'une réfection de toiture.",
+        "Souvent, au moins en partie : on remplace des pièces, on reprend des fermes, on rallonge par un trait de Jupiter. Quand elle doit être déposée, 3B Récup', notre activité de réemploi, trie les pièces saines et les usine à l'atelier pour les remettre en œuvre, comme une ferme en vieux bois reposée lors d'une réfection de toiture.",
       topic: 'recup',
     },
   ],

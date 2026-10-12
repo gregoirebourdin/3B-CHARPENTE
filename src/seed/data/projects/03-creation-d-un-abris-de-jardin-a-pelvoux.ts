@@ -13,7 +13,7 @@ export const project: SeedProject = {
   heroImage: 'creation-d-un-abris-de-jardin-a-pelvoux/réalisation terminé.jpg',
   summary: 'Un abri de jardin en bois, du levage à la réalisation terminée.',
   description:
-    "À Pelvoux, nous avons créé un abri de jardin. Même pour un petit ouvrage, la méthode reste celle du charpentier : une structure levée sur place, jusqu'à l'abri terminé. En montagne, un abri sert souvent à garder au sec le bois de chauffage, les outils ou le matériel. Pelvoux fait partie de la commune de Vallouise-Pelvoux, où nous avons aussi réalisé une surélévation. Nous construisons aussi des abris voiture, comme à L'Argentière-la-Bessée, et des terrasses couvertes, comme à Champcella.",
+    "À Pelvoux, nous avons créé un abri de jardin. Même pour un petit ouvrage, la méthode reste celle du charpentier : une structure levée sur place, jusqu'à l'abri terminé. En montagne, un abri sert souvent à garder au sec le bois de chauffage, les outils ou le matériel.\n\nPelvoux fait partie de la commune de Vallouise-Pelvoux, où nous avons aussi réalisé une surélévation. Nous construisons aussi des abris voiture, comme à L'Argentière-la-Bessée, et des terrasses couvertes, comme à Champcella.",
   steps: [
     {
       title: 'Levage de la structure',

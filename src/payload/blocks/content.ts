@@ -159,7 +159,21 @@ export const TextImageBlock: Block = {
   labels: { singular: 'Texte et image', plural: 'Textes et images' },
   fields: [
     ...headingFields({ intro: false }),
-    richTextField({ name: 'text', label: 'Texte', required: true }),
+    richTextField({
+      name: 'text',
+      label: 'Texte',
+      required: true,
+      description: 'Deux ou trois phrases. Ce qui s’énumère va plutôt dans « Points clés », juste en dessous.',
+    }),
+    {
+      name: 'points',
+      type: 'array',
+      label: 'Points clés (facultatif)',
+      labels: { singular: 'Point', plural: 'Points' },
+      maxRows: 6,
+      admin: { description: 'Une ligne chacun, affichée avec une coche verte. Ex. : « Reprise des fermes ».' },
+      fields: [{ name: 'text', type: 'text', label: 'Texte', required: true, maxLength: 140 }],
+    },
     {
       name: 'images',
       type: 'upload',
@@ -167,7 +181,7 @@ export const TextImageBlock: Block = {
       hasMany: true,
       maxRows: 2,
       label: 'Photos (1 ou 2)',
-      admin: { description: 'Deux photos : elles se superposent, comme le collage de l’accueil.' },
+      admin: { description: 'Deux photos : elles se placent côte à côte.' },
     },
     {
       type: 'row',
@@ -493,6 +507,111 @@ export const SpotlightBlock: Block = {
       maxRows: 3,
       label: 'Photos (1 grande + 2 vignettes)',
     },
+    ...tailFields,
+  ],
+}
+
+export const FiguresBlock: Block = {
+  slug: 'figures',
+  interfaceName: 'FiguresBlock',
+  labels: { singular: 'Chiffres clés', plural: 'Chiffres clés' },
+  imageAltText: 'Deux à quatre grands chiffres verts, chacun avec une ligne d’explication',
+  fields: [
+    ...headingFields(),
+    {
+      name: 'items',
+      type: 'array',
+      label: 'Chiffres',
+      labels: { singular: 'Chiffre', plural: 'Chiffres' },
+      minRows: 2,
+      maxRows: 4,
+      admin: { description: 'Uniquement des chiffres vérifiés : une année, une épaisseur, une durée.' },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            { name: 'value', type: 'text', label: 'Chiffre', required: true, maxLength: 10, admin: { width: '50%', placeholder: '28' } },
+            { name: 'unit', type: 'text', label: 'Unité (facultatif)', maxLength: 12, admin: { width: '50%', placeholder: 'cm' } },
+          ],
+        },
+        { name: 'label', type: 'textarea', label: 'Ce que veut dire le chiffre', required: true, maxLength: 120 },
+      ],
+    },
+    toneField,
+    ...tailFields,
+  ],
+}
+
+export const CalloutBlock: Block = {
+  slug: 'callout',
+  interfaceName: 'CalloutBlock',
+  labels: { singular: 'Encadré (bon à savoir)', plural: 'Encadrés' },
+  imageAltText: 'Un encadré vert pâle avec une icône, un titre court et deux phrases',
+  fields: [
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'kind',
+          type: 'select',
+          label: 'Type d’encadré',
+          defaultValue: 'tip',
+          options: [
+            { label: 'Bon à savoir', value: 'tip' },
+            { label: 'Sur nos chantiers', value: 'site' },
+            { label: 'Définition', value: 'definition' },
+            { label: 'Aides et qualification', value: 'aid' },
+          ],
+          admin: { width: '50%' },
+        },
+        {
+          name: 'title',
+          type: 'text',
+          label: 'Titre (facultatif)',
+          maxLength: 80,
+          admin: { width: '50%', description: 'Vide : le nom du type (« Bon à savoir »…).' },
+        },
+      ],
+    },
+    richTextField({ name: 'text', label: 'Texte', required: true, description: 'Deux phrases au plus.' }),
+    optionalLink({ name: 'link', label: 'Lien (facultatif)' }),
+    toneField,
+    ...tailFields,
+  ],
+}
+
+export const ProsConsBlock: Block = {
+  slug: 'prosCons',
+  interfaceName: 'ProsConsBlock',
+  labels: { singular: 'Points forts et points d’attention', plural: 'Points forts et points d’attention' },
+  imageAltText: 'Deux colonnes : les points forts avec des coches vertes, les points d’attention avec des tirets',
+  fields: [
+    ...headingFields(),
+    {
+      type: 'row',
+      fields: [
+        { name: 'prosLabel', type: 'text', label: 'Titre de la 1re colonne', defaultValue: 'Points forts', maxLength: 40, admin: { width: '50%' } },
+        { name: 'consLabel', type: 'text', label: 'Titre de la 2e colonne', defaultValue: 'Points d’attention', maxLength: 40, admin: { width: '50%' } },
+      ],
+    },
+    {
+      name: 'pros',
+      type: 'array',
+      label: 'Points forts',
+      labels: { singular: 'Point', plural: 'Points' },
+      minRows: 1,
+      maxRows: 6,
+      fields: [{ name: 'text', type: 'text', label: 'Texte', required: true, maxLength: 160 }],
+    },
+    {
+      name: 'cons',
+      type: 'array',
+      label: 'Points d’attention',
+      labels: { singular: 'Point', plural: 'Points' },
+      maxRows: 6,
+      fields: [{ name: 'text', type: 'text', label: 'Texte', required: true, maxLength: 160 }],
+    },
+    toneField,
     ...tailFields,
   ],
 }

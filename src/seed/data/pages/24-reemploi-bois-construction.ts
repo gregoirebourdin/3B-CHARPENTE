@@ -11,20 +11,22 @@ const HERO = 'refection-d-une-toiture-a-ronatlon/ferme en vieux bois .JPG'
 export const article: SeedArticle = {
   kind: 'article',
   slug: 'reemploi-bois-construction',
-  title: "Réemployer le bois en construction : **ce qu'on peut réutiliser**, comment, et à quelles conditions",
+  title:
+    "Réemployer le bois en construction : **ce qu'on peut réutiliser**, comment, et à quelles conditions",
   topic: 'Réemploi',
   menuLabel: 'Réemployer le bois',
   excerpt:
-    "Une vieille charpente, un plancher de grange, un bardage grisé : dans un bâtiment qu'on rénove ou qu'on démolit, une partie du bois peut resservir. Encore faut-il savoir lequel, comment le récupérer et à quelles conditions le reposer. Ce guide répond à ces trois questions avec notre regard de charpentiers, en citant les règles officielles sans les exagérer.",
-  cardSummary: 'Les mots du réemploi, les bois concernés, les cinq étapes et les conditions à réunir.',
+    "Une vieille charpente, un plancher de grange, un bardage grisé : une partie du bois peut resservir. Lequel, comment le récupérer, à quelles conditions le reposer ? Nos réponses de charpentiers, règles officielles à l'appui.",
+  cardSummary:
+    'Les mots du réemploi, les bois concernés, les cinq étapes et les conditions à réunir.',
   image: HERO,
-  tldr: 'Réemployer le bois, c\'est remettre en œuvre dans un nouvel ouvrage une pièce qui a déjà servi : charpente, solives, planchers, bardages. Cela suppose de connaître le bâtiment avant travaux (diagnostic PEMD obligatoire au-delà de 1 000 m², diagnostic ressources sinon), de déposer avec soin, de trier et préparer les pièces, puis d\'adapter le projet au matériau.',
+  tldr: "Réemployer le bois, c'est remettre en œuvre une pièce qui a déjà servi : charpente, solives, planchers, bardages. Il faut connaître le bâtiment avant travaux (diagnostic PEMD obligatoire au-delà de 1 000 m², diagnostic ressources sinon), déposer avec soin, trier et préparer les pièces, puis adapter le projet au matériau.",
   layout: [
-    // 3.4 Les mots du réemploi
+    // Les mots du réemploi
     {
       type: 'richText',
       anchor: 'vocabulaire',
-      content: `## Réemploi, recyclage, gisement : **les mots à connaître**`,
+      content: `## Réemploi, recyclage, gisement : **les mots à connaître**`,
     },
     {
       type: 'list',
@@ -32,38 +34,40 @@ export const article: SeedArticle = {
       items: [
         {
           title: 'Réemploi',
-          text: 'remettre en œuvre un élément qui a déjà servi, sans le transformer en nouvelle matière. Une poutre redevient une pièce de charpente, ou devient un garde-corps.',
+          text: 'Remettre en œuvre un élément qui a déjà servi, sans le transformer. Une poutre redevient charpente, ou devient garde-corps.',
         },
         {
           title: 'Recyclage',
-          text: 'transformer le matériau en matière première pour fabriquer autre chose. Le bois est alors broyé ou refaçonné, et la pièce disparaît en tant que telle.',
+          text: 'Transformer le matériau en matière première : le bois est broyé ou refaçonné, la pièce disparaît.',
         },
         {
           title: 'Déconstruction sélective',
-          text: 'démonter un bâtiment élément par élément, en séparant les matériaux, au lieu de le démolir.',
+          text: 'Démonter un bâtiment élément par élément, en séparant les matériaux, au lieu de le démolir.',
         },
-        { title: 'Gisement', text: "l'ensemble des matériaux réemployables d'un bâtiment." },
+        { title: 'Gisement', text: "L'ensemble des matériaux réemployables d'un bâtiment." },
         {
           title: 'Diagnostic PEMD',
-          text: 'le repérage réglementaire des produits, équipements, matériaux et déchets avant certaines démolitions et rénovations significatives (détails plus bas).',
+          text: 'Le repérage réglementaire des produits, équipements, matériaux et déchets avant certains travaux (détails plus bas).',
         },
         {
           title: 'Matériauthèque',
-          text: 'un lieu qui collecte des matériaux de construction pour les remettre en circulation. On parle aussi de plateforme de réemploi ou de ressourcerie de matériaux.',
+          text: 'Un lieu qui collecte des matériaux de construction pour les remettre en circulation : plateforme de réemploi, ressourcerie.',
         },
       ],
     },
     {
-      type: 'richText',
-      content: `Le réemploi garde la pièce telle qu'elle est : c'est toute sa différence avec le recyclage, qui la transforme.`,
+      type: 'callout',
+      kind: 'definition',
+      title: 'Réemploi ou recyclage ?',
+      text: "Le réemploi **garde la pièce telle qu'elle est** : c'est toute sa différence avec le recyclage, qui la transforme.",
     },
-    // 3.5 Quels bois peut-on réemployer ?
+    // Quels bois peut-on réemployer ?
     {
       type: 'richText',
       anchor: 'quels-bois',
-      content: `## Quels bois **peut-on réemployer** ?
+      content: `## Quels bois **peut-on réemployer** ?
 
-Tout le bois d'un bâtiment n'est pas réemployable, mais beaucoup d'éléments peuvent l'être s'ils sont en bon état et déposés avec soin. Voici les grandes familles, celles que des charpentiers savent déposer.`,
+Tout le bois d'un bâtiment n'est pas réemployable, mais beaucoup d'éléments peuvent l'être, **s'ils sont en bon état et déposés avec soin**. Voici les familles que des charpentiers savent déposer.`,
     },
     {
       type: 'comparisonTable',
@@ -88,36 +92,40 @@ Tout le bois d'un bâtiment n'est pas réemployable, mais beaucoup d'éléments 
     },
     {
       type: 'richText',
-      content: `Quelques repères pour lire ce tableau :
+      content: `Quelques repères pour lire ce tableau :
 
-- la **ferme** est l'assemblage triangulé qui porte la toiture ; les **pannes** et les **chevrons** portent la couverture ; les **solives** portent un plancher ;
-- une pièce longue et saine offre le plus de possibilités : elle peut être recoupée, l'inverse est impossible ;
-- un bois peint ou traité demande un examen particulier avant tout réemploi, surtout pour un usage intérieur.
-
-### Ce que le bois de réemploi devient
-
-Sur les chantiers de 3B Charpente, le bois de réemploi est par exemple devenu un **bardage vieux bois** et un **garde-corps** dans une [maison rénovée à L'Argentière-la-Bessée](/realisations/renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/), ou une **ferme de charpente en vieux bois** lors de la [réfection d'une toiture](/realisations/refection-d-une-toiture-a-ronatlon/).
-
-[Voir ces réalisations](/3b-recup/bois-de-reemploi/#realisations)`,
+- la **ferme** est l'assemblage triangulé qui porte la toiture ; les **pannes** et les **chevrons** portent la couverture ; les **solives** portent un plancher ;
+- une pièce longue et saine offre le plus de possibilités : on peut la recouper, l'inverse est impossible ;
+- un bois peint ou traité demande un examen particulier, surtout pour un usage intérieur.`,
+    },
+    {
+      type: 'callout',
+      kind: 'site',
+      title: 'Ce que le bois de réemploi devient',
+      text: "Un **bardage vieux bois** et un **garde-corps** dans une [maison rénovée à L'Argentière-la-Bessée](/realisations/renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/), une **ferme de charpente en vieux bois** lors de la [réfection d'une toiture](/realisations/refection-d-une-toiture-a-ronatlon/).",
+      link: { label: 'Voir ces réalisations', href: '/3b-recup/bois-de-reemploi/#realisations' },
     },
     {
       type: 'gallery',
       images: [
         {
-          image: 'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/06Bardage vieux bois.JPG',
-          caption: "Bardage en vieux bois sur une maison rénovée par 3B Charpente à L'Argentière-la-Bessée",
+          image:
+            'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/06Bardage vieux bois.JPG',
+          caption:
+            "Bardage en vieux bois sur une maison rénovée par 3B Charpente à L'Argentière-la-Bessée",
         },
         {
-          image: 'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/08Garde corps en bois de réemploi.JPG',
+          image:
+            'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/08Garde corps en bois de réemploi.JPG',
           caption: 'Garde-corps en bois de réemploi',
         },
       ],
     },
-    // 3.6 Comment : les cinq étapes
+    // Les cinq étapes
     {
       type: 'richText',
       anchor: 'etapes',
-      content: `## Du bâtiment existant au nouvel ouvrage : **cinq étapes**`,
+      content: `## Du bâtiment existant au nouvel ouvrage : **cinq étapes**`,
     },
     {
       type: 'steps',
@@ -125,33 +133,31 @@ Sur les chantiers de 3B Charpente, le bois de réemploi est par exemple devenu u
       steps: [
         {
           title: 'Diagnostic',
-          text: "Connaître le gisement avant les travaux : ce qu'il y a, dans quel état, en quelle quantité. C'est le rôle du diagnostic PEMD quand il est obligatoire, du diagnostic ressources sinon.",
+          text: 'Connaître le gisement avant les travaux : quoi, dans quel état, en quelle quantité. Diagnostic PEMD quand il est obligatoire, diagnostic ressources sinon.',
         },
         {
           title: 'Stratégie',
-          text: 'Établir une feuille de route : ce qui sera déposé, dans quel ordre, et ce que chaque pièce pourra devenir.',
+          text: 'Une feuille de route : ce qui sera déposé, dans quel ordre, pour devenir quoi.',
         },
         {
           title: 'Dépose',
-          text: "Démonter l'ouvrage élément par élément, dans l'ordre inverse de sa construction, en préservant les pièces : c'est la déconstruction sélective.",
+          text: "Démonter élément par élément, dans l'ordre inverse de la construction, en préservant les pièces.",
         },
         {
           title: 'Transformation',
-          text: 'Trier, nettoyer et usiner les pièces pour les préparer à leur nouvel usage.',
+          text: 'Trier, nettoyer et usiner les pièces pour leur nouvel usage.',
         },
         {
           title: 'Repose',
-          text: 'Remettre les pièces en œuvre, en adaptant le système constructif aux matériaux de réemploi.',
+          text: 'Remettre les pièces en œuvre, en adaptant le système constructif au matériau.',
         },
       ],
     },
     {
       type: 'richText',
-      content: `C'est la méthode que suit 3B Récup' : diagnostic, stratégie, intervention sur site, transformation dans nos ateliers, repose sur le chantier.
-
-[La méthode 3B Récup'](/3b-recup/#methode)`,
+      content: `C'est la méthode de 3B Récup' : diagnostic, stratégie, intervention sur site, transformation dans nos ateliers, repose sur le chantier. [La méthode 3B Récup'](/3b-recup/#methode)`,
     },
-    // 3.7 À quelles conditions ?
+    // À quelles conditions ?
     {
       type: 'richText',
       anchor: 'conditions',
@@ -159,31 +165,34 @@ Sur les chantiers de 3B Charpente, le bois de réemploi est par exemple devenu u
 
 ### 1. Connaître le bâtiment avant d'y toucher
 
-Le **diagnostic PEMD** (produits, équipements, matériaux et déchets) est obligatoire avant la démolition ou la rénovation significative de bâtiments dont la surface de plancher cumulée dépasse 1 000 m², ou de bâtiments qui ont accueilli une activité agricole, industrielle ou commerciale avec des substances classées dangereuses.
+Le **diagnostic PEMD** (produits, équipements, matériaux et déchets) est obligatoire avant la démolition ou la rénovation significative :
 
-En dessous de 1 000 m², on parle souvent de **diagnostic ressources** : un repérage volontaire des matériaux réemployables. C'est la démarche la plus réaliste pour une maison, une grange ou un petit bâtiment.`,
+- des bâtiments de plus de 1 000 m² de surface de plancher cumulée ;
+- des bâtiments qui ont accueilli une activité agricole, industrielle ou commerciale avec des substances classées dangereuses.
+
+En dessous, on parle souvent de **diagnostic ressources** : un repérage volontaire, la démarche la plus réaliste pour une maison, une grange ou un petit bâtiment.`,
     },
     {
-      type: 'richText',
-      boxed: true,
-      content: `**Les textes :** Le diagnostic PEMD est encadré par les décrets n° 2021-821 et n° 2021-822 du 25 juin 2021 et par les articles L. 126-34 et R. 126-12 du Code de la construction et de l'habitation. Pour les demandes d'autorisation déposées après le 1er juillet 2023, un formulaire de récolement est exigé : il rend compte de ce que sont réellement devenus les matériaux après les travaux.
-
-[Tout savoir sur le diagnostic PEMD](/3b-recup/diagnostic-pemd/)`,
+      type: 'callout',
+      kind: 'definition',
+      title: 'Les textes',
+      text: "Décrets n° 2021-821 et n° 2021-822 du 25 juin 2021, articles L. 126-34 et R. 126-12 du Code de la construction et de l'habitation. Depuis le 1er juillet 2023, un **formulaire de récolement** est exigé : ce que sont réellement devenus les matériaux après travaux.",
+      link: { label: 'Tout savoir sur le diagnostic PEMD', href: '/3b-recup/diagnostic-pemd/' },
     },
     {
       type: 'richText',
       content: `### 2. Déposer sans abîmer
 
-Une pièce cassée à la dépose est une pièce perdue. Une charpente tient par ses assemblages (tenons, mortaises, chevilles) : pour la démonter en préservant les pièces, il faut savoir comment elle a été taillée. C'est un travail de charpentier, qui se prévoit dans le planning.
-
-[La déconstruction sélective](/3b-recup/deconstruction-selective/)`,
+**Une pièce cassée à la dépose est une pièce perdue.** Une charpente tient par ses assemblages (tenons, mortaises, chevilles) : pour la démonter sans casse, il faut savoir comment elle a été taillée. C'est un travail de charpentier, qui se prévoit dans le planning. [La déconstruction sélective](/3b-recup/deconstruction-selective/)`,
     },
     {
       type: 'gallery',
       images: [
         {
-          image: "refection-d-une-charpente-a-l-argentiere-la-bessee/dépose de l'ancienne charpente.JPG",
-          caption: "Dépose d'une ancienne charpente par les charpentiers de 3B Charpente à L'Argentière-la-Bessée",
+          image:
+            "refection-d-une-charpente-a-l-argentiere-la-bessee/dépose de l'ancienne charpente.JPG",
+          caption:
+            "Dépose d'une ancienne charpente par les charpentiers de 3B Charpente à L'Argentière-la-Bessée",
         },
         {
           image: 'abris-voiture-a-l-argentiere-la-bessee/tenons mortaise chevillé.JPG',
@@ -195,111 +204,122 @@ Une pièce cassée à la dépose est une pièce perdue. Une charpente tient par 
       type: 'richText',
       content: `### 3. Trier et préparer chaque pièce
 
-Un vieux bois n'est ni bon ni mauvais par principe : tout dépend de la pièce. Le tri oriente chaque pièce vers l'usage qui lui convient ; le nettoyage la débarrasse de ce qui gêne ; l'usinage la remet à dimension et prépare ses assemblages.
+Un vieux bois n'est ni bon ni mauvais par principe : tout dépend de la pièce. Le **tri** l'oriente vers le bon usage, le **nettoyage** la débarrasse de ce qui gêne, l'**usinage** la remet à dimension et prépare ses assemblages.
 
 ### 4. Adapter le projet au matériau
 
-Avec du bois neuf, on commande les sections dont on a besoin. Avec du bois de réemploi, on part des pièces disponibles : leurs longueurs, leurs sections et leur aspect guident le dessin de l'ouvrage. Plus cette adaptation est prévue tôt, plus le réemploi est simple.
+Avec du bois neuf, on commande les sections voulues. Avec du réemploi, **on part des pièces disponibles** : leurs longueurs, leurs sections et leur aspect guident le dessin. Plus c'est prévu tôt, plus c'est simple.
 
 ### 5. Vérifier les pièces qui portent
 
-Pour un usage porteur (une poutre, une solive, une ferme), la capacité de chaque pièce se juge au cas par cas. Avant de vous engager, demandez à l'entreprise comment elle vérifie les pièces de réemploi et comment son assurance couvre l'ouvrage. Une réponse claire est bon signe.
-
-### 6. Le cadre de la RE2020
-
-La RE2020, la réglementation environnementale 2020, pousse le secteur du bâtiment à réduire son impact carbone sur tout le cycle de vie des bâtiments. Le réemploi, qui prolonge la vie des matériaux et réduit les déchets, s'inscrit dans cette logique. Les règles de calcul dépassent le cadre de ce guide : votre architecte ou votre bureau d'études vous dira comment le réemploi est pris en compte dans votre projet.`,
+Pour une poutre, une solive ou une ferme, la capacité de chaque pièce se juge au cas par cas.`,
     },
-    // 3.8 Le réemploi du bois dans les Hautes-Alpes (acteurs cités de façon neutre)
+    {
+      type: 'callout',
+      kind: 'tip',
+      text: "Avant de vous engager, demandez à l'entreprise **comment elle vérifie les pièces de réemploi** et comment son assurance couvre l'ouvrage. Une réponse claire est bon signe.",
+    },
+    {
+      type: 'richText',
+      content: `### 6. Le cadre de la RE2020
+
+La RE2020 pousse le bâtiment à réduire son impact carbone sur tout le cycle de vie. Le réemploi, qui prolonge la vie des matériaux et réduit les déchets, va dans ce sens. Les règles de calcul dépassent ce guide : votre architecte ou votre bureau d'études vous dira comment il est pris en compte dans votre projet.`,
+    },
+    // Le réemploi du bois dans les Hautes-Alpes
     {
       type: 'manifesto',
       anchor: 'hautes-alpes',
       layout: 'columns',
       title: 'Le réemploi du bois **dans les Hautes-Alpes**',
-      text: 'Granges, chalets, maisons de pays : quand on rénove dans les vallées des Hautes-Alpes, on rencontre souvent du bois ancien, en charpente, en plancher ou en bardage. Plusieurs acteurs travaillent sur le réemploi des matériaux du bâtiment, avec des métiers différents.',
+      text: 'Granges, chalets, maisons de pays : rénover dans les vallées, c’est souvent rencontrer du bois ancien. Plusieurs acteurs travaillent sur le réemploi, avec des métiers différents.',
       items: [
         {
           title: "Une plateforme de réemploi à L'Argentière-la-Bessée",
-          text: "Une plateforme de réemploi des matériaux du bâtiment, portée par la ressourcerie La Miraille (association Environnement & Solidarité), se trouve 11 rue de la Série E, ZA des Sablonnières, à L'Argentière-la-Bessée.",
+          text: 'Portée par la ressourcerie La Miraille (association Environnement & Solidarité), 11 rue de la Série E, ZA des Sablonnières.',
         },
         {
           title: 'Des réseaux régionaux',
-          text: "L'association Raediviva fédère les acteurs du réemploi dans le BTP en Provence-Alpes-Côte d'Azur. PRECI est la plateforme régionale de l'économie circulaire de la Région Sud, animée par le CIRIDD.",
+          text: "Raediviva fédère les acteurs du réemploi dans le BTP en PACA. PRECI, animée par le CIRIDD, est la plateforme régionale de l'économie circulaire.",
         },
         {
           title: 'Un charpentier qui déconstruit et réemploie',
-          text: "3B Récup' est la filière de déconstruction et de réemploi du bois de 3B Charpente, charpentier installé à L'Argentière-la-Bessée depuis 2007 : ses charpentiers évaluent, déposent, transforment et reposent le bois.",
+          text: "3B Récup', la filière de 3B Charpente : ses charpentiers évaluent, déposent, transforment et reposent le bois.",
         },
         {
           title: 'Une filière de bois neuf local',
-          text: '3B Charpente travaille principalement du mélèze et du sapin provenant des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli. Réemploi et bois local se complètent.',
+          text: 'Surtout du mélèze et du sapin des Hautes-Alpes, sciés par la Scierie Savoldelli. Réemploi et bois local se complètent.',
         },
       ],
+      emphasis:
+        'Une plateforme remet des matériaux en circulation ; un charpentier dépose le bois, le transforme et le pose. Savoir à qui s’adresser fait gagner du temps.',
     },
-    {
-      type: 'richText',
-      content: `Ces acteurs ne font pas le même métier. Une plateforme de réemploi rassemble des matériaux et les remet en circulation ; un charpentier dépose le bois, le transforme et le pose dans un ouvrage. Pour un projet, savoir à qui s'adresser fait gagner du temps.`,
-    },
-    // 3.9 Particuliers : cinq questions avant de jeter vos vieilles poutres
+    // Particuliers
     {
       type: 'richText',
       anchor: 'particuliers',
-      content: `## Particuliers : **cinq questions** avant de jeter vos vieilles poutres`,
+      content: `## Particuliers : **cinq questions** avant de jeter vos vieilles poutres`,
     },
     {
       type: 'list',
       style: 'numbered',
       items: [
         {
-          title: 'Mon bâtiment est-il concerné par le diagnostic PEMD ?',
-          text: 'Au-delà de 1 000 m² de surface de plancher, ou si le bâtiment a accueilli une activité agricole, industrielle ou commerciale avec des substances classées dangereuses, oui. Sinon, un diagnostic ressources, volontaire, vous aide à savoir quoi garder.',
+          title: 'Mon bâtiment est-il concerné par le diagnostic PEMD ?',
+          text: 'Oui au-delà de 1 000 m², ou après une activité agricole, industrielle ou commerciale avec des substances dangereuses. Sinon, un diagnostic ressources vous aide à savoir quoi garder.',
         },
         {
-          title: 'Le bois est-il sain ?',
-          text: "Un charpentier sait repérer une pièce affaiblie. Faites regarder le bois avant de décider, plutôt qu'après la dépose.",
+          title: 'Le bois est-il sain ?',
+          text: 'Un charpentier sait repérer une pièce affaiblie. Faites-le regarder avant de décider, pas après la dépose.',
         },
         {
-          title: 'Peut-il rester en place ?',
-          text: 'Le meilleur réemploi est parfois de ne rien déposer : une charpente existante peut se rénover et se renforcer, par exemple pour aménager les combles.',
-          link: { label: 'Rénover une charpente existante', href: '/renovation-charpente-combles/' },
+          title: 'Peut-il rester en place ?',
+          text: 'Le meilleur réemploi est parfois de ne rien déposer : une charpente se rénove et se renforce.',
+          link: {
+            label: 'Rénover une charpente existante',
+            href: '/renovation-charpente-combles/',
+          },
         },
         {
-          title: 'Où le stocker en attendant ?',
+          title: 'Où le stocker en attendant ?',
           text: "Au sec, à l'abri de la pluie et du sol, avec de l'air autour des pièces.",
         },
         {
-          title: 'Que deviendra-t-il ?',
-          text: 'Un bardage, un garde-corps, une charpente apparente, un plancher : le nouvel usage se décide avec le projet.',
-          link: { label: "Le bois de réemploi chez 3B Récup'", href: '/3b-recup/bois-de-reemploi/' },
+          title: 'Que deviendra-t-il ?',
+          text: 'Bardage, garde-corps, charpente apparente, plancher : le nouvel usage se décide avec le projet.',
+          link: {
+            label: "Le bois de réemploi chez 3B Récup'",
+            href: '/3b-recup/bois-de-reemploi/',
+          },
         },
       ],
       image: 'renovation-d-une-copropriete-a-briancon/4 Reprise des fermes.jpeg',
       caption: "Reprise des fermes, rénovation d'une copropriété à Briançon",
     },
-    // 3.10 Professionnels : prévoir le réemploi dès la faisabilité
+    // Professionnels
     {
       type: 'richText',
       anchor: 'professionnels',
-      content: `## Professionnels : prévoir le réemploi **dès l'étude de faisabilité**
+      content: `## Professionnels : prévoir le réemploi **dès l'étude de faisabilité**
 
-Le réemploi se décide tôt. Une fois la démolition calée, il est souvent trop tard pour déposer avec soin. Architectes, maîtres d'ouvrage, collectivités, entreprises de construction et de démolition, cinq réflexes :`,
+Le réemploi se décide tôt : une fois la démolition calée, il est souvent trop tard pour déposer avec soin. Architectes, maîtres d'ouvrage, collectivités, entreprises, cinq réflexes :`,
     },
     {
       type: 'list',
       style: 'checks',
       inCard: true,
       items: [
-        { text: 'faire évaluer le gisement bois en même temps que le diagnostic, et non après ;' },
-        { text: "prévoir dans le planning le temps d'une dépose soignée ;" },
-        { text: "dessiner l'ouvrage avec les sections et les longueurs disponibles ;" },
-        { text: 'organiser la logistique : évacuation, transport, stockage des pièces ;' },
-        { text: 'garder trace de ce qui est réemployé, utile pour le formulaire de récolement quand il est exigé.' },
+        { text: 'Faire évaluer le gisement bois avec le diagnostic, pas après' },
+        { text: "Prévoir au planning le temps d'une dépose soignée" },
+        { text: "Dessiner l'ouvrage avec les sections et longueurs disponibles" },
+        { text: 'Organiser la logistique : évacuation, transport, stockage' },
+        { text: 'Garder trace du réemploi, utile pour le formulaire de récolement' },
       ],
     },
     {
       type: 'richText',
-      content: `C'est l'ambition de 3B Récup' : être associé aux déconstructions locales dès l'étude de faisabilité.`,
+      content: `C'est l'ambition de 3B Récup' : être associé aux déconstructions locales dès l'étude de faisabilité.`,
     },
-    // 3.11 FAQ
+    // FAQ
     {
       type: 'faq',
       kicker: 'Questions fréquentes',
@@ -313,13 +333,13 @@ Le réemploi se décide tôt. Une fois la démolition calée, il est souvent tro
         'reemploi-bois-construction-q6',
       ],
     },
-    // 3.12 Appel à l'action
+    // Appel à l'action
     {
       type: 'cta',
       variant: 'card',
       badge: '3B Récup’',
-      title: 'Un bâtiment, une grange, un projet ? **Parlons-en**',
-      text: "3B Récup' accompagne les architectes, les maîtres d'ouvrage, les collectivités, les entreprises et les particuliers, de la dépose à la repose. Chaque projet débute par une étude sur mesure.",
+      title: 'Un bâtiment, une grange, un projet ? **Parlons-en**',
+      text: "3B Récup' accompagne architectes, maîtres d'ouvrage, collectivités, entreprises et particuliers, de la dépose à la repose.",
       primary: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
       secondary: { label: 'Parlons de votre bâtiment', href: '/contact/' },
       showAddress: true,
@@ -329,44 +349,44 @@ Le réemploi se décide tôt. Une fois la démolition calée, il est souvent tro
     {
       key: 'reemploi-bois-construction-q1',
       topic: 'guides',
-      question: 'Peut-on réutiliser une vieille charpente ?',
+      question: 'Peut-on réutiliser une vieille charpente ?',
       answer:
-        "Souvent, oui, en partie au moins. Tout dépend de l'état des pièces, de leurs sections et de la façon dont elles sont déposées. Une charpente démontée en suivant ses assemblages peut fournir des pièces de charpente, un bardage ou un garde-corps. Parfois, le meilleur réemploi est de garder la charpente en place et de la rénover.",
+        "Souvent, au moins en partie. Tout dépend de l'état des pièces, de leurs sections et de la dépose. Démontée en suivant ses assemblages, une charpente fournit des pièces de charpente, un bardage ou un garde-corps. Parfois, le meilleur réemploi est de la garder en place et de la rénover.",
     },
     {
       key: 'reemploi-bois-construction-q2',
       topic: 'guides',
-      question: 'Le bois de réemploi est-il aussi solide que le bois neuf ?',
+      question: 'Le bois de réemploi est-il aussi solide que le bois neuf ?',
       answer:
-        "Ni plus ni moins par principe : tout dépend de chaque pièce et de l'usage prévu. Une pièce ancienne doit être examinée, triée et préparée avant d'être reposée. Pour un usage porteur, demandez à l'entreprise comment elle vérifie les pièces de réemploi et comment son assurance couvre l'ouvrage.",
+        "Ni plus ni moins par principe : tout dépend de la pièce et de l'usage. Une pièce ancienne s'examine, se trie et se prépare avant d'être reposée. Pour un usage porteur, demandez à l'entreprise comment elle vérifie les pièces et comment son assurance couvre l'ouvrage.",
     },
     {
       key: 'reemploi-bois-construction-q3',
       topic: 'guides',
-      question: 'Le diagnostic PEMD est-il obligatoire pour une maison ?',
+      question: 'Le diagnostic PEMD est-il obligatoire pour une maison ?',
       answer:
-        'Le diagnostic PEMD est obligatoire avant la démolition ou la rénovation significative de bâtiments de plus de 1 000 m² de surface de plancher cumulée, ou ayant accueilli une activité agricole, industrielle ou commerciale avec des substances classées dangereuses. Une maison sous ce seuil, sans une telle activité, relève plutôt d\'un diagnostic ressources, volontaire.',
+        "Pas sous 1 000 m² de surface de plancher, sauf si elle a accueilli une activité agricole, industrielle ou commerciale avec des substances classées dangereuses. Une maison relève donc plutôt d'un diagnostic ressources, volontaire.",
     },
     {
       key: 'reemploi-bois-construction-q4',
       topic: 'guides',
-      question: "Qu'est-ce qu'une matériauthèque ?",
+      question: "Qu'est-ce qu'une matériauthèque ?",
       answer:
-        "Une matériauthèque est un lieu qui collecte des matériaux de construction pour les remettre en circulation. On parle aussi de plateforme de réemploi ou de ressourcerie de matériaux. À L'Argentière-la-Bessée, dans les Hautes-Alpes, une plateforme de réemploi des matériaux du bâtiment est portée par la ressourcerie La Miraille, ZA des Sablonnières.",
+        "Un lieu qui collecte des matériaux de construction pour les remettre en circulation : on parle aussi de plateforme de réemploi ou de ressourcerie de matériaux. À L'Argentière-la-Bessée, une plateforme de ce type est portée par la ressourcerie La Miraille, ZA des Sablonnières.",
     },
     {
       key: 'reemploi-bois-construction-q5',
       topic: 'guides',
-      question: 'Où trouver du bois de réemploi dans les Hautes-Alpes ?',
+      question: 'Où trouver du bois de réemploi dans les Hautes-Alpes ?',
       answer:
-        "Plusieurs acteurs existent. À L'Argentière-la-Bessée, une plateforme de réemploi des matériaux du bâtiment est portée par la ressourcerie La Miraille. 3B Récup', la filière de 3B Charpente installée dans la même commune, déconstruit, transforme et repose du bois de réemploi dans ses chantiers. À l'échelle régionale, Raediviva fédère les acteurs du réemploi dans le BTP.",
+        "À L'Argentière-la-Bessée, une plateforme de réemploi des matériaux du bâtiment est portée par la ressourcerie La Miraille. 3B Récup', dans la même commune, déconstruit, transforme et repose du bois de réemploi sur ses chantiers. À l'échelle régionale, Raediviva fédère les acteurs du réemploi dans le BTP.",
     },
     {
       key: 'reemploi-bois-construction-q6',
       topic: 'guides',
-      question: 'Qui peut déposer une vieille charpente pour la réemployer ?',
+      question: 'Qui peut déposer une vieille charpente pour la réemployer ?',
       answer:
-        "Un charpentier est bien placé : une charpente tient par ses assemblages, et il faut savoir comment elle a été taillée pour la démonter en préservant les pièces. Dans les Hautes-Alpes, les charpentiers de 3B Récup' déposent charpente, solivage, murs à ossature bois, couverture, isolation et parements, puis transforment le bois dans leurs ateliers.",
+        "Un charpentier : une charpente tient par ses assemblages, et il faut savoir comment elle a été taillée pour la démonter sans casse. Dans les Hautes-Alpes, les charpentiers de 3B Récup' déposent charpente, solivage, ossature, couverture, isolation et parements, puis transforment le bois à l'atelier.",
     },
   ],
   seo: {
@@ -378,15 +398,17 @@ Le réemploi se décide tôt. Une fois la démolition calée, il est souvent tro
   photoAlts: [
     {
       photo: HERO,
-      alt: 'Ferme de charpente en vieux bois réemployée par 3B Charpente lors de la réfection d\'une toiture',
+      alt: "Ferme de charpente en vieux bois réemployée par 3B Charpente lors de la réfection d'une toiture",
       caption: "Ferme de charpente en vieux bois, réfection d'une toiture par 3B Charpente.",
     },
     {
-      photo: "refection-d-une-charpente-a-l-argentiere-la-bessee/dépose de l'ancienne charpente.JPG",
+      photo:
+        "refection-d-une-charpente-a-l-argentiere-la-bessee/dépose de l'ancienne charpente.JPG",
       alt: "Dépose d'une ancienne charpente par les charpentiers de 3B Charpente à L'Argentière-la-Bessée",
     },
     {
-      photo: 'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/06Bardage vieux bois.JPG',
+      photo:
+        'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/06Bardage vieux bois.JPG',
       alt: "Bardage en vieux bois sur une maison rénovée par 3B Charpente à L'Argentière-la-Bessée",
     },
   ],
@@ -407,7 +429,8 @@ Le réemploi se décide tôt. Une fois la démolition calée, il est souvent tro
     {
       question:
         'Conseils pratiques (bois peint ou traité, stockage au sec, vérification des pièces porteuses, assurance) : Jean les valide-t-il ? Souhaite-t-il ajouter son expérience (ce qu’il refuse de réemployer, par exemple) ?',
-      decision: 'Conseils publiés tels que rédigés, présentés comme des conseils et non comme des règles.',
+      decision:
+        'Conseils publiés tels que rédigés, présentés comme des conseils et non comme des règles.',
       priority: 'normal',
     },
     {
@@ -418,17 +441,21 @@ Le réemploi se décide tôt. Une fois la démolition calée, il est souvent tro
     },
     {
       question: 'Date de publication et page /conseils/ (liste des guides) pour le fil d’Ariane.',
-      decision: 'Date = date de mise en ligne. Page /conseils/ publiée au lancement : fil d’Ariane Accueil › Conseils › guide.',
+      decision:
+        'Date = date de mise en ligne. Page /conseils/ publiée au lancement : fil d’Ariane Accueil › Conseils › guide.',
       priority: 'low',
     },
     {
-      question: 'Durée de lecture : « 8 minutes » est une estimation à recalculer sur le texte final.',
+      question:
+        'Durée de lecture : « 8 minutes » est une estimation à recalculer sur le texte final.',
       decision: 'Mention non transcrite : la ligne d’information est générée par le site.',
       priority: 'low',
     },
     {
-      question: 'Vente de bois : adapter la FAQ « Où trouver du bois de réemploi dans les Hautes-Alpes ? » si la variante B de la fiche 14 est retenue.',
-      decision: 'Variante A (pas de vente) : réponse publiée sans « et en propose aussi à la vente ».',
+      question:
+        'Vente de bois : adapter la FAQ « Où trouver du bois de réemploi dans les Hautes-Alpes ? » si la variante B de la fiche 14 est retenue.',
+      decision:
+        'Variante A (pas de vente) : réponse publiée sans « et en propose aussi à la vente ».',
       priority: 'low',
     },
     {
@@ -441,7 +468,7 @@ Le réemploi se décide tôt. Une fois la démolition calée, il est souvent tro
     {
       question: 'Scierie Savoldelli : formulation de la carte « Une filière de bois neuf local ».',
       decision:
-        "Formulation de la FAQ validée appliquée : « sciés par notre partenaire local, la Scierie Savoldelli » (fiche : « sciés par la Scierie Savoldelli »).",
+        'Formulation de la FAQ validée appliquée : « sciés par notre partenaire local, la Scierie Savoldelli » (fiche : « sciés par la Scierie Savoldelli »).',
       priority: 'low',
     },
     {

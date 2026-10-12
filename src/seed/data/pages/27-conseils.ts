@@ -18,7 +18,7 @@ export const page: SeedPage = {
     variant: 'simple',
     kicker: 'Conseils',
     title: 'Nos **conseils** pour construire et rénover en bois dans les Hautes-Alpes',
-    text: "Des réponses concrètes aux questions qu'on nous pose sur les chantiers : quel isolant choisir, comment réemployer du bois, par où commencer une rénovation, à quelles aides prétendre. Écrites par l'équipe de 3B Charpente, charpentier à L'Argentière-la-Bessée depuis 2007.",
+    text: "Les questions qu'on nous pose sur les chantiers, et nos réponses : **quel isolant**, **comment réemployer le bois**, **par où commencer**, **quelles aides**. Par l'équipe de 3B Charpente, charpentier à L'Argentière-la-Bessée depuis 2007.",
   },
 
   layout: [
@@ -37,8 +37,9 @@ export const page: SeedPage = {
 
   validationPoints: [
     {
-      question: "Les guides sont-ils signés « l'équipe de 3B Charpente » ou par Jean-Michel Tardy ?",
-      decision: '« L\'équipe de 3B Charpente ».',
+      question:
+        "Les guides sont-ils signés « l'équipe de 3B Charpente » ou par Jean-Michel Tardy ?",
+      decision: "« L'équipe de 3B Charpente ».",
       priority: 'low',
     },
   ],

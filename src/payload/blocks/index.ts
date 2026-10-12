@@ -1,11 +1,14 @@
 import type { Block } from 'payload'
 
 import {
+  CalloutBlock,
   CardsBlock,
   ComparisonTableBlock,
   CtaBlock,
+  FiguresBlock,
   ListBlock,
   ManifestoBlock,
+  ProsConsBlock,
   QuoteBlock,
   RichTextBlock,
   SpotlightBlock,
@@ -49,6 +52,9 @@ const DB_NAMES: Record<string, string> = {
   articles: 'b_arts',
   contactForm: 'b_form',
   richText: 'b_rich',
+  figures: 'b_fig',
+  callout: 'b_note',
+  prosCons: 'b_pc',
 }
 
 // Prefixed by the parent table (pages, services, articles…) so collections never share a table.
@@ -72,6 +78,9 @@ const withDbName = (block: Block): Block => {
 export const PAGE_BLOCKS: Block[] = [
   TextImageBlock,
   CardsBlock,
+  FiguresBlock,
+  CalloutBlock,
+  ProsConsBlock,
   ServicesGridBlock,
   ProjectsBlock,
   ProjectsExplorerBlock,

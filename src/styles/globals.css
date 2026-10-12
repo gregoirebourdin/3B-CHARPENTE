@@ -95,14 +95,21 @@ h2 {
   line-height: 1.08;
 }
 
+/* Card, step and list titles: Inter, so that only the big titles carry Nohemi. */
+h3,
+h4 {
+  font-family: var(--font-body);
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
 h3 {
   font-size: var(--fs-h3);
-  font-weight: 600;
 }
 
 h4 {
   font-size: var(--fs-h4);
-  font-weight: 600;
 }
 
 p,
@@ -132,10 +139,6 @@ a {
  * order by a CSS counter, so the numbering follows any reordering done in the
  * admin. A kicker without number starts with a short rule.
  */
-main {
-  counter-reset: tb-section;
-}
-
 /* Motifs: contour lines of the Hautes-Alpes, wood rings of 3B Récup' (CSS masks, tinted by the theme). */
 :root {
   --topo-url: url('/motifs/courbes-de-niveau.svg');
@@ -145,38 +148,43 @@ main {
 .kicker {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-3);
-  color: var(--fg-accent);
+  align-self: flex-start;
+  gap: var(--space-2);
+  width: fit-content;
+  padding: 5px 12px 5px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--c-sage-soft);
+  color: var(--c-forest);
   font-size: var(--fs-kicker);
   font-weight: 650;
-  letter-spacing: var(--tracking-kicker);
-  line-height: 1.3;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
 }
 
+/* A small square mark, like a carpenter's mark on a timber. */
 .kicker::before {
   content: '';
   flex: none;
-  width: 28px;
-  height: 1.5px;
-  background: currentColor;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--fg-accent);
+  transform: rotate(45deg);
 }
 
-.kicker[data-numbered] {
-  counter-increment: tb-section;
+/* On dark grounds (forest, night, photo). */
+[data-tone='dark'] .kicker,
+[data-tone='forest'] .kicker,
+.on-dark .kicker {
+  background: rgb(163 210 163 / 0.14);
+  /* Lighter than the sage accent: 4.5:1 on the forest green too. */
+  color: #d4ead1;
 }
 
-.kicker[data-numbered]::before {
-  content: counter(tb-section, decimal-leading-zero);
-  content: counter(tb-section, decimal-leading-zero) / '';
-  width: auto;
-  height: auto;
-  padding-right: var(--space-3);
-  border-right: 1.5px solid currentColor;
-  background: none;
-  font-family: var(--font-heading);
-  font-size: 0.875rem;
-  letter-spacing: 0;
+[data-tone='dark'] .kicker::before,
+[data-tone='forest'] .kicker::before,
+.on-dark .kicker::before {
+  background: var(--c-sage);
 }
 
 /* Hyphenated place names stay on one line where there is room for them. */
@@ -290,10 +298,18 @@ main {
 }
 
 /* ---------- Guides: sections flow in the reading column ---------- */
+.article-body {
+  container-type: inline-size;
+}
+
 .article-body > section,
 .article-body section[data-tone] {
-  padding-block: var(--space-8);
+  padding-block: var(--space-6);
   background: transparent;
+}
+
+.article-body > section:first-child {
+  padding-top: 0;
 }
 
 .article-body .container {
@@ -303,6 +319,7 @@ main {
 
 .article-body section[data-tone='light'] > .container {
   padding: var(--space-8);
+  border: 1px solid var(--c-line);
   border-radius: var(--radius-lg);
-  background: var(--bg-alt);
+  background: var(--c-card);
 }

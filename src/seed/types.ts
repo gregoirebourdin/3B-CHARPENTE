@@ -61,8 +61,32 @@ export type SeedBlock =
       badge?: string
       caption?: string
       twoColumns?: boolean
+      /** Short lines shown with a green check under the text (« points clés »). */
+      points?: string[]
       links?: SeedLink[]
       cta?: SeedLink
+    } & SeedHeading)
+  | ({
+      type: 'figures'
+      /** 2 to 4 verified figures: '2007', '28' + 'cm'… */
+      items: { value: string; unit?: string; label: string }[]
+    } & SeedHeading)
+  | {
+      type: 'callout'
+      kind?: 'tip' | 'site' | 'definition' | 'aid'
+      /** Empty: the name of the kind (« Bon à savoir »…). */
+      title?: string
+      text: Md
+      link?: SeedLink
+      tone?: Tone
+      anchor?: string
+    }
+  | ({
+      type: 'prosCons'
+      prosLabel?: string
+      consLabel?: string
+      pros: string[]
+      cons?: string[]
     } & SeedHeading)
   | ({
       type: 'cards'

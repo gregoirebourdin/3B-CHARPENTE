@@ -28,11 +28,9 @@ export function trackingFor(link: ResolvedLink): string | undefined {
 
 export function CmsLink({ link, variant, size, block, arrow, className, children }: Props) {
   if (!link) return null
-  const disc = Boolean(variant && arrow)
   const classes = [
     variant ? styles.button : undefined,
     variant ? styles[variant] : undefined,
-    disc ? styles.withDisc : undefined,
     size ? styles[size] : undefined,
     block ? styles.block : undefined,
     className,
@@ -43,13 +41,7 @@ export function CmsLink({ link, variant, size, block, arrow, className, children
     <>
       {link.kind === 'phone' && variant ? <Icon name="phone" size={18} /> : null}
       {children ?? link.label}
-      {disc ? (
-        <span className={styles.disc} aria-hidden="true">
-          <Icon name="arrowRight" size={size === 'small' ? 14 : 16} />
-        </span>
-      ) : arrow ? (
-        <Icon name="arrowRight" size={18} data-arrow="" />
-      ) : null}
+      {arrow ? <Icon name="arrowRight" size={variant ? 18 : 16} data-arrow="" className={variant ? styles.arrow : undefined} /> : null}
     </>
   )
   const track = trackingFor(link)

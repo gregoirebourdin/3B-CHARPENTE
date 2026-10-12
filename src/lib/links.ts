@@ -53,7 +53,9 @@ export function resolveLink(link: CmsLink, company?: ContactDetails | null): Res
       const path = pathFor(ref.relationTo, ref.value as { slug?: string; path?: string })
       if (!path) return null
       const anchor = link.anchor ? `#${link.anchor.replace(/^#/, '')}` : ''
-      return { href: `${path}${anchor}`, label, external: false, kind: 'internal' }
+      // A link left without words gets the title of the page it points to: never an empty button.
+      const title = (ref.value as { title?: string | null }).title?.replace(/\*\*/g, '') ?? ''
+      return { href: `${path}${anchor}`, label: label || title, external: false, kind: 'internal' }
     }
   }
 }

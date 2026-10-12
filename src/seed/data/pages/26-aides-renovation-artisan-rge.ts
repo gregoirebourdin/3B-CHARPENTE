@@ -8,7 +8,8 @@
  */
 import type { SeedArticle } from '../../types'
 
-const HERO = 'renovation-energetique-et-ouverture-d-une-lucarne-a-saint-martin-de-queyriere/toiture terminée.jpg'
+const HERO =
+  'renovation-energetique-et-ouverture-d-une-lucarne-a-saint-martin-de-queyriere/toiture terminée.jpg'
 
 export const article: SeedArticle = {
   kind: 'article',
@@ -17,53 +18,67 @@ export const article: SeedArticle = {
   topic: 'Aides',
   menuLabel: 'Aides à la rénovation et RGE',
   excerpt:
-    "Vous voulez isoler votre toit ou vos murs, ou changer vos fenêtres, et vous avez entendu parler des aides ? Avant les montants, une question compte : l'entreprise est-elle qualifiée RGE pour vos travaux ? Voici ce que recouvre ce label, comment le vérifier et comment préparer votre projet.",
+    "Isoler un toit, des murs, changer des fenêtres avec des aides ? Une question compte avant les montants : l'entreprise est-elle qualifiée RGE pour vos travaux ? Ce que recouvre le label, comment le vérifier, comment préparer votre projet.",
   cardSummary: "Ce qu'est le label RGE, comment le vérifier et les étapes d'un projet aidé.",
   image: HERO,
-  tldr: "Un artisan RGE (Reconnu garant de l'environnement) est qualifié, domaine par domaine, pour des travaux de rénovation énergétique. La plupart des aides publiques, comme MaPrimeRénov' ou les certificats d'économies d'énergie, l'exigent, sous conditions. Vérifiez l'entreprise dans l'annuaire de France Rénov' et faites le point avec un conseiller France Rénov' avant de signer un devis.",
+  tldr: "Un artisan RGE (« reconnu garant de l'environnement ») est qualifié, domaine par domaine, pour des travaux de rénovation énergétique. La plupart des aides publiques l'exigent, comme MaPrimeRénov' ou les certificats d'économies d'énergie, sous conditions. Vérifiez l'entreprise dans l'annuaire de France Rénov' et voyez un conseiller avant de signer.",
   layout: [
-    // 3.3 Encadré « Ce que ce guide ne dit pas »
+    // Ce que ce guide ne dit pas
     {
-      type: 'cta',
-      variant: 'slim',
-      icon: 'info',
-      text: "Ce guide ne donne volontairement aucun montant, aucun plafond et aucune condition d'accès : les règles des aides changent chaque année, parfois en cours d'année. Pour votre situation, la seule référence à jour est France Rénov' ([france-renov.gouv.fr](https://france-renov.gouv.fr/)), le service public de la rénovation de l'habitat.",
+      type: 'callout',
+      kind: 'tip',
+      title: 'Ce que ce guide ne dit pas',
+      text: "Aucun montant, aucun plafond, aucune condition d'accès : les règles changent chaque année, parfois en cours d'année. Pour votre situation, la seule référence à jour est [France Rénov'](https://france-renov.gouv.fr/), le service public de la rénovation de l'habitat.",
     },
-    // 3.5 Le label RGE, c'est quoi ?
+    // Le label RGE, c'est quoi ?
     {
       type: 'richText',
       anchor: 'rge',
-      content: `## Le label RGE, **c'est quoi** ?
+      content: `## Le label RGE, **c'est quoi** ?
 
-**RGE signifie « Reconnu garant de l'environnement ». C'est un signe de qualité attribué aux entreprises du bâtiment qui réalisent des travaux de rénovation énergétique** : isolation, fenêtres, chauffage, énergies renouvelables…
+**RGE signifie « Reconnu garant de l'environnement ».** C'est un signe de qualité attribué aux entreprises du bâtiment qui réalisent des travaux de rénovation énergétique : isolation, fenêtres, chauffage, énergies renouvelables…
 
-Il est délivré par des organismes de qualification ou de certification, comme Qualibat pour le bâtiment. Pour l'obtenir, l'entreprise doit notamment justifier de compétences techniques, désigner une personne formée qui encadre les chantiers concernés et accepter des contrôles de ses réalisations. La qualification est accordée pour une durée limitée et suivie dans le temps.
+Il est délivré par des organismes de qualification ou de certification, comme Qualibat pour le bâtiment, pour une durée limitée et suivie dans le temps.
 
-**Point essentiel : le RGE s'obtient par domaine de travaux.** Une entreprise peut être RGE pour l'isolation des toitures et pas pour la pose de fenêtres, ou l'inverse. C'est le domaine qui compte, pas le logo seul.
-
-Le RGE n'est pas une garantie absolue : c'est un niveau d'exigence vérifié. Il ne remplace ni un devis détaillé ni les assurances de l'entreprise. Demandez aussi son attestation d'assurance décennale.`,
+**Point essentiel : le RGE s'obtient par domaine de travaux.** Une entreprise peut être RGE pour l'isolation des toitures et pas pour les fenêtres, ou l'inverse. C'est le domaine qui compte, pas le logo seul.`,
     },
-    // 3.6 Pourquoi le RGE compte pour les aides
+    {
+      type: 'prosCons',
+      prosLabel: 'Ce que vérifie le RGE',
+      consLabel: "Ce qu'il ne remplace pas",
+      pros: [
+        "Des compétences techniques justifiées par l'entreprise",
+        'Une personne formée qui encadre les chantiers concernés',
+        'Des contrôles des réalisations',
+      ],
+      cons: [
+        "Ce n'est pas une garantie absolue, mais un niveau d'exigence vérifié",
+        'Un devis détaillé',
+        "L'assurance décennale de l'entreprise : demandez son attestation",
+      ],
+    },
+    // Pourquoi le RGE compte pour les aides
     {
       type: 'richText',
       anchor: 'aides',
       content: `## Pourquoi le RGE compte **pour les aides**
 
-En France, plusieurs aides publiques soutiennent la rénovation énergétique des logements. Elles existent toutes sous conditions, et ces conditions changent souvent. Les principaux dispositifs sont :
+Plusieurs aides publiques soutiennent la rénovation énergétique des logements, toutes sous conditions :
 
-- **MaPrimeRénov'**, l'aide de l'État gérée par l'Agence nationale de l'habitat (Anah) ;
-- les **certificats d'économies d'énergie (CEE)**, souvent appelés « primes énergie », financés par les fournisseurs d'énergie ;
-- l'**éco-prêt à taux zéro (éco-PTZ)**, un prêt sans intérêts pour financer des travaux ;
-- une **TVA à taux réduit** sur certains travaux de rénovation énergétique ;
-- des **aides locales** de collectivités, qui varient selon les territoires.
+- **MaPrimeRénov'**, l'aide de l'État gérée par l'Agence nationale de l'habitat (Anah) ;
+- les **certificats d'économies d'énergie (CEE)**, ou « primes énergie », financés par les fournisseurs d'énergie ;
+- l'**éco-prêt à taux zéro (éco-PTZ)**, un prêt sans intérêts pour financer des travaux ;
+- une **TVA à taux réduit** sur certains travaux ;
+- des **aides locales**, qui varient selon les territoires.
 
-**Pour la plupart de ces aides, les travaux doivent être réalisés par une entreprise qualifiée RGE dans le domaine concerné.** Le label RGE ouvre ainsi l'accès aux aides publiques à la rénovation énergétique, sous conditions.
-
-Les montants, les plafonds de ressources et les conditions évoluent régulièrement. Nous ne les détaillons pas ici, volontairement : la seule source à jour est France Rénov'.
-
-Un point de méthode, valable quel que soit le dispositif : renseignez-vous **avant** de signer un devis ou de commencer les travaux. Pour plusieurs aides, l'ordre des démarches compte.`,
+**Pour la plupart, les travaux doivent être réalisés par une entreprise qualifiée RGE dans le domaine concerné.** Montants, plafonds de ressources et conditions évoluent : la seule source à jour est France Rénov'.`,
     },
-    // 3.7 Comment vérifier qu'un artisan est RGE
+    {
+      type: 'callout',
+      kind: 'tip',
+      text: "Renseignez-vous **avant** de signer un devis ou de commencer les travaux : pour plusieurs aides, l'ordre des démarches compte.",
+    },
+    // Comment vérifier qu'un artisan est RGE
     {
       type: 'richText',
       anchor: 'verifier',
@@ -75,40 +90,43 @@ Un point de méthode, valable quel que soit le dispositif : renseignez-vous **a
       steps: [
         {
           title: 'Demandez le certificat',
-          text: 'Une entreprise RGE peut vous transmettre son certificat de qualification : nom de l\'entreprise, organisme, domaines couverts, dates de validité.',
+          text: "Nom de l'entreprise, organisme, domaines couverts, dates de validité : une entreprise RGE peut vous le transmettre.",
         },
         {
           title: "Vérifiez dans l'annuaire officiel",
-          text: "L'annuaire des professionnels RGE est accessible depuis france-renov.gouv.fr. Cherchez l'entreprise par son nom, sa commune ou le type de travaux.",
+          text: "L'annuaire des professionnels RGE, sur france-renov.gouv.fr : par nom, par commune ou par type de travaux.",
         },
         {
           title: 'Contrôlez le domaine',
-          text: 'Le domaine affiché doit correspondre exactement à vos travaux : « isolation des toitures par l\'extérieur » n\'est pas « isolation par l\'intérieur des murs ou rampants de toitures ou plafonds ».',
+          text: "Il doit correspondre exactement à vos travaux : « isolation des toitures par l'extérieur » n'est pas « isolation par l'intérieur des murs ou rampants ».",
         },
         {
           title: 'Comparez les identités',
-          text: 'Le nom et le numéro SIRET du certificat doivent correspondre à ceux du devis. Si une partie des travaux est confiée à une autre entreprise, demandez laquelle, et avec quelle qualification.',
+          text: 'Même nom et même SIRET sur le certificat et sur le devis. Une partie des travaux sous-traitée ? Demandez à qui, et avec quelle qualification.',
         },
         {
           title: 'Regardez les dates',
-          text: 'Une qualification a une date de fin. Demandez à votre conseiller France Rénov\' à quelle date elle doit être valide pour votre dossier.',
+          text: "Une qualification a une date de fin : votre conseiller France Rénov' vous dira à quelle date elle doit être valide.",
         },
       ],
     },
     {
-      type: 'cta',
-      variant: 'slim',
-      icon: 'shield',
-      text: 'Méfiez-vous des démarchages par téléphone ou à domicile, des promesses de travaux « gratuits » et des entreprises qui vous pressent de signer. Un conseiller France Rénov\' est neutre et gratuit : il ne vend rien.',
-      primary: { label: "Ouvrir l'annuaire RGE de France Rénov'", href: 'https://france-renov.gouv.fr/annuaire-rge' },
+      type: 'callout',
+      kind: 'tip',
+      title: 'Attention au démarchage',
+      text: "Méfiez-vous des appels ou visites non sollicités, des travaux « gratuits » et des entreprises qui pressent de signer. Un conseiller France Rénov' est neutre et gratuit : il ne vend rien.",
+      link: {
+        label: "Ouvrir l'annuaire RGE de France Rénov'",
+        href: 'https://france-renov.gouv.fr/annuaire-rge',
+      },
     },
-    // 3.8 Les domaines RGE de 3B Charpente
+    // Les domaines RGE de 3B Charpente
     {
       type: 'richText',
       anchor: 'domaines-3b',
       content: `## Les domaines RGE **de 3B Charpente**
 
-3B Charpente, charpentier installé à L'Argentière-la-Bessée depuis 2007, est qualifié QUALIBAT-RGE. La qualification est au nom de son fondateur, « TARDY JEAN-MICHEL », et figure dans l'annuaire RGE de l'ADEME (données ouvertes), avec une date de rattachement au 2 octobre 2025. Elle couvre cinq domaines :`,
+3B Charpente, charpentier à L'Argentière-la-Bessée depuis 2007, est qualifié **QUALIBAT-RGE**. La qualification est au nom de son fondateur, « TARDY JEAN-MICHEL », et figure dans l'annuaire RGE de l'ADEME (données ouvertes), rattachée au 2 octobre 2025. Elle couvre cinq domaines :`,
     },
     {
       type: 'comparisonTable',
@@ -118,20 +136,26 @@ Un point de méthode, valable quel que soit le dispositif : renseignez-vous **a
           "Isolation des murs par l'extérieur",
           "ITE (isolation thermique par l'extérieur) en panneaux de fibre de bois, sous bardage bois ou enduit",
         ],
-        ["Isolation des toitures par l'extérieur", 'Sarking : isolant continu posé au-dessus des chevrons, sous la couverture'],
+        [
+          "Isolation des toitures par l'extérieur",
+          'Sarking : isolant continu posé au-dessus des chevrons, sous la couverture',
+        ],
         [
           "Isolation par l'intérieur des murs ou rampants de toitures ou plafonds",
           'Murs du bâti ancien (ouate de cellulose insufflée), rampants, combles',
         ],
         ['Fenêtres de toit', "Ouverture dans la charpente, pose et raccords à l'isolation"],
-        ["Fenêtres, volets, portes donnant sur l'extérieur", "Menuiseries raccordées à l'isolation des murs"],
+        [
+          "Fenêtres, volets, portes donnant sur l'extérieur",
+          "Menuiseries raccordées à l'isolation des murs",
+        ],
       ],
     },
     {
       type: 'richText',
-      content: `**Pour en savoir plus :** [Isolation des murs par l'extérieur](/isolation-murs-ite/) · [Isolation de toiture et sarking](/isolation-toiture-sarking/) · [Fenêtres de toit](/isolation-toiture-sarking/#fenetres-de-toit) · [Menuiseries extérieures](/isolation-murs-ite/#menuiseries)
+      content: `**Pour en savoir plus :** [Isolation des murs par l'extérieur](/isolation-murs-ite/) · [Isolation de toiture et sarking](/isolation-toiture-sarking/) · [Fenêtres de toit](/isolation-toiture-sarking/#fenetres-de-toit) · [Menuiseries extérieures](/isolation-murs-ite/#menuiseries)
 
-Nos isolants sont biosourcés, c'est-à-dire fabriqués à partir de matières issues du vivant : ouate de cellulose, fibre de bois, laines de chanvre, lin et coton. Nos autres prestations (charpente, escaliers, terrasses) relèvent de notre métier de charpentier, en dehors de ces domaines. Et parce que rénover, c'est aussi réemployer, nous donnons une seconde vie au bois déposé avec 3B Récup'.
+Nos isolants sont **biosourcés** : ouate de cellulose, fibre de bois, laines de chanvre, lin et coton. Nos autres prestations (charpente, escaliers, terrasses) sortent de ces domaines. Et le bois déposé retrouve une seconde vie avec 3B Récup'.
 
 [Isolation biosourcée dans les Hautes-Alpes](/isolation-biosourcee/) · [3B Récup'](/3b-recup/)`,
     },
@@ -139,12 +163,13 @@ Nos isolants sont biosourcés, c'est-à-dire fabriqués à partir de matières i
       type: 'gallery',
       images: [
         {
-          image: "isolation-d-une-toiture-ancienne-a-l-argentiere-la-bessee/vue de dessous d'un velux 78x98.JPG",
-          caption: "Fenêtre de toit de 78 × 98 cm dans un rampant isolé à L'Argentière-la-Bessée",
+          image:
+            "isolation-d-une-toiture-ancienne-a-l-argentiere-la-bessee/vue de dessous d'un velux 78x98.JPG",
+          caption: "Fenêtre de toit de 78 × 98 cm dans un rampant isolé à L'Argentière-la-Bessée",
         },
       ],
     },
-    // 3.9 Les étapes d'un projet de rénovation aidé
+    // Les étapes d'un projet de rénovation aidé
     {
       type: 'richText',
       anchor: 'etapes',
@@ -155,28 +180,28 @@ Nos isolants sont biosourcés, c'est-à-dire fabriqués à partir de matières i
       variant: 'timeline',
       steps: [
         {
-          title: "Faire le point avec un conseiller France Rénov'",
-          text: "Gratuit et neutre, il vous aide à comprendre les aides possibles pour votre logement et votre situation, et l'ordre des démarches. Pour le trouver : [france-renov.gouv.fr](https://france-renov.gouv.fr/), ou le numéro national 0 808 800 700.",
+          title: "Voir un conseiller France Rénov'",
+          text: 'Gratuit et neutre : les aides possibles et l’ordre des démarches. Sur [france-renov.gouv.fr](https://france-renov.gouv.fr/) ou au 0 808 800 700.',
         },
         {
-          title: 'Faire réaliser un audit ou un diagnostic, si besoin',
-          text: "Pour un projet global, un audit énergétique aide à hiérarchiser les travaux, et il peut être demandé selon les dispositifs. Pour une rénovation d'ampleur, un accompagnement par un opérateur agréé, appelé Mon Accompagnateur Rénov', peut aussi être exigé : votre conseiller vous orientera.",
+          title: 'Audit ou diagnostic, si besoin',
+          text: "Un audit énergétique hiérarchise les travaux. Pour une rénovation d'ampleur, Mon Accompagnateur Rénov' peut être exigé.",
         },
         {
-          title: "Rencontrer l'artisan et obtenir un devis détaillé",
-          text: 'Chez 3B Charpente, chaque projet débute par une étude sur mesure : nous discutons de vos besoins lors d\'une rencontre et vous proposons un devis détaillé adapté à votre projet. Un bon devis précise les matériaux, les épaisseurs, les surfaces et les performances des isolants. Ces informations servent aussi à vos dossiers.',
+          title: 'Rencontre et devis détaillé',
+          text: 'Matériaux, épaisseurs, surfaces, performances des isolants : un bon devis sert aussi à vos dossiers.',
         },
         {
-          title: "Faire les demandes d'aides au bon moment",
-          text: 'Avec votre conseiller, vérifiez quelles demandes se font avant la signature du devis ou le début des travaux, et lesquelles après.',
+          title: "Demandes d'aides au bon moment",
+          text: 'Avec votre conseiller : lesquelles avant la signature ou le début des travaux, lesquelles après.',
         },
         {
           title: 'Réaliser les travaux',
-          text: 'Le délai peut varier selon la complexité et la taille du projet : nous vous fournissons un calendrier estimatif dès la première rencontre. Viennent ensuite la préparation, le chantier et la fin des travaux.',
+          text: 'Calendrier estimatif dès la première rencontre, puis préparation, chantier et fin des travaux.',
         },
         {
-          title: 'Transmettre les factures et les justificatifs',
-          text: 'La facture finale reprend les travaux réalisés et leurs caractéristiques. Elle sert à obtenir le versement des aides accordées.',
+          title: 'Factures et justificatifs',
+          text: 'La facture finale reprend les travaux et leurs caractéristiques : elle déclenche le versement des aides.',
         },
       ],
     },
@@ -189,40 +214,45 @@ Nos isolants sont biosourcés, c'est-à-dire fabriqués à partir de matières i
         },
       ],
     },
-    // 3.10 Par où commencer : l'ordre des travaux
+    // Par où commencer : l'ordre des travaux
     {
       type: 'richText',
       anchor: 'ordre-des-travaux',
-      content: `## Par où commencer : **l'ordre des travaux**
+      content: `## Par où commencer : **l'ordre des travaux**
 
-Une rénovation aidée n'est pas forcément une rénovation complète, faite en une seule fois. Mais l'ordre des travaux compte, pour ne pas défaire demain ce que l'on fait aujourd'hui.`,
+Une rénovation aidée n'est pas forcément faite en une fois. Mais **l'ordre compte**, pour ne pas défaire demain ce que l'on fait aujourd'hui.`,
     },
     {
       type: 'list',
-      style: 'bullets',
+      style: 'definitions',
       items: [
         {
-          text: "**L'enveloppe d'abord.** On isole avant de remplacer le chauffage : une maison mieux isolée a besoin d'un chauffage moins puissant.",
+          title: "L'enveloppe d'abord",
+          text: 'On isole avant de changer le chauffage : une maison mieux isolée en demande un moins puissant.',
         },
         {
-          text: "**Le toit, souvent en premier.** Dans une maison peu isolée, c'est souvent par là que part le plus de chaleur, et c'est sous le toit que l'été se fait le plus sentir.",
+          title: 'Le toit, souvent en premier',
+          text: "C'est souvent par là que part le plus de chaleur, et sous le toit que l'été se sent le plus.",
         },
         {
-          text: '**Les murs et les fenêtres ensemble.** La position et le raccord des fenêtres dépendent de l\'isolation des murs : les traiter en même temps évite un pont thermique autour de chaque ouverture.',
+          title: 'Murs et fenêtres ensemble',
+          text: 'Traités en même temps, ils évitent un pont thermique autour de chaque ouverture.',
         },
         {
-          text: "**La ventilation avec l'étanchéité à l'air.** L'étanchéité à l'air empêche l'air de traverser les parois ; une maison rendue plus étanche doit donc rester correctement ventilée.",
+          title: "Ventilation et étanchéité à l'air",
+          text: 'Une maison rendue plus étanche doit rester correctement ventilée.',
         },
         {
-          text: "**Les travaux déjà prévus.** Une couverture à refaire, une façade à reprendre : c'est le bon moment pour isoler par l'extérieur, puisque l'échafaudage est là.",
+          title: 'Les travaux déjà prévus',
+          text: "Couverture ou façade à refaire : c'est le moment d'isoler par l'extérieur, l'échafaudage est là.",
         },
       ],
     },
     {
       type: 'richText',
-      content: `Un audit énergétique ou un rendez-vous avec un conseiller France Rénov' aide à construire ce plan. Lors de notre visite, nous regardons aussi la charpente et les ouvertures, pour que l'isolation s'inscrive dans un ensemble cohérent.`,
+      content: `Un audit énergétique ou un rendez-vous France Rénov' aide à bâtir ce plan. À notre visite, nous regardons aussi la charpente et les ouvertures, pour une isolation cohérente.`,
     },
-    // 3.11 Les pièges à éviter
+    // Les pièges à éviter
     {
       type: 'richText',
       anchor: 'pieges',
@@ -230,26 +260,29 @@ Une rénovation aidée n'est pas forcément une rénovation complète, faite en 
     },
     {
       type: 'list',
-      style: 'bullets',
+      style: 'checks',
       items: [
-        { text: "**Signer trop vite**, avant d'avoir fait le point sur les aides avec un conseiller France Rénov'." },
-        { text: '**Se fier au logo RGE** sans vérifier que le domaine correspond à vos travaux.' },
+        { text: "**Signer trop vite**, avant d'avoir vu un conseiller France Rénov'." },
+        { text: '**Se fier au logo RGE** sans vérifier le domaine de vos travaux.' },
         {
-          text: "**Choisir un isolant sur son seul prix**, sans penser au confort d'été ni à l'humidité. Notre guide des isolants biosourcés aide à comparer.",
+          text: "**Choisir un isolant sur son seul prix**, sans penser au confort d'été ni à l'humidité.",
         },
         {
-          text: "**Oublier l'étanchéité à l'air et la ventilation.** L'étanchéité à l'air est la couche continue qui empêche l'air de traverser les parois ; sans elle, l'isolation perd une partie de son efficacité.",
+          text: "**Oublier l'étanchéité à l'air et la ventilation** : sans elles, l'isolation perd une partie de son efficacité.",
         },
         {
-          text: '**Isoler sans regarder la charpente.** En montagne, une toiture porte la neige tout l\'hiver : un isolant neuf ne doit pas cacher une structure fatiguée.',
+          text: "**Isoler sans regarder la charpente** : en montagne, un toit porte la neige tout l'hiver.",
         },
         {
-          text: "**Oublier la mairie.** Une isolation par l'extérieur modifie l'aspect de la maison et demande en général une déclaration préalable de travaux.",
+          text: "**Oublier la mairie** : une isolation par l'extérieur demande en général une déclaration préalable.",
         },
       ],
-      cta: { label: 'Quel isolant biosourcé choisir en montagne ?', href: '/conseils/isolant-biosource-montagne/' },
+      cta: {
+        label: 'Quel isolant biosourcé choisir en montagne ?',
+        href: '/conseils/isolant-biosource-montagne/',
+      },
     },
-    // 3.12 Réalisations
+    // Réalisations
     {
       type: 'projects',
       mode: 'manual',
@@ -260,21 +293,21 @@ Une rénovation aidée n'est pas forcément une rénovation complète, faite en 
         {
           project: 'renovation-energetique-et-ouverture-d-une-lucarne-a-saint-martin-de-queyriere',
           title: "Rénovation énergétique et ouverture d'une lucarne à Saint-Martin-de-Queyrières",
-          text: "Caissons d'isolation et étanchéité à l'air, nouvelle lucarne, toiture terminée.",
+          text: "Caissons d'isolation, étanchéité à l'air, lucarne ouverte.",
         },
         {
           project: 'isolation-d-un-bati-ancien-par-l-interieur',
           title: "Isolation d'un bâti ancien par l'intérieur",
-          text: "Ossature en poutres en I, étanchéité à l'air, ouate de cellulose insufflée, encadrements et menuiseries.",
+          text: "Poutres en I, étanchéité à l'air, ouate insufflée, menuiseries.",
         },
         {
           project: 'isolation-d-une-toiture-ancienne-a-l-argentiere-la-bessee',
           title: "Isolation d'une toiture ancienne à L'Argentière-la-Bessée",
-          text: "Panneaux de fibre de bois, étanchéité à l'air, fenêtre de toit de 78 × 98 cm.",
+          text: "Fibre de bois, étanchéité à l'air, fenêtre de toit.",
         },
       ],
     },
-    // 3.13 FAQ
+    // FAQ
     {
       type: 'faq',
       kicker: 'Questions fréquentes',
@@ -288,13 +321,13 @@ Une rénovation aidée n'est pas forcément une rénovation complète, faite en 
         'aides-renovation-artisan-rge-q6',
       ],
     },
-    // 3.14 Appel à l'action final
+    // Appel à l'action final
     {
       type: 'cta',
       variant: 'card',
-      kicker: 'Un projet de rénovation énergétique ?',
+      kicker: 'Un projet de rénovation énergétique ?',
       title: 'Parlons de **votre maison**',
-      text: "Isolation de toiture ou de murs, fenêtres de toit, menuiseries : contactez-nous par le site ou par téléphone. Nous venons voir votre maison et vous proposons un devis détaillé, en charpentiers qualifiés RGE. Pour les aides, nous vous orientons vers votre conseiller France Rénov'.",
+      text: "Toiture, murs, fenêtres de toit, menuiseries : nous venons voir votre maison et vous proposons un devis détaillé. Pour les aides, nous vous orientons vers votre conseiller France Rénov'.",
       primary: { label: 'Demander mon devis', href: '/contact/' },
       secondary: { label: 'Appeler le {telephone}', href: 'tel' },
       showAddress: true,
@@ -304,44 +337,44 @@ Une rénovation aidée n'est pas forcément une rénovation complète, faite en 
     {
       key: 'aides-renovation-artisan-rge-q1',
       topic: 'guides',
-      question: "Qu'est-ce qu'un artisan RGE ?",
+      question: "Qu'est-ce qu'un artisan RGE ?",
       answer:
-        "Un artisan RGE (Reconnu garant de l'environnement) est une entreprise qualifiée par un organisme comme Qualibat pour des travaux de rénovation énergétique précis : isolation, fenêtres, chauffage… La qualification est attribuée domaine par domaine, pour une durée limitée, avec des contrôles. Pour la plupart des aides publiques à la rénovation énergétique, elle est exigée, sous conditions.",
+        "Une entreprise qualifiée « Reconnu garant de l'environnement » par un organisme comme Qualibat, pour des travaux de rénovation énergétique précis : isolation, fenêtres, chauffage… La qualification est attribuée domaine par domaine, pour une durée limitée, avec des contrôles. La plupart des aides publiques l'exigent, sous conditions.",
     },
     {
       key: 'aides-renovation-artisan-rge-q2',
       topic: 'guides',
-      question: "Comment vérifier qu'un artisan est bien RGE ?",
+      question: "Comment vérifier qu'un artisan est bien RGE ?",
       answer:
-        "Consultez l'annuaire des professionnels RGE sur france-renov.gouv.fr et cherchez l'entreprise par son nom ou sa commune. Vérifiez que le domaine affiché correspond exactement à vos travaux, que la qualification est en cours de validité et que le nom et le SIRET sont ceux du devis. Vous pouvez aussi demander le certificat à l'entreprise.",
+        "Dans l'annuaire des professionnels RGE sur france-renov.gouv.fr, par nom ou par commune. Vérifiez que le domaine correspond exactement à vos travaux, que la qualification est valide, et que le nom et le SIRET sont ceux du devis. Vous pouvez aussi demander le certificat à l'entreprise.",
     },
     {
       key: 'aides-renovation-artisan-rge-q3',
       topic: 'guides',
-      question: "Faut-il un artisan RGE pour avoir MaPrimeRénov' ?",
+      question: "Faut-il un artisan RGE pour avoir MaPrimeRénov' ?",
       answer:
-        "Pour MaPrimeRénov', comme pour la plupart des aides publiques à la rénovation énergétique, les travaux doivent être réalisés par une entreprise qualifiée RGE dans le domaine concerné. Les montants, les plafonds et les conditions changent régulièrement : vérifiez votre situation avec un conseiller France Rénov' (france-renov.gouv.fr) avant de signer votre devis.",
+        "Oui : pour MaPrimeRénov', comme pour la plupart des aides publiques, les travaux doivent être réalisés par une entreprise RGE dans le domaine concerné. Montants, plafonds et conditions changent régulièrement : voyez un conseiller France Rénov' (france-renov.gouv.fr) avant de signer.",
     },
     {
       key: 'aides-renovation-artisan-rge-q4',
       topic: 'guides',
-      question: 'Un charpentier peut-il être RGE ?',
+      question: 'Un charpentier peut-il être RGE ?',
       answer:
-        "Oui. Un charpentier peut être qualifié RGE pour les travaux d'isolation et d'ouvertures qu'il réalise. 3B Charpente, à L'Argentière-la-Bessée, est qualifié QUALIBAT-RGE pour l'isolation des murs et des toitures par l'extérieur, l'isolation par l'intérieur des murs, rampants et plafonds, les fenêtres de toit, et les fenêtres, volets et portes donnant sur l'extérieur.",
+        "Oui, pour les travaux d'isolation et d'ouvertures qu'il réalise. 3B Charpente, à L'Argentière-la-Bessée, est qualifié QUALIBAT-RGE pour l'isolation des murs et des toitures par l'extérieur, l'isolation par l'intérieur des murs, rampants et plafonds, les fenêtres de toit et les menuiseries extérieures.",
     },
     {
       key: 'aides-renovation-artisan-rge-q5',
       topic: 'guides',
-      question: "Le RGE couvre-t-il tous les travaux d'une entreprise ?",
+      question: "Le RGE couvre-t-il tous les travaux d'une entreprise ?",
       answer:
-        "Non. Le RGE est attribué par domaine de travaux. Une entreprise peut être RGE pour l'isolation des toitures sans l'être pour les fenêtres ou le chauffage. Avant de compter sur une aide, vérifiez que le domaine exact de vos travaux figure sur le certificat de l'entreprise ou dans l'annuaire de France Rénov'. Une terrasse ou un escalier, eux, ne relèvent pas du RGE.",
+        "Non, il est attribué par domaine. Une entreprise peut être RGE pour l'isolation des toitures sans l'être pour les fenêtres ou le chauffage. Vérifiez que le domaine exact de vos travaux figure sur son certificat ou dans l'annuaire. Une terrasse ou un escalier ne relèvent pas du RGE.",
     },
     {
       key: 'aides-renovation-artisan-rge-q6',
       topic: 'guides',
-      question: "Qui contacter pour connaître les aides auxquelles j'ai droit ?",
+      question: "Qui contacter pour connaître les aides auxquelles j'ai droit ?",
       answer:
-        "Le réseau public France Rénov'. Ses conseillers sont gratuits et neutres : ils étudient votre logement, vos travaux et votre situation, puis vous indiquent les aides possibles et l'ordre des démarches. Rendez-vous sur france-renov.gouv.fr ou appelez le 0 808 800 700. Nous vous recommandons de le faire avant de signer un devis.",
+        "Le réseau public France Rénov' : ses conseillers, gratuits et neutres, étudient votre logement, vos travaux et votre situation, puis vous indiquent les aides possibles et l'ordre des démarches. Sur france-renov.gouv.fr ou au 0 808 800 700, de préférence avant de signer un devis.",
     },
   ],
   seo: {
@@ -357,7 +390,8 @@ Une rénovation aidée n'est pas forcément une rénovation complète, faite en 
       caption: "Rénovation énergétique et ouverture d'une lucarne à Saint-Martin-de-Queyrières.",
     },
     {
-      photo: "isolation-d-une-toiture-ancienne-a-l-argentiere-la-bessee/vue de dessous d'un velux 78x98.JPG",
+      photo:
+        "isolation-d-une-toiture-ancienne-a-l-argentiere-la-bessee/vue de dessous d'un velux 78x98.JPG",
       alt: "Fenêtre de toit de 78 × 98 cm dans un rampant isolé à L'Argentière-la-Bessée",
     },
     {
@@ -369,7 +403,8 @@ Une rénovation aidée n'est pas forcément une rénovation complète, faite en 
     {
       question:
         'SIRET de la qualification RGE : l’annuaire de l’ADEME indique 494 482 714 00024, les mentions légales 494 482 714 00016. Le guide conseille de comparer le SIRET du certificat et celui du devis : ceux de 3B doivent être cohérents avant la mise en ligne.',
-      decision: 'SIRET affiché sur le site : 494 482 714 00016 (décision par défaut). Le guide ne cite aucun SIRET.',
+      decision:
+        'SIRET affiché sur le site : 494 482 714 00016 (décision par défaut). Le guide ne cite aucun SIRET.',
       priority: 'high',
     },
     {
@@ -387,7 +422,8 @@ Une rénovation aidée n'est pas forcément une rénovation complète, faite en 
       priority: 'normal',
     },
     {
-      question: 'Assurance décennale : le guide conseille de la demander. 3B peut-il fournir son attestation (nom de l’assureur) sur demande ou sur la page contact ?',
+      question:
+        'Assurance décennale : le guide conseille de la demander. 3B peut-il fournir son attestation (nom de l’assureur) sur demande ou sur la page contact ?',
       decision: 'Conseil gardé tel quel ; aucun assureur cité.',
       priority: 'normal',
     },
@@ -406,17 +442,21 @@ Une rénovation aidée n'est pas forcément une rénovation complète, faite en 
     {
       question:
         'Relecture annuelle : qui relit cette page chaque année (noms des dispositifs, lien vers l’annuaire, numéro national) ?',
-      decision: 'À planifier ; la date de mise à jour du guide se change dans l’administration à chaque relecture.',
+      decision:
+        'À planifier ; la date de mise à jour du guide se change dans l’administration à chaque relecture.',
       priority: 'normal',
     },
     {
-      question: 'Page /conseils/ : à créer (liste des guides) pour que le fil d’Ariane fonctionne, ou retirer ce niveau ?',
+      question:
+        'Page /conseils/ : à créer (liste des guides) pour que le fil d’Ariane fonctionne, ou retirer ce niveau ?',
       decision: 'Page /conseils/ publiée au lancement : fil d’Ariane Accueil › Conseils › guide.',
       priority: 'low',
     },
     {
-      question: 'Adresse exacte de l’annuaire RGE de France Rénov’ (bouton « Ouvrir l’annuaire RGE de France Rénov’ »).',
-      decision: 'Lien posé vers https://france-renov.gouv.fr/annuaire-rge, adresse de la fiche, à vérifier à la mise en ligne.',
+      question:
+        'Adresse exacte de l’annuaire RGE de France Rénov’ (bouton « Ouvrir l’annuaire RGE de France Rénov’ »).',
+      decision:
+        'Lien posé vers https://france-renov.gouv.fr/annuaire-rge, adresse de la fiche, à vérifier à la mise en ligne.',
       priority: 'normal',
     },
     {
@@ -429,7 +469,8 @@ Une rénovation aidée n'est pas forcément une rénovation complète, faite en 
     {
       question:
         'Photos des cartes de réalisations (« étanchéité à l’air et caissons d’isolation », « insufflation de ouate de cellulose », « couverture terminée »).',
-      decision: 'Les cartes affichent la photo principale de chaque réalisation ; à changer dans la fiche réalisation si besoin.',
+      decision:
+        'Les cartes affichent la photo principale de chaque réalisation ; à changer dans la fiche réalisation si besoin.',
       priority: 'low',
     },
     {

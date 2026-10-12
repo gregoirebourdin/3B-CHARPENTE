@@ -53,6 +53,7 @@ const PATHS: Record<IconName | UiIcon, string[]> = {
   minus: ['M5 12h14'],
   external: ['M14 4h6v6', 'M20 4l-9 9', 'M18 14v6H4V6h6'],
   expand: ['M4 9V4h5', 'M20 9V4h-5', 'M4 15v5h5', 'M20 15v5h-5'],
+  bulb: ['M9 18h6', 'M10 21h4', 'M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3Z'],
 }
 
 type UiIcon =
@@ -65,6 +66,7 @@ type UiIcon =
   | 'minus'
   | 'external'
   | 'expand'
+  | 'bulb'
 
 export type AnyIconName = IconName | UiIcon
 

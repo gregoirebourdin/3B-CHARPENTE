@@ -1,9 +1,9 @@
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 250px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
   align-items: start;
   gap: clamp(2rem, 5vw, 5rem);
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  padding-block: clamp(1rem, 2vw, 2rem) clamp(2.5rem, 5vw, 4rem);
 }
 
 .aside {
@@ -17,11 +17,11 @@
 }
 
 .toc {
-  padding: 20px 18px 14px;
+  padding: 18px;
   border: 1px solid var(--c-line);
   border-radius: var(--radius-md);
   background: var(--bg-card);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
 }
 
 .tocHead {
@@ -29,15 +29,16 @@
   align-items: baseline;
   justify-content: space-between;
   gap: var(--space-3);
-  margin-bottom: var(--space-3);
-  padding-bottom: var(--space-3);
-  border-bottom: 1px solid var(--c-line);
+  margin-bottom: var(--space-2);
+  padding-inline: 8px;
 }
 
 .tocTitle {
-  font-family: var(--font-heading);
-  font-size: 1.0625rem;
-  font-weight: 600;
+  color: var(--fg-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .tocCount {
@@ -55,29 +56,27 @@
 
 .toc a {
   display: grid;
-  grid-template-columns: 26px minmax(0, 1fr);
+  grid-template-columns: 24px minmax(0, 1fr);
   gap: 4px;
-  min-height: 32px;
-  padding: 6px 8px 6px 10px;
-  border-left: 2px solid transparent;
-  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
-  color: var(--fg-muted);
+  min-height: 34px;
+  padding: 7px 10px 7px 8px;
+  border-radius: 9px;
+  color: var(--fg-body);
   line-height: 1.35;
   text-decoration: none;
   transition:
     color var(--dur-fast) var(--ease-out),
-    background-color var(--dur-fast) var(--ease-out),
-    border-color var(--dur-fast) var(--ease-out);
+    background-color var(--dur-fast) var(--ease-out);
 }
 
 .toc a:hover {
   color: var(--fg);
-  background: var(--bg-alt);
+  background: var(--c-sage-tint);
 }
 
 .toc a[aria-current='true'] {
-  border-left-color: var(--fg-accent);
-  color: var(--fg);
+  background: var(--c-sage-soft);
+  color: var(--c-forest);
   font-weight: 650;
 }
 
@@ -98,7 +97,7 @@
 
 .body {
   min-width: 0;
-  max-width: 760px;
+  max-width: 780px;
   counter-reset: doc-h2;
 }
 

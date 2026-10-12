@@ -4,8 +4,6 @@
  */
 import type { SeedService } from '../../types'
 
-const md = (...paragraphs: string[]) => paragraphs.join('\n\n')
-
 const QUART_TOURNANT = 'escalier-1-4-tournant-en-meleze-lamelle-colle'
 const BOIS_DEBOUT = 'creation-d-un-escalier-en-bois-debout-dans-un-bati-ancien'
 const HERO_PHOTO = `${QUART_TOURNANT}/07. montage terminé .JPG`
@@ -19,8 +17,7 @@ export const service: SeedService = {
   filterKey: 'escaliers',
   order: 8,
   icon: 'stairs',
-  cardText:
-    "Quart tournant, balancé ou en bois debout, dessinés pour votre maison, taillés à l'atelier.",
+  cardText: 'Quart tournant, balancé, bois debout : dessiné pour votre maison.',
   cardLinkLabel: 'Voir nos escaliers',
   image: HERO_PHOTO,
   schema: {
@@ -40,18 +37,27 @@ export const service: SeedService = {
     variant: 'photo',
     kicker: 'Escaliers bois sur mesure',
     title: 'Escalier bois **sur mesure** dans les **Hautes-Alpes**',
-    text: "Des escaliers **sur mesure**, conçus pour s'intégrer à l'environnement de montagne et à **l'âme de votre maison**. Quart tournant, balancé ou encloisonné, nous les dessinons après la prise de cotes, puis les traçons, taillons et assemblons **dans notre atelier**.",
+    text: "Des escaliers **sur mesure**, à **l'âme de votre maison** : quart tournant, balancé ou encloisonné. Dessinés après la prise de cotes, puis tracés, taillés et assemblés **dans notre atelier**.",
     primaryCta: { label: 'Demander mon devis', href: '/contact/' },
     secondaryCta: { label: 'Voir nos escaliers', href: '/escalier-bois-sur-mesure/#realisations' },
-    proofs: [{ label: 'Depuis 2007' }, { label: 'Taillés dans notre atelier' }],
+    proofs: [
+      { label: 'Depuis 2007', text: "à L'Argentière-la-Bessée", icon: 'calendar' },
+      { label: "Taillés à l'atelier", text: "selon l'art du trait", icon: 'saw' },
+      { label: 'Deux jours de montage', text: 'pour notre quart tournant', icon: 'clock' },
+    ],
     images: [HERO_PHOTO, 'fabrication-d-un-escalier/frêne et aluminium.JPG'],
     caption: 'Escalier quart tournant en mélèze lamellé-collé, montage terminé.',
+    sheet: [
+      { label: 'Formes', value: 'Quart tournant, balancé, encloisonné' },
+      { label: 'Bois', value: 'Mélèze lamellé-collé, frêne, bois debout' },
+      { label: 'Fabrication', value: "Tracé, taillé, assemblé à l'atelier" },
+    ],
   },
 
-  tldr: "3B Charpente, charpentier à L'Argentière-la-Bessée depuis 2007, dessine, taille et pose des escaliers bois sur mesure dans les Hautes-Alpes : quart tournant, balancé, encloisonné. Après la prise de cotes, nous dessinons l'escalier et proposons une esthétique ; une fois validé, il est tracé, taillé et assemblé dans notre atelier. Mélèze lamellé-collé, frêne, bois debout : chaque escalier est unique.",
+  tldr: "3B Charpente, charpentier à L'Argentière-la-Bessée depuis 2007, dessine, taille et pose des escaliers bois sur mesure dans les Hautes-Alpes : quart tournant, balancé, encloisonné. Dessin après la prise de cotes, puis traçage, taille et assemblage dans notre atelier. Mélèze lamellé-collé, frêne, bois debout : chaque escalier est unique.",
 
   layout: [
-    // 3.4 Notre méthode
+    // Notre méthode
     {
       type: 'steps',
       variant: 'tabs',
@@ -60,12 +66,12 @@ export const service: SeedService = {
       steps: [
         {
           title: 'Prise de cotes',
-          text: "Nous venons mesurer la trémie, c'est-à-dire l'ouverture dans le plancher, la hauteur à monter et la place disponible.",
+          text: "Nous mesurons la trémie (l'ouverture dans le plancher), la hauteur à monter et la place disponible.",
           image: `${QUART_TOURNANT}/01. Lieu en attente de l'escalier .JPG`,
         },
         {
           title: 'Dessin',
-          text: "Une fois les cotes prises, nous dessinons l'escalier et vous proposons une esthétique : essence, forme des marches, contremarches ou non, garde-corps.",
+          text: "Nous dessinons l'escalier et vous proposons une esthétique : essence, forme des marches, contremarches ou non, garde-corps.",
         },
         {
           title: 'Validation',
@@ -73,28 +79,30 @@ export const service: SeedService = {
         },
         {
           title: "Traçage, taille et assemblage à l'atelier",
-          text: "Une fois le dessin validé, nous traçons, taillons et assemblons l'escalier dans notre atelier. Le tracé d'un escalier tournant est un exercice classique de l'art du trait, enseigné chez les Compagnons du Devoir, où s'est formé notre fondateur.",
+          text: "Le tracé d'un escalier tournant relève de l'art du trait, enseigné chez les Compagnons du Devoir, où s'est formé notre fondateur.",
           image: `${QUART_TOURNANT}/02. début de montage.JPG`,
         },
         {
           title: 'Montage',
-          text: "Sur place, il ne reste que le montage. Pour notre escalier quart tournant en mélèze lamellé-collé, il s'est fait en deux jours, finitions comprises.",
+          text: 'Sur place, il ne reste que le montage : deux jours, finitions comprises, pour notre quart tournant en mélèze lamellé-collé.',
           image: HERO_PHOTO,
         },
       ],
     },
 
-    // 3.5 L'escalier quart tournant
+    // L'escalier quart tournant
     {
       type: 'textImage',
       anchor: 'quart-tournant',
+      tone: 'light',
       kicker: 'Quart tournant',
       title: "L'escalier **quart tournant**, pour tourner sans perdre de place",
-      text: md(
-        "Un escalier quart tournant change de direction à 90 degrés, soit un quart de tour. Il se loge dans un angle et prend moins de longueur qu'un escalier droit. C'est souvent la solution pour [monter aux combles](/renovation-charpente-combles/) ou relier deux niveaux dans une maison ancienne.",
-        "Le virage se fait avec un palier ou avec des marches balancées. Balancer les marches, c'est faire varier leur largeur dans le tournant pour que le pas reste régulier sur la ligne de foulée, le chemin naturel du pied.",
-        "Dans une maison que nous avons rénovée, l'escalier quart tournant en mélèze lamellé-collé mène aux combles et sert aussi de cloison rampante à la salle de bains. Ses marches et contremarches sont posées sur des crémaillères, des limons découpés en dents de scie. À [La Salle-les-Alpes](/charpentier-serre-chevalier/), l'ancienne forge réhabilitée a elle aussi son escalier quart tournant.",
-      ),
+      text: "Il change de direction à **90 degrés** dans un angle, et prend moins de longueur qu'un escalier droit. Souvent la solution pour [monter aux combles](/renovation-charpente-combles/).\n\nÀ [La Salle-les-Alpes](/charpentier-serre-chevalier/), l'ancienne forge réhabilitée a elle aussi son quart tournant.",
+      points: [
+        'Le virage : un palier, ou des marches balancées',
+        'Balancer, c’est varier la largeur des marches dans le tournant pour garder un pas régulier',
+        'Notre quart tournant en mélèze : marches sur crémaillères, et cloison rampante pour la salle de bains',
+      ],
       images: [
         `${QUART_TOURNANT}/04. balancement des marches.JPG`,
         `${QUART_TOURNANT}/05. seconde volée.JPG`,
@@ -103,31 +111,30 @@ export const service: SeedService = {
       caption: 'Balancement des marches dans le quart tournant. Seconde volée, vers les combles.',
     },
 
-    // 3.6 Les règles d'un escalier confortable
+    // Les règles d'un escalier confortable
     {
       type: 'cards',
       variant: 'icon',
-      columns: 2,
-      tone: 'light',
+      columns: 4,
       kicker: 'Bien dimensionner',
       title: "Les règles d'un **escalier confortable**",
       intro:
-        'Un escalier se calcule avant de se dessiner. Quelques repères, valables pour tout escalier :',
+        'Un escalier se calcule avant de se dessiner. Quatre repères, valables pour tout escalier.',
       items: [
         {
           title: 'La loi de Blondel',
           icon: 'ruler',
-          text: "Deux hauteurs de marche plus un giron (la profondeur de marche, où se pose le pied) doivent faire entre 60 et 64 cm environ : la longueur d'un pas confortable.",
+          text: 'Deux hauteurs de marche plus un giron (sa profondeur) : entre 60 et 64 cm environ, un pas confortable.',
         },
         {
           title: 'La régularité',
           icon: 'stairs',
-          text: "Toutes les marches d'une volée ont la même hauteur. Le pied s'y habitue et ne trébuche pas.",
+          text: "Toutes les marches d'une volée ont la même hauteur : le pied ne trébuche pas.",
         },
         {
           title: "L'échappée",
           icon: 'arrowUp',
-          text: 'La hauteur libre au-dessus des marches doit laisser passer la tête sans se baisser, surtout sous un rampant de toit.',
+          text: 'Assez de hauteur libre pour passer sans se baisser, surtout sous un rampant de toit.',
         },
         {
           title: 'La sécurité',
@@ -137,106 +144,106 @@ export const service: SeedService = {
       ],
     },
 
-    // 3.7 Les bois
+    // Les bois
     {
       type: 'cards',
       variant: 'photo',
-      columns: 2,
+      columns: 4,
+      tone: 'light',
       kicker: 'Les bois',
-      title: "Mélèze, frêne, **bois debout** : le bois fait l'escalier",
+      title: "Mélèze, frêne, **bois debout** : le bois fait l'escalier",
       intro:
-        "Nous travaillons principalement du mélèze et du sapin provenant des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli : la même logique de matériaux locaux et sains que pour nos charpentes et nos isolants biosourcés. Pour un escalier, l'essence se choisit au dessin, selon l'usage et le style de la maison.",
+        "Surtout du mélèze et du sapin des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli. L'essence se choisit au dessin, selon l'usage et le style de la maison.",
       items: [
         {
           title: 'Mélèze lamellé-collé',
-          text: "Des lamelles de mélèze collées entre elles. Ce bois reconstitué bouge moins qu'une pièce massive et se prête aux grandes pièces comme les crémaillères.",
+          text: 'Des lamelles de mélèze collées : un bois qui bouge peu, pour les grandes pièces comme les crémaillères.',
           image: `${QUART_TOURNANT}/03. départ d'escalier terminé.JPG`,
         },
         {
           title: 'Frêne et aluminium',
-          text: 'Un bois dur et clair, associé au métal pour un escalier au style plus contemporain.',
+          text: 'Un bois dur et clair, associé au métal, pour un style plus contemporain.',
           image: 'fabrication-d-un-escalier/frêne et aluminium.JPG',
         },
         {
           title: 'Bois debout',
-          text: "Du bois coupé en travers du fil, qui montre ses cernes de croissance comme un billot. Il résiste bien à l'usure et donne à l'escalier un dessin unique.",
+          text: "Coupé en travers du fil, il montre ses cernes comme un billot. Il résiste bien à l'usure.",
           image: `${BOIS_DEBOUT}/bois debout en cours de pose.JPG`,
         },
         {
           title: 'Panneau trois plis',
-          text: 'Trois couches de bois croisées et collées, très stables, utilisées pour former des caissons.',
+          text: 'Trois couches de bois croisées et collées, très stables : pour former des caissons.',
           image: `${BOIS_DEBOUT}/caisson en panneau 3plis.JPG`,
         },
       ],
     },
 
-    // 3.8 Dans une maison ancienne
+    // Dans une maison ancienne
     {
       type: 'textImage',
-      tone: 'light',
       kicker: 'Maisons anciennes',
       title: 'Remplacer un escalier **dans un bâti ancien**',
-      text: md(
-        "Dans une maison ancienne, rien n'est d'équerre : murs irréguliers, planchers qui ont bougé, trémie étroite. Un escalier standard s'y adapte mal ; un escalier sur mesure, tracé d'après les cotes réelles, s'y loge.",
-        "Dans un bâti ancien, nous avons démoli l'ancien escalier pour en construire un en bois debout. Les étapes : caissons en panneau trois plis, pose du bois debout, contremarches, puis escalier terminé.",
-        "À L'Argentière-la-Bessée, une maison rénovée a reçu un escalier balancé et un garde-corps en bois de réemploi. À La Salle-les-Alpes, l'ancienne forge compte aussi un escalier encloisonné, c'est-à-dire pris entre deux murs ou cloisons.",
-      ),
+      text: "Dans une maison ancienne, **rien n'est d'équerre** : murs irréguliers, planchers qui ont bougé, trémie étroite. Un escalier standard s'y adapte mal ; un escalier tracé d'après les cotes réelles s'y loge.",
+      points: [
+        'Dans un bâti ancien : ancien escalier démoli, caissons en trois plis, bois debout, contremarches',
+        "À L'Argentière-la-Bessée : un escalier balancé et un garde-corps en bois de réemploi",
+        'À La Salle-les-Alpes : un escalier encloisonné, pris entre deux murs ou cloisons',
+      ],
       images: [`${BOIS_DEBOUT}/ancien escalier démoli.JPG`, `${BOIS_DEBOUT}/escalier terminé.jpg`],
       imagePosition: 'left',
       caption: "L'ancien escalier démoli. L'escalier en bois debout terminé.",
     },
 
-    // 3.9 Réalisations
+    // Réalisations
     {
       type: 'projects',
       mode: 'manual',
       anchor: 'realisations',
       label: 'brand',
+      tone: 'light',
       kicker: 'Nos escaliers',
       title: 'Des escaliers **taillés dans notre atelier**',
       items: [
         {
           project: 'escalier-1-4-tournant-en-meleze-lamelle-colle',
           title: 'Escalier quart tournant en mélèze lamellé-collé',
-          text: 'Marches et contremarches sur crémaillères, accès aux combles, montage en deux jours, finitions comprises.',
+          text: 'Marches sur crémaillères, accès aux combles, monté en deux jours.',
         },
         {
           project: 'creation-d-un-escalier-en-bois-debout-dans-un-bati-ancien',
           title: 'Escalier en bois debout dans un bâti ancien',
-          text: 'Ancien escalier démoli, caissons en panneau trois plis, bois debout et contremarches.',
+          text: 'Ancien escalier démoli, caissons en trois plis, bois debout.',
         },
         {
           project: 'fabrication-d-un-escalier',
           title: 'Escalier en frêne et aluminium',
-          text: 'Un escalier en frêne et aluminium, fabriqué puis livré sur le chantier.',
+          text: 'Fabriqué à l’atelier, puis livré sur le chantier.',
         },
         {
           project: 'rehabilitation-d-une-ancienne-forge-a-la-salle-les-alpes',
           title: 'Ancienne forge à La Salle-les-Alpes',
-          text: 'Escalier quart tournant et escalier encloisonné dans un bâtiment réhabilité de Serre Chevalier.',
+          text: 'Un quart tournant et un escalier encloisonné, à Serre Chevalier.',
         },
         {
           project: 'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee',
           title: "Maison rénovée à L'Argentière-la-Bessée",
-          text: 'Escalier balancé, garde-corps en bois de réemploi et bardage vieux bois.',
+          text: 'Escalier balancé, garde-corps de réemploi, bardage vieux bois.',
         },
       ],
       cta: { label: 'Toutes nos réalisations', href: '/realisations/' },
     },
 
-    // 3.10 3B Récup'
+    // 3B Récup'
     {
       type: 'cta',
-      variant: 'card',
-      badge: '3B Récup’',
-      kicker: "3B Récup'",
+      variant: 'slim',
+      icon: 'recycle',
       title: 'Un garde-corps **en bois de réemploi**',
-      text: "Le bois de réemploi trouve aussi sa place à l'intérieur. Avec 3B Récup', nous déposons charpentes, planchers et bardages sur des chantiers de déconstruction, puis trions, nettoyons et usinons ce bois dans notre atelier. À L'Argentière-la-Bessée, une maison rénovée a reçu un garde-corps en bois de réemploi et un bardage vieux bois.",
+      text: "Avec 3B Récup', le bois de déconstruction est trié, nettoyé et usiné à l'atelier. À L'Argentière-la-Bessée, il est devenu garde-corps et bardage : voir le [bois de réemploi](/3b-recup/bois-de-reemploi/).",
       primary: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
-      secondary: { label: 'Le bois de réemploi', href: '/3b-recup/bois-de-reemploi/' },
     },
 
-    // 3.11 Prestations liées
+    // Prestations liées
     {
       type: 'servicesGrid',
       mode: 'manual',
@@ -245,9 +252,10 @@ export const service: SeedService = {
       services: ['renovation-charpente-combles', 'balcon-terrasse-abri-bois', 'charpente-bois'],
     },
 
-    // 3.12 FAQ
+    // FAQ
     {
       type: 'faq',
+      tone: 'light',
       kicker: 'Questions fréquentes',
       title: 'Vos questions sur **les escaliers bois**',
       faqs: [
@@ -260,12 +268,13 @@ export const service: SeedService = {
       ],
     },
 
-    // 3.13 Appel à l'action final
+    // Appel à l'action final
     {
       type: 'cta',
       variant: 'card',
-      title: 'Un escalier **à dessiner** ?',
-      text: "Chaque projet chez 3B Charpente débute par une étude sur mesure. Nous venons prendre les cotes, nous dessinons l'escalier avec vous et vous proposons un devis détaillé.",
+      kicker: 'Votre escalier',
+      title: 'Un escalier **à dessiner** ?',
+      text: "Nous venons prendre les cotes, nous dessinons l'escalier avec vous, puis nous vous proposons un devis détaillé.",
       primary: { label: 'Demander mon devis', href: '/contact/' },
       secondary: { label: 'Appeler le {telephone}', href: 'tel' },
       showAddress: true,
@@ -276,44 +285,44 @@ export const service: SeedService = {
     {
       key: 'escalier-bois-sur-mesure-q1',
       topic: 'escaliers',
-      question: "Quel est le prix d'un escalier quart tournant en bois sur mesure ?",
+      question: "Quel est le prix d'un escalier quart tournant en bois sur mesure ?",
       answer:
-        "Il dépend de l'essence (mélèze massif ou lamellé-collé, frêne…), du nombre de marches, de la présence de contremarches, du garde-corps, des finitions et de la configuration de la trémie. Un prix catalogue n'aurait pas de sens pour un escalier dessiné pour votre maison. Après la prise de cotes, nous vous proposons un dessin et un devis détaillé.",
+        "Il dépend de l'essence (mélèze massif ou lamellé-collé, frêne…), du nombre de marches, des contremarches, du garde-corps, des finitions et de la trémie. Un prix catalogue n'a pas de sens pour un escalier dessiné pour votre maison : après la prise de cotes, nous vous proposons un dessin et un devis détaillé.",
     },
     {
       key: 'escalier-bois-sur-mesure-q2',
       topic: 'escaliers',
-      question: 'Combien de temps pour fabriquer et poser un escalier sur mesure ?',
+      question: 'Combien de temps pour fabriquer et poser un escalier sur mesure ?',
       answer:
-        "Le délai dépend du projet ; nous vous donnons un calendrier estimatif lors de notre première rencontre. L'essentiel du travail se fait à l'atelier : traçage, taille et assemblage. Sur place, le montage est court : pour notre escalier quart tournant en mélèze lamellé-collé, il s'est fait en deux jours, finitions comprises.",
+        "Le délai dépend du projet : nous vous donnons un calendrier estimatif dès la première rencontre. L'essentiel se fait à l'atelier : traçage, taille, assemblage. Sur place, le montage est court : deux jours, finitions comprises, pour notre quart tournant en mélèze lamellé-collé.",
     },
     {
       key: 'escalier-bois-sur-mesure-q3',
       topic: 'escaliers',
-      question: 'Quel bois choisir pour un escalier intérieur ?',
+      question: 'Quel bois choisir pour un escalier intérieur ?',
       answer:
-        "Il faut un bois qui résiste à l'usure et reste stable. Nous travaillons beaucoup le mélèze, essence de montagne, en massif ou en lamellé-collé, qui bouge moins. Le frêne, bois dur et clair, convient à un style plus contemporain, par exemple avec de l'aluminium. Le bois debout offre un rendu unique. Nous privilégions les bois locaux des Hautes-Alpes.",
+        "Un bois qui résiste à l'usure et reste stable. Nous travaillons beaucoup le mélèze, en massif ou en lamellé-collé, qui bouge moins. Le frêne, dur et clair, va bien à un style contemporain, avec de l'aluminium par exemple. Le bois debout offre un rendu unique. Nous privilégions les bois des Hautes-Alpes.",
     },
     {
       key: 'escalier-bois-sur-mesure-q4',
       topic: 'escaliers',
-      question: 'Escalier quart tournant ou escalier droit : lequel prend le moins de place ?',
+      question: 'Escalier quart tournant ou escalier droit : lequel prend le moins de place ?',
       answer:
-        "À hauteur égale, le quart tournant prend moins de longueur au sol, car il tourne à 90 degrés dans un angle. L'escalier droit est plus simple à fabriquer et à monter, mais il demande une grande longueur libre. Dans une maison de montagne ou pour monter aux combles, le quart tournant est souvent le bon compromis entre confort et encombrement.",
+        "Le quart tournant : à hauteur égale, il prend moins de longueur au sol, car il tourne à 90 degrés dans un angle. L'escalier droit est plus simple à fabriquer, mais demande une grande longueur libre. Pour monter aux combles, le quart tournant est souvent le bon compromis.",
     },
     {
       key: 'escalier-bois-sur-mesure-q5',
       topic: 'escaliers',
-      question: 'Pouvez-vous remplacer un vieil escalier dans une maison ancienne ?',
+      question: 'Pouvez-vous remplacer un vieil escalier dans une maison ancienne ?',
       answer:
-        "Oui. Dans un bâti ancien, nous avons démoli l'ancien escalier pour en construire un neuf en bois debout, avec des caissons en panneau trois plis. Dans une maison ancienne, rien n'est d'équerre : c'est tout l'intérêt d'un escalier tracé d'après les cotes réelles. Si l'ouverture dans le plancher doit être agrandie, la trémie est reprise avec un chevêtre.",
+        "Oui. Dans un bâti ancien, nous avons démoli l'ancien escalier pour en construire un en bois debout, sur des caissons en trois plis. Rien n'y est d'équerre : c'est tout l'intérêt d'un escalier tracé d'après les cotes réelles. Si la trémie doit être agrandie, nous la reprenons avec un chevêtre.",
     },
     {
       key: 'escalier-bois-sur-mesure-q6',
       topic: 'escaliers',
-      question: "Faites-vous aussi les garde-corps d'escalier et de balcon ?",
+      question: "Faites-vous aussi les garde-corps d'escalier et de balcon ?",
       answer:
-        "Oui. Nous avons posé un garde-corps en bois de réemploi dans une maison rénovée à L'Argentière-la-Bessée, un garde-corps bois-métal à Prelles et une balustrade en mélèze sur un balcon à La Roche-de-Rame. Le garde-corps se dessine en même temps que l'escalier, pour un ensemble cohérent. Pour l'extérieur, nous utilisons volontiers le mélèze, qui tient bien aux intempéries.",
+        "Oui : un garde-corps en bois de réemploi à L'Argentière-la-Bessée, un garde-corps bois-métal à Prelles, une balustrade en mélèze à La Roche-de-Rame. Le garde-corps se dessine avec l'escalier, pour un ensemble cohérent. Dehors, nous utilisons volontiers le mélèze, qui tient bien aux intempéries.",
     },
   ],
 

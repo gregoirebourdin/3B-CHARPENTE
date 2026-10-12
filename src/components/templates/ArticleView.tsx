@@ -1,6 +1,6 @@
 import { RenderBlocks } from '@/components/blocks/RenderBlocks'
 import type { BlockContext } from '@/components/blocks/types'
-import { Media, isMedia } from '@/components/ui/Media'
+import { isMedia } from '@/components/ui/Media'
 import { homeCrumb, listingCrumb } from '@/lib/cms/breadcrumbs'
 import { getCompany, getSiteTexts } from '@/lib/cms/queries'
 import { starTitle, template } from '@/lib/links'
@@ -12,8 +12,11 @@ import type { Article } from '@/payload-types'
 import { pathFor } from '@/payload/utilities/routes'
 
 import styles from './ArticleView.module.css'
+import { DocLayout } from './DocLayout'
 import { PageHero } from './PageHero'
 import { Tldr } from './Tldr'
+
+const WIDE = new Set(['faq', 'cta', 'articles', 'servicesGrid'])
 
 const dateFormat = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
 
@@ -26,7 +29,11 @@ export async function ArticleView({ article }: { article: Article }) {
   const crumbs = [await homeCrumb(), await listingCrumb('conseils'), { name: title.title, path }]
   const context: BlockContext = { company, texts, path }
 
-  const richBlocks = (article.layout ?? []).filter((block) => block.blockType === 'richText')
+  // The questions and the call to action that close a guide take the whole width, after the reading column.
+  const blocks = article.layout ?? []
+  let readingEnd = blocks.length
+  while (readingEnd > 0 && WIDE.has(blocks[readingEnd - 1]!.blockType)) readingEnd -= 1
+  const richBlocks = blocks.filter((block) => block.blockType === 'richText')
   const headings = richBlocks.flatMap((block) => extractHeadings(block.content as never))
   const words = countWords(richBlocks.map((block) => richTextToPlain(block.content as never)).join(' '))
   const minutes = Math.max(1, Math.round(words / 200))
@@ -37,7 +44,15 @@ export async function ArticleView({ article }: { article: Article }) {
   return (
     <article>
       <PageHero
-        hero={{ variant: 'simple', title: title.title, titleAccent: title.accent, kicker: article.topic }}
+        hero={{
+          variant: isMedia(article.image) ? 'photo' : 'simple',
+          title: title.title,
+          titleAccent: title.accent,
+          kicker: article.topic,
+          images: isMedia(article.image) ? [article.image] : [],
+          caption: isMedia(article.image) ? article.image.caption : null,
+        }}
+        landscape
         company={company}
         breadcrumbs={crumbs}
         lead={<p>{article.excerpt}</p>}
@@ -61,30 +76,11 @@ export async function ArticleView({ article }: { article: Article }) {
           </p>
         }
       />
-      {isMedia(article.image) ? (
-        <div className={`container ${styles.cover}`}>
-          <Media media={article.image} priority sizes="(min-width: 1000px) 960px, 92vw" quality={82} />
-          {article.image.caption ? <p className={styles.caption}>{article.image.caption}</p> : null}
-        </div>
-      ) : null}
       <Tldr text={article.tldr} label={texts.general.tldrLabel} />
-      <div className={`container ${styles.layout}`}>
-        {headings.length > 1 ? (
-          <nav aria-label={t.tocTitle} className={styles.toc}>
-            <p className={styles.tocTitle}>{t.tocTitle}</p>
-            <ol>
-              {headings.map((heading) => (
-                <li key={heading.id}>
-                  <a href={`#${heading.id}`}>{heading.text}</a>
-                </li>
-              ))}
-            </ol>
-          </nav>
-        ) : null}
-        <div className={`${styles.body} article-body`}>
-          <RenderBlocks blocks={article.layout} context={context} />
-        </div>
-      </div>
+      <DocLayout id="guide" tocTitle={t.tocTitle} tocCount={template(texts.general.tocCount, { n: headings.length })} entries={headings.map((heading) => ({ href: `#${heading.id}`, label: heading.text }))} numbered={false}>
+        <RenderBlocks blocks={blocks.slice(0, readingEnd)} context={context} />
+      </DocLayout>
+      <RenderBlocks blocks={blocks.slice(readingEnd)} context={context} />
       <JsonLd
         data={graph([
           webPage(path, title.title, article.meta?.description),

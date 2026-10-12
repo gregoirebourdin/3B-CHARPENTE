@@ -15,43 +15,63 @@ export const article: SeedArticle = {
   topic: 'Rénovation',
   menuLabel: 'Rénover un chalet',
   excerpt:
-    "En montagne, une maison ancienne ou un chalet se rénove dans un ordre précis : ce qui porte, puis ce qui protège, puis ce qui isole, et enfin ce qui se voit. Voici l'ordre que nous recommandons, illustré par des maisons que nous avons rénovées à Vallouise, Prelles, Briançon et L'Argentière-la-Bessée.",
-  cardSummary: "L'ordre des travaux, de la charpente aux finitions, avec des exemples de chantiers.",
+    "Ce qui porte, puis ce qui protège, puis ce qui isole, et enfin ce qui se voit : l'ordre que nous recommandons pour rénover en montagne, illustré par des maisons rénovées à Vallouise, Prelles, Briançon et L'Argentière-la-Bessée.",
+  cardSummary:
+    "L'ordre des travaux, de la charpente aux finitions, avec des exemples de chantiers.",
   image: HERO,
-  tldr: "Pour rénover un chalet ou une maison ancienne en montagne, commencez par un état des lieux, puis suivez cet ordre : la structure et la charpente ; la couverture, pour mettre hors d'eau ; l'isolation et l'étanchéité à l'air ; les ouvertures ; les finitions. Gardez le vieux bois sain et isolez avec des matériaux biosourcés, adaptés au bâti ancien.",
+  tldr: "Pour rénover un chalet ou une maison ancienne en montagne, commencez par un état des lieux, puis suivez cet ordre : la structure et la charpente ; la couverture, pour mettre hors d'eau ; l'isolation et l'étanchéité à l'air ; les ouvertures ; les finitions. Gardez le vieux bois sain, isolez en biosourcé.",
   layout: [
-    // 3.5 Avant tout, l'état des lieux
+    // L'ordre en un coup d'œil
+    {
+      type: 'steps',
+      variant: 'timeline',
+      kicker: "L'ordre des travaux",
+      steps: [
+        {
+          title: 'Structure',
+          text: 'Réparer, renforcer ou refaire la charpente et les planchers.',
+        },
+        { title: 'Couverture', text: "Refermer le toit pour mettre hors d'eau." },
+        { title: 'Isolation', text: "Isolants biosourcés et étanchéité à l'air." },
+        { title: 'Ouvertures', text: "Fenêtres, lucarnes, raccordées à l'isolant." },
+        { title: 'Finitions', text: 'Planchers, escaliers, bardages, terrasses.' },
+      ],
+    },
+    // Avant tout, l'état des lieux
     {
       type: 'richText',
       anchor: 'etat-des-lieux',
       content: `## Avant tout, **l'état des lieux**
 
-Une maison ancienne raconte son histoire à qui sait la lire. Avant de choisir un isolant ou une fenêtre, il faut savoir ce qui tient, ce qui souffre, et pourquoi. Regardez en particulier :
+Une maison ancienne raconte son histoire à qui sait la lire. Avant de choisir un isolant ou une fenêtre, il faut savoir **ce qui tient, ce qui souffre, et pourquoi**. Regardez en particulier :
 
-- **la charpente :** pièces fendues, affaissées, attaquées par les insectes ou l'humidité, surtout aux appuis et aux pieds de fermes ;
-- **la toiture :** traces d'infiltration, état de la couverture et des dépassées de toit, ces débords qui protègent les façades ;
-- **les murs :** humidité en pied de mur, enduits qui cloquent, fissures ;
-- **les planchers :** solives qui fléchissent, planchers qui vibrent ou penchent ;
-- **votre projet :** habiter les combles, ouvrir une pièce, agrandir. Il change l'ordre des priorités.`,
+- **la charpente :** pièces fendues, affaissées, attaquées par les insectes ou l'humidité, surtout aux appuis et aux pieds de fermes ;
+- **la toiture :** traces d'infiltration, état de la couverture et des dépassées, ces débords qui protègent les façades ;
+- **les murs :** humidité en pied de mur, enduits qui cloquent, fissures ;
+- **les planchers :** solives qui fléchissent, planchers qui vibrent ou penchent ;
+- **votre projet :** habiter les combles, ouvrir une pièce, agrandir. Il change l'ordre des priorités.`,
     },
     {
-      type: 'richText',
-      boxed: true,
-      content: `Faites ce tour avec un professionnel. Chez 3B Charpente, chaque projet débute par une étude sur mesure, et nous vous fournissons un calendrier estimatif dès la première rencontre. Côté démarches, passez tôt en mairie : modifier l'aspect extérieur d'une maison demande en général une autorisation.`,
+      type: 'callout',
+      kind: 'tip',
+      text: "Faites ce tour avec un professionnel : chez 3B Charpente, chaque projet débute par une étude sur mesure, avec un calendrier estimatif dès la première rencontre. Et passez tôt en mairie : modifier l'aspect extérieur d'une maison demande en général une autorisation.",
     },
-    // 3.6 1. La structure et la charpente d'abord
+    // 1. La structure et la charpente
     {
       type: 'richText',
       anchor: 'charpente',
       content: `## 1. La structure et **la charpente** d'abord
 
-Tout repose sur la structure. Isoler une toiture dont la charpente fléchit, c'est enfermer le problème sous un isolant neuf. On commence donc par réparer, renforcer ou, si besoin, remplacer.
+Tout repose sur la structure. **Isoler une toiture dont la charpente fléchit, c'est enfermer le problème** sous un isolant neuf. On commence donc par réparer, renforcer ou, si besoin, remplacer.
 
-À [Briançon](/realisations/renovation-d-une-copropriete-a-briancon/), sur une copropriété, nous avons repris les fermes de la charpente, puis isolé et refait la couverture. À [L'Argentière-la-Bessée](/realisations/refection-d-une-charpente-a-l-argentiere-la-bessee/), l'ancienne charpente d'une maison a été déposée et remplacée par une charpente neuve, taillée et assemblée à blanc avant le levage. À [Prelles](/realisations/renovation-d-une-maison-d-habitation-sur-la-commune-de-prelles/), la charpente d'une maison d'habitation a été taillée en mélèze pays, le mélèze local, puis levée avec le solivage.
-
-C'est aussi le moment de penser aux futures ouvertures : une lucarne ou une fenêtre de toit se prépare dans la charpente, avec un chevêtre, la pièce qui encadre l'ouverture. Et si vous voulez habiter les combles, le plancher doit pouvoir porter une pièce de vie : dans un autre bâti ancien, nous avons ainsi créé un plancher neuf en douglas et en épicéa.
+C'est aussi le moment de préparer les futures ouvertures : une lucarne ou une fenêtre de toit se prépare dans la charpente, avec un chevêtre (la pièce qui encadre l'ouverture). Et pour habiter les combles, le plancher doit pouvoir porter une pièce de vie.
 
 [Rénovation de charpente et combles](/renovation-charpente-combles/)`,
+    },
+    {
+      type: 'callout',
+      kind: 'site',
+      text: "À [Briançon](/realisations/renovation-d-une-copropriete-a-briancon/), les fermes d'une copropriété reprises. À [L'Argentière-la-Bessée](/realisations/refection-d-une-charpente-a-l-argentiere-la-bessee/), une charpente neuve taillée et assemblée à blanc avant le levage. À [Prelles](/realisations/renovation-d-une-maison-d-habitation-sur-la-commune-de-prelles/), une charpente en mélèze du pays. Ailleurs, un plancher neuf en douglas et en épicéa.",
     },
     {
       type: 'gallery',
@@ -61,24 +81,24 @@ C'est aussi le moment de penser aux futures ouvertures : une lucarne ou une fen
           caption: 'Reprise des fermes sur une copropriété à Briançon.',
         },
         {
-          image: 'renovation-d-une-maison-d-habitation-sur-la-commune-de-prelles/3Assemblage à blanc  (1).JPG',
-          caption: "Assemblage à blanc de la charpente en mélèze pays d'une maison rénovée à Prelles",
+          image:
+            'renovation-d-une-maison-d-habitation-sur-la-commune-de-prelles/3Assemblage à blanc  (1).JPG',
+          caption:
+            "Assemblage à blanc de la charpente en mélèze pays d'une maison rénovée à Prelles",
         },
       ],
     },
-    // 3.7 2. La couverture, pour mettre hors d'eau
+    // 2. La couverture
     {
       type: 'richText',
       anchor: 'couverture',
       content: `## 2. La couverture, **pour mettre hors d'eau**
 
-Une fois la structure saine, on referme le toit. Une couverture étanche protège tout ce qui suit : isolant, planchers, finitions.
+Une fois la structure saine, on referme le toit : **une couverture étanche protège tout ce qui suit**, isolant, planchers, finitions.
 
-Au [Casset](/realisations/renovation-d-un-toit-en-bardeau-meleze-au-casset/), nous avons rénové un toit en bardeaux de mélèze, ces petites planches de bois posées en recouvrement, un matériau traditionnel des toits alpins. À Briançon, la couverture de la copropriété a été refaite et une dépassée de toiture recréée.
+Au [Casset](/realisations/renovation-d-un-toit-en-bardeau-meleze-au-casset/), nous avons rénové un toit en bardeaux de mélèze, ces petites planches posées en recouvrement des toits alpins. À Briançon, la couverture de la copropriété a été refaite et une dépassée recréée.
 
-Si la couverture doit être refaite, c'est l'occasion d'isoler par l'extérieur, en sarking : les panneaux isolants sont posés en continu sur la charpente, sous la nouvelle couverture. La charpente reste apparente à l'intérieur, et les pièces habitées ne sont pas touchées.
-
-[Isolation de toiture par l'extérieur (sarking)](/isolation-toiture-sarking/)`,
+Couverture à refaire ? C'est l'occasion d'isoler par l'extérieur, en **sarking** : l'isolant passe en continu sur la charpente, qui reste apparente dedans, sans toucher aux pièces habitées. [Isolation de toiture par l'extérieur (sarking)](/isolation-toiture-sarking/)`,
     },
     {
       type: 'gallery',
@@ -93,49 +113,64 @@ Si la couverture doit être refaite, c'est l'occasion d'isoler par l'extérieur,
         },
       ],
     },
-    // 3.8 3. L'isolation et l'étanchéité à l'air
+    // 3. L'isolation et l'étanchéité à l'air
     {
       type: 'richText',
       anchor: 'isolation',
       content: `## 3. Isoler avec des **matériaux biosourcés**
 
-Une maison ancienne n'est pas une maison neuve. Ses murs en pierre ou en bois ont besoin de laisser passer la vapeur d'eau et de sécher. Les [isolants biosourcés](/conseils/isolant-biosource-montagne/), comme la fibre de bois, la ouate de cellulose ou les laines de chanvre, de lin et de coton, savent stocker puis rendre une partie de l'humidité : c'est un atout dans le bâti ancien. Les panneaux de fibre de bois, denses, ralentissent aussi la chaleur d'été.
+Une maison ancienne n'est pas une maison neuve : **ses murs en pierre ou en bois doivent pouvoir sécher**. Les [isolants biosourcés](/conseils/isolant-biosource-montagne/) (fibre de bois, ouate de cellulose, laines de chanvre, de lin et de coton) stockent puis rendent une partie de l'humidité. Les panneaux de fibre de bois, denses, ralentissent aussi la chaleur d'été.
 
-Isoler ne suffit pas : il faut aussi rendre la maison étanche à l'air. Une membrane ou des panneaux continus, côté chauffé, empêchent l'air chaud et humide de traverser l'isolant, où il pourrait condenser. Une maison étanche à l'air doit, en contrepartie, être bien ventilée.`,
+Isoler ne suffit pas : une **étanchéité à l'air** continue, côté chauffé, empêche l'air chaud et humide de traverser l'isolant, où il pourrait condenser. En contrepartie, la maison doit être bien ventilée.`,
+    },
+    {
+      type: 'figures',
+      items: [
+        {
+          value: '28',
+          unit: 'cm',
+          label:
+            'de laine de chanvre, lin et coton et de fibre de bois dans les murs du chalet de Vallouise',
+        },
+        { value: '32', unit: 'cm', label: 'des mêmes isolants en toiture' },
+      ],
     },
     {
       type: 'richText',
-      boxed: true,
-      content: `**Le chalet de Vallouise :** 28 cm de laine de chanvre, lin et coton et de fibre de bois dans les murs, 32 cm en toiture.`,
-    },
-    {
-      type: 'richText',
-      content: `Quand la façade peut changer d'aspect, l'isolation thermique par l'extérieur (ITE), un isolant continu posé sur la face extérieure des murs, supprime les ponts thermiques et garde la masse des murs anciens côté intérieur. À Vallouise, une partie du chalet est ainsi enduite sur fibre de bois, l'autre habillée de bardage en mélèze.
+      content: `**Façade modifiable ?** L'isolation thermique par l'extérieur (ITE) pose un isolant continu sur la face extérieure des murs : plus de ponts thermiques, et la masse des murs anciens reste côté intérieur. À Vallouise, une partie du chalet est enduite sur fibre de bois, l'autre habillée de mélèze.
 
-Quand on ne peut pas toucher à la façade, on isole par l'intérieur. Sur un [bâti ancien](/realisations/isolation-d-un-bati-ancien-par-l-interieur/) isolé de cette façon, les photos du chantier montrent la méthode : doublage avec des poutres en I (des poutres légères en forme de I), panneaux OSB3, pose de l'étanchéité à l'air, puis insufflation de ouate de cellulose.
-
-3B Charpente est qualifiée QUALIBAT-RGE pour l'isolation des murs et des toitures par l'extérieur, et des murs et rampants par l'intérieur. Ce label ouvre l'accès aux aides publiques à la rénovation énergétique, sous conditions.
+**Façade à préserver ?** On isole par l'intérieur. Sur un [bâti ancien](/realisations/isolation-d-un-bati-ancien-par-l-interieur/), les photos montrent la méthode : doublage en poutres en I, panneaux OSB3, étanchéité à l'air, puis ouate de cellulose insufflée.
 
 [Isolation biosourcée](/isolation-biosourcee/) · [Isolation des murs par l'extérieur](/isolation-murs-ite/)`,
+    },
+    {
+      type: 'callout',
+      kind: 'aid',
+      text: "3B Charpente est qualifiée QUALIBAT-RGE pour l'isolation des murs et des toitures par l'extérieur, et des murs et rampants par l'intérieur : ce label ouvre l'accès aux aides publiques, sous conditions.",
     },
     {
       type: 'gallery',
       images: [
         {
-          image: 'isolation-d-un-bati-ancien-par-l-interieur/insufflation de ouate de cellulose.JPG',
+          image:
+            'isolation-d-un-bati-ancien-par-l-interieur/insufflation de ouate de cellulose.JPG',
           caption: "Insufflation de ouate de cellulose dans un bâti ancien isolé par l'intérieur.",
         },
       ],
     },
-    // 3.9 4. Les ouvertures
+    // 4. Les ouvertures
     {
       type: 'richText',
       anchor: 'ouvertures',
       content: `## 4. Les ouvertures, **pensées avec l'isolation**
 
-Fenêtres, portes, lucarnes, fenêtres de toit : on les choisit en même temps que l'isolant et on les pose quand l'enveloppe se referme. Leur position dans l'épaisseur du mur et leur raccord à l'étanchéité à l'air comptent autant que la menuiserie elle-même.
+Fenêtres, portes, lucarnes, fenêtres de toit : on les choisit avec l'isolant et on les pose quand l'enveloppe se referme. **Leur position dans le mur et leur raccord à l'étanchéité à l'air comptent autant que la menuiserie elle-même.**
 
-Sur le chalet de Vallouise, des ouvertures ont été créées ou modifiées. À [L'Argentière-la-Bessée](/realisations/renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/), une maison d'habitation a reçu un pignon vitré et de nouveaux vitrages. À [Saint-Martin-de-Queyrières](/realisations/renovation-energetique-et-ouverture-d-une-lucarne-a-saint-martin-de-queyriere/), une lucarne a été ouverte lors d'une rénovation énergétique. 3B Charpente est aussi qualifiée RGE pour les fenêtres de toit et pour les fenêtres, volets et portes donnant sur l'extérieur.`,
+- à Vallouise, des ouvertures créées ou modifiées sur le chalet ;
+- à [L'Argentière-la-Bessée](/realisations/renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/), un pignon vitré et de nouveaux vitrages ;
+- à [Saint-Martin-de-Queyrières](/realisations/renovation-energetique-et-ouverture-d-une-lucarne-a-saint-martin-de-queyriere/), une lucarne ouverte lors d'une rénovation énergétique.
+
+3B Charpente est aussi qualifiée RGE pour les fenêtres de toit et pour les fenêtres, volets et portes donnant sur l'extérieur.`,
     },
     {
       type: 'gallery',
@@ -146,15 +181,17 @@ Sur le chalet de Vallouise, des ouvertures ont été créées ou modifiées. À 
         },
       ],
     },
-    // 3.10 5. Les finitions
+    // 5. Les finitions
     {
       type: 'richText',
       anchor: 'finitions',
       content: `## 5. Les finitions, **ce qui se voit**
 
-Vient enfin ce qui se voit et se touche : planchers, escaliers, bardages, terrasses, garde-corps. C'est là que le bois local fait la différence, en mélèze et en sapin des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli.
+Planchers, escaliers, bardages, terrasses, garde-corps : **c'est là que le bois local fait la différence**, en mélèze et en sapin des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli.
 
-À [Vallouise](/charpentier-vallouise-pays-des-ecrins/), la terrasse agrandie du chalet est en mélèze, avec des assemblages traditionnels. À Prelles, la rénovation s'est terminée par une terrasse en mélèze et un garde-corps bois-métal. À L'Argentière-la-Bessée, une maison a reçu un bardage vieux bois, un escalier balancé et un garde-corps en bois de réemploi ; une autre, un plancher en mélèze.
+- à [Vallouise](/charpentier-vallouise-pays-des-ecrins/), une terrasse agrandie en mélèze, aux assemblages traditionnels ;
+- à Prelles, une terrasse en mélèze et un garde-corps bois-métal ;
+- à L'Argentière-la-Bessée, un bardage vieux bois, un escalier balancé, un garde-corps de réemploi ; ailleurs, un plancher en mélèze.
 
 [Escaliers bois sur mesure](/escalier-bois-sur-mesure/) · [Balcons, terrasses et garde-corps](/balcon-terrasse-abri-bois/)`,
     },
@@ -162,35 +199,32 @@ Vient enfin ce qui se voit et se touche : planchers, escaliers, bardages, terra
       type: 'gallery',
       images: [
         {
-          image: 'renovation-et-isolation-d-un-chalet-a-vallouise/10. Terrasse en mélèze et ses assemblages traditionnels.JPG',
+          image:
+            'renovation-et-isolation-d-un-chalet-a-vallouise/10. Terrasse en mélèze et ses assemblages traditionnels.JPG',
           caption: 'Terrasse en mélèze et ses assemblages traditionnels, Vallouise',
         },
         {
-          image: 'renovation-d-une-maison-d-habitation-sur-la-commune-de-prelles/6Terrasse mélèze.JPG',
+          image:
+            'renovation-d-une-maison-d-habitation-sur-la-commune-de-prelles/6Terrasse mélèze.JPG',
           caption: 'Terrasse mélèze, Prelles',
         },
         {
-          image: 'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/07Escalier balancé.JPG',
+          image:
+            'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/07Escalier balancé.JPG',
           caption: "Escalier balancé, L'Argentière-la-Bessée",
         },
       ],
     },
-    // 3.11 Garder et réemployer le vieux bois (bandeau vert forêt)
+    // Garder et réemployer le vieux bois
     {
-      type: 'cta',
-      variant: 'card',
+      type: 'callout',
+      kind: 'tip',
       anchor: 'vieux-bois',
-      badge: '3B Récup’',
-      title: 'Garder le vieux bois **et lui donner une seconde vie**',
-      text: `Dans une maison ancienne, tout le bois n'est pas à jeter. Une poutre saine, une ferme encore droite, un plancher usé mais solide peuvent rester en place, être réparés, ou être déposés puis [remis en œuvre ailleurs](/conseils/reemploi-bois-construction/).
-
-C'est le travail de 3B Récup', notre activité de déconstruction sélective et de réemploi. Nous déposons les éléments de structure bois (charpente, solivage, murs à ossature), la couverture, l'isolation et les parements. Dans notre atelier, ce bois est trié, nettoyé et usiné, puis reposé sur nos chantiers.
-
-Pour une maison particulière, un diagnostic ressources, c'est-à-dire un repérage volontaire des matériaux réemployables, permet de savoir avant les travaux ce qui mérite d'être sauvé.`,
-      primary: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
-      secondary: { label: 'Le bois de réemploi', href: '/3b-recup/bois-de-reemploi/' },
+      title: 'Garder le vieux bois, et lui donner une seconde vie',
+      text: "Une poutre saine, une ferme encore droite, un plancher solide peuvent rester en place, être réparés, ou être [remis en œuvre ailleurs](/conseils/reemploi-bois-construction/). Avec 3B Récup', nous déposons charpente, solivage, ossature, couverture, isolation et parements ; le bois est trié, nettoyé et usiné à l'atelier, puis reposé. Un diagnostic ressources dit, avant les travaux, ce qui mérite d'être sauvé.",
+      link: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
     },
-    // 3.12 L'exemple du chalet de Vallouise
+    // L'exemple du chalet de Vallouise
     {
       type: 'richText',
       anchor: 'vallouise',
@@ -203,16 +237,20 @@ Pour une maison particulière, un diagnostic ressources, c'est-à-dire un repér
         'renovation-et-isolation-d-un-chalet-a-vallouise/01. Façade Ouest avant les travaux.jpg',
         'renovation-et-isolation-d-un-chalet-a-vallouise/04. Façade Nord et Ouest.JPG',
       ],
-      text: `Ce chalet des années 1980 a été entièrement rénové et isolé. Ce n'est pas une maison ancienne au sens du patrimoine, mais il pose les mêmes questions que toute maison de montagne : une enveloppe à reprendre, des ouvertures à revoir, des extérieurs à agrandir.
-
-- **Murs :** 28 cm de laine de chanvre, lin et coton et de fibre de bois.
-- **Toiture :** 32 cm des mêmes isolants.
-- **Façades :** une partie en bardage de mélèze, l'autre enduite sur fibre de bois.
-- **Ouvertures :** créées ou modifiées.
-- **Extérieurs :** dépassée nord agrandie, balcon agrandi en terrasse étanchée, en mélèze et assemblages traditionnels.`,
-      cta: { label: 'Voir le chantier en photos', href: '/realisations/renovation-et-isolation-d-un-chalet-a-vallouise/' },
+      text: 'Un chalet des années 1980, entièrement rénové et isolé. Pas une maison ancienne au sens du patrimoine, mais **les mêmes questions** que toute maison de montagne.',
+      points: [
+        'Murs : 28 cm de laine de chanvre, lin et coton et de fibre de bois',
+        'Toiture : 32 cm des mêmes isolants',
+        "Façades : bardage de mélèze d'un côté, enduit sur fibre de bois de l'autre",
+        'Ouvertures créées ou modifiées',
+        'Dépassée nord agrandie, balcon devenu terrasse étanchée, en mélèze',
+      ],
+      cta: {
+        label: 'Voir le chantier en photos',
+        href: '/realisations/renovation-et-isolation-d-un-chalet-a-vallouise/',
+      },
     },
-    // 3.13 Par où commencer, concrètement
+    // Par où commencer, concrètement
     {
       type: 'richText',
       anchor: 'checklist',
@@ -224,26 +262,30 @@ Pour une maison particulière, un diagnostic ressources, c'est-à-dire un repér
       items: [
         { text: 'Notez ce que vous voulez faire de la maison, pièce par pièce.' },
         { text: 'Faites venir un charpentier pour examiner la charpente et la toiture.' },
-        { text: 'Renseignez-vous en mairie sur les autorisations : ouvertures, façades, hauteur.' },
-        { text: 'Repérez le bois et les matériaux qui méritent d\'être gardés ou réemployés.' },
-        { text: 'Choisissez l\'isolant selon les murs : biosourcé et ouvert à la vapeur pour le bâti ancien.' },
+        { text: 'Renseignez-vous en mairie sur les autorisations : ouvertures, façades, hauteur.' },
+        { text: "Repérez le bois et les matériaux qui méritent d'être gardés ou réemployés." },
         {
-          text: "Vérifiez les aides possibles auprès de [France Rénov'](https://france-renov.gouv.fr/), le service public de la rénovation, avec un [artisan RGE](/conseils/aides-renovation-artisan-rge/).",
+          text: "Choisissez l'isolant selon les murs : biosourcé et ouvert à la vapeur pour le bâti ancien.",
         },
-        { text: 'Demandez un calendrier qui suive l\'ordre : structure, couverture, isolation, ouvertures, finitions.' },
+        {
+          text: "Vérifiez les aides possibles auprès de [France Rénov'](https://france-renov.gouv.fr/), avec un [artisan RGE](/conseils/aides-renovation-artisan-rge/).",
+        },
+        {
+          text: "Demandez un calendrier qui suive l'ordre : structure, couverture, isolation, ouvertures, finitions.",
+        },
       ],
     },
-    // 3.14 Qui écrit ce guide ? (portrait de Jean non disponible)
+    // Qui écrit ce guide ?
     {
       type: 'richText',
       boxed: true,
-      content: `### Qui écrit ce guide ?
+      content: `### Qui écrit ce guide ?
 
-3B Charpente a été fondée en 2007 à L'Argentière-la-Bessée par Jean-Michel Tardy, charpentier formé chez les Compagnons du Devoir (CAP, puis Tour de France en France, en Martinique et en Autriche). Nous avons commencé avec des projets de charpente, puis étendu nos services à la rénovation de chalets, de maisons de pays, et à la construction neuve en ossature bois.
+3B Charpente, fondée en 2007 à L'Argentière-la-Bessée par Jean-Michel Tardy, charpentier formé chez les Compagnons du Devoir (CAP, puis Tour de France en France, en Martinique et en Autriche). D'abord la charpente, puis la rénovation de chalets et de maisons de pays, et la construction neuve en ossature bois.
 
 [Notre histoire](/a-propos/)`,
     },
-    // 3.15 FAQ
+    // FAQ
     {
       type: 'faq',
       title: "Vos questions sur **la rénovation d'une maison ancienne**",
@@ -256,12 +298,12 @@ Pour une maison particulière, un diagnostic ressources, c'est-à-dire un repér
         'renover-chalet-maison-ancienne-q6',
       ],
     },
-    // 3.16 Appel à l'action final
+    // Appel à l'action final
     {
       type: 'cta',
       variant: 'card',
-      title: 'Prêt à **transformer votre maison** ?',
-      text: 'Chaque projet chez 3B Charpente débute par une étude sur mesure. Nous venons voir votre chalet ou votre maison, nous regardons la charpente et l\'enveloppe avec vous, et nous vous proposons un devis détaillé, dans le bon ordre.',
+      title: 'Prêt à **transformer votre maison** ?',
+      text: "Nous venons voir votre chalet ou votre maison, regardons la charpente et l'enveloppe avec vous, puis vous proposons un devis détaillé, dans le bon ordre.",
       primary: { label: 'Demander mon devis', href: '/contact/' },
       secondary: { label: 'Appeler le {telephone}', href: 'tel' },
       showAddress: true,
@@ -271,44 +313,44 @@ Pour une maison particulière, un diagnostic ressources, c'est-à-dire un repér
     {
       key: 'renover-chalet-maison-ancienne-q1',
       topic: 'guides',
-      question: "Par quoi commencer la rénovation d'une maison ancienne ?",
+      question: "Par quoi commencer la rénovation d'une maison ancienne ?",
       answer:
-        "Par un état des lieux, puis par la structure. On vérifie la charpente, la toiture, les murs et les planchers, et on précise le projet. L'ordre logique est ensuite : structure et charpente, couverture, isolation et étanchéité à l'air, ouvertures, finitions. Commencer par les finitions, c'est risquer de tout reprendre le jour où l'on touche à la structure.",
+        "Par un état des lieux, puis par la structure. On vérifie charpente, toiture, murs et planchers, et on précise le projet. Ensuite : structure et charpente, couverture, isolation et étanchéité à l'air, ouvertures, finitions. Commencer par les finitions, c'est risquer de tout reprendre le jour où l'on touche à la structure.",
     },
     {
       key: 'renover-chalet-maison-ancienne-q2',
       topic: 'guides',
-      question: "Faut-il refaire la toiture avant d'isoler ?",
+      question: "Faut-il refaire la toiture avant d'isoler ?",
       answer:
-        "Il faut au moins qu'elle soit saine et étanche : isoler sous une couverture qui fuit abîme l'isolant et les bois. Si la couverture doit de toute façon être refaite, profitez-en pour isoler par l'extérieur, en sarking : les panneaux isolants sont posés en continu sur la charpente, sous la nouvelle couverture, et la charpente reste apparente à l'intérieur.",
+        "Elle doit au moins être saine et étanche : isoler sous une couverture qui fuit abîme l'isolant et les bois. Si elle est à refaire de toute façon, isolez par l'extérieur en sarking : l'isolant passe en continu sur la charpente, sous la nouvelle couverture, et la charpente reste apparente.",
     },
     {
       key: 'renover-chalet-maison-ancienne-q3',
       topic: 'guides',
-      question: 'Quel isolant choisir pour un chalet ou une maison ancienne en pierre ?',
+      question: 'Quel isolant choisir pour un chalet ou une maison ancienne en pierre ?',
       answer:
-        "Pour un bâti ancien, on privilégie des isolants biosourcés et ouverts à la vapeur d'eau : fibre de bois, ouate de cellulose, laines de chanvre, de lin ou de coton. Ils gèrent mieux l'humidité des murs anciens. Sur un chalet de Vallouise, nous avons posé 28 cm de laine de chanvre, lin et coton et de fibre de bois dans les murs, et 32 cm en toiture.",
+        "Des isolants biosourcés, ouverts à la vapeur d'eau : fibre de bois, ouate de cellulose, laines de chanvre, de lin ou de coton. Ils gèrent mieux l'humidité des murs anciens. Sur un chalet de Vallouise : 28 cm de laine de chanvre, lin et coton et de fibre de bois dans les murs, 32 cm en toiture.",
     },
     {
       key: 'renover-chalet-maison-ancienne-q4',
       topic: 'guides',
-      question: "Peut-on garder la charpente d'origine d'une maison ancienne ?",
+      question: "Peut-on garder la charpente d'origine d'une maison ancienne ?",
       answer:
-        "Souvent, oui. Une charpente ancienne se répare : remplacement de pièces, reprise des fermes, renfort par doublage, rallonge par un trait de Jupiter, un assemblage qui aboute deux pièces. Il faut l'examiner de près avant de décider. Si elle doit être déposée, ses pièces saines peuvent être triées, nettoyées et réemployées : c'est le rôle de 3B Récup', notre activité de réemploi du bois.",
+        "Souvent, oui. Elle se répare : pièces remplacées, fermes reprises, renfort par doublage, rallonge par un trait de Jupiter. Il faut l'examiner de près avant de décider. Déposée, ses pièces saines peuvent être triées, nettoyées et réemployées avec 3B Récup'.",
     },
     {
       key: 'renover-chalet-maison-ancienne-q5',
       topic: 'guides',
-      question: "Combien de temps dure la rénovation d'un chalet ?",
+      question: "Combien de temps dure la rénovation d'un chalet ?",
       answer:
-        "Cela dépend de l'état de la maison et de l'ampleur des travaux : refaire une toiture ou rénover toute l'enveloppe, ce n'est pas le même chantier. Le délai peut varier selon la complexité et la taille du projet ; nous vous fournirons un calendrier estimatif lors de notre première rencontre. En montagne, pensez aussi aux saisons : la mise hors d'eau se prévoit avant l'hiver.",
+        "Cela dépend de l'état de la maison et de l'ampleur des travaux : refaire un toit ou toute l'enveloppe, ce n'est pas le même chantier. Nous vous donnons un calendrier estimatif dès la première rencontre. En montagne, pensez aux saisons : la mise hors d'eau se prévoit avant l'hiver.",
     },
     {
       key: 'renover-chalet-maison-ancienne-q6',
       topic: 'guides',
-      question: 'Existe-t-il des aides pour rénover une maison ancienne ?',
+      question: 'Existe-t-il des aides pour rénover une maison ancienne ?',
       answer:
-        "Oui, sous conditions. Certains travaux d'isolation et de menuiseries réalisés par un artisan RGE peuvent ouvrir droit à des aides publiques à la rénovation énergétique. 3B Charpente est qualifiée QUALIBAT-RGE pour l'isolation des murs, des toitures et des rampants, et pour les fenêtres et fenêtres de toit. Les règles changent souvent : vérifiez votre situation auprès de France Rénov' avant de signer.",
+        "Oui, sous conditions : certains travaux d'isolation et de menuiseries réalisés par un artisan RGE ouvrent droit à des aides publiques. 3B Charpente est qualifiée QUALIBAT-RGE pour l'isolation des murs, toitures et rampants, et pour les fenêtres et fenêtres de toit. Vérifiez votre situation auprès de France Rénov' avant de signer.",
     },
   ],
   seo: {
@@ -324,7 +366,8 @@ Pour une maison particulière, un diagnostic ressources, c'est-à-dire un repér
       caption: 'Chalet des années 1980 rénové et isolé à Vallouise, avec sa terrasse en mélèze.',
     },
     {
-      photo: 'renovation-et-isolation-d-un-chalet-a-vallouise/01. Façade Ouest avant les travaux.jpg',
+      photo:
+        'renovation-et-isolation-d-un-chalet-a-vallouise/01. Façade Ouest avant les travaux.jpg',
       alt: 'Façade ouest du chalet de Vallouise avant les travaux de rénovation',
     },
     {
@@ -332,7 +375,8 @@ Pour une maison particulière, un diagnostic ressources, c'est-à-dire un repér
       alt: "Reprise des fermes de la charpente d'une copropriété à Briançon",
     },
     {
-      photo: 'renovation-d-une-maison-d-habitation-sur-la-commune-de-prelles/3Assemblage à blanc  (1).JPG',
+      photo:
+        'renovation-d-une-maison-d-habitation-sur-la-commune-de-prelles/3Assemblage à blanc  (1).JPG',
       alt: "Assemblage à blanc de la charpente en mélèze pays d'une maison rénovée à Prelles",
     },
     {
@@ -344,7 +388,8 @@ Pour une maison particulière, un diagnostic ressources, c'est-à-dire un repér
       alt: "Insufflation de ouate de cellulose lors de l'isolation d'un bâti ancien par l'intérieur",
     },
     {
-      photo: 'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/06Bardage vieux bois.JPG',
+      photo:
+        'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/06Bardage vieux bois.JPG',
       alt: "Bardage en vieux bois de réemploi sur une maison rénovée à L'Argentière-la-Bessée",
     },
   ],
@@ -363,23 +408,27 @@ Pour une maison particulière, un diagnostic ressources, c'est-à-dire un repér
       priority: 'normal',
     },
     {
-      question: 'Chalet de Vallouise : ordre réel des travaux, durée, isolant précis des murs (marque ou composition).',
+      question:
+        'Chalet de Vallouise : ordre réel des travaux, durée, isolant précis des murs (marque ou composition).',
       decision: 'Travaux présentés par poste, sans chronologie, sans durée ni marque.',
       priority: 'low',
     },
     {
       question:
         'Bâti ancien isolé par l’intérieur : commune du chantier, et confirmation de la méthode lue sur les photos (doublage en poutres en I, OSB3, étanchéité à l’air, insufflation de ouate).',
-      decision: 'Aucune commune indiquée ; la méthode est présentée comme « ce que montrent les photos du chantier ».',
+      decision:
+        'Aucune commune indiquée ; la méthode est présentée comme « ce que montrent les photos du chantier ».',
       priority: 'normal',
     },
     {
-      question: 'Plancher en douglas et épicéa (« Création d’un plancher dans un bâti ancien ») : commune, pour le citer avec un lieu.',
+      question:
+        'Plancher en douglas et épicéa (« Création d’un plancher dans un bâti ancien ») : commune, pour le citer avec un lieu.',
       decision: 'Cité sans commune (« dans un autre bâti ancien »).',
       priority: 'low',
     },
     {
-      question: 'Diagnostic ressources : 3B propose-t-il ce repérage aux particuliers ? (section « Garder le vieux bois »)',
+      question:
+        'Diagnostic ressources : 3B propose-t-il ce repérage aux particuliers ? (section « Garder le vieux bois »)',
       decision:
         'La phrase générale sur le diagnostic ressources est gardée, sans dire que 3B le propose. La mention entre crochets est retirée.',
       priority: 'normal',
@@ -392,13 +441,16 @@ Pour une maison particulière, un diagnostic ressources, c'est-à-dire un repér
       priority: 'high',
     },
     {
-      question: 'Ventilation : 3B travaille-t-il avec un ventiliste qu’il recommande ? (facultatif)',
-      decision: 'Aucun partenaire cité ; le guide dit seulement qu’une maison étanche à l’air doit être bien ventilée.',
+      question:
+        'Ventilation : 3B travaille-t-il avec un ventiliste qu’il recommande ? (facultatif)',
+      decision:
+        'Aucun partenaire cité ; le guide dit seulement qu’une maison étanche à l’air doit être bien ventilée.',
       priority: 'low',
     },
     {
       question: 'Date de publication et page /conseils/ : créer une page d’accueil des guides ?',
-      decision: 'Page /conseils/ publiée au lancement : fil d’Ariane Accueil › Conseils › guide. Date = date de mise en ligne.',
+      decision:
+        'Page /conseils/ publiée au lancement : fil d’Ariane Accueil › Conseils › guide. Date = date de mise en ligne.',
       priority: 'low',
     },
     {
@@ -409,13 +461,15 @@ Pour une maison particulière, un diagnostic ressources, c'est-à-dire un repér
       priority: 'normal',
     },
     {
-      question: 'Scierie Savoldelli (section « Les finitions ») : la fiche écrit « sciés par la Scierie Savoldelli, notre partenaire ».',
+      question:
+        'Scierie Savoldelli (section « Les finitions ») : la fiche écrit « sciés par la Scierie Savoldelli, notre partenaire ».',
       decision:
-        "Formulation de la FAQ validée appliquée : « sciés par notre partenaire local, la Scierie Savoldelli ». Nommée une seule fois dans le guide.",
+        'Formulation de la FAQ validée appliquée : « sciés par notre partenaire local, la Scierie Savoldelli ». Nommée une seule fois dans le guide.',
       priority: 'low',
     },
     {
-      question: 'Parcours de Jean (encadré « Qui écrit ce guide ? ») : la fiche écrit « formé chez les Compagnons du Devoir et sur le Tour de France ».',
+      question:
+        'Parcours de Jean (encadré « Qui écrit ce guide ? ») : la fiche écrit « formé chez les Compagnons du Devoir et sur le Tour de France ».',
       decision:
         'Formulation par défaut appliquée : « formé chez les Compagnons du Devoir (CAP, puis Tour de France en France, en Martinique et en Autriche) ». Pas de portrait (aucun disponible) : encadré texte seul.',
       priority: 'low',
@@ -430,7 +484,8 @@ Pour une maison particulière, un diagnostic ressources, c'est-à-dire un repér
     {
       question:
         'Composants absents : curseur avant / après (Le Casset) et schéma de l’ordre des travaux (à redessiner).',
-      decision: 'Avant / après affichés en galerie de deux photos ; schéma non repris (il n’existe pas).',
+      decision:
+        'Avant / après affichés en galerie de deux photos ; schéma non repris (il n’existe pas).',
       priority: 'low',
     },
     {

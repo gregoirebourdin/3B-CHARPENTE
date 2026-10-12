@@ -20,7 +20,16 @@ const firstText = (value: unknown): string => {
 const titleOf = (row: Row | undefined) => {
   if (!row) return ''
   const items = (row.items ?? row.cards ?? row.steps) as Row[] | undefined
-  const candidates = [row.title, row.kicker, row.lead, typeof row.text === 'string' ? row.text : firstText(row.text), items?.[0]?.title]
+  const pros = row.pros as Row[] | undefined
+  const candidates = [
+    row.title,
+    row.kicker,
+    row.lead,
+    typeof row.text === 'string' ? row.text : firstText(row.text),
+    items?.[0]?.title,
+    items?.[0]?.label,
+    pros?.[0]?.text,
+  ]
   const found = candidates.find((value): value is string => typeof value === 'string' && value.trim().length > 0) ?? ''
   const plain = found.replace(/\*\*/g, '').replace(/\s+/g, ' ').trim()
   return plain.length > 80 ? `${plain.slice(0, 79).trimEnd()}…` : plain

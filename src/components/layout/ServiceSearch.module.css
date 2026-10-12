@@ -63,9 +63,9 @@
   place-items: center;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  background: var(--pill-bg);
-  color: var(--pill-fg);
+  border-radius: var(--radius-btn);
+  background: var(--c-sage-soft);
+  color: var(--c-forest);
 }
 
 .text {

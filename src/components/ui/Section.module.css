@@ -18,14 +18,32 @@
   background: var(--bg);
 }
 
+/* White sections between cream ones: the page breathes, the reader sees where a part ends. */
 .tone-light {
   background: var(--bg-alt);
+}
+
+.tone-dark {
+  background: var(--c-night);
+  color: #eef1e8;
+}
+
+.tone-forest {
+  background: var(--band-bg);
+  color: var(--band-fg);
 }
 
 /* Two consecutive sections on the same ground share their padding. */
 .tone-cream + .tone-cream.spacing-default,
 .tone-light + .tone-light.spacing-default {
   padding-top: calc(var(--section-pad) * 0.35);
+}
+
+/* A short aside (« Bon à savoir », points forts) sticks to the section it completes.
+   Not in a guide: its sections already flow with a small, even gap. */
+.tone-cream + .tone-cream.spacing-tight:not(:global(.article-body) > *),
+.tone-light + .tone-light.spacing-tight:not(:global(.article-body) > *) {
+  margin-top: calc(var(--section-pad) * -0.6);
 }
 
 .recup {

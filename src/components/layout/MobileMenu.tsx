@@ -36,8 +36,8 @@ export function MobileMenu({ items, cta, phone, tel }: Props) {
         aria-haspopup="dialog"
         onClick={() => dialog.current?.showModal()}
       >
-        <Icon name="menu" size={24} />
-        <span className="visually-hidden">Ouvrir le menu</span>
+        <Icon name="menu" size={20} />
+        <span>Menu</span>
       </button>
       <dialog ref={dialog} className={styles.dialog} aria-label="Menu">
         <div className={styles.top}>

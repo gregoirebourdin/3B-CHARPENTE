@@ -14,7 +14,7 @@ export const project: SeedProject = {
   summary:
     "Une surélévation, de l'existant au chantier terminé, et le détail d'une console de dépassée de toit.",
   description:
-    "À Pelvoux, au pied du massif des Écrins, nous avons réalisé une surélévation. Surélever, c'est rehausser un bâtiment existant pour gagner de la hauteur ou un niveau. Pelvoux fait partie de la commune de Vallouise-Pelvoux. La nouvelle toiture déborde du mur : c'est la dépassée, qui repose ici sur des consoles. Les photos suivent le chantier de l'état d'origine jusqu'au résultat, dedans comme dehors.",
+    "À Pelvoux, au pied du massif des Écrins, nous avons réalisé une surélévation. Surélever, c'est rehausser un bâtiment existant pour gagner de la hauteur ou un niveau. Pelvoux fait partie de la commune de Vallouise-Pelvoux.\n\nLa nouvelle toiture déborde du mur : c'est la dépassée, qui repose ici sur des consoles. Les photos suivent le chantier de l'état d'origine jusqu'au résultat, dedans comme dehors.",
   steps: [
     {
       title: 'État avant travaux.',

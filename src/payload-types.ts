@@ -592,6 +592,9 @@ export interface Page {
     | (
         | TextImageBlock
         | CardsBlock
+        | FiguresBlock
+        | CalloutBlock
+        | ProsConsBlock
         | ServicesGridBlock
         | ProjectsBlock
         | ProjectsExplorerBlock
@@ -892,6 +895,9 @@ export interface Service {
     | (
         | TextImageBlock
         | CardsBlock
+        | FiguresBlock
+        | CalloutBlock
+        | ProsConsBlock
         | ServicesGridBlock
         | ProjectsBlock
         | ProjectsExplorerBlock
@@ -1202,6 +1208,9 @@ export interface Article {
     | (
         | TextImageBlock
         | CardsBlock
+        | FiguresBlock
+        | CalloutBlock
+        | ProsConsBlock
         | ServicesGridBlock
         | ProjectsBlock
         | ProjectsExplorerBlock
@@ -1272,7 +1281,16 @@ export interface TextImageBlock {
     [k: string]: unknown;
   };
   /**
-   * Deux photos : elles se superposent, comme le collage de l’accueil.
+   * Une ligne chacun, affichée avec une coche verte. Ex. : « Reprise des fermes ».
+   */
+  points?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Deux photos : elles se placent côte à côte.
    */
   images?: (number | Media)[] | null;
   imagePosition?: ('right' | 'left') | null;
@@ -1489,6 +1507,149 @@ export interface CardsBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'cards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FiguresBlock".
+ */
+export interface FiguresBlock {
+  /**
+   * Petite ligne au-dessus du titre (facultatif). Ex. : « Nos prestations ».
+   */
+  kicker?: string | null;
+  title?: string | null;
+  /**
+   * Recopiez les mots du titre à afficher en vert. Plusieurs groupes : séparez-les par une virgule. Ex. : « simplement, durablement ».
+   */
+  titleAccent?: string | null;
+  /**
+   * Une ou deux phrases sous le titre (facultatif).
+   */
+  intro?: string | null;
+  /**
+   * Uniquement des chiffres vérifiés : une année, une épaisseur, une durée.
+   */
+  items?:
+    | {
+        value: string;
+        unit?: string | null;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Alternez les fonds pour rythmer la page.
+   */
+  tone?: ('cream' | 'light') | null;
+  /**
+   * Permet de faire un lien direct vers cette section : /page/#ancre.
+   */
+  anchor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'figures';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CalloutBlock".
+ */
+export interface CalloutBlock {
+  kind?: ('tip' | 'site' | 'definition' | 'aid') | null;
+  /**
+   * Vide : le nom du type (« Bon à savoir »…).
+   */
+  title?: string | null;
+  /**
+   * Tiptap document (type « doc »).
+   */
+  text: {
+    type: 'doc';
+    content?: {
+      [k: string]: unknown;
+    }[];
+    [k: string]: unknown;
+  };
+  link?: {
+    /**
+     * Astuce : écrivez {telephone} pour afficher le numéro de l’entreprise.
+     */
+    label?: string | null;
+    type?: ('internal' | 'phone' | 'email' | 'external') | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'services';
+          value: number | Service;
+        } | null)
+      | ({
+          relationTo: 'projects';
+          value: number | Project;
+        } | null)
+      | ({
+          relationTo: 'articles';
+          value: number | Article;
+        } | null);
+    anchor?: string | null;
+    url?: string | null;
+  };
+  /**
+   * Alternez les fonds pour rythmer la page.
+   */
+  tone?: ('cream' | 'light') | null;
+  /**
+   * Permet de faire un lien direct vers cette section : /page/#ancre.
+   */
+  anchor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'callout';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProsConsBlock".
+ */
+export interface ProsConsBlock {
+  /**
+   * Petite ligne au-dessus du titre (facultatif). Ex. : « Nos prestations ».
+   */
+  kicker?: string | null;
+  title?: string | null;
+  /**
+   * Recopiez les mots du titre à afficher en vert. Plusieurs groupes : séparez-les par une virgule. Ex. : « simplement, durablement ».
+   */
+  titleAccent?: string | null;
+  /**
+   * Une ou deux phrases sous le titre (facultatif).
+   */
+  intro?: string | null;
+  prosLabel?: string | null;
+  consLabel?: string | null;
+  pros?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  cons?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Alternez les fonds pour rythmer la page.
+   */
+  tone?: ('cream' | 'light') | null;
+  /**
+   * Permet de faire un lien direct vers cette section : /page/#ancre.
+   */
+  anchor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'prosCons';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3176,6 +3337,9 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         textImage?: T | TextImageBlockSelect<T>;
         cards?: T | CardsBlockSelect<T>;
+        figures?: T | FiguresBlockSelect<T>;
+        callout?: T | CalloutBlockSelect<T>;
+        prosCons?: T | ProsConsBlockSelect<T>;
         servicesGrid?: T | ServicesGridBlockSelect<T>;
         projects?: T | ProjectsBlockSelect<T>;
         projectsExplorer?: T | ProjectsExplorerBlockSelect<T>;
@@ -3220,6 +3384,12 @@ export interface TextImageBlockSelect<T extends boolean = true> {
   title?: T;
   titleAccent?: T;
   text?: T;
+  points?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
   images?: T;
   imagePosition?: T;
   badge?: T;
@@ -3294,6 +3464,78 @@ export interface CardsBlockSelect<T extends boolean = true> {
         reference?: T;
         anchor?: T;
         url?: T;
+      };
+  tone?: T;
+  anchor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FiguresBlock_select".
+ */
+export interface FiguresBlockSelect<T extends boolean = true> {
+  kicker?: T;
+  title?: T;
+  titleAccent?: T;
+  intro?: T;
+  items?:
+    | T
+    | {
+        value?: T;
+        unit?: T;
+        label?: T;
+        id?: T;
+      };
+  tone?: T;
+  anchor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CalloutBlock_select".
+ */
+export interface CalloutBlockSelect<T extends boolean = true> {
+  kind?: T;
+  title?: T;
+  text?: T;
+  link?:
+    | T
+    | {
+        label?: T;
+        type?: T;
+        reference?: T;
+        anchor?: T;
+        url?: T;
+      };
+  tone?: T;
+  anchor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProsConsBlock_select".
+ */
+export interface ProsConsBlockSelect<T extends boolean = true> {
+  kicker?: T;
+  title?: T;
+  titleAccent?: T;
+  intro?: T;
+  prosLabel?: T;
+  consLabel?: T;
+  pros?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  cons?:
+    | T
+    | {
+        text?: T;
+        id?: T;
       };
   tone?: T;
   anchor?: T;
@@ -3832,6 +4074,9 @@ export interface ArticlesSelect<T extends boolean = true> {
     | {
         textImage?: T | TextImageBlockSelect<T>;
         cards?: T | CardsBlockSelect<T>;
+        figures?: T | FiguresBlockSelect<T>;
+        callout?: T | CalloutBlockSelect<T>;
+        prosCons?: T | ProsConsBlockSelect<T>;
         servicesGrid?: T | ServicesGridBlockSelect<T>;
         projects?: T | ProjectsBlockSelect<T>;
         projectsExplorer?: T | ProjectsExplorerBlockSelect<T>;
@@ -3941,6 +4186,9 @@ export interface ServicesSelect<T extends boolean = true> {
     | {
         textImage?: T | TextImageBlockSelect<T>;
         cards?: T | CardsBlockSelect<T>;
+        figures?: T | FiguresBlockSelect<T>;
+        callout?: T | CalloutBlockSelect<T>;
+        prosCons?: T | ProsConsBlockSelect<T>;
         servicesGrid?: T | ServicesGridBlockSelect<T>;
         projects?: T | ProjectsBlockSelect<T>;
         projectsExplorer?: T | ProjectsExplorerBlockSelect<T>;

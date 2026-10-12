@@ -7,8 +7,31 @@ Contrôle du 12 octobre 2026, sur la version de production du site construite en
 - 49 pages indexables, toutes avec un title de 50 à 60 caractères, une meta description de 141 à 155 caractères, un seul H1, une adresse canonique et une image de partage.
 - Données structurées présentes sur chaque page et conformes aux propriétés exigées par Google ; les 24 pages avec FAQ reprennent mot pour mot les questions et réponses visibles.
 - 0 lien interne cassé, 0 page orpheline (chaque page reçoit au moins un lien depuis le contenu d’une autre).
-- Lighthouse mobile : **accessibilité 100, bonnes pratiques 100, SEO 100** sur les quatre pages mesurées ; **performance 89 à 92**, sous l’objectif de 95 (explication et pistes au § 2).
+- Lighthouse mobile : **accessibilité 100, bonnes pratiques 100, SEO 100** sur les quatre pages mesurées ; **performance 89 à 92** au premier passage, **91 à 95** après la refonte (§ 0), sous l’objectif de 95 sauf sur la fiche chantier (explication et pistes au § 2).
 - Démonstration de bout en bout de l’administration : 15 vérifications sur 15 (voir `guide-admin.md`).
+
+---
+
+## 0. Second passage : refonte « Atelier ouvert » et textes réécrits
+
+Après la refonte du design (`docs/design.md`) et la réécriture du texte des 26 pages et des chantiers, tout a été remesuré sur la version de production construite en local.
+
+- **SEO** : 49 pages, **0 page avec un défaut** (title, description, H1 unique, canonique, image de partage), données structurées sans erreur, **215 liens internes, 0 cassé**, 0 page orpheline. Les H1, titres et descriptions SEO, questions de FAQ et liens internes sont ceux de la version précédente.
+- **Lighthouse mobile** (un passage par page) : accessibilité **100**, bonnes pratiques **100**, SEO **100** partout ; performance **91 à 95** (accueil 92, charpente bois 92, isolation de toiture 92, 3B Récup’ 91, guide isolant 91, fiche chantier 95), CLS 0, TBT sous 100 ms.
+- **Captures** 1 440 px et 390 px de chaque gabarit relues une à une.
+
+Défauts trouvés et corrigés pendant ce passage :
+
+| Constat | Correction |
+|---|---|
+| Dans les guides, les encadrés et les blocs courts remontaient sur le texte précédent (règle « bloc collé à la section qu’il complète » prévue pour les pages, pas pour la colonne de lecture). | Règle désactivée dans les guides (`Section.module.css`). |
+| Surtitre clair sur le vert forêt du haut de page 3B Récup’ : contraste 3,95:1 (accessibilité 96). | Teinte éclaircie : 5,3:1, accessibilité 100. |
+| Classe `undefined` sur chaque surtitre. | Supprimée (`SectionHeading`, `PageHero`). |
+| Une liste en frise ou en pastilles ignorait son texte d’introduction. | Le texte s’affiche sous le titre. |
+| « Voir aussi » occupait une section entière pour une ou deux pastilles. | Une seule ligne compacte quand la liste n’a ni titre ni texte. |
+| Une grille de 7 chantiers laissait une carte seule sur la dernière ligne. | 4 colonnes pour 7 ou 8 cartes. |
+| Titres longs coupés en trois lignes dans les rangées de la bande sombre. | Colonne de titre élargie quand un titre dépasse un mot. |
+| Les marques `**gras**` apparaissaient telles quelles dans une introduction de section (texte simple). | Retirées du contenu. |
 
 ---
 

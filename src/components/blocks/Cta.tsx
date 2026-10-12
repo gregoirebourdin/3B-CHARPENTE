@@ -12,9 +12,10 @@ import styles from './Cta.module.css'
 import type { BlockProps } from './types'
 
 /**
- * Call to action. « Bandeau » and « Carte »: a forest panel, the invitation on
- * the left, on the right the phone number, the opening hours and the address
- * (from the « Entreprise » settings) or a photo. « Discret »: a light strip.
+ * Call to action. « Bandeau » and « Carte »: a rounded forest panel, the
+ * invitation on the left, on the right the phone number and the opening hours
+ * (from the « Entreprise » settings) or a photo. « Discret »: a pale sage line
+ * with an icon, a sentence and a button.
  */
 export function Cta({ block, context }: BlockProps<Data>) {
   const variant = block.variant ?? 'band'
@@ -97,23 +98,15 @@ export function Cta({ block, context }: BlockProps<Data>) {
     </div>
   )
 
+  // « Bandeau » and « Carte » share the same rounded forest panel; the wood rings mark 3B Récup'.
   return (
-    <section id={block.anchor || undefined} className={`${styles.wrap} ${styles[variant]}`}>
-      {variant === 'card' ? (
-        <div className="container">
-          <div className={styles.panel} data-reveal="">
-            <Decor />
-            {content}
-          </div>
+    <section id={block.anchor || undefined} className={styles.wrap} data-tone="forest">
+      <div className="container">
+        <div className={styles.panel} data-reveal="">
+          {block.badge ? <Decor /> : null}
+          {content}
         </div>
-      ) : (
-        <div className={styles.panel}>
-          <Decor />
-          <div className="container" data-reveal="">
-            {content}
-          </div>
-        </div>
-      )}
+      </div>
     </section>
   )
 }

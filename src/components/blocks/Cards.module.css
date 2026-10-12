@@ -1,8 +1,8 @@
-/* ---------- Grid of cards ---------- */
-.list {
+/* ---------- Grid of short cards ---------- */
+.grid {
   display: grid;
   grid-template-columns: repeat(var(--columns, 3), minmax(0, 1fr));
-  gap: clamp(1rem, 2vw, 1.5rem);
+  gap: var(--space-5);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -12,89 +12,67 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
   overflow: hidden;
-  padding: clamp(1.5rem, 2.4vw, 2rem);
   border: 1px solid var(--c-line);
   border-radius: var(--radius-md);
-  background: var(--bg-card);
+  background: var(--c-card);
   transition:
+    border-color var(--dur-fast) var(--ease-out),
     transform var(--dur-base) var(--ease-out),
-    box-shadow var(--dur-base) var(--ease-out),
-    border-color var(--dur-base) var(--ease-out);
+    box-shadow var(--dur-base) var(--ease-out);
 }
 
-.card:has(a):hover {
-  border-color: transparent;
+.card[data-link]:hover {
+  border-color: var(--c-line-strong);
   box-shadow: var(--shadow-md);
-  transform: translateY(-4px);
+  transform: translateY(-2px);
 }
 
-.muted {
-  border-style: dashed;
-  background: transparent;
+.card[data-muted] {
+  background: var(--c-surface);
+}
+
+.card[data-muted] .icon {
+  background: var(--c-line);
+  color: var(--fg-muted);
 }
 
 .body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 26px 28px 28px;
+}
+
+.icon {
   display: grid;
-  align-content: start;
-  gap: 10px;
+  flex: none;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: var(--space-2);
+  border-radius: 14px;
+  background: var(--c-sage-soft);
+  color: var(--c-forest);
+}
+
+.number {
+  margin-bottom: var(--space-1);
+  color: var(--fg-accent);
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
 }
 
 .title {
   font-size: var(--fs-h3);
-  font-weight: 600;
-  letter-spacing: -0.012em;
-  line-height: 1.2;
 }
 
-.eyebrow {
-  color: var(--fg-muted);
-  font-size: 0.875rem;
-  font-style: italic;
-}
-
-.text {
-  display: grid;
-  gap: 0.8em;
-  color: var(--fg-muted);
-  font-size: 0.97rem;
-}
-
-.text strong {
-  color: var(--fg);
-}
-
-.link {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  justify-self: start;
-  margin-top: var(--space-2);
-  color: var(--fg-accent);
-  font-weight: 650;
-}
-
-.link svg {
-  transition: transform var(--dur-base) var(--ease-out);
-}
-
-.link:hover svg {
-  transform: translateX(3px);
-}
-
-.disc {
-  display: grid;
-  flex: none;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--pill-bg);
-  color: var(--pill-fg);
-}
-
-.number {
+/* Bio, Bâti, Bois: the word itself, big and green. */
+.word {
   color: var(--fg-accent);
   font-family: var(--font-heading);
   font-size: 2.75rem;
@@ -103,265 +81,54 @@
   line-height: 1;
 }
 
+.eyebrow {
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+  line-height: 1.45;
+}
+
+.text {
+  color: var(--fg-body);
+  font-size: 0.97rem;
+  line-height: 1.55;
+}
+
+.text p + p {
+  margin-top: var(--space-2);
+}
+
 .photo {
   position: relative;
-  overflow: hidden;
-  margin: calc(-1 * clamp(1.5rem, 2.4vw, 2rem)) calc(-1 * clamp(1.5rem, 2.4vw, 2rem)) 0;
-  aspect-ratio: 4 / 3;
-  background: var(--bg-alt);
+  aspect-ratio: 3 / 2;
+  background: var(--c-surface);
 }
 
 .photo img {
   object-fit: cover;
 }
 
-/* ---------- Big letter (Bio · Bâti · Bois) ---------- */
-.card[data-variant='letter'] {
-  gap: var(--space-2);
-  padding: 0;
-  border-radius: var(--radius-lg);
-}
-
-.card[data-variant='letter'] .body {
-  padding: 28px 28px 8px;
-}
-
-.glyph {
-  color: var(--fg-accent);
-  font-family: var(--font-heading);
-  font-size: clamp(5rem, 4rem + 3vw, 6.5rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 0.8;
-}
-
-.word {
-  font-size: 1.875rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
-}
-
-.letterPhoto {
-  position: relative;
-  overflow: hidden;
-  margin: auto 12px 12px;
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius-md);
-  background: var(--bg-alt);
-}
-
-.letterPhoto img {
-  object-fit: cover;
-}
-
-/* ---------- Features (with a side photo) ---------- */
-.features {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: start;
-  gap: clamp(2.5rem, 6vw, 6rem);
-}
-
-.featuresSide {
-  position: sticky;
-  top: calc(var(--header-h) + 32px);
-  display: grid;
-  gap: 28px;
-}
-
-.asideHeading {
-  margin-bottom: 0;
-}
-
-/* Passe-partout: a hairline frame offset from the photo, like a carpenter's square. */
-.frame {
-  position: relative;
-  isolation: isolate;
-  margin: 12px 0 0 12px;
-}
-
-.frame::after {
-  content: '';
-  position: absolute;
-  inset: -12px 12px 12px -12px;
-  z-index: -1;
-  border: 1px solid var(--c-line-strong);
-  border-radius: calc(var(--radius-lg) + 4px);
-}
-
-.framePhoto {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius-lg);
-  background: var(--bg-alt);
-}
-
-.framePhoto img {
-  object-fit: cover;
-}
-
-.featuresMain {
-  display: grid;
-  gap: 28px;
-}
-
-.featureList {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.feature {
-  display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
-  gap: 20px;
-  padding-block: 24px;
-  border-top: 1px solid var(--c-line);
-}
-
-.feature:last-child {
-  border-bottom: 1px solid var(--c-line);
-}
-
-.feature .body {
-  gap: 6px;
-}
-
-.featureNum {
-  color: var(--fg-accent);
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 700;
-}
-
-.cta {
-  display: flex;
-  margin-top: var(--space-10);
-}
-
-.featuresMain .cta {
-  margin-top: 0;
-}
-
-@media (max-width: 1000px) {
-  .list {
-    grid-template-columns: repeat(min(var(--columns, 3), 2), minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 900px) {
-  .features {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .featuresSide {
-    position: static;
-  }
-}
-
-@media (max-width: 640px) {
-  .list {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-/* ---------- Editorial index (numbered rows between hairlines) ---------- */
-.index {
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--c-line);
-  list-style: none;
-}
-
-.indexRow {
-  position: relative;
-  display: grid;
-  grid-template-columns: 64px minmax(0, 1.05fr) minmax(0, 1.25fr) 52px;
-  align-items: center;
-  gap: var(--space-6);
-  padding-block: 26px;
-  border-bottom: 1px solid var(--c-line);
-  transition: padding var(--dur-base) var(--ease-out);
-}
-
-.indexRow[data-link]:hover {
-  padding-inline: var(--space-3);
-}
-
-.indexNum {
-  color: var(--fg-muted);
-  font-family: var(--font-heading);
-  font-size: 0.9375rem;
-  font-weight: 600;
-}
-
-.indexTitle {
-  font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.875rem);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.15;
-}
-
-.indexTitle a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.indexText {
-  display: grid;
-  gap: 6px;
-  color: var(--fg-muted);
-  font-size: 0.97rem;
-  line-height: 1.55;
-}
-
-.indexMore {
+.go {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  justify-self: start;
+  margin-top: auto;
+  padding-top: var(--space-2);
   color: var(--fg-accent);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 650;
   text-decoration: none;
 }
 
-.indexMore svg {
+.go svg {
   transition: transform var(--dur-base) var(--ease-out);
 }
 
-.indexRow:hover .indexMore svg {
+.card:hover .go svg,
+.go:hover svg {
   transform: translateX(3px);
 }
 
-.indexGo {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border: 1px solid var(--c-line-strong);
-  border-radius: 50%;
-  transition:
-    background-color 220ms var(--ease-out),
-    border-color 220ms var(--ease-out),
-    color 220ms var(--ease-out),
-    transform var(--dur-base) var(--ease-out);
-}
-
-.indexRow:hover .indexGo,
-.indexRow:focus-within .indexGo {
-  border-color: var(--btn-bg);
-  background: var(--btn-bg);
-  color: var(--btn-fg);
-  transform: rotate(-45deg);
-}
-
-.stretched {
-  position: static;
-}
-
+/* The whole card is the link. */
 .stretched::after {
   content: '';
   position: absolute;
@@ -369,122 +136,142 @@
   z-index: 1;
 }
 
-.stretched:focus-visible {
-  outline: none;
-}
-
-.stretched:focus-visible::after {
-  outline: 2px solid var(--c-focus);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
-}
-
-/* The item's photo follows the row on hover (pointer devices). */
-.indexPeek {
-  position: absolute;
-  right: 96px;
-  top: 50%;
+.text a {
+  position: relative;
   z-index: 2;
-  width: 220px;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-50%) rotate(-3deg) scale(0.92);
-  transition:
-    opacity 260ms var(--ease-out),
-    transform 420ms var(--ease-out);
 }
 
-@media (hover: hover) {
-  .indexRow:hover .indexPeek {
-    opacity: 1;
-    transform: translateY(-50%) rotate(-3deg) scale(1);
-  }
-}
-
-/* Many short items: three columns of compact rows. */
-.indexGrid {
+/* ---------- With a side photo: heading and photo on the left, points on the right ---------- */
+.split {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: clamp(1.25rem, 2.6vw, 2.5rem);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.aside {
+  position: sticky;
+  top: calc(var(--header-h) + var(--space-8));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.asideHeading {
+  margin-bottom: 0;
+}
+
+.asidePhoto {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+}
+
+.asidePhoto img {
+  object-fit: cover;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0;
   border-top: 1px solid var(--c-line);
   list-style: none;
 }
 
-.indexGrid .indexRow {
-  grid-template-columns: 34px minmax(0, 1fr) 44px;
-  align-items: start;
-  gap: 6px 12px;
-  padding-block: 22px;
+.row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-5);
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--c-line);
 }
 
-.indexGrid .indexNum {
-  padding-top: 5px;
-  font-size: 0.875rem;
-}
-
-.indexGrid .indexTitle {
-  font-size: 1.1875rem;
-  line-height: 1.25;
-}
-
-.indexGrid .indexText {
-  grid-column: 2;
-  grid-row: 2;
-  font-size: 0.9375rem;
-}
-
-.indexGrid .indexGo {
-  grid-column: 3;
-  grid-row: 1 / span 2;
+.row .icon {
   width: 44px;
   height: 44px;
+  margin: 0;
+  border-radius: var(--radius-btn);
 }
 
-.indexGrid .indexRow[data-link]:hover {
-  padding-inline: 0;
+.row .number {
+  min-width: 52px;
+  font-size: 2rem;
+}
+
+.row .body {
+  padding: 0;
+  gap: var(--space-2);
+}
+
+.row .go {
+  margin-top: var(--space-1);
+  padding-top: 0;
+}
+
+.cta {
+  margin-top: var(--space-8);
 }
 
 @media (max-width: 1080px) {
-  .indexRow {
-    grid-template-columns: 44px minmax(0, 1fr) 44px;
-    gap: var(--space-2) var(--space-4);
-    padding-block: 22px;
+  .grid {
+    --columns: 2 !important;
   }
 
-  .indexText {
-    grid-column: 2;
-    grid-row: 2;
-  }
-
-  .indexGo {
-    grid-column: 3;
-    grid-row: 1 / span 2;
-    width: 44px;
-    height: 44px;
-  }
-
-  .indexPeek {
-    display: none;
-  }
-
-  .indexGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 640px) {
-  .indexGrid {
+  .split {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .indexRow[data-link]:hover {
-    padding-inline: 0;
+  .aside {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
+  .grid {
+    --columns: 1 !important;
+    gap: var(--space-3);
+  }
+
+  /* Icon cards turn into compact rows: the icon on the left. */
+  .card[data-variant='icon'] .body {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 4px var(--space-4);
+    padding: 18px 20px;
+  }
+
+  .card[data-variant='icon'] .icon {
+    grid-row: span 4;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    border-radius: var(--radius-btn);
+  }
+
+  .card[data-variant='icon'] .go {
+    padding-top: var(--space-1);
+  }
+
+  .body {
+    padding: 22px;
+  }
+}
+
+/* Inside a guide's reading column. */
+@container (max-width: 860px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aside {
+    position: static;
+  }
+
+  .grid {
+    --columns: 2 !important;
   }
 }

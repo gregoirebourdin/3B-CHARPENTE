@@ -1,86 +1,81 @@
-/* A chantier: a photo first, then a few words. No box around: the photo is the card. */
 .card {
   position: relative;
-  display: grid;
-  align-content: start;
-  gap: 14px;
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-md);
+  background: var(--c-card);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.card:hover {
+  border-color: var(--c-line-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .media {
   position: relative;
-  overflow: hidden;
   aspect-ratio: 4 / 3;
-  border-radius: var(--radius-lg);
-  background: var(--bg-alt);
-}
-
-.large .media {
-  aspect-ratio: 5 / 4;
-}
-
-/* In a bento grid, the large card's photo grows to the height of its two rows. */
-@media (min-width: 901px) {
-  .large {
-    grid-template-rows: minmax(0, 1fr) auto;
-  }
-
-  .large .media {
-    aspect-ratio: auto;
-    min-height: 360px;
-  }
+  overflow: hidden;
+  background: var(--c-surface);
 }
 
 .media img {
   object-fit: cover;
-  transition: transform 900ms var(--ease-out);
+  transition: transform 700ms var(--ease-out);
 }
 
 .card:hover .media img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
-/* Label on the photo: the commune (or the service). */
 .badge {
   position: absolute;
-  left: 14px;
-  bottom: 14px;
+  left: 12px;
+  bottom: 12px;
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  max-width: calc(100% - 28px);
-  padding: 6px 10px;
-  border-radius: var(--radius-sm);
-  background: rgb(248 244 238 / 0.94);
+  max-width: calc(100% - 24px);
+  padding: 6px 11px;
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 0.94);
   color: #102311;
-  font-size: 0.8125rem;
-  font-weight: 650;
+  font-size: 0.78rem;
+  font-weight: 600;
   line-height: 1.3;
-  backdrop-filter: blur(6px);
+}
+
+.badge svg {
+  flex: none;
+  color: #336233;
 }
 
 .body {
-  display: grid;
-  gap: 8px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 20px 22px 24px;
 }
 
 .info {
   color: var(--fg-muted);
-  font-size: 0.875rem;
+  font-size: 0.84rem;
 }
 
 .title {
-  font-size: clamp(1.1875rem, 1rem + 0.5vw, 1.4375rem);
-  font-weight: 600;
-  letter-spacing: -0.012em;
-  line-height: 1.2;
+  font-size: 1.125rem;
+  line-height: 1.35;
 }
 
-.large .title {
-  font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.875rem);
-}
-
-.stretched {
+.title a {
   color: inherit;
   text-decoration: none;
 }
@@ -89,17 +84,6 @@
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 1;
-}
-
-.stretched:focus-visible {
-  outline: none;
-}
-
-.stretched:focus-visible::after {
-  outline: 2px solid var(--c-focus);
-  outline-offset: 4px;
-  border-radius: var(--radius-lg);
 }
 
 .text {
@@ -107,63 +91,20 @@
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
-  color: color-mix(in srgb, var(--fg) 78%, var(--bg));
-  font-size: 0.97rem;
+  color: var(--fg-body);
+  font-size: 0.94rem;
+  line-height: 1.55;
 }
 
-.more {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin-top: 2px;
-  color: var(--fg-accent);
-  font-size: 0.9375rem;
-  font-weight: 650;
+.compact .body {
+  padding: 16px 18px 20px;
 }
 
-.more svg {
-  transition: transform var(--dur-base) var(--ease-out);
+.compact .title {
+  font-size: 1.03rem;
 }
 
-.card:hover .more svg {
-  transform: translateX(3px);
-}
-
-/* « Row »: a square photo on the left, the words on the right (bento of four). */
-.row {
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
-  align-items: center;
-  column-gap: 20px;
-}
-
-.row .media {
-  aspect-ratio: 1 / 1;
-}
-
-.row .title {
-  font-size: clamp(1.125rem, 1rem + 0.35vw, 1.3125rem);
-}
-
-.row .text {
-  font-size: 0.9375rem;
-  -webkit-line-clamp: 3;
-}
-
-@media (max-width: 600px) {
-  .row {
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
-    column-gap: 14px;
-  }
-
-  .row .text {
-    display: none;
-  }
-
-  .row .badge {
-    display: none;
-  }
-
-  .row .title {
-    font-size: 1.0625rem;
-  }
+.compact .text {
+  -webkit-line-clamp: 2;
+  font-size: 0.9rem;
 }

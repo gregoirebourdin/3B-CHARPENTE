@@ -6,6 +6,7 @@ import type { ReactNode } from 'react'
 import { Analytics } from '@/components/layout/Analytics'
 import { LivePreviewListener } from '@/components/layout/LivePreviewListener'
 import { RevealObserver } from '@/components/layout/RevealObserver'
+import { CallBar } from '@/components/layout/CallBar'
 import { SiteFooter } from '@/components/layout/SiteFooter'
 import { SiteHeader } from '@/components/layout/SiteHeader'
 import { isDraftMode } from '@/lib/cms/client'
@@ -64,6 +65,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
         <SiteHeader />
         <main id="contenu">{children}</main>
         <SiteFooter />
+        <CallBar />
         <RevealObserver />
         <Analytics
           // Vercel Web Analytics only exists on Vercel: elsewhere (local build) its script would be a 404.

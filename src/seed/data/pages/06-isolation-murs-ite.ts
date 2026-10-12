@@ -2,9 +2,6 @@ import type { SeedService } from '../../types'
 
 /** Fiche 06 : 3b-charpente-kit/docs/pages/06-isolation-murs-ite.md */
 
-const p = (...paragraphs: string[]) => paragraphs.join('\n\n')
-const list = (...items: string[]) => items.map((item) => `- ${item}`).join('\n')
-
 const HERO = 'renovation-et-isolation-d-un-chalet-a-vallouise/04. Façade Nord et Ouest.JPG'
 const DEPASSEE = 'renovation-et-isolation-d-un-chalet-a-vallouise/05. Dépassée Nord agrandie.JPG'
 const ENDUIT = 'renovation-et-isolation-d-un-chalet-a-vallouise/07. Façade Sud et sa terrasse.JPG'
@@ -31,8 +28,7 @@ export const service: SeedService = {
   order: 5,
   icon: 'wall',
   cardTitle: 'Isolation des murs (ITE et bâti ancien)',
-  cardText:
-    "L'ITE, ou isolation thermique par l'extérieur, enveloppe les murs d'un manteau isolant. En bâti ancien, aussi par l'intérieur.",
+  cardText: "Un manteau isolant par l'extérieur ; par l'intérieur pour le bâti ancien.",
   cardLinkLabel: 'Isoler mes murs',
   image: HERO,
   schema: {
@@ -53,62 +49,88 @@ export const service: SeedService = {
     kicker: 'Isolation des murs · Qualifié RGE',
     title:
       "Isolation des murs **par l'extérieur** (ITE) et du **bâti ancien** dans les Hautes-Alpes",
-    text: "Des murs froids, des courants d'air, une façade à refaire ? 3B Charpente, charpentier à L'Argentière-la-Bessée depuis 2007, isole les murs des maisons et des chalets avec des **isolants biosourcés**, issus du bois ou de plantes. Par l'extérieur, avec un manteau de fibre de bois fini par un **bardage bois ou un enduit**. Par l'intérieur, quand la façade doit rester telle qu'elle est. Avec, à chaque fois, une **étanchéité à l'air** soignée : la couche qui empêche l'air de traverser les murs.",
+    text: "Murs froids, courants d'air, façade à refaire ? Nous isolons les murs en **isolants biosourcés** : **par l'extérieur**, sous un bardage bois ou un enduit, ou **par l'intérieur** quand la façade doit rester telle qu'elle est.",
     primaryCta: { label: 'Demander mon devis', href: '/contact/' },
     secondaryCta: {
       label: "Voir l'isolation d'un bâti ancien",
       href: '/realisations/isolation-d-un-bati-ancien-par-l-interieur/',
     },
-    proofs: [{ label: 'Qualifié RGE murs et menuiseries' }, { label: 'Charpentiers depuis 2007' }],
+    proofs: [
+      { label: 'Qualifié RGE', text: 'murs et menuiseries', icon: 'medal' },
+      { label: 'Depuis 2007', text: "à L'Argentière-la-Bessée", icon: 'calendar' },
+      { label: "Étanchéité à l'air", text: 'traitée à chaque fois', icon: 'shield' },
+    ],
     images: [HERO],
     caption:
-      'Chalet des années 1980 à Vallouise : 28 cm de laine de chanvre/lin/coton et de fibre de bois dans les murs.',
+      'Chalet des années 1980 à Vallouise : 28 cm de laine de chanvre/lin/coton et de fibre de bois dans les murs.',
+    photoTag: 'Vallouise',
+    sheet: [
+      { label: "Par l'extérieur", value: 'Fibre de bois, bardage ou enduit' },
+      { label: "Par l'intérieur", value: 'Poutres en I, ouate insufflée' },
+      { label: 'Ouvertures', value: 'Fenêtres, volets, portes raccordés' },
+    ],
   },
 
-  tldr: "3B Charpente, charpentier qualifié RGE à L'Argentière-la-Bessée, isole les murs des maisons des Hautes-Alpes. Par l'extérieur (ITE, isolation thermique par l'extérieur) : panneaux de fibre de bois, puis bardage en mélèze ou enduit. Par l'intérieur, pour le bâti ancien : ossature en poutres en I et ouate de cellulose insufflée. L'étanchéité à l'air est traitée à chaque fois.",
+  tldr: "3B Charpente, charpentier qualifié RGE à L'Argentière-la-Bessée, isole les murs des maisons des Hautes-Alpes. Par l'extérieur (ITE) : fibre de bois, puis bardage en mélèze ou enduit. Par l'intérieur, pour le bâti ancien : ossature en poutres en I et ouate de cellulose insufflée. L'étanchéité à l'air est traitée à chaque fois.",
 
   layout: [
-    // 3.3 L'ITE, un manteau isolant (légende de la photo : voir photoAlts)
+    // L'ITE, un manteau isolant
     {
       type: 'manifesto',
       layout: 'split',
       kicker: "Isolation par l'extérieur",
       title: "L'ITE, un **manteau isolant** autour de la maison",
-      text: p(
-        "L'ITE, pour isolation thermique par l'extérieur, consiste à poser l'isolant sur la face extérieure des murs, puis à le protéger par un parement : un bardage bois ou un enduit. Le mur existant se retrouve à l'intérieur de l'enveloppe isolante, au chaud. C'est la façon la plus directe de créer une enveloppe isolante continue.",
-        'Ce que ça change :',
-        list(
-          "**moins de ponts thermiques** : l'isolant passe devant les planchers et les murs de refend, sans interruption ;",
-          "**aucune surface perdue** à l'intérieur, et peu de travaux dans les pièces ;",
-          "**un meilleur confort d'été** : les murs maçonnés, restés côté intérieur, amortissent les variations de température ;",
-          "**une façade neuve** : l'isolation et le ravalement se font en une fois.",
-        ),
-        "Selon le mur, les panneaux de fibre de bois sont fixés directement sur la maçonnerie, ou posés sur une ossature bois rapportée, garnie d'isolant souple. Plus dense que beaucoup d'isolants, la fibre de bois aide aussi à garder la fraîcheur l'été.",
-        "**En montagne, deux points à anticiper.** D'abord, l'épaisseur ajoutée doit rester à l'abri sous les débords de toit, qu'on appelle ici les dépassées : il faut parfois les prolonger. Sur le chalet de Vallouise, la dépassée nord a été agrandie. Ensuite, une ITE change l'aspect de la façade : une déclaration préalable de travaux est en général nécessaire en mairie.",
-      ),
+      text: "L'ITE (isolation thermique par l'extérieur) pose l'isolant **sur la face extérieure des murs**, protégé par un bardage bois ou un enduit. Le mur existant se retrouve au chaud, dans l'enveloppe isolante.",
+      items: [
+        {
+          title: 'Moins de ponts thermiques',
+          text: "L'isolant passe devant les planchers et les murs de refend, sans interruption.",
+        },
+        {
+          title: 'Aucune surface perdue',
+          text: "Rien ne change dans les pièces, et peu de travaux à l'intérieur.",
+        },
+        {
+          title: "Plus de confort l'été",
+          text: 'Les murs maçonnés, restés côté intérieur, amortissent les écarts de température.',
+        },
+        {
+          title: 'Une façade neuve',
+          text: 'Isolation et ravalement se font en une fois.',
+        },
+      ],
+      emphasis:
+        "Selon le mur, la fibre de bois est fixée sur la maçonnerie, ou sur une ossature bois rapportée garnie d'isolant souple.",
       image: DEPASSEE,
     },
-    // 3.4 Deux finitions : bardage bois ou enduit (le texte sous les cartes passe en introduction)
+    {
+      type: 'callout',
+      kind: 'tip',
+      title: 'En montagne, deux points à anticiper',
+      text: "**Les dépassées** : l'épaisseur ajoutée doit rester à l'abri sous les débords de toit, qu'il faut parfois prolonger. À Vallouise, la dépassée nord a été agrandie.\n\n**La mairie** : une ITE change l'aspect de la façade. Une déclaration préalable est en général nécessaire.",
+    },
+    // Deux finitions : bardage bois ou enduit
     {
       type: 'cards',
       variant: 'photo',
       columns: 2,
+      tone: 'light',
       kicker: 'Finitions de façade',
       title: 'Bardage bois **ou enduit** sur fibre de bois',
       intro:
-        "Sur le chalet de Vallouise, les deux finitions se répondent : une partie de l'extérieur est habillée de bardage en mélèze, l'autre est enduite sur une fibre de bois.",
+        'Sur le chalet de Vallouise, les deux se répondent : une partie en bardage de mélèze, l’autre enduite sur fibre de bois.',
       items: [
         {
           title: 'Bardage bois',
           icon: 'tree',
           image: BARDAGE_MELEZE,
-          text: "Le bardage se pose sur des tasseaux qui laissent une lame d'air ventilée derrière les lames : la façade sèche vite après la pluie ou la neige. Notre bois est principalement du mélèze et du sapin des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli. Sur nos chantiers, on trouve du bardage en mélèze, en pin, en douglas, et même en vieux bois de réemploi.",
+          text: "Posé sur tasseaux, avec une lame d'air ventilée : la façade sèche vite. Surtout du mélèze et du sapin des Hautes-Alpes, sciés par la Scierie Savoldelli.",
         },
         {
           title: 'Enduit sur fibre de bois',
           icon: 'wall',
           image: ENDUIT,
-          text: "Certains panneaux de fibre de bois sont conçus pour recevoir directement un enduit, appliqué en plusieurs couches avec une trame d'armature. La façade garde un aspect minéral, proche de celui des maisons de pays, tout en étant isolée par un matériau biosourcé.",
+          text: "Certains panneaux de fibre de bois reçoivent directement un enduit, armé d'une trame. Un aspect minéral, proche des maisons de pays.",
         },
       ],
       cta: {
@@ -116,135 +138,177 @@ export const service: SeedService = {
         href: '/realisations/renovation-et-isolation-d-un-chalet-a-vallouise/',
       },
     },
-    // 3.5 Bâti ancien : isoler par l'intérieur
+    // Bâti ancien : isoler par l'intérieur
     {
       type: 'textImage',
-      tone: 'light',
       kicker: 'Bâti ancien',
       title: "Isoler un bâti ancien **par l'intérieur**",
-      text: p(
-        "L'isolation par l'extérieur n'est pas toujours possible : façade en pierre à préserver, maison mitoyenne, limite de propriété, règles d'urbanisme. On isole alors les murs par l'intérieur, un domaine de notre qualification RGE.",
-        "Un mur ancien en pierre doit pouvoir sécher. Une isolation par l'intérieur mal conçue peut piéger l'humidité dans la maçonnerie. Nous utilisons des isolants biosourcés, capables d'absorber puis de restituer une partie de l'humidité, et une étanchéité à l'air continue côté pièce, souvent avec une membrane dite frein-vapeur, qui limite le passage de la vapeur tout en laissant le mur sécher.",
-        "Sur notre chantier « Isolation d'un bâti ancien par l'intérieur », la technique se lit dans les photos :",
-        list(
-          '**une ossature en poutres en I** : des poutres légères en forme de I, faites de deux semelles en bois reliées par une âme mince. Elles créent des caissons profonds avec très peu de bois, donc peu de ponts thermiques ;',
-          '**des panneaux OSB3**, faits de grandes lamelles de bois collées, adaptés aux ambiances humides ;',
-          "**la pose de l'étanchéité à l'air** ;",
-          "**l'insufflation de ouate de cellulose** : l'isolant en vrac est envoyé sous pression dans le caisson fermé, qu'il remplit sans laisser de vide ;",
-          '**le doublage, les encadrements des ouvertures, de nouvelles menuiseries et un bardage en pin.**',
-        ),
-        "Reste à traiter les planchers et les murs de refend qui touchent la façade : ce sont des ponts thermiques que l'isolation par l'intérieur ne coupe pas d'elle-même. Ils se traitent au cas par cas.",
-      ),
-      images: [POUTRE_I, INSUFFLATION],
+      text: "Façade en pierre à préserver, maison mitoyenne, règles d'urbanisme : l'ITE n'est pas toujours possible. On isole alors **par l'intérieur**, un domaine de notre qualification RGE.\n\nUn mur en pierre **doit pouvoir sécher**. Mal conçue, une isolation intérieure piège l'humidité dans la maçonnerie.",
+      points: [
+        "Des isolants biosourcés, qui absorbent puis restituent une partie de l'humidité",
+        "Une étanchéité à l'air continue côté pièce",
+        'Souvent, une membrane frein-vapeur : elle limite la vapeur tout en laissant le mur sécher',
+      ],
+      images: [POUTRE_I],
       imagePosition: 'right',
-      cta: {
-        label: 'Voir le chantier en photos',
-        href: '/realisations/isolation-d-un-bati-ancien-par-l-interieur/',
-      },
       links: [
         {
-          label: 'Rénover une maison ancienne en montagne : notre guide',
+          label: 'Rénover une maison ancienne en montagne : notre guide',
           href: '/conseils/renover-chalet-maison-ancienne/',
         },
       ],
     },
-    // 3.6 L'étanchéité à l'air
     {
-      type: 'manifesto',
-      layout: 'split',
+      type: 'list',
+      style: 'checks',
+      tone: 'light',
+      kicker: 'Sur le chantier',
+      title: "Un bâti ancien isolé **par l'intérieur**, en photos",
+      text: 'Les planchers et les murs de refend qui touchent la façade restent des ponts thermiques : nous les traitons au cas par cas.',
+      image: 'isolation-d-un-bati-ancien-par-l-interieur/panneaux OSB3.JPG',
+      caption: "Panneaux OSB3 sur l'ossature d'un bâti ancien isolé par l'intérieur.",
+      items: [
+        {
+          title: 'Ossature en poutres en I',
+          text: 'Deux semelles en bois reliées par une âme mince : des caissons profonds, très peu de bois, peu de ponts thermiques.',
+        },
+        {
+          title: 'Panneaux OSB3',
+          text: 'De grandes lamelles de bois collées, adaptées aux ambiances humides.',
+        },
+        { title: "Étanchéité à l'air", text: "La couche qui empêche l'air de traverser le mur." },
+        {
+          title: 'Ouate de cellulose insufflée',
+          text: 'Envoyée sous pression dans le caisson fermé, elle le remplit sans laisser de vide.',
+        },
+        {
+          title: 'Finitions',
+          text: 'Doublage, encadrements des ouvertures, nouvelles menuiseries et bardage en pin.',
+        },
+      ],
+      cta: {
+        label: 'Voir le chantier en photos',
+        href: '/realisations/isolation-d-un-bati-ancien-par-l-interieur/',
+      },
+    },
+    // L'étanchéité à l'air
+    {
+      type: 'cards',
+      variant: 'icon',
       kicker: "Étanchéité à l'air",
       title: "L'étanchéité à l'air, **la couche qu'on ne voit pas**",
-      text: p(
-        "L'étanchéité à l'air, c'est une couche continue qui empêche l'air intérieur de traverser les parois. On la réalise avec une membrane, ou avec des panneaux dont les joints sont collés à l'adhésif, et des manchettes autour des gaines et des tuyaux qui traversent. Elle ne se confond pas avec l'étanchéité à l'eau, qui protège de la pluie côté extérieur. Elle ne remplace pas non plus la ventilation : une maison bien étanche doit être bien ventilée.",
-        'Pourquoi elle compte :',
-        list(
-          "**le confort** : moins de courants d'air froids, surtout par grand vent ;",
-          "**la durée de vie** : l'air chaud de la maison transporte de la vapeur d'eau ; s'il traverse l'isolant, cette vapeur peut condenser dans le mur froid ;",
-          "**la performance** : un isolant traversé par l'air isole moins bien.",
-        ),
-        "On la retrouve sur nos chantiers : pose de l'étanchéité à l'air sur le bâti ancien isolé par l'intérieur, étanchéité à l'air de la toiture ancienne de L'Argentière-la-Bessée, et panneaux trois plis en épicéa pour le contreventement et l'étanchéité à l'air de la toiture d'une surélévation à Briançon.",
-        "Une mesure de perméabilité à l'air (test d'infiltrométrie), réalisée par un opérateur spécialisé, permet de vérifier le résultat.",
-      ),
-      image: ETANCHEITE_AIR,
+      intro:
+        "Une couche continue, membrane ou panneaux aux joints collés, qui empêche l'air intérieur de traverser les parois. Elle ne remplace ni l'étanchéité à l'eau, ni la ventilation.",
+      asideImage: ETANCHEITE_AIR,
+      items: [
+        {
+          title: 'Le confort',
+          icon: 'snow',
+          text: "Moins de courants d'air froids, surtout par grand vent.",
+        },
+        {
+          title: 'La durée de vie',
+          icon: 'shield',
+          text: "L'air chaud porte de la vapeur d'eau : s'il traverse l'isolant, elle peut condenser dans le mur froid.",
+        },
+        {
+          title: 'La performance',
+          icon: 'layers',
+          text: "Un isolant traversé par l'air isole moins bien.",
+        },
+      ],
     },
-    // 3.7 Menuiseries extérieures
+    {
+      type: 'callout',
+      kind: 'site',
+      text: "Étanchéité à l'air posée sur le bâti ancien isolé par l'intérieur, sur la toiture ancienne de L'Argentière-la-Bessée, et en panneaux trois plis d'épicéa sur une surélévation à Briançon. Un test d'infiltrométrie, par un opérateur spécialisé, permet de vérifier le résultat.",
+    },
+    // Menuiseries extérieures
     {
       type: 'textImage',
       anchor: 'menuiseries',
+      tone: 'light',
       kicker: 'Menuiseries extérieures',
-      title: 'Fenêtres, volets, portes : **raccorder les ouvertures**',
-      text: p(
-        "Changer les fenêtres sans isoler les murs, ou isoler les murs sans s'occuper des fenêtres, laisse des points faibles. Les deux se pensent ensemble : la position de la fenêtre dans l'épaisseur du mur, son raccord à l'isolant et à l'étanchéité à l'air comptent autant que la fenêtre elle-même.",
-        "Avec une ITE, on avance souvent la fenêtre vers l'isolant, ou on prolonge l'isolant sur les côtés de l'ouverture, pour éviter un pont thermique tout autour. Par l'intérieur, l'encadrement fait le lien entre la menuiserie, l'ossature et la membrane.",
-        "« Fenêtres, volets, portes donnant sur l'extérieur » fait partie de nos domaines RGE. Sur le bâti ancien isolé par l'intérieur, le chantier a compris les encadrements des ouvertures et de nouvelles menuiseries.",
-      ),
+      title: 'Fenêtres, volets, portes : **raccorder les ouvertures**',
+      text: "Fenêtres et murs se pensent ensemble. **La position de la fenêtre** dans le mur et ses raccords à l'isolant comptent autant que la fenêtre elle-même.",
+      points: [
+        "Avec une ITE : la fenêtre avancée vers l'isolant, ou l'isolant prolongé autour de l'ouverture",
+        "Par l'intérieur : l'encadrement relie la menuiserie, l'ossature et la membrane",
+        "Fenêtres, volets, portes donnant sur l'extérieur : un domaine de notre qualification RGE",
+      ],
       images: [ENCADREMENT, MENUISERIES],
       imagePosition: 'left',
       caption: "Encadrement d'une ouverture, raccordé à l'isolation d'un bâti ancien.",
     },
-    // 3.8 Réalisations
+    // Réalisations
     {
       type: 'projects',
       mode: 'manual',
       anchor: 'realisations',
       label: 'brand',
-      tone: 'light',
       kicker: 'Nos chantiers de murs',
       title: 'Des murs isolés **en photos**',
       items: [
         {
           project: 'isolation-d-un-bati-ancien-par-l-interieur',
           title: "Isolation d'un bâti ancien par l'intérieur",
-          text: "Poutres en I, panneaux OSB3, étanchéité à l'air, ouate de cellulose insufflée, encadrements, menuiseries et bardage en pin.",
+          text: "Poutres en I, OSB3, étanchéité à l'air, ouate insufflée, menuiseries et bardage en pin.",
         },
         {
           project: 'renovation-et-isolation-d-un-chalet-a-vallouise',
           title: "Rénovation et isolation d'un chalet à Vallouise",
-          text: 'Chalet des années 1980 entièrement rénové : 28 cm de laine de chanvre/lin/coton et de fibre de bois dans les murs, bardage en mélèze et enduit sur fibre de bois, ouvertures créées ou modifiées.',
+          text: "28 cm d'isolant biosourcé dans les murs, bardage en mélèze et enduit sur fibre de bois.",
         },
         {
           project: 'maison-a-ossature-bois-dans-les-monts-du-lyonnais',
           title: 'Maison à ossature bois dans les monts du Lyonnais',
-          text: "Construction neuve : fibre de bois sur l'ossature bois, bardage en douglas, support maçonné en pierres récupérées.",
+          text: "Fibre de bois sur l'ossature, bardage en douglas, support maçonné en pierres récupérées.",
         },
       ],
       cta: { label: 'Toutes nos réalisations', href: '/realisations/' },
     },
-    // 3.8 Ligne « Voir aussi »
     {
-      type: 'richText',
-      tone: 'light',
-      content:
-        "Voir aussi : [Rénovation d'une maison d'habitation à L'Argentière-la-Bessée](/realisations/renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/) (bardage en vieux bois, pignon vitré).",
+      type: 'list',
+      style: 'pills',
+      kicker: 'Voir aussi',
+      items: [
+        {
+          title: "Maison rénovée à L'Argentière-la-Bessée : bardage en vieux bois, pignon vitré",
+          link: {
+            label: "Rénovation d'une maison d'habitation à L'Argentière-la-Bessée",
+            href: '/realisations/renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/',
+          },
+        },
+      ],
     },
-    // 3.9 Aides et RGE
+    // Aides et RGE
     {
-      type: 'cta',
-      variant: 'slim',
-      icon: 'euro',
-      kicker: 'Aides et RGE',
-      title: 'Isolation des murs : **les aides**',
-      text: "3B Charpente est qualifié RGE (Qualibat) pour l'isolation des murs par l'extérieur, l'isolation par l'intérieur des murs, et les fenêtres, volets et portes donnant sur l'extérieur. Ce label ouvre l'accès aux aides publiques à la rénovation énergétique, sous conditions. Les règles changent chaque année : faites le point avec un conseiller France Rénov' ([france-renov.gouv.fr](https://france-renov.gouv.fr/)) avant de signer un devis.",
-      primary: {
+      type: 'callout',
+      kind: 'aid',
+      tone: 'light',
+      title: 'Isolation des murs : les aides',
+      text: "Qualifiés RGE (Qualibat) pour les murs par l'extérieur, les murs par l'intérieur et les fenêtres, volets et portes : vos travaux peuvent ouvrir droit à des aides, sous conditions. Les règles changent chaque année : voyez un conseiller [France Rénov'](https://france-renov.gouv.fr/) avant de signer.",
+      link: {
         label: 'Notre guide des aides avec un artisan RGE',
         href: '/conseils/aides-renovation-artisan-rge/',
       },
     },
-    // 3.10 3B Récup'
+    // 3B Récup'
     {
-      type: 'cta',
-      variant: 'card',
-      badge: '3B Récup’',
+      type: 'textImage',
       kicker: "3B Récup'",
-      title: 'Un bardage **en vieux bois** ?',
-      text: "Sur une maison rénovée à L'Argentière-la-Bessée, nous avons posé un bardage en vieux bois et un garde-corps en bois de réemploi. Avec 3B Récup', notre initiative dédiée au réemploi, le bois issu de la déconstruction est trié, nettoyé et usiné dans nos ateliers avant d'être reposé. Une façade isolée peut aussi raconter une histoire.",
-      primary: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
-      secondary: { label: 'Le bois de réemploi', href: '/3b-recup/bois-de-reemploi/' },
-      image: BARDAGE_VIEUX_BOIS,
+      title: 'Un bardage **en vieux bois** ?',
+      text: "Sur une maison rénovée à L'Argentière-la-Bessée : un **bardage en vieux bois** et un garde-corps en bois de réemploi.\n\nAvec 3B Récup', le bois issu de la déconstruction est trié, nettoyé et usiné dans nos ateliers avant d'être reposé. Une façade isolée peut aussi raconter une histoire.",
+      badge: "3B Récup'",
+      images: [BARDAGE_VIEUX_BOIS],
+      imagePosition: 'right',
+      cta: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
+      links: [{ label: 'Le bois de réemploi', href: '/3b-recup/bois-de-reemploi/' }],
     },
-    // 3.11 FAQ
+    // FAQ
     {
       type: 'faq',
+      tone: 'light',
       kicker: 'Questions fréquentes',
       title: "Vos questions sur **l'isolation des murs**",
       faqs: [
@@ -256,35 +320,36 @@ export const service: SeedService = {
         'isolation-murs-ite-q6',
       ],
     },
-    // Liens internes : bloc « Prestations proches » (pied de contenu)
+    // Prestations proches
     {
       type: 'servicesGrid',
       mode: 'manual',
       variant: 'compact',
       title: 'Prestations proches',
-      services: ['isolation-toiture-sarking', 'maison-ossature-bois'],
+      services: ['isolation-toiture-sarking', 'maison-ossature-bois', 'isolation-biosourcee'],
     },
-    // Liens internes : bloc « Pour aller plus loin »
+    // Pour aller plus loin
     {
       type: 'list',
-      style: 'bullets',
-      title: 'Pour aller plus loin',
+      style: 'pills',
+      kicker: 'Pour aller plus loin',
       items: [
         {
-          text: '[Quel isolant biosourcé choisir en montagne ?](/conseils/isolant-biosource-montagne/)',
+          title: 'Quel isolant biosourcé choisir en montagne ?',
+          link: {
+            label: 'Quel isolant biosourcé choisir en montagne ?',
+            href: '/conseils/isolant-biosource-montagne/',
+          },
         },
       ],
     },
-    // 3.12 Appel à l'action final
+    // Appel à l'action final
     {
       type: 'cta',
       variant: 'card',
       kicker: 'Votre façade',
-      title: 'Des murs à isoler, **une façade à refaire** ?',
-      text: p(
-        "Chaque projet est unique, et chaque projet chez 3B Charpente débute par une étude sur mesure. Nous venons voir vos murs, nous vous expliquons les options, par l'extérieur ou par l'intérieur, et nous vous proposons un devis détaillé.",
-        "[Toutes nos solutions d'isolation biosourcée](/isolation-biosourcee/)",
-      ),
+      title: 'Des murs à isoler, **une façade à refaire** ?',
+      text: "Nous venons voir vos murs, nous vous expliquons les options, par l'extérieur ou par l'intérieur, puis nous vous proposons un devis détaillé.",
       primary: { label: 'Demander mon devis', href: '/contact/' },
       secondary: { label: 'Appeler le {telephone}', href: 'tel' },
       showAddress: true,
@@ -295,121 +360,120 @@ export const service: SeedService = {
     {
       key: 'isolation-murs-ite-q1',
       topic: 'isolation',
-      question: "Isolation par l'extérieur ou par l'intérieur : que choisir ?",
+      question: "Isolation par l'extérieur ou par l'intérieur : que choisir ?",
       answer:
-        "L'isolation par l'extérieur (ITE) traite mieux les ponts thermiques, ne prend pas de place dans les pièces et rénove la façade. Elle demande un accord de la mairie et des débords de toit suffisants. L'isolation par l'intérieur convient quand la façade doit être conservée ou que l'ITE est impossible. Dans un mur ancien, elle se conçoit avec des isolants qui gèrent l'humidité.",
+        "L'extérieur (ITE) si c'est possible : elle traite mieux les ponts thermiques, ne prend pas de place dans les pièces et rénove la façade, mais demande l'accord de la mairie et des débords de toit suffisants. L'intérieur quand la façade doit être conservée. Dans un mur ancien, avec des isolants qui gèrent l'humidité.",
     },
     {
       key: 'isolation-murs-ite-q2',
       topic: 'isolation',
-      question: "Quel isolant pour une isolation par l'extérieur en montagne ?",
+      question: "Quel isolant pour une isolation par l'extérieur en montagne ?",
       answer:
-        "Nous utilisons des panneaux de fibre de bois, un isolant biosourcé qui reçoit un bardage ou, pour certains panneaux, un enduit. Sa densité aide aussi au confort d'été. Sur un chalet de Vallouise, les murs ont reçu 28 cm de laine de chanvre/lin/coton et de fibre de bois, avec un bardage en mélèze d'un côté et un enduit sur fibre de bois de l'autre.",
+        "Des panneaux de fibre de bois : un isolant biosourcé qui reçoit un bardage ou, pour certains panneaux, un enduit, et dont la densité aide au confort d'été. À Vallouise, les murs d'un chalet ont reçu 28 cm de laine de chanvre/lin/coton et de fibre de bois, sous bardage en mélèze et sous enduit.",
     },
     {
       key: 'isolation-murs-ite-q3',
       topic: 'isolation',
-      question: "Qu'est-ce que l'étanchéité à l'air d'une maison ?",
+      question: "Qu'est-ce que l'étanchéité à l'air d'une maison ?",
       answer:
-        "C'est une couche continue, membrane ou panneaux aux joints collés, qui empêche l'air de traverser les murs et la toiture. Elle évite les courants d'air, protège l'isolant de la vapeur d'eau qui pourrait condenser dans la paroi et lui permet d'isoler vraiment. Elle ne remplace pas la ventilation et se distingue de l'étanchéité à l'eau, qui protège de la pluie.",
+        "Une couche continue, membrane ou panneaux aux joints collés, qui empêche l'air de traverser les murs et la toiture. Elle évite les courants d'air, protège l'isolant de la condensation et lui permet d'isoler vraiment. Elle ne remplace pas la ventilation et se distingue de l'étanchéité à l'eau, contre la pluie.",
     },
     {
       key: 'isolation-murs-ite-q4',
       topic: 'isolation',
-      question: "Faut-il une autorisation pour isoler ses murs par l'extérieur ?",
+      question: "Faut-il une autorisation pour isoler ses murs par l'extérieur ?",
       answer:
-        "En général, oui. Une ITE modifie l'aspect extérieur de la maison : une déclaration préalable de travaux est le plus souvent demandée en mairie, et le plan local d'urbanisme peut encadrer les matériaux, les teintes ou les débords. Dans certains secteurs protégés, d'autres avis s'ajoutent. Renseignez-vous en mairie avant de fixer le calendrier des travaux.",
+        "En général, oui. Une ITE change l'aspect de la maison : une déclaration préalable est le plus souvent demandée en mairie, et le plan local d'urbanisme peut encadrer matériaux, teintes ou débords. En secteur protégé, d'autres avis s'ajoutent. Renseignez-vous avant de fixer le calendrier des travaux.",
     },
     {
       key: 'isolation-murs-ite-q5',
       topic: 'isolation',
-      question: "Peut-on isoler un mur en pierre par l'intérieur ?",
+      question: "Peut-on isoler un mur en pierre par l'intérieur ?",
       answer:
-        "Oui, avec précaution : un mur en pierre doit pouvoir sécher. On choisit des isolants biosourcés capables de gérer l'humidité, avec une étanchéité à l'air continue côté pièce et un frein-vapeur adapté. Sur un bâti ancien, nous avons ainsi monté une ossature en poutres en I, posé l'étanchéité à l'air et insufflé de la ouate de cellulose dans les caissons.",
+        "Oui, avec précaution : un mur en pierre doit pouvoir sécher. Il faut des isolants biosourcés qui gèrent l'humidité, une étanchéité à l'air continue côté pièce et un frein-vapeur adapté. Sur un bâti ancien, nous avons monté une ossature en poutres en I et insufflé de la ouate de cellulose dans les caissons.",
     },
     {
       key: 'isolation-murs-ite-q6',
       topic: 'isolation',
-      question: "Faut-il changer les fenêtres en même temps que l'isolation des murs ?",
+      question: "Faut-il changer les fenêtres en même temps que l'isolation des murs ?",
       answer:
-        "C'est souvent le bon moment. La position de la fenêtre dans le mur, son raccord à l'isolant et à l'étanchéité à l'air comptent autant que la fenêtre elle-même. En traitant les deux ensemble, on évite un pont thermique tout autour de l'ouverture. Les fenêtres, volets et portes donnant sur l'extérieur font partie de nos domaines RGE.",
+        "C'est souvent le bon moment. La position de la fenêtre dans le mur et ses raccords à l'isolant et à l'étanchéité à l'air comptent autant que la fenêtre elle-même : traités ensemble, ils évitent un pont thermique autour de l'ouverture. Fenêtres, volets et portes font partie de nos domaines RGE.",
     },
   ],
 
   validationPoints: [
     {
       question:
-        'Menuiseries : types de menuiseries proposées (bois, bois-aluminium…), fabricant ou atelier, volets ou portes déjà posés ? 3B fournit-il et pose-t-il lui-même fenêtres, volets et portes ? (La galerie montre « menuiseries livrées! » sans plus de détail.)',
+        'Menuiseries : types de menuiseries proposées (bois, bois-aluminium…), fabricant ou atelier, volets ou portes déjà posés ? 3B fournit-il et pose-t-il lui-même fenêtres, volets et portes ? (La galerie montre « menuiseries livrées! » sans plus de détail.)',
       decision:
-        'Mention retirée de la section « Menuiseries extérieures » : la page cite seulement le domaine RGE et les encadrements et nouvelles menuiseries du bâti ancien, sans matériau ni fabricant.',
+        'Mention retirée de la section « Menuiseries extérieures » : la page cite seulement le domaine RGE et les encadrements et nouvelles menuiseries du bâti ancien, sans matériau ni fabricant.',
       priority: 'normal',
     },
     {
-      question: "Chantier « Isolation d'un bâti ancien par l'intérieur » : dans quelle commune ?",
+      question: "Chantier « Isolation d'un bâti ancien par l'intérieur » : dans quelle commune ?",
       decision:
-        'Aucune commune affichée (décision « communes inconnues ») : la mention « Commune : … » de la carte de réalisation est retirée.',
-      priority: 'normal',
-    },
-    {
-      question:
-        "Chantier « Isolation d'un bâti ancien par l'intérieur » : nature du mur (pierre ?), épaisseur de ouate insufflée, rôle exact des panneaux OSB3, emplacement du bardage en pin (intérieur ou extérieur) ?",
-      decision:
-        "La page décrit ce que montrent les photos, sans en déduire l'ordre des étapes, l'épaisseur ni l'emplacement du bardage.",
+        'Aucune commune affichée (décision « communes inconnues ») : la mention « Commune : … » de la carte de réalisation est retirée.',
       priority: 'normal',
     },
     {
       question:
-        "Enduit sur fibre de bois : réalisé par 3B ou par un façadier partenaire ? Quel système d'enduit ?",
+        "Chantier « Isolation d'un bâti ancien par l'intérieur » : nature du mur (pierre ?), épaisseur de ouate insufflée, rôle exact des panneaux OSB3, emplacement du bardage en pin (intérieur ou extérieur) ?",
       decision:
-        "La carte « Enduit sur fibre de bois » décrit la technique sans dire qui applique l'enduit ni citer de système (décision « travaux confiés à des partenaires »).",
+        "La page décrit ce que montrent les photos, en liste à coches (sans ordre d'étapes), sans épaisseur ni emplacement du bardage.",
       priority: 'normal',
     },
     {
       question:
-        "Chalet de Vallouise : quelles façades sont en bardage mélèze, lesquelles en enduit ? L'agrandissement de la dépassée nord est-il lié à l'isolation par l'extérieur ? L'isolation des murs y est-elle par l'extérieur ?",
+        "Enduit sur fibre de bois : réalisé par 3B ou par un façadier partenaire ? Quel système d'enduit ?",
       decision:
-        "Texte de la fiche gardé (« une partie… l'autre… », dépassée nord agrandie donnée en exemple), sans préciser les façades ni la technique d'isolation des murs.",
+        "La carte « Enduit sur fibre de bois » décrit la technique sans dire qui applique l'enduit ni citer de système (décision « travaux confiés à des partenaires »).",
       priority: 'normal',
     },
     {
       question:
-        'ITE sur maçonnerie : 3B a-t-il déjà posé une ITE sur une maison existante (hors Vallouise) ? Une réalisation de ce type renforcerait beaucoup la page (photo de fibre de bois fixée sur une maçonnerie).',
+        "Chalet de Vallouise : quelles façades sont en bardage mélèze, lesquelles en enduit ? L'agrandissement de la dépassée nord est-il lié à l'isolation par l'extérieur ? L'isolation des murs y est-elle par l'extérieur ?",
       decision:
-        "Aucune réalisation d'ITE sur maison existante présentée ; la technique est décrite en général.",
+        "Texte de la fiche gardé (« une partie… l'autre… », dépassée nord agrandie donnée en exemple), sans préciser les façades ni la technique d'isolation des murs.",
       priority: 'normal',
     },
     {
-      question: "Test d'infiltrométrie : 3B en propose-t-il ou en fait-il réaliser ?",
+      question:
+        'ITE sur maçonnerie : 3B a-t-il déjà posé une ITE sur une maison existante (hors Vallouise) ? Une réalisation de ce type renforcerait beaucoup la page (photo de fibre de bois fixée sur une maçonnerie).',
       decision:
-        'Cité de façon générale (« réalisée par un opérateur spécialisé »), sans engagement de 3B.',
+        "Aucune réalisation d'ITE sur maison existante présentée ; la technique est décrite en général.",
+      priority: 'normal',
+    },
+    {
+      question: "Test d'infiltrométrie : 3B en propose-t-il ou en fait-il réaliser ?",
+      decision: 'Cité de façon générale (« par un opérateur spécialisé »), sans engagement de 3B.',
       priority: 'low',
     },
     {
       question:
-        'Démarches en mairie : 3B aide-t-il à préparer la déclaration préalable (plans, choix de teinte) ?',
+        'Démarches en mairie : 3B aide-t-il à préparer la déclaration préalable (plans, choix de teinte) ?',
       decision:
         "La page dit seulement qu'une déclaration préalable est en général nécessaire, sans dire qui la prépare.",
       priority: 'low',
     },
     {
       question:
-        'Essences de bardage : le pin et le douglas viennent-ils aussi de la Scierie Savoldelli ?',
+        'Essences de bardage : le pin et le douglas viennent-ils aussi de la Scierie Savoldelli ?',
       decision:
-        'Texte gardé : bois « principalement » mélèze et sapin des Hautes-Alpes ; pin et douglas cités comme essences posées, sans provenance.',
+        'Texte gardé : bois « surtout » mélèze et sapin des Hautes-Alpes ; pin et douglas cités seulement dans les chantiers, sans provenance.',
       priority: 'low',
     },
     {
       question:
-        "Bardage en vieux bois et garde-corps en bois de réemploi (maison d'habitation à L'Argentière-la-Bessée) : ce bois vient-il d'une déconstruction faite par 3B ?",
+        "Bardage en vieux bois et garde-corps en bois de réemploi (maison d'habitation à L'Argentière-la-Bessée) : ce bois vient-il d'une déconstruction faite par 3B ?",
       decision:
-        "Présentés comme « bardage en vieux bois » et « garde-corps en bois de réemploi », sans dire d'où vient ce bois : la phrase « Ce bois vient de la déconstruction » est remplacée par une description générale de 3B Récup' (le bois issu de la déconstruction est trié, nettoyé et usiné dans nos ateliers).",
+        "Présentés comme « bardage en vieux bois » et « garde-corps en bois de réemploi », sans dire d'où vient ce bois : la phrase « Ce bois vient de la déconstruction » est remplacée par une description générale de 3B Récup' (le bois issu de la déconstruction est trié, nettoyé et usiné dans nos ateliers).",
       priority: 'high',
     },
     {
       question:
-        "Qualification RGE : quel SIRET est rattaché (00024 dans l'annuaire ADEME, 00016 dans les mentions légales) ? Numéro et date de fin de validité du certificat Qualibat ?",
+        "Qualification RGE : quel SIRET est rattaché (00024 dans l'annuaire ADEME, 00016 dans les mentions légales) ? Numéro et date de fin de validité du certificat Qualibat ?",
       decision:
-        "Mention « qualifié RGE (Qualibat) » sans logo ni numéro de certificat : « QUALIBAT-RGE » des textes de la fiche est écrit « RGE (Qualibat) ». Aides toujours « sous conditions », avec renvoi vers France Rénov'.",
+        "Mention « qualifié RGE (Qualibat) » sans logo ni numéro de certificat : « QUALIBAT-RGE » des textes de la fiche est écrit « RGE (Qualibat) ». Aides toujours « sous conditions », avec renvoi vers France Rénov'.",
       priority: 'normal',
     },
   ],

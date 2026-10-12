@@ -2,7 +2,6 @@ import Link from 'next/link'
 
 import { CmsLink } from '@/components/ui/CmsLink'
 import { Icon } from '@/components/ui/Icon'
-import { Media } from '@/components/ui/Media'
 import { Section } from '@/components/ui/Section'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { getServices } from '@/lib/cms/queries'
@@ -15,8 +14,8 @@ import type { BlockProps } from './types'
 
 /**
  * The services, built automatically from the "Prestations" collection (or
- * chosen by hand). "Complet": an editorial numbered index, a photo of the
- * service peeks out on hover. "Compact": small cards (other services).
+ * chosen by hand). "Complet": a grid of clickable cards with the service's
+ * icon. "Compact": a row of links (the other services, under a page).
  */
 export async function ServicesGrid({ block, context }: BlockProps<Data>) {
   const all = await getServices()
@@ -41,73 +40,51 @@ export async function ServicesGrid({ block, context }: BlockProps<Data>) {
         title={block.title}
         accent={block.titleAccent}
         intro={block.intro}
-        layout={compact ? 'stack' : 'split'}
+        layout="split"
+        actions={cta ? <CmsLink link={cta} variant="outline" arrow /> : undefined}
       />
       {compact ? (
-        <ul className={styles.compact}>
+        <ul className={styles.rows}>
+          {visible.map((service) => (
+            <li key={service.id} data-reveal="">
+              <Link href={pathFor('services', service) ?? '/'} className={styles.row}>
+                <span className={styles.rowCopy}>
+                  <span className={styles.rowTitle}>{service.cardTitle || service.title}</span>
+                  {service.cardText ? <span className={styles.rowText}>{service.cardText}</span> : null}
+                </span>
+                <span className={styles.rowGo} aria-hidden="true">
+                  <Icon name="arrowRight" size={16} />
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <ul className={styles.grid}>
           {visible.map((service, index) => (
             <li
               key={service.id}
               className={styles.card}
               data-reveal=""
-              style={{ ['--reveal-delay' as string]: `${(index % 3) * 80}ms` }}
+              style={{ ['--reveal-delay' as string]: `${(index % 3) * 60}ms` }}
             >
-              <div className={styles.cardPhoto}>
-                {service.image ? (
-                  <Media
-                    media={service.image}
-                    fill
-                    sizes="(min-width: 1100px) 400px, (min-width: 700px) 45vw, 40vw"
-                  />
-                ) : (
-                  <span className={styles.icon}>
-                    <Icon name={service.icon} size={26} />
-                  </span>
-                )}
-              </div>
-              <div className={styles.cardBody}>
-                <h3 className={styles.cardTitle}>
-                  <Link href={pathFor('services', service) ?? '/'} className={styles.stretched}>
-                    {service.cardTitle || service.title}
-                  </Link>
-                </h3>
-                {service.cardText ? <p className={styles.cardText}>{service.cardText}</p> : null}
-                <span className={styles.cardMore} aria-hidden="true">
-                  {service.cardLinkLabel || context.texts.general.serviceCardLink}
-                  <Icon name="arrowRight" size={16} />
-                </span>
-              </div>
+              <span className={styles.icon}>
+                <Icon name={service.icon} size={24} />
+              </span>
+              <h3 className={styles.title}>
+                <Link href={pathFor('services', service) ?? '/'} className={styles.stretched}>
+                  {service.cardTitle || service.title}
+                </Link>
+              </h3>
+              {service.cardText ? <p className={styles.text}>{service.cardText}</p> : null}
+              <span className={styles.go} aria-hidden="true">
+                {context.texts.general.serviceCardLink}
+                <Icon name="arrowRight" size={16} />
+              </span>
             </li>
           ))}
         </ul>
-      ) : (
-        <ol className={styles.index}>
-          {visible.map((service, index) => (
-            <li
-              key={service.id}
-              data-reveal=""
-              style={{ ['--reveal-delay' as string]: `${Math.min(index, 4) * 50}ms` }}
-            >
-              <Link href={pathFor('services', service) ?? '/'} className={styles.row}>
-                <span className={styles.num} aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3 className={styles.title}>{service.cardTitle || service.title}</h3>
-                {service.cardText ? <p className={styles.text}>{service.cardText}</p> : null}
-                <span className={styles.go} aria-hidden="true">
-                  <Icon name="arrowRight" size={18} />
-                </span>
-                <Media media={service.image} alt="" sizes="220px" className={styles.peek} />
-              </Link>
-            </li>
-          ))}
-        </ol>
       )}
-      {cta ? (
-        <div className={styles.cta}>
-          <CmsLink link={cta} variant="outline" arrow />
-        </div>
-      ) : null}
     </Section>
   )
 }

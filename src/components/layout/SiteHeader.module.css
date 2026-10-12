@@ -2,23 +2,10 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid var(--c-line);
   background: var(--header-bg);
-}
-
-/* A hairline appears once the page scrolls: pure CSS, no listener. */
-@supports (animation-timeline: scroll()) {
-  .header {
-    animation: header-lift linear both;
-    animation-timeline: scroll();
-    animation-range: 0 90px;
-  }
-}
-
-@keyframes header-lift {
-  to {
-    border-bottom-color: var(--c-line);
-  }
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  backdrop-filter: saturate(1.4) blur(10px);
 }
 
 .inner {
@@ -37,7 +24,7 @@
 
 .logo img {
   width: auto;
-  height: 60px;
+  height: 52px;
 }
 
 .nav {
@@ -59,7 +46,7 @@
   position: relative;
 }
 
-/* Navigation links: pills; the current section is filled in ink. */
+/* Navigation links: soft squares; the current section is tinted sage. */
 .link {
   display: inline-flex;
   align-items: center;
@@ -67,7 +54,7 @@
   min-height: 44px;
   padding: 0 14px;
   border: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   background: none;
   color: var(--fg);
   font-size: 0.97rem;
@@ -80,13 +67,13 @@
 }
 
 .link:hover {
-  background: var(--c-sage-soft);
+  background: var(--c-sage-tint);
 }
 
 .link[aria-current='page'],
 .link[data-current] {
-  background: var(--fg);
-  color: var(--bg);
+  background: var(--c-sage-soft);
+  color: var(--c-forest);
 }
 
 /* 3B Récup': its own colour and a sage dot. */
@@ -97,11 +84,11 @@
 .highlight::before {
   content: '';
   flex: none;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--c-sage);
-  box-shadow: 0 0 0 3px var(--c-sage-soft);
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--fg-accent);
+  transform: rotate(45deg);
 }
 
 .chevron {
@@ -177,7 +164,7 @@
 
 .panelLink:hover,
 .panelLink[aria-current='page'] {
-  background: var(--bg-alt);
+  background: var(--c-sage-tint);
 }
 
 .panelText {
@@ -207,9 +194,9 @@
   place-items: center;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  background: var(--pill-bg);
-  color: var(--pill-fg);
+  border-radius: var(--radius-btn);
+  background: var(--c-sage-soft);
+  color: var(--c-forest);
 }
 
 .actions {
@@ -240,7 +227,7 @@
   gap: var(--space-2);
   min-height: 44px;
   padding: 0 var(--space-4);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-btn);
   background: var(--btn-bg);
   color: var(--btn-fg);
   font-weight: 600;
@@ -275,7 +262,12 @@
 
 @media (max-width: 600px) {
   .logo img {
-    height: 48px;
+    height: 44px;
+  }
+
+  /* The call bar at the bottom of the screen takes over (CallBar). */
+  .call {
+    display: none;
   }
 }
 

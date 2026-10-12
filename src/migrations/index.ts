@@ -5,6 +5,7 @@ import * as migration_20261011_212140_hero_highlight_texts from './20261011_2121
 import * as migration_20261011_220046_interior_pages_v2 from './20261011_220046_interior_pages_v2';
 import * as migration_20261011_223439_quote_lead from './20261011_223439_quote_lead';
 import * as migration_20261012_004448_tiptap_rich_text from './20261012_004448_tiptap_rich_text';
+import * as migration_20261012_014914_refonte_blocs from './20261012_014914_refonte_blocs';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20261012_004448_tiptap_rich_text.up,
     down: migration_20261012_004448_tiptap_rich_text.down,
-    name: '20261012_004448_tiptap_rich_text'
+    name: '20261012_004448_tiptap_rich_text',
+  },
+  {
+    up: migration_20261012_014914_refonte_blocs.up,
+    down: migration_20261012_014914_refonte_blocs.down,
+    name: '20261012_014914_refonte_blocs'
   },
 ];

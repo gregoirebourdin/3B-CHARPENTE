@@ -1,6 +1,10 @@
 .quote {
-  max-width: 920px;
+  max-width: 960px;
   margin: 0 auto;
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border: 1px solid color-mix(in srgb, var(--fg-accent) 18%, transparent);
+  border-radius: var(--radius-lg);
+  background: var(--c-sage-tint);
 }
 
 .withImage {
@@ -25,7 +29,7 @@
 .mark {
   display: block;
   height: 3.2rem;
-  color: var(--c-sage);
+  color: var(--fg-accent);
   font-family: var(--font-heading);
   font-size: 5rem;
   font-weight: 700;

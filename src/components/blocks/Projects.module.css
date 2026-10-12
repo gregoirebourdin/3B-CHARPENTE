@@ -1,66 +1,17 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2rem, 3vw, 3rem) clamp(1.25rem, 2.4vw, 2rem);
+  grid-template-columns: repeat(var(--columns, 3), minmax(0, 1fr));
+  gap: var(--space-5);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-/* Bento: one large chantier, two beside it, then rows of three. */
-.bento {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: clamp(1.75rem, 3vw, 2.75rem) clamp(1.25rem, 2.4vw, 2rem);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.bento > li:nth-child(1) {
-  grid-column: span 7;
-  grid-row: span 2;
-}
-
-.bento > li:nth-child(2),
-.bento > li:nth-child(3) {
-  grid-column: span 5;
-}
-
-.bento > li:nth-child(n + 4) {
-  grid-column: span 4;
-}
-
-/* Five chantiers: the last row shares the width. */
-.bento[data-count='5'] > li:nth-child(n + 4) {
-  grid-column: span 6;
-}
-
-/* Four chantiers: one large on the left, three in rows on the right. */
-.four {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: clamp(1.25rem, 2.4vw, 2rem);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.four > li:nth-child(1) {
-  grid-column: span 7;
-  grid-row: span 3;
-}
-
-.four > li:nth-child(n + 2) {
-  grid-column: span 5;
-  align-self: center;
-}
-
-/* Two chantiers told in full. */
+/* ---------- Two chantiers told in full ---------- */
 .duo {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2.5rem, 4vw, 4rem) clamp(1.5rem, 3vw, 3rem);
+  gap: var(--space-5);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -68,86 +19,69 @@
 
 .duoCard {
   position: relative;
-  display: grid;
-  align-content: start;
-  gap: 18px;
-}
-
-.mosaic {
-  display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  aspect-ratio: 16 / 10.5;
-}
-
-.mosaic[data-thumbs='0'] {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.mosaic[data-thumbs='1'] .mosaicThumb {
-  grid-row: 1 / span 2;
-}
-
-.mosaicMain,
-.mosaicThumb {
-  position: relative;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+  border: 1px solid var(--c-line);
   border-radius: var(--radius-md);
-  background: var(--bg-alt);
+  background: var(--c-card);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
 }
 
-.mosaicMain {
-  grid-row: 1 / span 2;
-  border-radius: var(--radius-lg);
+.duoCard:hover {
+  border-color: var(--c-line-strong);
+  box-shadow: var(--shadow-md);
 }
 
-.mosaicMain img,
-.mosaicThumb img {
+.duoPhoto {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  background: var(--c-surface);
+}
+
+.duoPhoto img {
   object-fit: cover;
-  transition: transform 900ms var(--ease-out);
-}
-
-.duoCard:hover .mosaicMain img {
-  transform: scale(1.03);
 }
 
 .tag {
   position: absolute;
-  left: 12px;
-  bottom: 12px;
+  left: 14px;
+  bottom: 14px;
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  max-width: calc(100% - 24px);
-  padding: 6px 10px;
-  border-radius: var(--radius-sm);
-  background: rgb(248 244 238 / 0.94);
+  padding: 6px 11px;
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 0.94);
   color: #102311;
-  font-size: 0.8125rem;
-  font-weight: 650;
-  line-height: 1.3;
-  backdrop-filter: blur(6px);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.tag svg {
+  color: #336233;
 }
 
 .duoBody {
-  display: grid;
-  gap: 10px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 24px 28px 28px;
 }
 
 .duoInfo {
   color: var(--fg-muted);
-  font-size: 0.875rem;
+  font-size: 0.86rem;
 }
 
 .duoTitle {
-  font-size: clamp(1.25rem, 1.05rem + 0.6vw, 1.5rem);
-  font-weight: 600;
-  letter-spacing: -0.012em;
-  line-height: 1.2;
+  font-size: 1.375rem;
 }
 
-.stretched {
+.duoTitle a {
   color: inherit;
   text-decoration: none;
 }
@@ -156,103 +90,81 @@
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 1;
-}
-
-.stretched:focus-visible {
-  outline: none;
-}
-
-.stretched:focus-visible::after {
-  outline: 2px solid var(--c-focus);
-  outline-offset: 6px;
-  border-radius: var(--radius-lg);
 }
 
 .duoText {
-  max-width: 60ch;
-  color: color-mix(in srgb, var(--fg) 80%, var(--bg));
+  color: var(--fg-body);
   font-size: 0.97rem;
+  line-height: 1.55;
 }
 
 .duoSteps {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--space-6);
-  margin: 6px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: var(--space-1) 0 0;
   padding: 0;
-  border-top: 1px solid var(--c-line);
   list-style: none;
 }
 
 .duoSteps li {
-  display: grid;
-  grid-template-columns: 30px minmax(0, 1fr);
-  gap: 6px;
-  padding-block: 9px;
-  border-bottom: 1px solid var(--c-line);
-  font-size: 0.9rem;
-  font-weight: 550;
-  line-height: 1.35;
+  position: relative;
+  padding-left: 30px;
+  color: var(--fg-body);
+  font-size: 0.95rem;
+  line-height: 1.45;
 }
 
-.duoSteps span {
-  color: var(--fg-accent);
-  font-family: var(--font-heading);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  line-height: 1.6;
+.duoSteps li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 7px;
+  background: var(--c-sage-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232c4f2d' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 12px no-repeat;
 }
 
 .duoLink {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  justify-self: start;
-  margin-top: 4px;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: var(--space-2);
   color: var(--fg-accent);
   font-size: 0.9375rem;
   font-weight: 650;
 }
 
-.duoLink svg {
-  transition: transform var(--dur-base) var(--ease-out);
-}
-
-.duoCard:hover .duoLink svg {
-  transform: translateX(3px);
-}
-
-@media (max-width: 900px) {
-  .four > li {
-    grid-column: span 12 !important;
-    grid-row: auto !important;
+@media (max-width: 1080px) {
+  .grid {
+    --columns: 2 !important;
   }
 
   .duo {
     grid-template-columns: minmax(0, 1fr);
   }
+}
 
-  .bento > li {
-    grid-column: span 6 !important;
-    grid-row: auto !important;
+@media (max-width: 640px) {
+  .grid {
+    --columns: 1 !important;
+    gap: var(--space-4);
   }
 
-  .bento > li:nth-child(1) {
-    grid-column: span 12 !important;
+  .duoBody {
+    padding: 20px 22px 24px;
   }
 }
 
-@media (max-width: 620px) {
+/* Inside a guide's reading column. */
+@container (max-width: 860px) {
   .grid {
-    grid-template-columns: minmax(0, 1fr);
+    --columns: 2 !important;
   }
 
-  .duoSteps {
+  .duo {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .bento > li {
-    grid-column: span 12 !important;
   }
 }

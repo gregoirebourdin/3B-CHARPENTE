@@ -13,7 +13,7 @@ type Props = {
   layout?: 'stack' | 'split'
   /** Link or button shown with the heading (e.g. « Voir toutes nos réalisations »). */
   actions?: ReactNode
-  /** Section number in the kicker (« 02 | … »), counted in page order. Off for the hero-like openings. */
+  /** @deprecated Kickers are no longer numbered (kept so that callers need no change). */
   numbered?: boolean
   id?: string
   /** On forest-green / photo grounds. */
@@ -31,14 +31,13 @@ export function SectionHeading({
   align = 'start',
   layout = 'stack',
   actions,
-  numbered = true,
   id,
   inverse,
   as = 'h2',
   className,
 }: Props) {
   if (!kicker && !title && !intro) return null
-  const split = layout === 'split' && align !== 'center' && Boolean(intro || actions)
+  const split = layout === 'split' && align !== 'center' && Boolean(actions)
   return (
     <header
       className={[styles.heading, styles[align], split ? styles.split : undefined, inverse ? styles.inverse : undefined, className]
@@ -46,18 +45,12 @@ export function SectionHeading({
         .join(' ')}
       data-reveal=""
     >
-      {kicker ? (
-        <p className={`kicker ${styles.kicker}`} data-numbered={numbered ? '' : undefined}>
-          {kicker}
-        </p>
-      ) : null}
-      {title ? <AccentTitle as={as} title={title} accent={accent} id={id} className={styles.title} /> : null}
-      {intro || actions ? (
-        <div className={styles.side}>
-          {intro ? <p className={styles.intro}>{intro}</p> : null}
-          {actions ? <div className={styles.actions}>{actions}</div> : null}
-        </div>
-      ) : null}
+      <div className={styles.main}>
+        {kicker ? <p className="kicker">{kicker}</p> : null}
+        {title ? <AccentTitle as={as} title={title} accent={accent} id={id} className={styles.title} /> : null}
+        {intro ? <p className={styles.intro}>{intro}</p> : null}
+      </div>
+      {actions ? <div className={styles.actions}>{actions}</div> : null}
     </header>
   )
 }

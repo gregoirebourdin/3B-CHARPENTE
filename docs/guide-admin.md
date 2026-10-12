@@ -44,6 +44,19 @@ Chaque demande arrive aussi dans votre boîte e-mail.
 
 Les petites phrases fixes (boutons, libellés, page 404) sont dans **Réglages** → **Textes du site**.
 
+**Écrire court, c’est ce qui se lit.** Trois phrases par paragraphe au plus ; une énumération va dans une liste ; une précision va dans un encadré. Pour aérer une page, **Ajouter une section** propose :
+
+| Section | À quoi elle sert |
+|---|---|
+| **Texte et image** | Deux ou trois phrases, puis des **points clés** (coches vertes, une ligne chacun) et une ou deux photos. |
+| **Encadré (bon à savoir)** | Une précision mise à part. Type : « Bon à savoir », « Sur nos chantiers », « Définition » ou « Aides et qualification ». |
+| **Chiffres clés** | 2 à 4 chiffres vérifiés (28 cm, 1 000 m², 2007), chacun avec une courte explication. |
+| **Points forts et points d’attention** | Deux colonnes, une ligne par point (pour comparer un matériau, une technique). |
+| **Liste à puces ou à cocher** | Coches, numéros, définitions (un terme et son explication) ou pastilles de liens (« Voir aussi »). |
+| **Cartes** | Une idée par carte, une vingtaine de mots, avec une icône ou une photo. |
+
+Si un texte paraît long dans l’aperçu, coupez-le en deux paragraphes ou passez-le en points clés.
+
 ![Haut de page d’une page](captures/admin/12-page-haut-de-page.webp)
 ![Sections d’une page, chacune avec son titre](captures/admin/13-page-sections.webp)
 

@@ -13,10 +13,13 @@
   --c-forest-deep: #24412a; /* hover of forest */
   --c-accent: #336233; /* green words in titles on light grounds */
   --c-sage: #a3d2a3; /* pills, icon dots, accents on dark grounds */
-  --c-sage-soft: #dcecd9; /* soft sage tint (active pills, highlights) */
+  --c-sage-soft: #e3f0e0; /* soft sage tint (chips, icon squares, active filters) */
+  --c-sage-tint: #f0f6ee; /* palest sage: « En bref », « Bon à savoir », points forts */
   --c-stone: #78716c; /* decorative stone (borders, separators) */
-  --c-stone-text: #6b645f; /* secondary text: #78716C darkened for AA (5.3:1 on cream) */
+  --c-stone-text: #5f6a60; /* secondary text (5.2:1 on cream) */
+  --c-ink-2: #33443a; /* running text: softer than titles (9.8:1 on cream) */
   --c-card: #ffffff;
+  --c-paper: #ffffff; /* white sections between cream ones */
   --c-surface: #f2f2ec; /* light section ground */
   --c-line: rgb(16 35 17 / 0.12);
   --c-line-strong: rgb(16 35 17 / 0.24);
@@ -29,10 +32,11 @@
 
   /* Semantic aliases used by components */
   --bg: var(--c-cream);
-  --bg-alt: var(--c-surface);
+  --bg-alt: var(--c-paper);
   --bg-card: var(--c-card);
   --fg: var(--c-ink);
   --fg-muted: var(--c-stone-text);
+  --fg-body: var(--c-ink-2);
   --fg-accent: var(--c-accent);
   --btn-bg: var(--c-forest);
   --btn-bg-hover: var(--c-forest-deep);
@@ -45,7 +49,7 @@
   --band-accent: var(--c-sage);
   --pill-bg: var(--c-sage);
   --pill-fg: var(--c-ink);
-  --header-bg: #f8f4ee;
+  --header-bg: rgb(255 255 255 / 0.94);
   --logo-mark: #254227;
   --logo-text: #102311;
 
@@ -55,11 +59,11 @@
   --font-heading: var(--font-nohemi), 'Arial', sans-serif;
   --font-body: var(--font-inter), system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --fs-display: clamp(2rem, 1.2rem + 3.6vw, 4rem); /* H1 of the home page */
-  --fs-h1: clamp(2.25rem, 1.9rem + 2.6vw, 3.75rem);
-  --fs-h2: clamp(2rem, 1.6rem + 1.9vw, 3rem);
-  --fs-h3: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
-  --fs-h4: 1.125rem;
+  --fs-display: clamp(2.125rem, 1.3rem + 3.3vw, 3.75rem); /* H1 of the home page */
+  --fs-h1: clamp(2.125rem, 1.4rem + 3vw, 3.75rem);
+  --fs-h2: clamp(1.875rem, 1.3rem + 2.1vw, 2.875rem);
+  --fs-h3: 1.1875rem; /* card and step titles, in Inter */
+  --fs-h4: 1.0625rem;
   --fs-lead: clamp(1.125rem, 1rem + 0.35vw, 1.25rem);
   --fs-body: 1.0625rem;
   --fs-small: 0.9375rem;
@@ -85,17 +89,18 @@
   --space-16: 4rem;
   --space-20: 5rem;
   --space-24: 6rem;
-  --section-pad: clamp(5rem, 9vw, 8rem);
-  --gutter: clamp(1.25rem, 4vw, 3rem);
-  --container: 1240px;
+  --section-pad: clamp(4rem, 7.5vw, 7rem);
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --container: 1200px;
   --container-narrow: 760px;
-  --header-h: 84px;
+  --header-h: 76px;
 
   /* ---------- Shape ---------- */
   --radius-xs: 6px;
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
+  --radius-sm: 10px;
+  --radius-btn: 12px; /* buttons, fields, icon squares */
+  --radius-md: 16px;
+  --radius-lg: 24px;
   --radius-xl: 32px;
   --radius-pill: 999px;
 
@@ -123,6 +128,9 @@
     --c-accent: #a3d2a3;
     --c-sage: #a3d2a3;
     --c-sage-soft: #24402a;
+    --c-sage-tint: #16291a;
+    --c-paper: #122015;
+    --c-ink-2: #d6ddd1;
     --c-stone: #8d968a;
     --c-stone-text: #a8b0a2;
     --c-card: #16271a;
@@ -143,7 +151,7 @@
     --band-accent: #a3d2a3;
     --pill-bg: #2a4a2e;
     --pill-fg: #dcecd9;
-    --header-bg: #0e1a10;
+    --header-bg: rgb(14 26 16 / 0.94);
     --logo-mark: #a3d2a3;
     --logo-text: #eef1e8;
     --shadow-md: 0 14px 34px -16px rgb(0 0 0 / 0.6);
@@ -160,6 +168,9 @@
   --c-accent: #a3d2a3;
   --c-sage: #a3d2a3;
   --c-sage-soft: #24402a;
+  --c-sage-tint: #16291a;
+  --c-paper: #122015;
+  --c-ink-2: #d6ddd1;
   --c-stone: #8d968a;
   --c-stone-text: #a8b0a2;
   --c-card: #16271a;
@@ -180,7 +191,7 @@
   --band-accent: #a3d2a3;
   --pill-bg: #2a4a2e;
   --pill-fg: #dcecd9;
-  --header-bg: #0e1a10;
+  --header-bg: rgb(14 26 16 / 0.94);
   --logo-mark: #a3d2a3;
   --logo-text: #eef1e8;
   --shadow-md: 0 14px 34px -16px rgb(0 0 0 / 0.6);

@@ -1,0 +1,73 @@
+.note {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-4);
+  max-width: 860px;
+  padding: 22px 26px;
+  border: 1px solid color-mix(in srgb, var(--fg-accent) 18%, transparent);
+  border-radius: var(--radius-md);
+  background: var(--c-sage-tint);
+}
+
+.note[data-kind='definition'] {
+  border-color: var(--c-line);
+  background: var(--c-card);
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-btn);
+  background: var(--c-sage-soft);
+  color: var(--c-forest);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 2px;
+}
+
+.title {
+  font-weight: 650;
+}
+
+.text {
+  color: var(--fg-body);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.text p + p {
+  margin-top: var(--space-2);
+}
+
+.text a {
+  color: var(--fg-accent);
+  font-weight: 600;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin-top: var(--space-1);
+  color: var(--fg-accent);
+  font-size: 0.95rem;
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .note {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+    padding: 18px 20px;
+  }
+}

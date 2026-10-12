@@ -1,68 +1,43 @@
 .wrap {
-  padding-block: var(--section-pad);
+  padding-block: calc(var(--section-pad) * 0.6);
 }
 
-/* Forest panel (always dark, in both themes). */
 .panel {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: clamp(2rem, 5vw, 4.5rem);
+  padding: clamp(2.25rem, 5vw, 4rem);
   border-radius: var(--radius-xl);
-  background: #2c4f2d;
+  background: var(--band-bg);
   color: #ffffff;
 }
 
-:global(:root[data-theme='dark']) .panel {
-  background: #1f3a22;
-}
-
-@media (prefers-color-scheme: dark) {
-  :global(:root:not([data-theme='light'])) .panel {
-    background: #1f3a22;
-  }
-}
-
-/* The signature of 3B Récup': the rings of a larch trunk. */
 .rings {
   position: absolute;
+  z-index: -1;
   right: -140px;
   top: -160px;
-  z-index: -1;
-  width: 620px;
-  height: 620px;
+  width: 560px;
+  height: 560px;
   background: #a3d2a3;
-  opacity: 0.22;
-  pointer-events: none;
+  opacity: 0.12;
   -webkit-mask: var(--rings-url) center / contain no-repeat;
   mask: var(--rings-url) center / contain no-repeat;
+  pointer-events: none;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: start;
-  gap: clamp(2.5rem, 6vw, 6rem);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
 }
 
 .copy {
-  display: grid;
-  align-content: start;
-  gap: 22px;
-}
-
-.badge {
-  justify-self: start;
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  background: #a3d2a3;
-  color: #102311;
-  font-size: var(--fs-xs);
-  font-weight: 650;
-}
-
-.kicker {
-  color: #a3d2a3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
 }
 
 .title {
@@ -75,95 +50,24 @@
 }
 
 .text {
-  display: grid;
-  gap: 1em;
-  color: rgb(255 255 255 / 0.8);
+  max-width: 58ch;
+  color: rgb(238 241 232 / 0.86);
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+}
+
+.text p + p {
+  margin-top: var(--space-3);
 }
 
 .text strong {
   color: #ffffff;
 }
 
-.actions {
-  display: grid;
-  justify-items: start;
-  gap: var(--space-5);
-  margin-top: var(--space-2);
-}
-
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-6);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.links a {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.side {
-  display: grid;
-  gap: 28px;
-}
-
-/* One tall photo, two squares stacked. */
-.collage {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 14px;
-}
-
-.photo {
-  position: relative;
-  overflow: hidden;
-  margin: 0;
-  border-radius: var(--radius-lg);
-  background: rgb(255 255 255 / 0.06);
-  aspect-ratio: 1;
-}
-
-.photo img {
-  object-fit: cover;
-}
-
-.collage > .photo:first-child {
-  grid-row: span 2;
-  aspect-ratio: auto;
-}
-
-.collage[data-count='1'] {
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-}
-
-.collage[data-count='1'] > .photo:first-child {
-  aspect-ratio: 4 / 3;
-}
-
-.collage[data-count='2'] {
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
-}
-
-.collage[data-count='2'] > .photo:first-child {
-  grid-row: auto;
-  aspect-ratio: 4 / 5;
-}
-
-.collage[data-count='2'] > .photo {
-  aspect-ratio: 4 / 5;
-}
-
 .steps {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -171,40 +75,112 @@
 
 .steps li {
   display: grid;
-  grid-template-columns: 44px minmax(0, 1fr);
+  grid-template-columns: 24px minmax(0, 1fr);
   gap: var(--space-3);
-  padding-block: var(--space-3);
-  border-top: 1px solid rgb(255 255 255 / 0.18);
-  color: rgb(255 255 255 / 0.82);
-  font-size: 0.97rem;
+  align-items: start;
+}
+
+.check {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+  border-radius: 8px;
+  background: #a3d2a3;
+  color: #102311;
+}
+
+.steps p {
+  color: rgb(238 241 232 / 0.86);
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .steps strong {
   color: #ffffff;
 }
 
-.stepNumber {
-  color: #a3d2a3;
-  font-family: var(--font-heading);
-  font-size: 1.125rem;
-  font-weight: 700;
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-6);
+  margin-top: var(--space-2);
 }
 
-@media (max-width: 900px) {
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  color: #a3d2a3;
+  font-size: 0.95rem;
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-color: rgb(163 210 163 / 0.45);
+  text-underline-offset: 4px;
+}
+
+.link:hover {
+  text-decoration-color: currentColor;
+}
+
+.mosaic {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  height: clamp(300px, 32vw, 420px);
+}
+
+.photo {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.photo:first-child {
+  grid-row: span 2;
+}
+
+.photo img {
+  object-fit: cover;
+}
+
+.mosaic[data-count='1'] .photo:first-child {
+  grid-column: span 2;
+}
+
+.mosaic[data-count='2'] .photo:nth-child(2) {
+  grid-row: span 2;
+}
+
+@media (max-width: 960px) {
   .grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .rings {
-    width: 420px;
-    height: 420px;
-    right: -180px;
-    top: -140px;
+  .mosaic {
+    height: 300px;
   }
 }
 
 @media (max-width: 600px) {
-  .actions > a {
-    width: 100%;
+  .panel {
+    margin-inline: calc(var(--gutter) * -0.5);
+    padding: var(--space-8) var(--space-5);
+    border-radius: var(--radius-lg);
+  }
+
+  .mosaic {
+    height: 240px;
+    gap: 8px;
   }
 }

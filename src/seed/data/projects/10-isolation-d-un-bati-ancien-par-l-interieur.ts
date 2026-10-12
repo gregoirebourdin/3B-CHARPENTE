@@ -12,7 +12,7 @@ export const project: SeedProject = {
   summary:
     "Poutres en I, ouate de cellulose insufflée, panneaux OSB3, étanchéité à l'air, nouvelles menuiseries et bardage en pin.",
   description:
-    "Dans ce bâti ancien, nous avons réalisé une isolation par l'intérieur. L'isolant est de la ouate de cellulose, un isolant biosourcé fabriqué à partir de papier recyclé. Elle est insufflée, c'est-à-dire soufflée sous pression dans une paroi fermée. Le chantier comprend aussi les encadrements des menuiseries et la pose d'un bardage en pin.",
+    "Dans ce bâti ancien, nous avons réalisé une isolation par l'intérieur. L'isolant est de la ouate de cellulose, un isolant biosourcé fabriqué à partir de papier recyclé.\n\nElle est insufflée, c'est-à-dire soufflée sous pression dans une paroi fermée. Le chantier comprend aussi les encadrements des menuiseries et la pose d'un bardage en pin.",
   steps: [
     {
       title: 'Préparation',

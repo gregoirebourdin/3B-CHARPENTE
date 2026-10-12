@@ -16,8 +16,7 @@ export const service: SeedService = {
   filterKey: 'isolation-biosourcee',
   order: 3,
   icon: 'leaf',
-  cardText:
-    "Fibre de bois, ouate de cellulose, laine de chanvre, lin et coton : le confort d'hiver et d'été.",
+  cardText: "Fibre de bois, ouate, chanvre : chaud l'hiver, frais l'été.",
   cardLinkLabel: 'Isoler ma maison',
   image: HERO,
   schema: {
@@ -37,49 +36,67 @@ export const service: SeedService = {
     variant: 'photo',
     kicker: 'Rénovation énergétique · Qualifié RGE',
     title: 'Isolation **biosourcée** et rénovation énergétique dans les **Hautes-Alpes**',
-    text: "3B Charpente, charpentier installé à L'Argentière-la-Bessée depuis 2007, isole les toitures et les murs avec des **isolants biosourcés**, fabriqués à partir de matières végétales : ouate de cellulose, fibre de bois, laines de chanvre, lin et coton. Nous créons une **enveloppe isolante continue**, posée par des charpentiers **qualifiés RGE**, pour un confort d'hiver et d'été.",
+    text: "Toitures et murs isolés avec des **isolants biosourcés** (ouate de cellulose, fibre de bois, chanvre, lin, coton), posés par des charpentiers **qualifiés RGE** : chaud l'hiver, frais l'été.",
     primaryCta: { label: 'Demander mon devis', href: '/contact/' },
     secondaryCta: {
       label: "Voir nos chantiers d'isolation",
       href: '/isolation-biosourcee/#realisations',
     },
-    proofs: [{ label: 'Depuis 2007' }, { label: 'Qualifié QUALIBAT-RGE' }],
+    proofs: [
+      { label: 'Depuis 2007', text: "à L'Argentière-la-Bessée", icon: 'calendar' },
+      { label: 'Qualifié QUALIBAT-RGE', text: 'cinq domaines', icon: 'medal' },
+      { label: 'Une enveloppe continue', text: 'du toit aux murs', icon: 'layers' },
+    ],
     images: [HERO],
     caption:
-      "Chalet des années 1980 rénové et isolé à Vallouise : 28 cm d'isolant biosourcé dans les murs, 32 cm en toiture.",
+      "Chalet des années 1980 rénové et isolé à Vallouise : 28 cm d'isolant biosourcé dans les murs, 32 cm en toiture.",
+    photoTag: 'Vallouise',
+    sheet: [
+      { label: 'Isolants', value: 'Ouate de cellulose, fibre de bois, chanvre, lin, coton' },
+      { label: 'Parois', value: 'Toitures, rampants, murs' },
+      { label: 'Qualification', value: 'QUALIBAT-RGE' },
+    ],
   },
 
-  tldr: "3B Charpente, charpentier qualifié QUALIBAT-RGE à L'Argentière-la-Bessée (Hautes-Alpes), isole maisons et chalets avec des isolants biosourcés, issus du bois, du papier recyclé ou de plantes : ouate de cellulose, fibre de bois, laines de chanvre, lin et coton. Nous isolons les toitures, dont le sarking (isolant posé au-dessus des chevrons), et les murs, par l'extérieur ou par l'intérieur.",
+  tldr: "3B Charpente, charpentier qualifié QUALIBAT-RGE à L'Argentière-la-Bessée (Hautes-Alpes), isole maisons et chalets avec des isolants biosourcés : ouate de cellulose, fibre de bois, laines de chanvre, lin et coton. Toitures, dont le sarking (isolant posé au-dessus des chevrons), et murs, par l'extérieur ou par l'intérieur.",
 
   layout: [
-    // 3.3 Isolation globale (bloc manifeste, titre à gauche, texte et photo)
+    // Isolation globale
     {
-      type: 'manifesto',
-      layout: 'split',
+      type: 'textImage',
       kicker: 'Isolation globale',
       title: 'Une enveloppe isolante **continue**, du toit aux murs',
-      text: "Isolez toute votre habitation, pas seulement une pièce ou un pan de toit. Notre travail consiste à créer une enveloppe isolante continue : la toiture, les murs et les ouvertures sont pensés ensemble. C'est ce qui améliore vraiment l'efficacité énergétique d'une maison. C'est aussi ce qui apporte un confort d'hiver et d'été.\n\nPour cela, nous utilisons des matériaux **biosourcés**. Un isolant biosourcé est fabriqué à partir de matière issue du vivant : le bois, le papier recyclé, le chanvre, le lin, le coton. Ces isolants contiennent du carbone capté par les plantes pendant leur croissance. Ils peuvent aussi absorber puis restituer une partie de l'humidité de l'air, un atout dans les maisons anciennes, dont les murs doivent pouvoir sécher.\n\nChez 3B Charpente, ce choix vient de loin : « 3B » veut dire Bio, Bâti, Bois. Nous travaillons principalement le mélèze et le sapin des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli. Nous isolons avec des matériaux de la même famille.",
-      image: 'renovation-et-isolation-d-un-chalet-a-vallouise/04. Façade Nord et Ouest.JPG',
+      text: "Toiture, murs et ouvertures pensés ensemble : c'est ce qui rend une maison **vraiment plus économe**, et plus confortable en toute saison.\n\nPour cela, nous posons des isolants **biosourcés**, fabriqués à partir de matière issue du vivant : bois, papier recyclé, chanvre, lin, coton.",
+      points: [
+        'Du carbone stocké, capté par les plantes pendant leur croissance',
+        "Une partie de l'humidité de l'air absorbée puis restituée : un atout pour les murs anciens, qui doivent sécher",
+        '« 3B » veut dire Bio, Bâti, Bois : des isolants de la même famille que notre mélèze et notre sapin',
+      ],
+      images: ['renovation-et-isolation-d-un-chalet-a-vallouise/04. Façade Nord et Ouest.JPG'],
+      imagePosition: 'right',
+      caption:
+        'Façades nord et ouest du chalet de Vallouise, isolé en laines végétales et fibre de bois.',
     },
 
-    // 3.4 Nos isolants
+    // Nos isolants
     {
       type: 'cards',
       variant: 'photo',
       columns: 3,
+      tone: 'light',
       kicker: 'Nos matériaux',
       title: "Trois familles d'isolants **biosourcés**",
       intro:
-        "Notre système constructif inclut l'isolation en ouate de cellulose et les panneaux de fibre de bois. Selon la paroi, nous les associons à des laines végétales. Chaque isolant a sa place.",
+        'Chaque isolant a sa place : nous les choisissons paroi par paroi, et les associons souvent.',
       items: [
         {
           title: 'Ouate de cellulose',
           icon: 'recycle',
           image:
             'isolation-d-un-bati-ancien-par-l-interieur/insufflation de ouate de cellulose.JPG',
-          text: "Fabriquée à partir de papier recyclé, elle se pose en vrac. Soufflée sur un plancher de combles, ou insufflée sous pression dans un caisson fermé (mur, rampant, ossature), elle remplit chaque recoin sans laisser de vide.\n\n*Sur nos chantiers : insufflation de ouate de cellulose dans une ossature en poutres en I, pour isoler un bâti ancien par l'intérieur.*",
+          text: 'Du papier recyclé, posé en vrac : soufflée sur un plancher de combles, insufflée dans un caisson fermé, elle remplit chaque recoin.',
           link: {
-            label: 'Voir le chantier',
+            label: 'Voir le bâti ancien isolé',
             href: '/realisations/isolation-d-un-bati-ancien-par-l-interieur/',
           },
         },
@@ -88,7 +105,7 @@ export const service: SeedService = {
           icon: 'tree',
           image:
             'isolation-d-une-toiture-ancienne-a-l-argentiere-la-bessee/panneaux en fibre de bois.JPG',
-          text: "Fabriquée à partir de bois défibré, elle existe en panneaux rigides et en panneaux souples. Les panneaux rigides se posent par l'extérieur, sur les murs ou au-dessus des chevrons ; certains reçoivent directement un enduit. Les panneaux souples, qu'on appelle aussi laine de bois, garnissent les ossatures et les rampants.\n\n*Sur nos chantiers : panneaux de fibre de bois sur une toiture ancienne à L'Argentière-la-Bessée, remplissage en laine de bois sur une surélévation à Briançon, enduit sur fibre de bois à Vallouise.*",
+          text: "En panneaux rigides par l'extérieur (toits, murs, sous enduit), ou souples, en laine de bois, dans les ossatures et les rampants.",
           link: {
             label: 'Voir la toiture isolée',
             href: '/realisations/isolation-d-une-toiture-ancienne-a-l-argentiere-la-bessee/',
@@ -99,9 +116,9 @@ export const service: SeedService = {
           icon: 'leaf',
           image:
             'surelevation-en-ossature-bois-d-une-maison-a-briancon/8.1 remplissage en laine de bois.JPG',
-          text: "Ces laines végétales, souvent mélangées, se présentent en rouleaux ou en panneaux semi-rigides. On les glisse entre les montants d'une ossature ou entre les chevrons. Légères, elles se combinent bien avec des panneaux de fibre de bois, plus denses.\n\n*Sur nos chantiers : chalet de Vallouise, avec 28 cm de laine de chanvre/lin/coton et de fibre de bois dans les murs, et 32 cm en toiture.*",
+          text: "En rouleaux ou en panneaux, entre les montants d'une ossature ou les chevrons. Légères, elles s'associent à la fibre de bois.",
           link: {
-            label: 'Voir le chalet',
+            label: 'Voir le chalet de Vallouise',
             href: '/realisations/renovation-et-isolation-d-un-chalet-a-vallouise/',
           },
         },
@@ -112,54 +129,52 @@ export const service: SeedService = {
       },
     },
 
-    // 3.5 Climat de montagne : hiver et été
+    // Climat de montagne : hiver et été
     {
       type: 'manifesto',
       layout: 'columns',
       kicker: 'Climat de montagne',
       title: "Au chaud l'hiver, **au frais l'été**",
-      text: "Dans les Hautes-Alpes, l'hiver est long et froid. L'été, le soleil d'altitude chauffe fort les toitures et les façades exposées au sud. Une bonne isolation doit répondre aux deux saisons.",
+      text: "Un hiver long et froid, un soleil d'altitude qui chauffe fort les toits l'été : une bonne isolation répond aux deux saisons.",
       items: [
         {
-          title: "L'hiver : garder la chaleur",
-          text: "Ce qui compte, c'est l'épaisseur et la qualité de l'isolant, et surtout sa continuité. Un pont thermique, c'est-à-dire un point où l'isolant est interrompu (un plancher, un linteau, une pièce de charpente), suffit à refroidir une pièce.",
+          title: "L'hiver : garder la chaleur",
+          text: "L'épaisseur compte, et surtout la continuité : un seul pont thermique (un point où l'isolant s'interrompt) suffit à refroidir une pièce.",
         },
         {
-          title: "L'été : retarder la chaleur",
-          text: "Ce qui compte, c'est le déphasage : le temps que met la chaleur du jour pour traverser la paroi. À épaisseur égale, les isolants denses, comme la fibre de bois en panneaux ou la ouate de cellulose, la ralentissent davantage que les isolants très légers. La chaleur arrive plus tard, souvent quand on peut aérer la nuit.",
+          title: "L'été : retarder la chaleur",
+          text: 'Les isolants denses, comme la fibre de bois, freinent la chaleur du jour : elle arrive tard, quand on peut aérer.',
         },
         {
-          title: "Toute l'année : bloquer l'air",
-          text: "L'étanchéité à l'air est une couche continue, membrane ou panneaux aux joints collés, qui empêche l'air de traverser les parois. Sans elle, l'isolant perd une partie de son efficacité et la vapeur d'eau de la maison peut condenser dans les murs.",
+          title: "Toute l'année : bloquer l'air",
+          text: "Une étanchéité à l'air continue protège l'isolant : sans elle, il perd en efficacité et la vapeur peut condenser.",
         },
       ],
-      image: "isolation-d-un-bati-ancien-par-l-interieur/pose de l'étanchéité à l'air.JPG",
     },
 
-    // 3.6 Toiture, murs, ouvertures
+    // Toiture, murs, ouvertures
     {
       type: 'cards',
       variant: 'photo',
       columns: 3,
-      tone: 'light',
       kicker: "Nos prestations d'isolation",
-      title: 'Toiture, murs, ouvertures : **par où commencer ?**',
+      title: 'Toiture, murs, ouvertures : **par où commencer ?**',
       intro:
-        "La chaleur s'échappe par plusieurs chemins. Nous vous aidons à choisir les travaux utiles pour votre maison, et à les enchaîner dans le bon ordre.",
+        'La chaleur s’échappe par plusieurs chemins : nous vous aidons à choisir les travaux utiles, et à les faire dans le bon ordre.',
       items: [
         {
           title: 'Isolation de toiture et sarking',
           icon: 'layers',
           image:
-            "renovation-energetique-et-ouverture-d-une-lucarne-a-saint-martin-de-queyriere/étanchéité à l'air et caissons d'isolation.jpg",
-          text: "Le sarking est une isolation de toiture par l'extérieur : des panneaux isolants continus, posés au-dessus des chevrons, sous la couverture. La charpente reste visible et vous ne perdez pas de volume. Nous isolons aussi les rampants par l'intérieur et les combles.",
+            "renovation-energetique-et-ouverture-d-une-lucarne-a-saint-martin-de-queyriere/étanchéité à l'air et caissons d'isolation.jpg",
+          text: "Le sarking isole le toit par l'extérieur, au-dessus des chevrons : la charpente reste visible. Rampants et combles aussi.",
           link: { label: 'Isolation de toiture et sarking', href: '/isolation-toiture-sarking/' },
         },
         {
-          title: 'Isolation des murs : ITE et bâti ancien',
+          title: 'Isolation des murs : ITE et bâti ancien',
           icon: 'wall',
           image: 'isolation-d-un-bati-ancien-par-l-interieur/poutre en I.JPG',
-          text: "L'ITE, ou isolation thermique par l'extérieur, enveloppe les murs d'un manteau de fibre de bois, fini par un bardage bois ou un enduit. Pour le bâti ancien, nous isolons aussi par l'intérieur, avec de la ouate de cellulose insufflée dans une ossature.",
+          text: "Un manteau de fibre de bois par l'extérieur, sous bardage ou enduit ; par l'intérieur pour le bâti ancien.",
           link: { label: "Isolation des murs par l'extérieur", href: '/isolation-murs-ite/' },
         },
         {
@@ -167,20 +182,22 @@ export const service: SeedService = {
           icon: 'window',
           image:
             "isolation-d-une-toiture-ancienne-a-l-argentiere-la-bessee/vue de dessous d'un velux 78x98.JPG",
-          text: "Une fenêtre mal raccordée crée une fuite d'air au milieu d'une paroi bien isolée. Les fenêtres de toit, ainsi que les fenêtres, volets et portes donnant sur l'extérieur, font partie de nos domaines RGE. Nous les raccordons à l'isolant et à l'étanchéité à l'air.\n\n[Fenêtres de toit](/isolation-toiture-sarking/#fenetres-de-toit) · [Menuiseries extérieures](/isolation-murs-ite/#menuiseries)",
+          text: "Raccordées à l'isolant et à l'étanchéité à l'air, pour ne pas créer de fuite. [Menuiseries extérieures](/isolation-murs-ite/#menuiseries)",
+          link: { label: 'Fenêtres de toit', href: '/isolation-toiture-sarking/#fenetres-de-toit' },
         },
       ],
       cta: { label: 'Rénovation de charpente et combles', href: '/renovation-charpente-combles/' },
     },
 
-    // 3.7 Qualification RGE (carte blanche, coches) …
+    // Qualification RGE
     {
       type: 'list',
       style: 'checks',
-      inCard: true,
+      tone: 'light',
       kicker: 'Qualification RGE',
       title: 'Un charpentier **qualifié RGE** dans les Hautes-Alpes',
-      text: "RGE signifie « Reconnu garant de l'environnement ». Ce signe de qualité est attribué par domaine de travaux. 3B Charpente est qualifié QUALIBAT-RGE : la qualification est au nom de son fondateur, Jean-Michel Tardy, et figure dans l'annuaire RGE de l'ADEME (date de rattachement : 2 octobre 2025). Elle couvre cinq domaines :",
+      intro:
+        "RGE veut dire « reconnu garant de l'environnement ». Notre qualification QUALIBAT-RGE, au nom de Jean-Michel Tardy, couvre cinq domaines :",
       items: [
         { text: "isolation des murs par l'extérieur" },
         { text: "isolation des toitures par l'extérieur" },
@@ -189,103 +206,110 @@ export const service: SeedService = {
         { text: "fenêtres, volets, portes donnant sur l'extérieur" },
       ],
     },
-    // … suite de la section 3.7 : aides, France Rénov' et les deux boutons
     {
-      type: 'cta',
-      variant: 'slim',
-      icon: 'euro',
-      text: "Le label RGE ouvre l'accès aux aides publiques à la rénovation énergétique, sous conditions. Ces aides (MaPrimeRénov', certificats d'économies d'énergie, éco-prêt à taux zéro…) changent souvent. Pour savoir ce qui s'applique à votre projet, contactez un conseiller France Rénov', service public gratuit, sur france-renov.gouv.fr. Nous en parlons aussi lors de notre rencontre pour le devis.",
-      primary: {
+      type: 'callout',
+      kind: 'aid',
+      tone: 'light',
+      title: 'Et les aides ?',
+      text: "Le label RGE ouvre l'accès aux aides publiques (MaPrimeRénov', certificats d'économies d'énergie, éco-prêt à taux zéro…), sous conditions. Elles changent souvent : demandez à un conseiller [France Rénov'](https://france-renov.gouv.fr/annuaire-rge), service public gratuit, avant de signer.",
+      link: {
         label: 'Comprendre les aides avec un artisan RGE',
         href: '/conseils/aides-renovation-artisan-rge/',
       },
-      secondary: {
-        label: "Vérifier notre qualification sur France Rénov'",
-        href: 'https://france-renov.gouv.fr/annuaire-rge',
-      },
     },
 
-    // 3.8 Réalisations
+    // Réalisations
     {
       type: 'projects',
       mode: 'manual',
       anchor: 'realisations',
-      label: 'brand',
-      tone: 'light',
+      label: 'commune',
       kicker: "Nos chantiers d'isolation",
       title: 'Des isolations **en photos**',
       items: [
         {
           project: 'isolation-d-un-bati-ancien-par-l-interieur',
-          title: "Isolation d'un bâti ancien par l'intérieur",
-          text: "Ossature en poutres en I, panneaux OSB3, étanchéité à l'air, ouate de cellulose insufflée, puis doublage, encadrements et bardage en pin.",
+          title: "Un bâti ancien isolé par l'intérieur",
+          text: "Ossature en poutres en I, étanchéité à l'air, ouate de cellulose insufflée.",
         },
         {
           project: 'isolation-d-une-toiture-ancienne-a-l-argentiere-la-bessee',
-          title: "Isolation d'une toiture ancienne à L'Argentière-la-Bessée",
-          text: "Doublage pour le renfort et l'isolation, panneaux de fibre de bois, étanchéité à l'air, étanchéité à l'eau et ventilation, fenêtre de toit de 78 × 98 cm.",
+          title: 'Une toiture ancienne isolée',
+          text: "Charpente doublée, fibre de bois, étanchéité à l'air et à l'eau, fenêtre de toit.",
         },
         {
           project: 'renovation-et-isolation-d-un-chalet-a-vallouise',
-          title: "Rénovation et isolation d'un chalet à Vallouise",
-          text: 'Chalet des années 1980 : 28 cm de laine de chanvre/lin/coton et de fibre de bois dans les murs, 32 cm en toiture, bardage en mélèze et enduit sur fibre de bois.',
+          title: "Rénovation et isolation d'un chalet",
+          text: "28 cm d'isolant dans les murs, 32 cm en toiture, bardage en mélèze et enduit.",
         },
       ],
       cta: { label: 'Toutes nos réalisations', href: '/realisations/' },
     },
-    // Ligne « Voir aussi » de la section 3.8
     {
-      type: 'richText',
-      tone: 'light',
-      content:
-        "Voir aussi : [Rénovation énergétique et ouverture d'une lucarne à Saint-Martin-de-Queyrières](/realisations/renovation-energetique-et-ouverture-d-une-lucarne-a-saint-martin-de-queyriere/) · [Rénovation d'une copropriété à Briançon](/realisations/renovation-d-une-copropriete-a-briancon/)",
+      type: 'list',
+      style: 'pills',
+      kicker: 'Voir aussi',
+      items: [
+        {
+          title: 'Lucarne et rénovation énergétique à Saint-Martin-de-Queyrières',
+          link: {
+            label: "Rénovation énergétique et ouverture d'une lucarne à Saint-Martin-de-Queyrières",
+            href: '/realisations/renovation-energetique-et-ouverture-d-une-lucarne-a-saint-martin-de-queyriere/',
+          },
+        },
+        {
+          title: "Rénovation d'une copropriété à Briançon",
+          link: {
+            label: "Rénovation d'une copropriété à Briançon",
+            href: '/realisations/renovation-d-une-copropriete-a-briancon/',
+          },
+        },
+      ],
     },
 
-    // 3.9 Méthode
+    // Méthode
     {
       type: 'steps',
       variant: 'tabs',
+      tone: 'light',
       kicker: 'Notre méthode',
       title: 'De la visite **au chantier fini**',
       steps: [
         {
           title: 'Rencontre et visite',
-          text: "Nous venons voir la maison : charpente, murs, ouvertures, traces d'humidité. Vous nous dites ce qui vous gêne : le froid, la surchauffe sous le toit, les courants d'air, un projet d'aménagement.",
+          text: "Charpente, murs, ouvertures, traces d'humidité : nous regardons, et vous nous dites ce qui vous gêne.",
+          image: 'renovation-d-une-copropriete-a-briancon/1 Soufflage après découverture.JPG',
         },
         {
           title: 'Étude sur mesure',
-          text: "Chaque projet chez 3B Charpente débute par une étude sur mesure. Nous choisissons la technique, par l'extérieur ou par l'intérieur, puis l'isolant et son épaisseur, paroi par paroi.",
+          text: "Par l'extérieur ou par l'intérieur, quel isolant, quelle épaisseur : paroi par paroi.",
         },
         {
           title: 'Devis détaillé',
-          text: "Nous vous remettons un devis détaillé et un calendrier estimatif. C'est le bon moment pour faire le point sur les aides avec votre conseiller France Rénov'.",
+          text: "Avec un calendrier estimatif : le bon moment pour faire le point sur les aides avec France Rénov'.",
         },
         {
           title: 'Chantier',
-          text: "Renfort de charpente si besoin, pose des isolants, de l'étanchéité à l'air et des raccords autour des fenêtres, des poutres et des conduits.",
-          image: 'renovation-d-une-copropriete-a-briancon/1 Soufflage après découverture.JPG',
+          text: "Renfort de charpente si besoin, isolants, étanchéité à l'air, raccords autour des fenêtres et des conduits.",
         },
         {
           title: 'Finitions',
-          text: 'Bardage, enduit, lambris ou doublage intérieur : la maison retrouve son allure, avec une enveloppe plus performante.',
+          text: 'Bardage, enduit, lambris ou doublage : la maison retrouve son allure.',
         },
       ],
     },
 
-    // 3.10 3B Récup'
+    // 3B Récup'
     {
       type: 'cta',
-      variant: 'card',
-      badge: '3B Récup’',
-      kicker: "3B Récup'",
+      variant: 'slim',
+      icon: 'recycle',
       title: "Rénover, c'est aussi **réemployer**",
-      text: "Avant d'isoler, il faut parfois déposer : une vieille charpente, un plancher, un bardage. 3B Récup', notre initiative dédiée au réemploi des matériaux et à la déconstruction sélective, donne une seconde vie à ce bois. Il est trié, nettoyé et usiné dans notre atelier, puis reposé sur nos chantiers : bardage vieux bois, garde-corps en bois de réemploi.",
-      image:
-        'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/06Bardage vieux bois.JPG',
+      text: "Avant d'isoler, il faut parfois déposer. Avec 3B Récup', ce bois est trié et usiné à l'atelier, puis reposé : bardage vieux bois, garde-corps de réemploi.",
       primary: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
     },
 
-    // 3.11 FAQ
+    // FAQ
     {
       type: 'faq',
       tone: 'light',
@@ -301,13 +325,13 @@ export const service: SeedService = {
       ],
     },
 
-    // 3.12 Appel à l'action final
+    // Appel à l'action final
     {
       type: 'cta',
       variant: 'card',
       kicker: 'Votre projet',
-      title: 'Prêt à isoler **votre maison** ?',
-      text: "Chaque projet chez 3B Charpente débute par une étude sur mesure. Parlez-nous de votre maison : nous venons la voir, nous discutons de vos besoins et nous vous proposons un devis détaillé.\n\n*« Construire durablement, c'est construire pour l'avenir. »*",
+      title: 'Prêt à isoler **votre maison** ?',
+      text: 'Nous venons voir votre maison, nous parlons de vos besoins, puis nous vous proposons un devis détaillé.',
       primary: { label: 'Demander mon devis', href: '/contact/' },
       secondary: { label: 'Appeler le {telephone}', href: 'tel' },
       showAddress: true,
@@ -317,44 +341,44 @@ export const service: SeedService = {
   faqs: [
     {
       key: 'isolation-biosourcee-q1',
-      question: "Qu'est-ce qu'un isolant biosourcé ?",
+      question: "Qu'est-ce qu'un isolant biosourcé ?",
       answer:
-        "Un isolant biosourcé est fabriqué à partir de matières issues du vivant : bois, papier recyclé, chanvre, lin, coton. Chez 3B Charpente, nous posons surtout de la ouate de cellulose, des panneaux de fibre de bois et des laines de chanvre, lin et coton. Ils isolent du froid, aident à garder la fraîcheur l'été et peuvent absorber puis restituer une partie de l'humidité de l'air.",
+        "Un isolant fabriqué à partir de matières issues du vivant : bois, papier recyclé, chanvre, lin, coton. Nous posons surtout de la ouate de cellulose, des panneaux de fibre de bois et des laines de chanvre, lin et coton. Ils isolent du froid, aident à garder la fraîcheur l'été et régulent une partie de l'humidité de l'air.",
       topic: 'isolation',
     },
     {
       key: 'isolation-biosourcee-q2',
-      question: 'Quels isolants biosourcés utilisez-vous ?',
+      question: 'Quels isolants biosourcés utilisez-vous ?',
       answer:
-        "Nous nous engageons à utiliser des matériaux biosourcés et locaux. Notre système constructif inclut l'isolation en ouate de cellulose et les panneaux de fibre de bois, auxquels nous associons des laines de chanvre, lin et coton selon la paroi. Sur un chalet de Vallouise, par exemple, les murs ont reçu 28 cm de laine de chanvre/lin/coton et de fibre de bois.",
+        'De la ouate de cellulose et des panneaux de fibre de bois, auxquels nous associons des laines de chanvre, lin et coton selon la paroi. Sur un chalet de Vallouise, par exemple, les murs ont reçu 28 cm de laine de chanvre, lin et coton et de fibre de bois, et la toiture 32 cm.',
       topic: 'isolation',
     },
     {
       key: 'isolation-biosourcee-q3',
-      question: "L'isolation biosourcée est-elle adaptée à la montagne ?",
+      question: "L'isolation biosourcée est-elle adaptée à la montagne ?",
       answer:
-        "Oui, à condition d'être bien conçue et bien posée. L'hiver, ce sont l'épaisseur et la continuité de l'isolant qui comptent. L'été, les isolants denses comme la fibre de bois ralentissent la chaleur qui traverse le toit. Dans tous les cas, l'étanchéité à l'air doit être soignée pour protéger l'isolant de l'humidité. C'est ce que nous faisons sur nos chantiers du Briançonnais et de la Vallouise.",
+        "Oui, si elle est bien conçue et bien posée. L'hiver, l'épaisseur et la continuité de l'isolant comptent ; l'été, les isolants denses comme la fibre de bois ralentissent la chaleur qui traverse le toit. Dans tous les cas, une étanchéité à l'air soignée protège l'isolant de l'humidité.",
       topic: 'isolation',
     },
     {
       key: 'isolation-biosourcee-q4',
-      question: '3B Charpente est-il un charpentier RGE ?',
+      question: '3B Charpente est-il un charpentier RGE ?',
       answer:
-        "Oui. 3B Charpente est qualifié QUALIBAT-RGE, au nom de Jean-Michel Tardy, pour cinq domaines : isolation des murs par l'extérieur ; isolation des toitures par l'extérieur ; isolation par l'intérieur des murs ou rampants de toitures ou plafonds ; fenêtres de toit ; fenêtres, volets, portes donnant sur l'extérieur. Vous pouvez le vérifier dans l'annuaire des professionnels RGE de France Rénov'.",
+        "Oui. 3B Charpente est qualifié QUALIBAT-RGE, au nom de Jean-Michel Tardy, pour l'isolation des murs et des toitures par l'extérieur, l'isolation par l'intérieur des murs, rampants et plafonds, les fenêtres de toit et les menuiseries extérieures. Vous pouvez le vérifier dans l'annuaire RGE de France Rénov'.",
       topic: 'isolation',
     },
     {
       key: 'isolation-biosourcee-q5',
-      question: 'Quelles aides pour une isolation biosourcée ?',
+      question: 'Quelles aides pour une isolation biosourcée ?',
       answer:
-        "Des aides publiques existent pour l'isolation, sous conditions, et la plupart exigent une entreprise qualifiée RGE pour les travaux concernés. Leurs règles et leurs montants changent chaque année. Le plus sûr est de contacter un conseiller France Rénov' (france-renov.gouv.fr), un service public gratuit, avant de signer un devis. Nous en parlons aussi lors de notre rencontre.",
+        "Des aides publiques existent, sous conditions, et la plupart exigent une entreprise qualifiée RGE pour les travaux concernés. Leurs règles changent chaque année : le plus sûr est de contacter un conseiller France Rénov' (france-renov.gouv.fr), service public gratuit, avant de signer un devis.",
       topic: 'isolation',
     },
     {
       key: 'isolation-biosourcee-q6',
-      question: "Un charpentier peut-il s'occuper de l'isolation ?",
+      question: "Un charpentier peut-il s'occuper de l'isolation ?",
       answer:
-        "Oui, et c'est souvent logique : isoler une toiture ou un mur à ossature, c'est travailler sur la charpente, les chevrons, les débords de toit. En charpentiers, nous vérifions la structure et la renforçons si besoin avant d'isoler. Nous posons ensuite l'isolant, l'étanchéité à l'air, les fenêtres de toit et les parements, comme le bardage.",
+        "Oui, et c'est souvent logique : isoler un toit ou un mur à ossature, c'est travailler sur la charpente, les chevrons, les débords de toit. Nous vérifions et renforçons la structure si besoin, puis nous posons l'isolant, l'étanchéité à l'air, les fenêtres de toit et les parements.",
       topic: 'isolation',
     },
   ],

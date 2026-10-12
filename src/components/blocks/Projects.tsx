@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { CmsLink } from '@/components/ui/CmsLink'
 import { Icon } from '@/components/ui/Icon'
-import { Media, isMedia } from '@/components/ui/Media'
+import { Media } from '@/components/ui/Media'
 import { Section } from '@/components/ui/Section'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { getProjectSteps, getProjects } from '@/lib/cms/queries'
@@ -66,7 +66,7 @@ export async function resolveProjectCards(block: Data): Promise<ProjectCardData[
 
 const cleanStep = (title: string) => title.replace(/[.:;,]\s*$/, '')
 
-/** Two chantiers told in full: a mosaic of photos, the words, the steps. */
+/** Two chantiers told in full: a large photo, the words and their first steps. */
 async function Duo({
   cards,
   context,
@@ -84,46 +84,21 @@ async function Duo({
         const main = projectServices(project)[0]
         const commune = projectCommune(project)
         const place = project.locality || commune?.name
-        const heroId = isMedia(project.heroImage) ? project.heroImage.id : project.heroImage
-        const thumbs = (project.gallery ?? [])
-          .map((item) => item.image)
-          .filter(isMedia)
-          .filter((image) => image.id !== heroId)
-          .slice(0, 2)
         const photos = project.gallery?.length ?? 0
-        const info = [
-          main?.shortLabel || main?.title,
-          photos ? template(texts.projectPhotos, { n: photos }) : null,
-        ]
+        const info = [main?.shortLabel || main?.title, photos ? template(texts.projectPhotos, { n: photos }) : null]
           .filter(Boolean)
           .join(' · ')
-        const steps = (details.find((item) => item.id === project.id)?.steps ?? []).slice(0, 6)
+        const steps = (details.find((item) => item.id === project.id)?.steps ?? []).slice(0, 3)
         return (
-          <li
-            key={project.id}
-            className={styles.duoCard}
-            data-reveal=""
-            style={{ ['--reveal-delay' as string]: `${index * 90}ms` }}
-          >
-            <div className={styles.mosaic} data-thumbs={thumbs.length}>
-              <div className={styles.mosaicMain}>
-                <Media
-                  media={project.heroImage}
-                  fill
-                  sizes="(min-width: 1100px) 360px, (min-width: 700px) 30vw, 60vw"
-                />
-                {place ? (
-                  <span className={styles.tag}>
-                    <Icon name="mapPin" size={13} />
-                    {place}
-                  </span>
-                ) : null}
-              </div>
-              {thumbs.map((image) => (
-                <div key={image.id} className={styles.mosaicThumb}>
-                  <Media media={image} fill sizes="(min-width: 1100px) 200px, 30vw" />
-                </div>
-              ))}
+          <li key={project.id} className={styles.duoCard} data-reveal="" style={{ ['--reveal-delay' as string]: `${index * 90}ms` }}>
+            <div className={styles.duoPhoto}>
+              <Media media={project.heroImage} fill sizes="(min-width: 1100px) 580px, 92vw" />
+              {place ? (
+                <span className={styles.tag}>
+                  <Icon name="mapPin" size={13} />
+                  {place}
+                </span>
+              ) : null}
             </div>
             <div className={styles.duoBody}>
               {info ? <p className={styles.duoInfo}>{info}</p> : null}
@@ -134,14 +109,11 @@ async function Duo({
               </h3>
               <p className={styles.duoText}>{card.text || project.summary}</p>
               {steps.length ? (
-                <ol className={styles.duoSteps}>
+                <ul className={styles.duoSteps}>
                   {steps.map((step, stepIndex) => (
-                    <li key={step.id ?? stepIndex}>
-                      <span>{String(stepIndex + 1).padStart(2, '0')}</span>
-                      {cleanStep(step.title)}
-                    </li>
+                    <li key={step.id ?? stepIndex}>{cleanStep(step.title)}</li>
                   ))}
-                </ol>
+                </ul>
               ) : null}
               <span className={styles.duoLink} aria-hidden="true">
                 {texts.projectCardLink}
@@ -156,16 +128,15 @@ async function Duo({
 }
 
 /**
- * Chantiers in a « bento » grid (the first one large), four as one large and
- * three in rows beside it, two told in full with their photos and steps. The
- * link to all chantiers sits next to the title.
+ * Chantiers as photo cards: two told in full, otherwise a grid of three (or
+ * four) columns. The link to all chantiers sits next to the title.
  */
 export async function Projects({ block, context }: BlockProps<Data>) {
   const cards = await resolveProjectCards(block)
   if (!cards.length) return null
   const cta = resolveLink(block.cta, context.company)
-  const layout =
-    cards.length === 2 ? 'duo' : cards.length === 4 ? 'four' : cards.length === 1 ? 'grid' : 'bento'
+  const duo = cards.length === 2
+  const columns = cards.length === 4 || cards.length === 7 || cards.length === 8 ? 4 : cards.length === 1 ? 2 : 3
   return (
     <Section tone={block.tone} anchor={block.anchor}>
       <SectionHeading
@@ -176,23 +147,18 @@ export async function Projects({ block, context }: BlockProps<Data>) {
         layout="split"
         actions={cta ? <CmsLink link={cta} variant="outline" arrow /> : undefined}
       />
-      {layout === 'duo' ? (
+      {duo ? (
         <Duo cards={cards} context={context} />
       ) : (
-        <ul className={styles[layout]} data-count={cards.length}>
+        <ul className={styles.grid} style={{ ['--columns' as string]: columns }}>
           {cards.map((card, index) => (
-            <li
-              key={card.project.id}
-              data-reveal=""
-              style={{ ['--reveal-delay' as string]: `${(index % 3) * 90}ms` }}
-            >
+            <li key={card.project.id} data-reveal="" style={{ ['--reveal-delay' as string]: `${(index % 3) * 80}ms` }}>
               <ProjectCard
                 {...card}
-                large={(layout === 'bento' || layout === 'four') && index === 0}
-                layout={layout === 'four' && index > 0 ? 'row' : 'stack'}
                 label={block.label}
                 linkLabel={context.texts.general.projectCardLink}
                 photosLabel={context.texts.general.projectPhotos}
+                compact={columns === 4}
               />
             </li>
           ))}

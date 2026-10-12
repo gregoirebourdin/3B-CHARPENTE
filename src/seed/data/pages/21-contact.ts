@@ -15,24 +15,29 @@ export const page: SeedPage = {
     variant: 'photo',
     kicker: 'Contact et devis',
     title: 'Demandez votre **devis** de charpente dans les **Hautes-Alpes**',
-    text: 'Nous sommes là pour répondre à toutes vos questions et discuter de vos projets de construction et de rénovation. Chaque projet commence par une **étude sur mesure** : décrivez-nous le vôtre.',
+    text: 'Une question, un projet de construction ou de rénovation ? Chaque projet commence par une **étude sur mesure** : décrivez-nous le vôtre.',
     secondaryCta: { label: 'Appeler le {telephone}', href: 'tel' },
+    proofs: [
+      { label: 'Une rencontre', text: 'pour parler de votre projet', icon: 'users' },
+      { label: 'Un devis détaillé', text: 'adapté à votre projet', icon: 'document' },
+      { label: 'Un calendrier estimatif', text: 'dès la première rencontre', icon: 'calendar' },
+    ],
     images: ['refection-d-une-charpente-a-l-argentiere-la-bessee/lucarne en cours de levage.JPG'],
   },
-  tldr: "Pour un devis, appelez 3B Charpente au 06 34 67 31 49, écrivez à tardy@3bcharpente.fr ou remplissez le formulaire ci-dessous. Nous discutons de votre projet lors d'une rencontre, puis nous vous proposons un devis détaillé. L'entreprise est située 5 rue Saint-Michel, 05120 L'Argentière-la-Bessée, dans les Hautes-Alpes.",
+  tldr: "Pour un devis, appelez 3B Charpente au 06 34 67 31 49, écrivez à tardy@3bcharpente.fr ou remplissez le formulaire ci-dessous. Nous parlons de votre projet lors d'une rencontre, puis nous vous proposons un devis détaillé. Adresse : 5 rue Saint-Michel, 05120 L'Argentière-la-Bessée (Hautes-Alpes).",
   layout: [
-    // Sections 3 et 4 : formulaire de demande + coordonnées (colonne de droite, réglage « Entreprise »)
+    // Formulaire de demande + coordonnées
     {
       type: 'contactForm',
       form: 'contact',
       title: 'Parlez-nous de votre **projet**',
       intro:
-        "Quelques informations suffisent. Plus votre description est précise, plus notre premier échange sera utile. Les champs marqués d'un astérisque sont obligatoires.",
+        "Quelques informations suffisent : plus votre description est précise, plus notre premier échange sera utile. Les champs marqués d'un astérisque sont obligatoires.",
       showCompanyInfo: true,
       privacyNotice:
-        "Les informations de ce formulaire sont utilisées par 3B Charpente (Jean-Michel Tardy, EI) uniquement pour répondre à votre demande et préparer votre devis. Elles ne sont ni vendues ni cédées. Si aucun devis n'est signé, elles sont supprimées 3 ans après notre dernier échange. Vous pouvez y accéder, les corriger ou les faire effacer en écrivant à tardy@3bcharpente.fr. En savoir plus : [politique de confidentialité](/mentions-legales/#confidentialite)",
+        "Les informations de ce formulaire sont utilisées par 3B Charpente (Jean-Michel Tardy, EI) uniquement pour répondre à votre demande et préparer votre devis. Elles ne sont ni vendues ni cédées. Si aucun devis n'est signé, elles sont supprimées 3 ans après notre dernier échange. Vous pouvez y accéder, les corriger ou les faire effacer en écrivant à tardy@3bcharpente.fr. En savoir plus : [politique de confidentialité](/mentions-legales/#confidentialite)",
     },
-    // Section 5 : plan d'accès (pas de carte Google intégrée ; adresse + lien « Itinéraire »)
+    // Plan d'accès
     {
       type: 'cta',
       variant: 'slim',
@@ -44,36 +49,43 @@ export const page: SeedPage = {
       },
       showAddress: true,
     },
-    // Section 6 : après votre message
+    // Après votre message
     {
       type: 'steps',
-      variant: 'tabs',
-      kicker: 'Et ensuite ?',
-      title: 'Après votre message, **comment ça se passe** ?',
+      variant: 'timeline',
+      tone: 'light',
+      kicker: 'Et ensuite ?',
+      title: 'Après votre message, **comment ça se passe** ?',
       steps: [
         {
           title: 'Nous lisons votre demande',
-          text: 'Nous prenons connaissance de votre projet, de vos plans et de vos photos, puis nous vous recontactons.',
+          text: 'Votre projet, vos plans, vos photos : nous en prenons connaissance, puis nous vous recontactons.',
         },
         {
           title: 'Nous nous rencontrons',
-          text: "Nous discutons de vos besoins lors d'une rencontre. Nous vous donnons dès cette première rencontre un calendrier estimatif.",
+          text: 'Nous parlons de vos besoins, et vous donnons un calendrier estimatif dès cette première rencontre.',
         },
         {
           title: 'Vous recevez un devis détaillé',
-          text: 'Nous vous proposons un devis détaillé, adapté à votre projet. Prenez le temps de le lire et de nous poser vos questions.',
+          text: 'Adapté à votre projet. Prenez le temps de le lire et de nous poser vos questions.',
         },
         {
           title: 'Le chantier se prépare',
-          text: "Une fois le devis accepté, nous préparons les pièces à l'atelier, puis nous intervenons chez vous.",
+          text: "Devis accepté : nous préparons les pièces à l'atelier, puis nous intervenons chez vous.",
         },
       ],
     },
-    // Section 7 : encart professionnels et 3B Récup'
+    // Encart professionnels et 3B Récup'
     {
       type: 'textImage',
-      title: 'Vous préparez une **déconstruction** ?',
-      text: "Que vous soyez architecte, entreprise du bâtiment, collectivité ou particulier, 3B Récup' saura vous apporter des solutions personnalisées. Du bâtiment industriel à la maison particulière, nous déposons les structures bois, la couverture, l'isolation et les parements, puis nous transformons le bois dans nos ateliers. Associez-nous dès l'étude de faisabilité : c'est à ce stade que le réemploi se prévoit le plus simplement.",
+      kicker: "3B Récup'",
+      title: 'Vous préparez une **déconstruction** ?',
+      text: "Architecte, entreprise du bâtiment, collectivité ou particulier : 3B Récup' vous apporte des solutions sur mesure, du bâtiment industriel à la maison particulière.",
+      points: [
+        "Nous déposons la structure bois, la couverture, l'isolation et les parements",
+        'Nous transformons le bois dans nos ateliers',
+        "Associez-nous dès l'étude de faisabilité : c'est là que le réemploi se prévoit le plus simplement",
+      ],
       images: [
         'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/06Bardage vieux bois.JPG',
       ],
@@ -81,11 +93,13 @@ export const page: SeedPage = {
       badge: '3B Récup’',
       cta: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
     },
-    // Section 8 : zone d'intervention
+    // Zone d'intervention
     {
       type: 'list',
       style: 'pills',
       tone: 'light',
+      kicker: "Zone d'intervention",
+      title: 'Où **nous intervenons**',
       text: "Basés dans le nord des Hautes-Alpes, nous intervenons dans tout le département, mais aussi en Provence-Alpes-Côte d'Azur et en Auvergne-Rhône-Alpes.",
       items: [
         {
@@ -105,7 +119,7 @@ export const page: SeedPage = {
         },
       ],
     },
-    // Section 9 : FAQ
+    // FAQ
     {
       type: 'faq',
       kicker: 'Questions fréquentes',
@@ -117,37 +131,37 @@ export const page: SeedPage = {
     {
       key: 'contact-q1',
       topic: 'contact',
-      question: 'Comment obtenir un devis pour ma charpente ?',
+      question: 'Comment obtenir un devis pour ma charpente ?',
       answer:
-        "Il vous suffit de nous contacter, par téléphone au 06 34 67 31 49 ou avec le formulaire de cette page. Nous discutons de vos besoins lors d'une rencontre, puis nous vous proposons un devis détaillé, adapté à votre projet. Chaque projet est unique : nous adaptons nos constructions à vos besoins et à vos préférences esthétiques et fonctionnelles.",
+        "Contactez-nous, par téléphone au 06 34 67 31 49 ou avec le formulaire de cette page. Nous parlons de vos besoins lors d'une rencontre, puis nous vous proposons un devis détaillé, adapté à votre projet et à vos goûts.",
     },
     {
       key: 'contact-q2',
       topic: 'contact',
-      question: 'Que faut-il préparer avant de vous contacter ?',
+      question: 'Que faut-il préparer avant de vous contacter ?',
       answer:
-        "Une description de votre projet suffit pour commencer : ce que vous voulez faire, la commune, le type de bâtiment et, si possible, quand vous aimeriez démarrer. Des photos de l'existant et des plans, si vous en avez, nous aident à mieux comprendre le chantier. Vous pouvez les joindre au formulaire. Nous ferons le point ensemble lors de notre rencontre.",
+        "Une description suffit pour commencer : ce que vous voulez faire, la commune, le type de bâtiment et, si possible, quand démarrer. Des photos de l'existant et des plans nous aident : vous pouvez les joindre au formulaire. Nous ferons le point ensemble à la rencontre.",
     },
     {
       key: 'contact-q3',
       topic: 'contact',
-      question: 'Combien de temps faut-il pour réaliser mes travaux ?',
+      question: 'Combien de temps faut-il pour réaliser mes travaux ?',
       answer:
-        "Le délai peut varier selon la complexité et la taille du projet. Une réfection de charpente, une isolation complète ou une surélévation ne demandent pas la même préparation à l'atelier ni le même temps sur le chantier. Nous vous fournissons un calendrier estimatif lors de notre première rencontre, en tenant compte de votre échéance.",
+        'Le délai varie selon la taille et la complexité du projet : une réfection de charpente, une isolation complète ou une surélévation ne demandent pas la même préparation. Nous vous donnons un calendrier estimatif dès la première rencontre, en tenant compte de votre échéance.',
     },
     {
       key: 'contact-q4',
       topic: 'secteurs',
-      question: 'Intervenez-vous dans ma commune ?',
+      question: 'Intervenez-vous dans ma commune ?',
       answer:
-        "Basés à L'Argentière-la-Bessée, dans le nord des Hautes-Alpes, nous intervenons dans les Hautes-Alpes, mais aussi en Provence-Alpes-Côte d'Azur et en Auvergne-Rhône-Alpes. Nos chantiers se situent surtout à Briançon, à Serre Chevalier, en Vallouise et dans le Pays des Écrins ; nous avons aussi travaillé à Gresse-en-Vercors et dans les monts du Lyonnais. Indiquez votre commune dans le formulaire.",
+        "Probablement : depuis L'Argentière-la-Bessée, nous intervenons dans les Hautes-Alpes, mais aussi en Provence-Alpes-Côte d'Azur et en Auvergne-Rhône-Alpes. Surtout à Briançon, à Serre Chevalier, en Vallouise et dans le Pays des Écrins ; parfois plus loin. Indiquez votre commune dans le formulaire.",
     },
     {
       key: 'contact-q5',
       topic: 'isolation',
-      question: "Pouvez-vous m'aider à obtenir des aides à la rénovation ?",
+      question: "Pouvez-vous m'aider à obtenir des aides à la rénovation ?",
       answer:
-        "3B Charpente est qualifiée RGE (reconnu garant de l'environnement) par Qualibat pour l'isolation des murs et des toitures par l'extérieur, l'isolation par l'intérieur, les fenêtres de toit et les menuiseries donnant sur l'extérieur. Faire appel à un artisan RGE ouvre l'accès aux aides publiques à la rénovation énergétique, sous conditions. Signalez-le dans votre message : nous en parlerons lors de la rencontre.",
+        "Nous sommes qualifiés RGE (Qualibat) pour l'isolation des murs et des toitures, les fenêtres de toit et les menuiseries extérieures : faire appel à un artisan RGE ouvre l'accès aux aides publiques, sous conditions. Signalez-le dans votre message : nous en parlerons à la rencontre.",
     },
   ],
   photoAlts: [

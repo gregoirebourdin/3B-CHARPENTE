@@ -1,21 +1,20 @@
 /*
- * Buttons of the « Atelier alpin » kit: pills, with the arrow in a sage disc
- * that turns a quarter on hover. Variants recolour a few local properties.
+ * Buttons of « Atelier ouvert »: squared corners (like a joinery tool), a
+ * forest fill for the one main action, an outline for the others. The arrow
+ * slides a few pixels on hover.
  */
 .button {
   --_bg: var(--btn-bg);
   --_fg: var(--btn-fg);
   --_border: var(--btn-bg);
-  --_disc-bg: var(--btn-disc-bg);
-  --_disc-fg: var(--btn-disc-fg);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-3);
+  gap: 10px;
   min-height: 52px;
-  padding: 0 var(--space-6);
-  border: 1.5px solid var(--_border);
-  border-radius: var(--radius-pill);
+  padding: 0 22px;
+  border: 1px solid var(--_border);
+  border-radius: var(--radius-btn);
   background: var(--_bg);
   color: var(--_fg);
   font-family: var(--font-body);
@@ -32,27 +31,14 @@
     color var(--dur-fast) var(--ease-out);
 }
 
-.withDisc {
-  padding-right: 9px;
-}
-
-.disc {
-  display: grid;
+.arrow {
   flex: none;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--_disc-bg);
-  color: var(--_disc-fg);
-  transition:
-    transform var(--dur-base) var(--ease-out),
-    background-color var(--dur-fast) var(--ease-out);
+  transition: transform var(--dur-base) var(--ease-out);
 }
 
-.button:hover .disc,
-.button:focus-visible .disc {
-  transform: translateX(3px) rotate(-45deg);
+.button:hover .arrow,
+.button:focus-visible .arrow {
+  transform: translateX(3px);
 }
 
 .primary:hover {
@@ -61,42 +47,34 @@
 }
 
 .outline {
-  --_bg: transparent;
+  --_bg: var(--c-paper);
   --_fg: var(--fg);
   --_border: var(--c-line-strong);
-  --_disc-bg: var(--btn-bg);
-  --_disc-fg: var(--btn-fg);
 }
 
 .outline:hover {
-  --_bg: var(--c-sage-soft);
   --_border: var(--fg);
 }
 
 /* On forest-green and night grounds (always dark, in both themes). */
 .light {
   --_bg: #ffffff;
-  --_fg: #102311;
+  --_fg: #2c4f2d;
   --_border: #ffffff;
-  --_disc-bg: #2c4f2d;
-  --_disc-fg: #ffffff;
 }
 
 .light:hover {
-  --_bg: #a3d2a3;
-  --_border: #a3d2a3;
+  --_bg: #e3f0e0;
+  --_border: #e3f0e0;
 }
 
 .outlineLight {
   --_bg: transparent;
   --_fg: #ffffff;
-  --_border: rgb(255 255 255 / 0.5);
-  --_disc-bg: #a3d2a3;
-  --_disc-fg: #102311;
+  --_border: rgb(255 255 255 / 0.4);
 }
 
 .outlineLight:hover {
-  --_bg: rgb(255 255 255 / 0.08);
   --_border: #ffffff;
 }
 
@@ -104,8 +82,6 @@
   --_bg: #a3d2a3;
   --_fg: #102311;
   --_border: #a3d2a3;
-  --_disc-bg: #2c4f2d;
-  --_disc-fg: #ffffff;
 }
 
 .sage:hover {
@@ -114,33 +90,15 @@
 }
 
 .small {
-  min-height: 44px;
+  min-height: 46px;
   padding-inline: 18px;
   font-size: 0.9375rem;
 }
 
-.small.withDisc {
-  padding-right: 7px;
-}
-
-.small .disc {
-  width: 28px;
-  height: 28px;
-}
-
 .large {
-  min-height: 58px;
-  padding-inline: 28px;
+  min-height: 56px;
+  padding-inline: 26px;
   font-size: 1.0625rem;
-}
-
-.large.withDisc {
-  padding-right: 11px;
-}
-
-.large .disc {
-  width: 38px;
-  height: 38px;
 }
 
 .block {
@@ -151,7 +109,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-3) 14px;
+  gap: var(--space-3);
 }
 
 /* Phones: buttons take the full width, long labels wrap instead of overflowing. */

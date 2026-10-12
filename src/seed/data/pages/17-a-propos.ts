@@ -7,12 +7,17 @@ const P = {
   assemblageBlanc: 'refection-d-une-charpente-a-l-argentiere-la-bessee/assamblage à blanc.JPG',
   levageFermes: 'refection-d-une-charpente-a-l-argentiere-la-bessee/levage des fermes.JPG',
   /** Pas de portrait de Jean : vraie photo de taille à l'atelier (décision « Portrait de Jean »). */
-  tailleForge: 'rehabilitation-d-une-ancienne-forge-a-la-salle-les-alpes/1 Taille de la charpente.JPG',
+  tailleForge:
+    'rehabilitation-d-une-ancienne-forge-a-la-salle-les-alpes/1 Taille de la charpente.JPG',
   chaletNordOuest: 'renovation-et-isolation-d-un-chalet-a-vallouise/04. Façade Nord et Ouest.JPG',
-  tailleTenon: "refection-d-une-charpente-a-l-argentiere-la-bessee/taille d'un tenon à double embrèvement à la besaïgue.JPG",
-  tailleCharpentePrelles: 'renovation-d-une-maison-d-habitation-sur-la-commune-de-prelles/2Taille de la charpente (1).JPG',
-  soleilCouchant: 'maison-a-ossature-bois-dans-les-monts-du-lyonnais/charpente apparent et soleil couchant...jpg',
-  gardeCorpsReemploi: 'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/08Garde corps en bois de réemploi.JPG',
+  tailleTenon:
+    "refection-d-une-charpente-a-l-argentiere-la-bessee/taille d'un tenon à double embrèvement à la besaïgue.JPG",
+  tailleCharpentePrelles:
+    'renovation-d-une-maison-d-habitation-sur-la-commune-de-prelles/2Taille de la charpente (1).JPG',
+  soleilCouchant:
+    'maison-a-ossature-bois-dans-les-monts-du-lyonnais/charpente apparent et soleil couchant...jpg',
+  gardeCorpsReemploi:
+    'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/08Garde corps en bois de réemploi.JPG',
   foret: 'ambiance/foret.png',
 } as const
 
@@ -34,193 +39,160 @@ export const page: SeedPage = {
     variant: 'photo',
     kicker: 'À propos de 3B Charpente',
     title: '**3B Charpente**, charpentiers dans les **Hautes-Alpes** depuis 2007',
-    text: "Une entreprise de charpente installée à **L'Argentière-la-Bessée**, dans le nord des Hautes-Alpes. Notre mission est claire : **utiliser le bois local pour construire des maisons saines et durables.**",
+    text: "Une entreprise de charpente installée à **L'Argentière-la-Bessée**, dans le nord des Hautes-Alpes. Notre mission : **utiliser le bois local pour construire des maisons saines et durables.**",
     primaryCta: { label: 'Parler de mon projet', href: '/contact/' },
     secondaryCta: { label: 'Voir nos réalisations', href: '/realisations/' },
     proofs: [
-      { label: 'Depuis 2007', icon: 'calendar' },
-      { label: 'Qualifié RGE', icon: 'medal' },
+      { label: 'Depuis 2007', text: "à L'Argentière-la-Bessée", icon: 'calendar' },
+      { label: 'Qualifié RGE', text: 'Qualibat, cinq domaines', icon: 'medal' },
+      { label: 'Compagnons du Devoir', text: 'CAP et Tour de France', icon: 'hammer' },
     ],
     images: [P.assemblageBlanc],
     backdrop: P.foret,
   },
 
-  tldr: "3B Charpente est l'entreprise de charpente de Jean-Michel Tardy, fondée en 2007 à L'Argentière-la-Bessée (Hautes-Alpes). Formé chez les Compagnons du Devoir, Jean-Michel a fait son Tour de France en France métropolitaine, en Martinique et en Autriche. L'entreprise est qualifiée RGE par Qualibat, travaille le mélèze et le sapin des Hautes-Alpes et réemploie le bois avec 3B Récup'.",
+  tldr: "3B Charpente est l'entreprise de Jean-Michel Tardy, fondée en 2007 à L'Argentière-la-Bessée (Hautes-Alpes). Formé chez les Compagnons du Devoir, il a fait son Tour de France en métropole, en Martinique et en Autriche. Qualifiée RGE (Qualibat), l'entreprise travaille le bois des Hautes-Alpes et le réemploie avec 3B Récup'.",
 
   layout: [
-    // Section 3 : notre histoire (texte + frise)
+    // Notre histoire
     {
       type: 'list',
       style: 'definitions',
       kicker: 'Notre histoire',
       title: 'Une entreprise née de la **charpente**, grandie avec le **bois local**',
-      text: "Jean-Michel Tardy a fondé 3B Charpente en 2007, après plus de dix ans de métier. Il a choisi de s'installer à L'Argentière-la-Bessée, là où il avait été formateur.\n\nNous avons commencé avec des projets de charpente, puis nous avons progressivement étendu nos services à la rénovation de chalets et de maisons de pays, et à la construction neuve en ossature bois.",
+      text: "Fondée en 2007 après plus de dix ans de métier, à L'Argentière-la-Bessée, là où Jean-Michel Tardy avait été formateur. D'abord la charpente, puis la rénovation de chalets et de maisons de pays, et la construction neuve en ossature bois.",
       items: [
-        { title: '1995', text: 'Jean-Michel Tardy débute la charpente, apprenti à 16 ans dans une entreprise de Savoie.' },
+        {
+          title: '1995',
+          text: 'Jean-Michel Tardy débute la charpente, apprenti à 16 ans dans une entreprise de Savoie.',
+        },
         {
           title: 'Ensuite',
-          text: 'CAP dans un CFA des Compagnons du Devoir, puis Tour de France, en France métropolitaine, en Martinique et en Autriche.',
+          text: 'CAP dans un CFA des Compagnons du Devoir, puis Tour de France : métropole, Martinique, Autriche.',
         },
         { title: 'Puis', text: "Deux ans formateur à L'Argentière-la-Bessée." },
         { title: '2007', text: 'Création de 3B Charpente dans les Hautes-Alpes.' },
         { title: "Aujourd'hui", text: 'Une entreprise qualifiée RGE.' },
       ],
-      image: P.levageFermes,
     },
 
-    // Section 4 : le fondateur
+    // Le fondateur
     {
       type: 'textImage',
+      tone: 'light',
       kicker: 'Le fondateur',
       title: 'Jean-Michel Tardy, du **Tour de France** aux **Hautes-Alpes**',
-      text: "Jean-Michel Tardy est originaire des montagnes grenobloises. Il débute la charpente en 1995 : à 16 ans, il entre en apprentissage dans une entreprise de Savoie.\n\nIl passe son CAP dans un CFA des Compagnons du Devoir, puis part sur le Tour de France. Ce parcours de formation fait passer le jeune charpentier d'entreprise en entreprise pour apprendre le métier auprès de différentes équipes. Pour Jean-Michel, ce sera en France métropolitaine, en Martinique et en Autriche.\n\nIl devient ensuite formateur pendant deux ans à L'Argentière-la-Bessée, puis crée 3B Charpente dans les Hautes-Alpes, en 2007.",
+      text: "Originaire des montagnes grenobloises, Jean-Michel Tardy entre en apprentissage à 16 ans.\n\nLe **Tour de France** des Compagnons le fait ensuite passer d'entreprise en entreprise, pour apprendre le métier auprès de différentes équipes : en France métropolitaine, en Martinique, en Autriche.",
+      points: [
+        "Deux ans formateur à L'Argentière-la-Bessée",
+        'En 2007, il crée 3B Charpente dans les Hautes-Alpes',
+      ],
       images: [P.tailleForge],
       imagePosition: 'left',
     },
     {
       type: 'quote',
-      lead: 'Ce qui compte pour lui ?',
+      tone: 'light',
+      lead: 'Ce qui compte pour lui ?',
       text: "Le travail en équipe, l'écoute apportée aux clients, la belle ouvrage, la joie de venir travailler le matin.",
       author: 'Jean-Michel Tardy',
       role: 'fondateur de 3B Charpente',
       image: P.soleilCouchant,
     },
 
-    // Section 5 : Bio, Bâti, Bois
+    // Bio, Bâti, Bois
     {
       type: 'cards',
       variant: 'letter',
       columns: 3,
-      tone: 'light',
       kicker: 'Notre nom',
-      title: '**Bio**, **Bâti**, **Bois** : ce que veut dire 3B',
+      title: '**Bio**, **Bâti**, **Bois** : ce que veut dire 3B',
       intro: "Trois lettres, trois mots, choisis pour leur sens d'origine.",
       items: [
         {
           letter: 'B',
           title: 'Bio',
           eyebrow: "du grec ancien βίος, qui exprime l'idée de vie.",
-          text: "Pour nous, c'est la vie dans la maison : des matériaux sains et des [isolants biosourcés](/isolation-biosourcee/), comme la fibre de bois, la ouate de cellulose ou la laine de chanvre, lin et coton.",
+          text: 'La vie dans la maison : des matériaux sains et des [isolants biosourcés](/isolation-biosourcee/), fibre de bois, ouate, chanvre.',
           image: P.chaletNordOuest,
         },
         {
           letter: 'B',
           title: 'Bâti',
           eyebrow: "de l'ancien français bastir, idée d'entrelacer, d'assembler.",
-          text: "C'est le cœur du métier : tracer, tailler, assembler. Tenons et mortaises chevillés, [traits de Jupiter](/realisations/refection-d-une-charpente-a-l-argentiere-la-bessee/) (un assemblage qui raboute deux pièces de bois), charpentes montées à blanc à l'atelier avant le levage.",
+          text: "Le cœur du métier : tracer, tailler, assembler. Tenons, mortaises, [traits de Jupiter](/realisations/refection-d-une-charpente-a-l-argentiere-la-bessee/), montage à blanc à l'atelier.",
           image: P.tailleTenon,
         },
         {
           letter: 'B',
           title: 'Bois',
           eyebrow: 'un être vivant.',
-          text: "Nous travaillons principalement du mélèze et du sapin des Hautes-Alpes, sciés par notre partenaire local. Et parce qu'un bois peut servir plusieurs fois, nous réemployons le bois issu de la déconstruction avec 3B Récup'.",
+          text: "Mélèze et sapin des Hautes-Alpes, sciés par notre partenaire local. Et du bois de réemploi, avec 3B Récup'.",
           image: P.tailleCharpentePrelles,
         },
       ],
     },
 
-    // Section 6 : nos métiers
+    // Nos métiers
     {
-      type: 'list',
-      style: 'bullets',
+      type: 'servicesGrid',
+      mode: 'all',
+      tone: 'light',
       kicker: 'Nos métiers',
       title: 'Du **solivage** au **faîtage**, tout le travail du charpentier',
       intro: 'Neuf prestations, une seule entreprise, de la structure aux finitions.',
-      items: [
-        {
-          title: 'Charpente bois traditionnelle',
-          text: "Tracée, taillée et assemblée à l'atelier.",
-          link: { label: 'Charpente bois traditionnelle', href: '/charpente-bois/' },
-        },
-        {
-          title: 'Rénovation de charpente et combles',
-          text: 'Renforcer, ouvrir une lucarne, aménager les combles.',
-          link: { label: 'Rénovation de charpente et combles', href: '/renovation-charpente-combles/' },
-        },
-        {
-          title: 'Isolation biosourcée',
-          text: 'Fibre de bois, ouate de cellulose, laine de chanvre, lin et coton.',
-          link: { label: 'Isolation biosourcée', href: '/isolation-biosourcee/' },
-        },
-        {
-          title: "Isolation de toiture par l'extérieur (sarking)",
-          text: "L'isolant passe par-dessus les chevrons, côté extérieur.",
-          link: { label: "Isolation de toiture par l'extérieur (sarking)", href: '/isolation-toiture-sarking/' },
-        },
-        {
-          title: 'Isolation des murs',
-          text: "ITE (isolation thermique par l'extérieur) ou isolation par l'intérieur en bâti ancien.",
-          link: { label: 'Isolation des murs', href: '/isolation-murs-ite/' },
-        },
-        {
-          title: 'Maison ossature bois',
-          text: 'Une maison neuve, sur mesure.',
-          link: { label: 'Maison ossature bois', href: '/maison-ossature-bois/' },
-        },
-        {
-          title: 'Extension et surélévation bois',
-          text: 'Gagner de la place sans tout reconstruire.',
-          link: { label: 'Extension et surélévation bois', href: '/extension-surelevation-bois/' },
-        },
-        {
-          title: 'Escaliers bois sur mesure',
-          text: 'Quart tournant, balancé, en bois debout.',
-          link: { label: 'Escaliers bois sur mesure', href: '/escalier-bois-sur-mesure/' },
-        },
-        {
-          title: 'Balcons, terrasses et abris bois',
-          text: 'En mélèze, avec garde-corps sur mesure.',
-          link: { label: 'Balcons, terrasses et abris bois', href: '/balcon-terrasse-abri-bois/' },
-        },
-      ],
     },
 
-    // Section 7 : l'équipe (seul Jean-Michel Tardy est visible : intro de repli de la fiche)
+    // L'équipe
     {
       type: 'team',
       kicker: "L'équipe",
       title: 'Les **mains** derrière vos **chantiers**',
-      intro: "Autour de Jean-Michel, une équipe de charpentiers travaille à l'atelier et sur les chantiers.",
+      intro:
+        "Autour de Jean-Michel, une équipe de charpentiers travaille à l'atelier et sur les chantiers.",
     },
 
-    // Section 8 : nos valeurs (panneau vert forêt ; la photo d'ambiance de la forêt est en fond du haut de page)
+    // Nos valeurs
     {
       type: 'manifesto',
       layout: 'columns',
       kicker: 'Nos valeurs',
       title: '**Innovation** et **durabilité** guident notre travail quotidien',
-      text: "Notre mission : construire durablement, en réalisant des structures respectueuses de l'environnement. Innover, pour nous, c'est par exemple adapter notre système constructif aux matériaux de réemploi.",
+      text: "Construire durablement, avec des structures respectueuses de l'environnement. Innover, c'est par exemple adapter notre système constructif aux matériaux de réemploi.",
       items: [
         {
           title: "L'écoute",
-          text: 'Chaque projet est unique. Nous travaillons en étroite collaboration avec vous pour adapter nos constructions à vos besoins, en respectant vos préférences esthétiques et fonctionnelles.',
+          text: 'Chaque projet est unique : nous l’adaptons à vos besoins et à vos goûts.',
         },
         {
           title: 'La belle ouvrage',
-          text: "Tracer, tailler, assembler à l'atelier, puis lever sur le chantier. Le savoir-faire appris sur le Tour de France, au service de votre maison.",
+          text: "Tracer, tailler, assembler à l'atelier, puis lever sur le chantier.",
         },
-        { title: "Le bois d'ici", text: 'Du mélèze et du sapin des Hautes-Alpes, et des isolants biosourcés.' },
         {
-          title: 'Le réemploi',
-          text: "Prolonger la vie des matériaux de construction, réduire les déchets et l'impact environnemental, tout en proposant des solutions esthétiques et économiques.",
+          title: "Le bois d'ici",
+          text: 'Mélèze et sapin des Hautes-Alpes, et des isolants biosourcés.',
         },
-        { title: 'La transparence', text: 'Simple, transparent, et toujours à votre écoute : voilà notre promesse.' },
+        { title: 'Le réemploi', text: 'Prolonger la vie des matériaux, réduire les déchets.' },
+        {
+          title: 'La transparence',
+          text: 'Simple, transparent, et toujours à votre écoute : voilà notre promesse.',
+        },
       ],
     },
 
-    // Section 9 : qualifications (cartes Scierie Savoldelli, PRECI et FEADER retirées : voir points à valider)
+    // Qualifications
     {
       type: 'cards',
       variant: 'icon',
       columns: 2,
+      tone: 'light',
       kicker: 'Qualifications',
       title: 'Des **qualifications** vérifiables',
       items: [
         {
           title: 'Qualification RGE (Qualibat)',
           icon: 'medal',
-          text: "RGE signifie « reconnu garant de l'environnement ». Notre qualification QUALIBAT-RGE, enregistrée au nom de Jean-Michel Tardy, couvre cinq domaines :\n\n- isolation des murs par l'extérieur ;\n- isolation des toitures par l'extérieur ;\n- isolation par l'intérieur des murs ou rampants de toitures ou plafonds ;\n- fenêtres de toit ;\n- fenêtres, volets, portes donnant sur l'extérieur.\n\nElle ouvre l'accès aux aides publiques à la rénovation énergétique, sous conditions. Vous pouvez la vérifier dans l'annuaire officiel des professionnels RGE.",
+          text: "« Reconnu garant de l'environnement », au nom de Jean-Michel Tardy : isolation des murs et des toitures, par l'extérieur ou par l'intérieur, fenêtres de toit, menuiseries extérieures. Elle ouvre l'accès aux aides, sous conditions.",
           link: { label: 'Vérifier notre qualification', href: RGE_DIRECTORY },
         },
         {
@@ -231,36 +203,51 @@ export const page: SeedPage = {
       ],
     },
 
-    // Section 10 : 3B Récup' (teaser)
+    // 3B Récup'
     {
-      type: 'cta',
-      variant: 'card',
-      badge: "3B Récup'",
+      type: 'textImage',
+      kicker: "3B Récup'",
       title: '**Prolonger la vie** des matériaux de construction',
-      text: "Avec 3B Récup', nous voulons prolonger la vie des matériaux de construction, réduisant ainsi les déchets et l'impact environnemental, tout en offrant des solutions esthétiques et économiques. Nous déposons les structures bois, les transformons dans nos ateliers et les réemployons sur nos chantiers.\n\n- Réduire l'impact environnemental\n- Maximiser l'utilisation des ressources",
-      primary: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
-      image: P.gardeCorpsReemploi,
+      text: "Avec 3B Récup', nous déposons les structures bois, les transformons dans nos ateliers et les réemployons sur nos chantiers.",
+      points: [
+        "Réduire l'impact environnemental",
+        "Maximiser l'utilisation des ressources",
+        'Des solutions esthétiques et économiques',
+      ],
+      badge: "3B Récup'",
+      images: [P.gardeCorpsReemploi],
+      imagePosition: 'right',
+      cta: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
     },
 
-    // Section 11 : où nous trouver
+    // Où nous trouver
     {
       type: 'serviceArea',
-      tone: 'cream',
+      tone: 'light',
       kicker: 'Où nous trouver',
       title: "Installés à **L'Argentière-la-Bessée**",
-      text: "3B Charpente, 5 rue Saint-Michel, 05120 L'Argentière-la-Bessée. Basés dans le nord des Hautes-Alpes, nous intervenons dans tout le département, mais aussi en Provence-Alpes-Côte d'Azur et en Auvergne-Rhône-Alpes.",
+      text: "5 rue Saint-Michel, 05120 L'Argentière-la-Bessée. Nous intervenons dans tout le département, mais aussi en Provence-Alpes-Côte d'Azur et en Auvergne-Rhône-Alpes.",
       sectors: [
-        { title: 'Briançon', link: { label: 'Charpentier à Briançon', href: '/charpentier-briancon/' } },
-        { title: 'Serre Chevalier', link: { label: 'Charpentier à Serre Chevalier', href: '/charpentier-serre-chevalier/' } },
+        {
+          title: 'Briançon',
+          link: { label: 'Charpentier à Briançon', href: '/charpentier-briancon/' },
+        },
+        {
+          title: 'Serre Chevalier',
+          link: { label: 'Charpentier à Serre Chevalier', href: '/charpentier-serre-chevalier/' },
+        },
         {
           title: 'Vallouise et Pays des Écrins',
-          link: { label: 'Charpentier en Vallouise et Pays des Écrins', href: '/charpentier-vallouise-pays-des-ecrins/' },
+          link: {
+            label: 'Charpentier en Vallouise et Pays des Écrins',
+            href: '/charpentier-vallouise-pays-des-ecrins/',
+          },
         },
       ],
       showMap: false,
     },
 
-    // Section 12 : FAQ
+    // FAQ
     {
       type: 'faq',
       kicker: 'Questions fréquentes',
@@ -268,13 +255,13 @@ export const page: SeedPage = {
       faqs: ['a-propos-q1', 'a-propos-q2', 'a-propos-q3', 'a-propos-q4', 'a-propos-q5'],
     },
 
-    // Section 13 : appel à l'action final
+    // Appel à l'action final
     {
       type: 'cta',
       variant: 'card',
       kicker: 'Travaillons ensemble',
       title: 'Parlons de votre **projet**',
-      text: 'Nous sommes là pour répondre à toutes vos questions et discuter de vos projets de construction et de rénovation.',
+      text: 'Une question, un projet de construction ou de rénovation ? Nous sommes là pour en parler.',
       primary: { label: 'Demander mon devis', href: '/contact/' },
       secondary: { label: 'Appeler le {telephone}', href: 'tel' },
     },
@@ -284,37 +271,37 @@ export const page: SeedPage = {
     {
       key: 'a-propos-q1',
       topic: 'general',
-      question: 'Qui a fondé 3B Charpente ?',
+      question: 'Qui a fondé 3B Charpente ?',
       answer:
-        "3B Charpente a été fondée en 2007 par Jean-Michel Tardy, charpentier originaire des montagnes grenobloises. Il a débuté en 1995, apprenti à 16 ans dans une entreprise de Savoie, puis s'est formé chez les Compagnons du Devoir et sur le Tour de France, en France métropolitaine, en Martinique et en Autriche. Après deux ans comme formateur à L'Argentière-la-Bessée, il a créé l'entreprise dans les Hautes-Alpes.",
+        "Jean-Michel Tardy, en 2007. Charpentier originaire des montagnes grenobloises, il débute en 1995, apprenti à 16 ans en Savoie, puis se forme chez les Compagnons du Devoir et sur le Tour de France : métropole, Martinique, Autriche. Après deux ans comme formateur à L'Argentière-la-Bessée, il y crée l'entreprise.",
     },
     {
       key: 'a-propos-q2',
       topic: 'general',
-      question: 'Que signifie « 3B » dans 3B Charpente ?',
+      question: 'Que signifie « 3B » dans 3B Charpente ?',
       answer:
-        "3B veut dire Bio, Bâti, Bois. Bio vient du grec ancien βίος, qui exprime l'idée de vie. Bâti vient de l'ancien français bastir, qui porte l'idée d'entrelacer, d'assembler. Le bois, enfin, est un être vivant. Ces trois mots résument notre façon de travailler : des maisons saines, des assemblages de charpentier et du bois local ou de réemploi.",
+        "Bio, Bâti, Bois. Bio vient du grec βίος, l'idée de vie. Bâti vient de l'ancien français bastir, entrelacer, assembler. Le bois, enfin, est un être vivant. Trois mots pour notre façon de travailler : des maisons saines, des assemblages de charpentier, du bois local ou de réemploi.",
     },
     {
       key: 'a-propos-q3',
       topic: 'general',
-      question: 'Jean-Michel Tardy a-t-il été formé chez les Compagnons du Devoir ?',
+      question: 'Jean-Michel Tardy a-t-il été formé chez les Compagnons du Devoir ?',
       answer:
-        "Oui. Jean-Michel Tardy a préparé son CAP dans un CFA des Compagnons du Devoir, puis il a effectué son Tour de France : il s'est formé dans des entreprises de France métropolitaine, de Martinique et d'Autriche. Ce parcours se retrouve dans nos chantiers : charpentes tracées et taillées à l'atelier, assemblages traditionnels, montage à blanc avant le levage.",
+        "Oui. Il a préparé son CAP dans un CFA des Compagnons du Devoir, puis fait son Tour de France dans des entreprises de métropole, de Martinique et d'Autriche. On le retrouve sur nos chantiers : charpentes taillées à l'atelier, assemblages traditionnels, montage à blanc avant le levage.",
     },
     {
       key: 'a-propos-q4',
       topic: 'general',
-      question: '3B Charpente est-elle qualifiée RGE ?',
+      question: '3B Charpente est-elle qualifiée RGE ?',
       answer:
-        "Oui. 3B Charpente détient la qualification QUALIBAT-RGE, enregistrée au nom de Jean-Michel Tardy dans l'annuaire officiel des professionnels RGE. Elle couvre l'isolation des murs et des toitures par l'extérieur, l'isolation par l'intérieur des murs, rampants et plafonds, les fenêtres de toit, ainsi que les fenêtres, volets et portes donnant sur l'extérieur. Elle ouvre l'accès aux aides publiques à la rénovation énergétique, sous conditions.",
+        "Oui, QUALIBAT-RGE, au nom de Jean-Michel Tardy dans l'annuaire officiel. Elle couvre l'isolation des murs et des toitures par l'extérieur, l'isolation par l'intérieur des murs, rampants et plafonds, les fenêtres de toit et les menuiseries extérieures. Elle ouvre l'accès aux aides publiques, sous conditions.",
     },
     {
       key: 'a-propos-q5',
       topic: 'charpente',
-      question: "D'où vient le bois que vous utilisez ?",
+      question: "D'où vient le bois que vous utilisez ?",
       answer:
-        "Nous utilisons principalement du mélèze et du sapin provenant des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli. Selon les chantiers, d'autres essences entrent en jeu, comme le douglas, l'épicéa ou le frêne. Nous intégrons aussi du bois de réemploi : déposé sur des chantiers de déconstruction, il est trié, nettoyé et usiné dans nos ateliers avec 3B Récup'.",
+        "Surtout du mélèze et du sapin des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli. Selon les chantiers : douglas, épicéa ou frêne. Et du bois de réemploi, déposé sur des chantiers de déconstruction, puis trié, nettoyé et usiné dans nos ateliers avec 3B Récup'.",
     },
   ],
 
@@ -323,14 +310,23 @@ export const page: SeedPage = {
       photo: P.assemblageBlanc,
       alt: "Assemblage à blanc d'une charpente à l'atelier avant le levage, chantier de L'Argentière-la-Bessée",
     },
-    { photo: P.levageFermes, alt: "Levage des fermes d'une charpente par l'équipe de 3B Charpente" },
+    {
+      photo: P.levageFermes,
+      alt: "Levage des fermes d'une charpente par l'équipe de 3B Charpente",
+    },
     {
       photo: P.chaletNordOuest,
       alt: 'Chalet des années 1980 rénové et isolé en fibres végétales et fibre de bois à Vallouise',
     },
     { photo: P.tailleTenon, alt: "Taille à la besaiguë d'un tenon à double embrèvement" },
-    { photo: P.tailleCharpentePrelles, alt: "Taille d'une charpente en mélèze du pays pour une maison à Prelles" },
-    { photo: P.soleilCouchant, alt: "Charpente apparente d'une maison à ossature bois au soleil couchant" },
+    {
+      photo: P.tailleCharpentePrelles,
+      alt: "Taille d'une charpente en mélèze du pays pour une maison à Prelles",
+    },
+    {
+      photo: P.soleilCouchant,
+      alt: "Charpente apparente d'une maison à ossature bois au soleil couchant",
+    },
     {
       photo: P.gardeCorpsReemploi,
       alt: "Garde-corps en bois de réemploi posé par 3B Charpente à L'Argentière-la-Bessée",
@@ -347,22 +343,23 @@ export const page: SeedPage = {
     },
     {
       question: "Abel Hamadene, chef d'équipe : nom, rôle et accord pour la publication ?",
-      decision: 'Créé non visible dans l\'administration, en attendant son accord.',
+      decision: "Créé non visible dans l'administration, en attendant son accord.",
       priority: 'normal',
     },
     {
-      question: 'Claire Patin, responsable organisation : nom, rôle et accord pour la publication ?',
-      decision: 'Créée non visible dans l\'administration, en attendant son accord.',
+      question:
+        'Claire Patin, responsable organisation : nom, rôle et accord pour la publication ?',
+      decision: "Créée non visible dans l'administration, en attendant son accord.",
       priority: 'normal',
     },
     {
       question: 'Mickael Oudot, charpentier : nom, rôle et accord pour la publication ?',
-      decision: 'Créé non visible dans l\'administration, en attendant son accord.',
+      decision: "Créé non visible dans l'administration, en attendant son accord.",
       priority: 'normal',
     },
     {
       question: 'Chloé Nicod, apprentie : nom, rôle et accord pour la publication ?',
-      decision: 'Créée non visible dans l\'administration, en attendant son accord.',
+      decision: "Créée non visible dans l'administration, en attendant son accord.",
       priority: 'normal',
     },
     {
@@ -386,23 +383,27 @@ export const page: SeedPage = {
     {
       question:
         "Formateur : dans quel organisme Jean a-t-il été formateur à L'Argentière-la-Bessée ? Peut-on le citer ? (« là où il avait été formateur » est à relire par Jean.)",
-      decision: "Organisme non cité. Texte conservé : « deux ans formateur à L'Argentière-la-Bessée ».",
+      decision:
+        "Organisme non cité. Texte conservé : « deux ans formateur à L'Argentière-la-Bessée ».",
       priority: 'low',
     },
     {
       question: "3B Récup' : année de lancement, pour la frise ?",
-      decision: "Étape retirée de la frise : la date de création de 3B Récup' n'est pas mentionnée.",
+      decision:
+        "Étape retirée de la frise : la date de création de 3B Récup' n'est pas mentionnée.",
       priority: 'normal',
     },
     {
-      question: 'Date de création : 2007 correspond-il à la date d\'immatriculation au répertoire SIRENE (SIREN 494 482 714) ?',
+      question:
+        "Date de création : 2007 correspond-il à la date d'immatriculation au répertoire SIRENE (SIREN 494 482 714) ?",
       decision: '2007 conservé (« Depuis 2007 »).',
       priority: 'normal',
     },
     {
-      question: 'Scierie Savoldelli : accord de la scierie pour la citer comme partenaire, avec logo et lien ?',
+      question:
+        'Scierie Savoldelli : accord de la scierie pour la citer comme partenaire, avec logo et lien ?',
       decision:
-        "Carte « Scierie Savoldelli » retirée. La scierie est nommée une seule fois sur la page, dans la FAQ (« notre partenaire local, la Scierie Savoldelli ») ; la carte « Bois » dit seulement « notre partenaire local ». Pas de logo, pas de lien, pas de photo.",
+        'Carte « Scierie Savoldelli » retirée. La scierie est nommée une seule fois sur la page, dans la FAQ (« notre partenaire local, la Scierie Savoldelli ») ; la carte « Bois » dit seulement « notre partenaire local ». Pas de logo, pas de lien, pas de photo.',
       priority: 'high',
     },
     {
@@ -428,7 +429,7 @@ export const page: SeedPage = {
       question:
         "Section « Qualifications et partenaires » : titre « Des qualifications vérifiables, des partenaires d'ici » alors qu'aucune carte partenaire n'est publiée ?",
       decision:
-        "Titre raccourci en « Des qualifications vérifiables », surtitre « Qualifications » (cartes RGE et Compagnons du Devoir). À rétablir si un partenaire est validé.",
+        'Titre raccourci en « Des qualifications vérifiables », surtitre « Qualifications » (cartes RGE et Compagnons du Devoir). À rétablir si un partenaire est validé.',
       priority: 'low',
     },
     {
@@ -440,13 +441,14 @@ export const page: SeedPage = {
     },
     {
       question:
-        'Photos : portrait de Jean-Michel Tardy (indispensable), portraits de l\'équipe, photo de groupe, atelier, photo du Tour de France, logos Scierie Savoldelli et RGE Qualibat ?',
+        "Photos : portrait de Jean-Michel Tardy (indispensable), portraits de l'équipe, photo de groupe, atelier, photo du Tour de France, logos Scierie Savoldelli et RGE Qualibat ?",
       decision:
         "Aucun portrait : héros illustré par « assemblage à blanc » (repli de la fiche), section du fondateur par « Taille de la charpente » (ancienne forge de La Salle-les-Alpes). Aucune photo de banque d'images. Photo d'ambiance « forêt » utilisée une fois, en fond des valeurs.",
       priority: 'high',
     },
     {
-      question: "Frise : « Aujourd'hui : une entreprise qualifiée RGE, 24 chantiers présentés sur ce site. »",
+      question:
+        "Frise : « Aujourd'hui : une entreprise qualifiée RGE, 24 chantiers présentés sur ce site. »",
       decision:
         "Raccourci en « Une entreprise qualifiée RGE. » : 23 chantiers sont publiés (l'isolation d'une voûte, sans photo, n'a pas de page).",
       priority: 'low',

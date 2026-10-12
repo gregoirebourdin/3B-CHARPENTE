@@ -1,9 +1,8 @@
 .card {
   overflow-x: auto;
-  padding: var(--space-2);
-  border-radius: var(--radius-lg);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-md);
   background: var(--bg-card);
-  box-shadow: var(--shadow-sm);
 }
 
 .table {
@@ -21,17 +20,21 @@
 }
 
 .table thead th {
-  color: var(--fg-muted);
+  background: var(--c-sage-tint);
+  color: var(--c-forest);
   font-size: var(--fs-xs);
-  font-weight: 650;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
+.table td {
+  color: var(--fg-body);
+}
+
 .table tbody th {
-  font-family: var(--font-heading);
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 0.98rem;
+  font-weight: 650;
 }
 
 .table tbody tr:last-child > * {
@@ -67,12 +70,16 @@
     display: block;
   }
 
+  .card {
+    border: 0;
+  }
+
   .table tr {
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
     padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--c-line);
     border-radius: var(--radius-md);
     background: var(--bg-card);
-    box-shadow: var(--shadow-sm);
   }
 
   .table th,

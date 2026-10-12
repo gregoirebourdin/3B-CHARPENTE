@@ -14,7 +14,7 @@ export const project: SeedProject = {
   summary:
     'Terrasse couverte et local technique, abri de voiture en prolongement de toiture et plancher en mélèze du pays.',
   description:
-    "À Champcella, nous avons construit une terrasse couverte. Sa toiture se prolonge pour abriter une voiture, et l'ensemble accueille aussi un local technique. Le plancher est en mélèze de pays, c'est-à-dire en mélèze local, et les assemblages restent visibles. Une terrasse couverte permet de profiter de l'extérieur à l'abri de la pluie et de la neige.",
+    "À Champcella, nous avons construit une terrasse couverte. Sa toiture se prolonge pour abriter une voiture, et l'ensemble accueille aussi un local technique.\n\nLe plancher est en mélèze de pays, c'est-à-dire en mélèze local, et les assemblages restent visibles. Une terrasse couverte permet de profiter de l'extérieur à l'abri de la pluie et de la neige.",
   steps: [
     {
       title: 'Charpente de la terrasse couverte',

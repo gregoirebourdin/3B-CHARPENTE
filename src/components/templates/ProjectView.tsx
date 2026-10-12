@@ -2,7 +2,6 @@ import Link from 'next/link'
 
 import { PhotoGrid } from '@/components/blocks/Gallery'
 import { ProjectCard, projectCommune, projectServices } from '@/components/blocks/ProjectCard'
-import { Decor } from '@/components/blocks/Decor'
 import { AccentTitle } from '@/components/ui/AccentTitle'
 import { ButtonGroup, CmsLink } from '@/components/ui/CmsLink'
 import { Icon } from '@/components/ui/Icon'
@@ -21,12 +20,18 @@ import { pathFor } from '@/payload/utilities/routes'
 import { PageHero } from './PageHero'
 import styles from './ProjectView.module.css'
 
-const internal = (href: string, label: string): ResolvedLink => ({ href, label, external: false, kind: 'internal' })
+const internal = (href: string, label: string): ResolvedLink => ({
+  href,
+  label,
+  external: false,
+  kind: 'internal',
+})
 
 /** "Taille." + "Chaque pièce…" → bold title + text; "Abri voiture" + "dans le prolongement…" → one sentence. */
 function stepParts(title: string, text?: string | null) {
   if (!text) return { title, rest: '' }
-  if (/^[a-zàâçéèêëîïôûùüÿœ]/.test(text)) return { title: title.replace(/[.:]\s*$/, ''), rest: ` ${text}` }
+  if (/^[a-zàâçéèêëîïôûùüÿœ]/.test(text))
+    return { title: title.replace(/[.:]\s*$/, ''), rest: ` ${text}` }
   return { title: /[.!?:]$/.test(title) ? title : `${title}.`, rest: ` ${text}` }
 }
 
@@ -39,7 +44,11 @@ export async function ProjectView({ project }: { project: Project }) {
   const services = projectServices(project)
   const main = services[0]
   const place = project.locality || commune?.name
-  const crumbs = [await homeCrumb(), await listingCrumb('realisations'), { name: project.shortTitle || project.title, path }]
+  const crumbs = [
+    await homeCrumb(),
+    await listingCrumb('realisations'),
+    { name: project.shortTitle || project.title, path },
+  ]
 
   const mainLink = (() => {
     const link = project.mainLink
@@ -50,21 +59,33 @@ export async function ProjectView({ project }: { project: Project }) {
     return main ? { href: pathFor('services', main) ?? '/', title: main.title } : null
   })()
 
-  const sector = commune?.sector && typeof commune.sector === 'object' ? (commune.sector as Page) : null
-  const sectorName = sector ? sector.breadcrumbLabel || sector.title.replace(/^Charpentier (à|en|au|aux)\s+/i, '') : ''
+  const sector =
+    commune?.sector && typeof commune.sector === 'object' ? (commune.sector as Page) : null
+  const sectorName = sector
+    ? sector.breadcrumbLabel || sector.title.replace(/^Charpentier (à|en|au|aux)\s+/i, '')
+    : ''
 
   const related: Project[] = (() => {
-    const chosen = (project.related ?? []).filter((item): item is Project => typeof item === 'object' && item !== null)
+    const chosen = (project.related ?? []).filter(
+      (item): item is Project => typeof item === 'object' && item !== null,
+    )
     return chosen
   })()
   const similar = related.length
     ? related
     : main
-      ? (await getProjects(JSON.stringify({ services: { contains: main.id } }), 4)).filter((p) => p.id !== project.id).slice(0, 3)
+      ? (await getProjects(JSON.stringify({ services: { contains: main.id } }), 4))
+          .filter((p) => p.id !== project.id)
+          .slice(0, 3)
       : []
 
   const facts = [
-    { label: t.factCommune, value: place ? `${place}${commune && commune.name !== place ? ` (${commune.name})` : ''}${commune?.department ? `, ${commune.department}` : ''}` : null },
+    {
+      label: t.factCommune,
+      value: place
+        ? `${place}${commune && commune.name !== place ? ` (${commune.name})` : ''}${commune?.department ? `, ${commune.department}` : ''}`
+        : null,
+    },
     { label: t.factService, value: main?.title ?? null, href: mainLink?.href },
     { label: t.factYear, value: project.facts?.year },
     { label: t.factDuration, value: project.facts?.duration },
@@ -77,7 +98,9 @@ export async function ProjectView({ project }: { project: Project }) {
     .filter((item) => isMedia(item.image))
     .map((item) => ({ image: item.image as Media, caption: item.caption }))
 
-  const introTitle = starTitle(place ? template(t.introTitle, { commune: place }) : t.introTitleNoCommune)
+  const introTitle = starTitle(
+    place ? template(t.introTitle, { commune: place }) : t.introTitleNoCommune,
+  )
   const stepsTitle = starTitle(t.stepsTitle)
   const galleryTitle = starTitle(template(t.galleryTitle, { n: gallery.length }))
   const materialsTitle = starTitle(t.materialsTitle)
@@ -85,22 +108,39 @@ export async function ProjectView({ project }: { project: Project }) {
   const similarTitle = starTitle(t.similarTitle)
   const ctaTitle = starTitle(t.ctaTitle)
   const contactHref = `/contact/${main ? `?projet=${main.slug}` : ''}`
-  const tel = { href: `tel:${phoneToE164(company.phone)}`, label: template(t.ctaSecondary, { telephone: company.phone }), external: false, kind: 'phone' as const }
+  const tel = {
+    href: `tel:${phoneToE164(company.phone)}`,
+    label: template(t.ctaSecondary, { telephone: company.phone }),
+    external: false,
+    kind: 'phone' as const,
+  }
 
   return (
     <>
       <PageHero
-        hero={{ variant: 'photo', title: project.title.replace(/\*\*/g, ''), titleAccent: project.titleAccent, images: [project.heroImage] }}
+        hero={{
+          variant: 'photo',
+          title: project.title.replace(/\*\*/g, ''),
+          titleAccent: project.titleAccent,
+          images: [project.heroImage],
+        }}
         company={company}
         breadcrumbs={crumbs}
         tags={[place, ...(project.tags ?? [])].filter((tag): tag is string => Boolean(tag))}
-        actions={{ primary: internal(contactHref, t.heroPrimary), secondary: internal('/realisations/', t.heroSecondary) }}
+        actions={{
+          primary: internal(contactHref, t.heroPrimary),
+          secondary: internal('/realisations/', t.heroSecondary),
+        }}
       />
 
       <Section tone="cream">
         <div className={styles.intro}>
           <div>
-            <SectionHeading kicker={t.introKicker} title={introTitle.title} accent={introTitle.accent} />
+            <SectionHeading
+              kicker={t.introKicker}
+              title={introTitle.title}
+              accent={introTitle.accent}
+            />
             <RichText data={project.description} className={styles.description} />
           </div>
           {facts.length ? (
@@ -123,12 +163,20 @@ export async function ProjectView({ project }: { project: Project }) {
 
       {project.steps?.length ? (
         <Section tone="light">
-          <SectionHeading kicker={t.stepsKicker} title={stepsTitle.title} accent={stepsTitle.accent} />
+          <SectionHeading
+            kicker={t.stepsKicker}
+            title={stepsTitle.title}
+            accent={stepsTitle.accent}
+          />
           <ol className={styles.steps}>
             {project.steps.map((step, index) => {
               const parts = stepParts(step.title, step.text)
               return (
-                <li key={step.id ?? index} data-reveal="" style={{ ['--reveal-delay' as string]: `${(index % 3) * 70}ms` }}>
+                <li
+                  key={step.id ?? index}
+                  data-reveal=""
+                  style={{ ['--reveal-delay' as string]: `${(index % 3) * 70}ms` }}
+                >
                   <span className={styles.stepNumber}>{String(index + 1).padStart(2, '0')}</span>
                   <p>
                     <strong>{parts.title}</strong>
@@ -143,7 +191,11 @@ export async function ProjectView({ project }: { project: Project }) {
 
       {gallery.length ? (
         <Section tone="cream" anchor="photos">
-          <SectionHeading kicker={t.galleryKicker} title={galleryTitle.title} accent={galleryTitle.accent} />
+          <SectionHeading
+            kicker={t.galleryKicker}
+            title={galleryTitle.title}
+            accent={galleryTitle.accent}
+          />
           <PhotoGrid items={gallery} id="galerie-chantier" />
         </Section>
       ) : null}
@@ -151,7 +203,11 @@ export async function ProjectView({ project }: { project: Project }) {
       {project.materials?.length ? (
         <Section tone="light">
           <div className={styles.materials}>
-            <SectionHeading kicker={t.materialsKicker} title={materialsTitle.title} accent={materialsTitle.accent} />
+            <SectionHeading
+              kicker={t.materialsKicker}
+              title={materialsTitle.title}
+              accent={materialsTitle.accent}
+            />
             <div data-reveal="">
               <ul className={styles.materialList}>
                 {project.materials.map((material, index) => (
@@ -221,11 +277,19 @@ export async function ProjectView({ project }: { project: Project }) {
 
       {similar.length ? (
         <Section tone="light">
-          <SectionHeading kicker={t.similarKicker} title={similarTitle.title} accent={similarTitle.accent} />
+          <SectionHeading
+            kicker={t.similarKicker}
+            title={similarTitle.title}
+            accent={similarTitle.accent}
+          />
           <ul className={styles.similar}>
             {similar.map((item) => (
               <li key={item.id} data-reveal="">
-                <ProjectCard project={item} linkLabel={texts.general.projectCardLink} photosLabel={texts.general.projectPhotos} />
+                <ProjectCard
+                  project={item}
+                  linkLabel={texts.general.projectCardLink}
+                  photosLabel={texts.general.projectPhotos}
+                />
               </li>
             ))}
           </ul>
@@ -235,23 +299,41 @@ export async function ProjectView({ project }: { project: Project }) {
         </Section>
       ) : null}
 
-      <section className={styles.cta}>
-        <Decor />
-        <div className={`container ${styles.ctaInner}`} data-reveal="">
-          <AccentTitle as="h2" title={ctaTitle.title} accent={ctaTitle.accent} className={styles.ctaTitle} />
-          <p className={styles.ctaText}>{t.ctaText}</p>
-          <ButtonGroup className={styles.ctaActions}>
-            <CmsLink link={internal(contactHref, t.ctaPrimary)} variant="light" size="large" arrow />
-            <CmsLink link={tel} variant="outlineLight" size="large" />
-          </ButtonGroup>
-          <p className={styles.ctaAddress}>
-            {company.name}, {company.address.street}, {company.address.postalCode} {company.address.city}, {company.phone}
-          </p>
+      <section className={styles.ctaWrap} data-tone="forest">
+        <div className={`container`}>
+          <div className={styles.cta} data-reveal="">
+            <div className={styles.ctaInner}>
+              <AccentTitle
+                as="h2"
+                title={ctaTitle.title}
+                accent={ctaTitle.accent}
+                className={styles.ctaTitle}
+              />
+              <p className={styles.ctaText}>{t.ctaText}</p>
+              <ButtonGroup className={styles.ctaActions}>
+                <CmsLink
+                  link={internal(contactHref, t.ctaPrimary)}
+                  variant="light"
+                  size="large"
+                  arrow
+                />
+                <CmsLink link={tel} variant="outlineLight" size="large" />
+              </ButtonGroup>
+              <p className={styles.ctaAddress}>
+                {company.name}, {company.address.street}, {company.address.postalCode}{' '}
+                {company.address.city}, {company.phone}
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       <JsonLd
-        data={graph([webPage(path, project.title, project.meta?.description), projectSchema(project, path, project.meta?.description), breadcrumbList(crumbs)])}
+        data={graph([
+          webPage(path, project.title, project.meta?.description),
+          projectSchema(project, path, project.meta?.description),
+          breadcrumbList(crumbs),
+        ])}
       />
     </>
   )

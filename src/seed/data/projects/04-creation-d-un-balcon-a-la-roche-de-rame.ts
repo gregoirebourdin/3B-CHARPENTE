@@ -12,7 +12,7 @@ export const project: SeedProject = {
   heroImage: "creation-d-un-balcon-a-la-roche-de-rame/vue d'ensemble.JPG",
   summary: 'Un balcon porté par des portiques, avec sa balustrade en mélèze.',
   description:
-    "À La Roche-de-Rame, nous avons créé un balcon en mélèze. Il est porté par des portiques : des cadres en bois faits de poteaux et d'une poutre. Ces cadres reprennent le poids du balcon, qui ne pèse pas seulement sur la façade. Une balustrade en mélèze le borde. Avec le sapin, le mélèze est l'essence que nous utilisons le plus ; il pousse dans les forêts des Hautes-Alpes.",
+    "À La Roche-de-Rame, nous avons créé un balcon en mélèze. Il est porté par des portiques : des cadres en bois faits de poteaux et d'une poutre. Ces cadres reprennent le poids du balcon, qui ne pèse pas seulement sur la façade.\n\nUne balustrade en mélèze le borde. Avec le sapin, le mélèze est l'essence que nous utilisons le plus ; il pousse dans les forêts des Hautes-Alpes.",
   steps: [
     {
       title: 'Portiques porteurs en mélèze',

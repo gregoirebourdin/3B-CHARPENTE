@@ -41,9 +41,9 @@ export const page: SeedPage = {
 
   hero: {
     variant: 'collage',
-    kicker: 'Charpente · Isolation biosourcée · Ossature bois · Réemploi',
+    kicker: "Charpentier depuis 2007 à L'Argentière-la-Bessée",
     title: "**Charpentiers** à Briançon, L'Argentière-la-Bessée et dans les **Hautes-Alpes**",
-    text: "3B Charpente transforme le **bois des Hautes-Alpes** en charpentes, maisons et rénovations faites pour durer. Nous travaillons le mélèze et le sapin du pays, des **isolants biosourcés** et du **bois de réemploi**, pour des constructions écoresponsables à Briançon et dans ses environs.",
+    text: 'Charpente, ossature bois, isolation biosourcée et réemploi : nous travaillons le **bois des Hautes-Alpes** pour des maisons saines, faites pour durer.',
     primaryCta: { label: 'Demander mon devis', href: '/contact/' },
     secondaryCta: { label: 'Voir nos réalisations', href: '/realisations/' },
     proofs: [
@@ -55,149 +55,74 @@ export const page: SeedPage = {
     highlight: 'refection-d-une-charpente-a-l-argentiere-la-bessee',
   },
 
-  tldr: "3B Charpente est une entreprise de charpente bois fondée en 2007 par Jean-Michel Tardy, formé chez les Compagnons du Devoir, et installée à L'Argentière-la-Bessée (Hautes-Alpes). Elle réalise charpentes, rénovations, isolation biosourcée avec la qualification RGE, maisons ossature bois, escaliers et balcons, en bois local. Avec 3B Récup', elle déconstruit et réemploie le bois.",
+  tldr: "3B Charpente est une entreprise de charpente bois fondée en 2007 à L'Argentière-la-Bessée (Hautes-Alpes) par Jean-Michel Tardy, formé chez les Compagnons du Devoir. Charpentes, rénovations, isolation biosourcée RGE, ossature bois, escaliers et balcons : en bois local, et en bois de réemploi avec 3B Récup'.",
 
   layout: [
-    // Section 4 : prestations (les textes des cartes viennent des prestations)
+    // Les prestations (les textes des cartes viennent des prestations)
     {
       type: 'servicesGrid',
       mode: 'all',
+      tone: 'light',
       kicker: 'Nos prestations',
       title: "Tous nos **métiers du bois**, de la charpente à l'**isolation**",
       cta: { label: 'Parler de mon projet', href: '/contact/' },
     },
 
-    // Section 3 : manifeste
+    // Chiffres et engagements
     {
-      type: 'manifesto',
-      layout: 'centered',
-      kicker: 'Notre façon de travailler',
-      title: 'Construire **simplement**, penser **durablement**.',
-      text: 'Chez 3B Charpente, nous faisons les choses différemment. Notre engagement pour le bois local et les techniques écoresponsables nous distingue dans les Hautes-Alpes, à Briançon comme dans les communes voisines.\n\nNous privilégions les matériaux sains et le réemploi pour limiter notre impact sur l\'environnement. Chaque charpente ou rénovation de chalet est le fruit d\'un travail étroit avec vous : nous l\'adaptons à votre maison, à vos usages et à vos goûts.',
-      emphasis: 'Simple, transparent, et toujours à votre écoute : voilà notre promesse.',
-      image: 'ambiance/foret.png',
-      cta: { label: 'Découvrir notre histoire', href: '/a-propos/' },
-    },
-
-    // Section 5 : 3B Récup'
-    {
-      type: 'spotlight',
-      badge: "3B Récup'",
-      kicker: 'Déconstruction et réemploi du bois',
-      title: 'Donner une **seconde vie** au bois des **bâtiments déconstruits**',
-      text: "3B Récup' est l'initiative de 3B Charpente dédiée au réemploi des matériaux et à la déconstruction sélective : démonter un bâtiment élément par élément pour récupérer ce qui peut resservir.\n\nCharpentiers de métier, nous déposons les structures bois, du bâtiment industriel à la maison particulière. Le bois est trié, nettoyé et usiné dans nos ateliers, puis réemployé sur nos chantiers.\n\n**Architectes, entreprises, collectivités, particuliers : 3B Récup' vous apporte des solutions personnalisées.**",
-      steps: [
-        {
-          title: 'Diagnostic',
-          text: 'Repérer les matériaux réemployables, en lien avec le diagnostic PEMD (produits, équipements, matériaux et déchets), exigé avant certaines démolitions.',
-        },
-        { title: 'Stratégie', text: 'Une feuille de route pour déposer sans abîmer.' },
-        { title: 'Intervention', text: 'Nos charpentiers déposent les éléments sur site.' },
-        { title: 'Transformation', text: "Tri, nettoyage et usinage à l'atelier." },
-        { title: 'Repose', text: "Notre système constructif s'adapte au bois de réemploi." },
-      ],
-      primary: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
-      links: [
-        { label: 'Diagnostic et gisement (PEMD)', href: '/3b-recup/diagnostic-pemd/' },
-        { label: 'Déconstruction sélective', href: '/3b-recup/deconstruction-selective/' },
-        { label: 'Bois de réemploi', href: '/3b-recup/bois-de-reemploi/' },
-      ],
-      images: [P.bardageVieuxBois, P.gardeCorpsReemploi, P.fermeVieuxBois],
-    },
-
-    // Section 6 : 3B = Bio, Bâti, Bois
-    {
-      type: 'cards',
-      variant: 'letter',
-      columns: 3,
-      tone: 'light',
-      kicker: 'Pourquoi « 3B » ?',
-      title: '**Bio**, **Bâti**, **Bois** : trois mots pour une façon de construire',
+      type: 'figures',
+      kicker: "L'atelier en quelques chiffres",
+      title: "Un **savoir-faire** de compagnon, des **matériaux** d'ici",
       items: [
-        {
-          letter: 'B',
-          title: 'Bio',
-          eyebrow: "du grec ancien βίος, qui exprime l'idée de vie.",
-          text: 'Des maisons saines, isolées avec des matériaux biosourcés.',
-          image: P.insufflation,
-        },
-        {
-          letter: 'B',
-          title: 'Bâti',
-          eyebrow: "de l'ancien français bastir, idée d'entrelacer, d'assembler.",
-          text: "L'art d'assembler : tenons et mortaises chevillés, traits de Jupiter, fermes montées à blanc avant le levage.",
-          image: P.traitDeJupiter,
-        },
-        {
-          letter: 'B',
-          title: 'Bois',
-          eyebrow: 'un être vivant.',
-          text: 'Du mélèze et du sapin des Hautes-Alpes, et du bois de réemploi, à qui nous donnons une seconde vie.',
-          image: P.plancherMeleze,
-        },
+        { value: '2007', label: "Création de 3B Charpente à L'Argentière-la-Bessée." },
+        { value: '16', unit: 'ans', label: "L'âge de Jean-Michel Tardy à son premier jour d'apprenti, en 1995." },
+        { value: '28', unit: 'cm', label: "D'isolant biosourcé dans les murs du chalet de Vallouise." },
+        { value: '2', unit: 'jours', label: "Pour monter l'escalier quart tournant, finitions comprises." },
       ],
     },
-
-    // Section 7 : nos preuves (pas de portrait : vraie photo de chantier, à l'atelier)
     {
       type: 'cards',
       variant: 'icon',
-      kicker: 'Ce sur quoi vous pouvez compter',
-      title: "Un **savoir-faire** de compagnon, des **matériaux** d'ici",
-      asideImage: P.tailleCharpentePrelles,
+      columns: 3,
       items: [
         {
-          title: 'Depuis 2007',
-          icon: 'calendar',
-          text: "Installés à L'Argentière-la-Bessée depuis 2007 : la charpente d'abord, puis la rénovation de chalets et l'ossature bois.",
-        },
-        {
-          title: 'Formé chez les Compagnons du Devoir',
-          icon: 'ruler',
-          text: 'Jean-Michel Tardy, notre fondateur, a débuté à 16 ans, en 1995. CAP chez les Compagnons du Devoir, puis Tour de France : France métropolitaine, Martinique, Autriche.',
-        },
-        {
-          title: 'Qualifié RGE',
+          title: 'Qualifié RGE (Qualibat)',
           icon: 'medal',
-          text: "RGE veut dire « reconnu garant de l'environnement ». Notre qualification Qualibat couvre l'isolation des murs et des toitures et les menuiseries extérieures. Elle ouvre l'accès aux aides publiques à la rénovation énergétique, sous conditions.",
+          text: "Pour l'isolation des murs et des toitures : la porte d'accès aux aides publiques, sous conditions.",
           link: { label: 'Vérifier notre qualification', href: RGE_DIRECTORY },
         },
         {
           title: 'Du bois des Hautes-Alpes',
           icon: 'tree',
-          text: 'Principalement du mélèze et du sapin des Hautes-Alpes, sciés par notre partenaire local.',
+          text: 'Surtout du mélèze et du sapin, sciés par notre partenaire local.',
         },
         {
           title: 'Des isolants biosourcés',
           icon: 'leaf',
-          text: 'Ouate de cellulose, fibre de bois, laine de chanvre, lin et coton : 28 cm dans les murs du chalet de Vallouise, 32 cm en toiture.',
+          text: 'Ouate de cellulose, fibre de bois, laine de chanvre, lin et coton.',
         },
       ],
-      cta: { label: 'Qui sommes-nous ?', href: '/a-propos/' },
+      cta: { label: 'Qui sommes-nous ?', href: '/a-propos/' },
     },
 
-    // Section 8 : votre projet, étape par étape
+    // Manifeste
     {
-      type: 'steps',
-      variant: 'timeline',
-      tone: 'light',
-      kicker: 'Votre projet, étape par étape',
-      title: 'Chaque projet commence par une **étude sur mesure**',
-      steps: [
-        { title: 'Vous nous contactez', text: 'Par téléphone ou avec le formulaire, même en quelques lignes.' },
-        { title: 'Nous nous rencontrons', text: 'Nous parlons de vos besoins et vous donnons un calendrier estimatif.' },
-        { title: 'Vous recevez votre devis', text: 'Un devis détaillé, adapté à votre projet.' },
-        {
-          title: "Nous préparons à l'atelier",
-          text: "Traçage, taille et assemblage à blanc, c'est-à-dire un premier montage pour tout vérifier.",
-          image: P.assemblageBlancPrelles,
-        },
-        { title: 'Nous levons et posons', text: 'Levage, pose et finitions sur votre chantier.' },
+      type: 'manifesto',
+      layout: 'centered',
+      kicker: 'Notre façon de travailler',
+      title: 'Construire **simplement**, penser **durablement**.',
+      text: "Bois local, matériaux sains, réemploi : chaque charpente ou rénovation de chalet est pensée avec vous, pour votre maison, vos usages et vos goûts.",
+      items: [
+        { title: "Du bois d'ici", text: 'Mélèze et sapin des Hautes-Alpes : moins de transport, une filière locale qui vit.' },
+        { title: 'Des matériaux sains', text: 'Isolants biosourcés et bois de réemploi, pour limiter notre impact.' },
+        { title: 'Un travail sur mesure', text: 'Une étude pour chaque projet, adaptée à votre maison et à vos envies.' },
       ],
-      cta: { label: 'Demander mon devis', href: '/contact/' },
+      emphasis: 'Simple, transparent, et toujours à votre écoute : voilà notre promesse.',
+      image: 'ambiance/foret.png',
+      cta: { label: 'Découvrir notre histoire', href: '/a-propos/' },
     },
 
-    // Section 9 : réalisations (6 cartes)
+    // Réalisations (6 cartes)
     {
       type: 'projects',
       mode: 'manual',
@@ -209,7 +134,7 @@ export const page: SeedPage = {
           project: 'renovation-et-isolation-d-un-chalet-a-vallouise',
           tag: 'Vallouise',
           title: "Rénovation et isolation d'un chalet",
-          text: "Chalet des années 1980 : 28 cm d'isolant biosourcé dans les murs, 32 cm en toiture.",
+          text: "Chalet des années 1980 : 28 cm d'isolant biosourcé dans les murs, 32 cm en toiture.",
         },
         {
           project: 'refection-d-une-charpente-a-l-argentiere-la-bessee',
@@ -221,37 +146,114 @@ export const page: SeedPage = {
           project: 'renovation-d-une-copropriete-a-briancon',
           tag: 'Briançon',
           title: "Rénovation d'une copropriété",
-          text: 'Reprise des fermes, isolation soufflée, nouvelle couverture. Avec en prime, une belle vue.',
+          text: 'Reprise des fermes, isolation soufflée, nouvelle couverture.',
         },
         {
           project: 'surelevation-en-ossature-bois-d-une-maison-a-briancon',
           tag: 'Briançon',
           title: 'Surélévation en ossature bois',
-          text: 'Pignons en ossature bois et panneaux trois plis en épicéa apparents.',
+          text: 'Pignons en ossature bois, panneaux trois plis en épicéa apparents.',
         },
         {
           project: 'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee',
           tag: "L'Argentière-la-Bessée",
-          title: "Rénovation d'une maison avec du bois de réemploi",
-          text: 'Pignon vitré, escalier balancé, bardage en vieux bois et garde-corps de réemploi.',
+          title: 'Une maison rénovée en bois de réemploi',
+          text: 'Pignon vitré, escalier balancé, bardage en vieux bois, garde-corps de réemploi.',
         },
         {
           project: 'escalier-1-4-tournant-en-meleze-lamelle-colle',
           tag: 'Escalier',
-          title: 'Escalier quart tournant en mélèze lamellé-collé',
+          title: 'Escalier quart tournant en mélèze',
           text: "Tracé et taillé à l'atelier, monté en deux jours, finitions comprises.",
         },
       ],
       cta: { label: 'Voir toutes nos réalisations', href: '/realisations/' },
     },
 
-    // Section 10 : zone d'intervention
+    // Votre projet, étape par étape
+    {
+      type: 'steps',
+      variant: 'timeline',
+      tone: 'light',
+      kicker: 'Votre projet, étape par étape',
+      title: 'Chaque projet commence par une **étude sur mesure**',
+      steps: [
+        { title: 'Vous nous contactez', text: 'Par téléphone ou avec le formulaire, même en quelques lignes.' },
+        { title: 'Nous nous rencontrons', text: 'Vos besoins, vos envies, et un calendrier estimatif.' },
+        { title: 'Vous recevez le devis', text: 'Un devis détaillé, adapté à votre projet.' },
+        {
+          title: "Nous préparons à l'atelier",
+          text: "Traçage, taille et assemblage à blanc : un premier montage pour tout vérifier.",
+          image: P.assemblageBlancPrelles,
+        },
+        { title: 'Nous levons et posons', text: 'Levage, pose et finitions sur votre chantier.' },
+      ],
+      cta: { label: 'Demander mon devis', href: '/contact/' },
+    },
+
+    // 3B Récup'
+    {
+      type: 'spotlight',
+      badge: "3B Récup'",
+      kicker: 'Déconstruction et réemploi',
+      title: 'Donner une **seconde vie** au bois des **bâtiments déconstruits**',
+      text: "Nous démontons les bâtiments élément par élément, de la maison au bâtiment industriel. Le bois sain est trié, nettoyé et usiné à l'atelier, puis réemployé sur nos chantiers.\n\nPour les architectes, entreprises, collectivités et particuliers.",
+      steps: [
+        { title: 'Diagnostic', text: 'repérer ce qui peut resservir, en lien avec le diagnostic PEMD.' },
+        { title: 'Stratégie', text: 'une feuille de route pour déposer sans abîmer.' },
+        { title: 'Intervention', text: 'nos charpentiers déposent les éléments sur site.' },
+        { title: 'Transformation', text: "tri, nettoyage et usinage à l'atelier." },
+        { title: 'Repose', text: "notre système constructif s'adapte au bois de réemploi." },
+      ],
+      primary: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
+      links: [
+        { label: 'Diagnostic et gisement (PEMD)', href: '/3b-recup/diagnostic-pemd/' },
+        { label: 'Déconstruction sélective', href: '/3b-recup/deconstruction-selective/' },
+        { label: 'Bois de réemploi', href: '/3b-recup/bois-de-reemploi/' },
+      ],
+      images: [P.bardageVieuxBois, P.gardeCorpsReemploi, P.fermeVieuxBois],
+    },
+
+    // 3B = Bio, Bâti, Bois
+    {
+      type: 'cards',
+      variant: 'letter',
+      columns: 3,
+      tone: 'light',
+      kicker: 'Pourquoi « 3B » ?',
+      title: '**Bio**, **Bâti**, **Bois** : trois mots pour une façon de construire',
+      items: [
+        {
+          letter: 'B',
+          title: 'Bio',
+          eyebrow: 'du grec ancien βίος, la vie',
+          text: 'Des maisons saines, isolées avec des matériaux biosourcés.',
+          image: P.insufflation,
+        },
+        {
+          letter: 'B',
+          title: 'Bâti',
+          eyebrow: "de l'ancien français bastir, assembler",
+          text: "L'art d'assembler : tenons et mortaises chevillés, traits de Jupiter, fermes montées à blanc.",
+          image: P.traitDeJupiter,
+        },
+        {
+          letter: 'B',
+          title: 'Bois',
+          eyebrow: 'un être vivant',
+          text: 'Du mélèze et du sapin des Hautes-Alpes, et du bois de réemploi.',
+          image: P.plancherMeleze,
+        },
+      ],
+    },
+
+    // Zone d'intervention
     {
       type: 'serviceArea',
       tone: 'cream',
       kicker: 'Où nous intervenons',
       title: 'Charpentiers dans le **nord des Hautes-Alpes**, et au-delà',
-      text: "Basés à L'Argentière-la-Bessée, nous intervenons dans les Hautes-Alpes, mais aussi en Provence-Alpes-Côte d'Azur et en Auvergne-Rhône-Alpes.",
+      text: "Basés à L'Argentière-la-Bessée, nous intervenons dans tout le département, en Provence-Alpes-Côte d'Azur et en Auvergne-Rhône-Alpes.",
       sectors: [
         {
           title: 'Charpentier à Briançon',
@@ -265,28 +267,29 @@ export const page: SeedPage = {
         },
         {
           title: 'Charpentier en Vallouise et Pays des Écrins',
-          text: "L'Argentière-la-Bessée, Vallouise, Pelvoux, Champcella, La Roche-de-Rame : notre secteur d'origine.",
+          text: "L'Argentière-la-Bessée, Vallouise, Pelvoux, Champcella, La Roche-de-Rame : notre secteur d'origine.",
           link: { label: 'Nos chantiers en Vallouise', href: '/charpentier-vallouise-pays-des-ecrins/' },
         },
       ],
       showMap: true,
     },
 
-    // Section 11 : FAQ
+    // Questions fréquentes
     {
       type: 'faq',
+      tone: 'light',
       kicker: 'Questions fréquentes',
       title: 'Vos **questions**, nos **réponses**',
       faqs: ['accueil-q1', 'accueil-q2', 'accueil-q3', 'accueil-q4', 'accueil-q5', 'accueil-q6'],
     },
 
-    // Section 12 : appel à l'action final
+    // Appel à l'action final
     {
       type: 'cta',
-      variant: 'band',
+      variant: 'card',
       kicker: 'Votre projet',
-      title: 'Prêt à **transformer** votre **espace** ?',
-      text: 'Chaque projet chez 3B Charpente débute par une étude sur mesure. Racontez-nous votre chantier : nous en parlerons ensemble.',
+      title: 'Prêt à **transformer** votre **maison** ?',
+      text: 'Racontez-nous votre chantier en quelques lignes. Nous venons voir, puis nous vous proposons un devis détaillé.',
       primary: { label: 'Demander mon devis', href: '/contact/' },
       secondary: { label: 'Appeler le {telephone}', href: 'tel' },
     },
@@ -296,44 +299,44 @@ export const page: SeedPage = {
     {
       key: 'accueil-q1',
       topic: 'secteurs',
-      question: 'Dans quelles communes intervenez-vous ?',
+      question: 'Dans quelles communes intervenez-vous ?',
       answer:
-        "3B Charpente est basée à L'Argentière-la-Bessée, dans le nord des Hautes-Alpes. Nous intervenons dans tout le département, notamment à Briançon, à Serre Chevalier, en Vallouise et dans le Pays des Écrins, mais aussi en Provence-Alpes-Côte d'Azur et en Auvergne-Rhône-Alpes. Nous avons par exemple construit un balcon terrasse à Gresse-en-Vercors et une maison à ossature bois dans les monts du Lyonnais.",
+        "Dans tout le département, depuis L'Argentière-la-Bessée : Briançon, Serre Chevalier, Vallouise et le Pays des Écrins. Nous intervenons aussi en Provence-Alpes-Côte d'Azur et en Auvergne-Rhône-Alpes, comme pour un balcon terrasse à Gresse-en-Vercors ou une maison à ossature bois dans les monts du Lyonnais.",
     },
     {
       key: 'accueil-q2',
       topic: 'general',
-      question: 'Quels bois et quels isolants utilisez-vous ?',
+      question: 'Quels bois et quels isolants utilisez-vous ?',
       answer:
-        "Nous utilisons principalement du mélèze et du sapin provenant des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli. Pour l'isolation, nous posons des matériaux biosourcés : ouate de cellulose, panneaux de fibre de bois, laine de chanvre, lin et coton. Nous intégrons aussi dans nos chantiers du bois de réemploi, issu de la déconstruction et retravaillé dans notre atelier.",
+        "Surtout du mélèze et du sapin des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli. Côté isolation, des matériaux biosourcés : ouate de cellulose, fibre de bois, laine de chanvre, lin et coton. Et du bois de réemploi, issu de la déconstruction et retravaillé dans notre atelier.",
     },
     {
       key: 'accueil-q3',
       topic: 'general',
-      question: 'Êtes-vous un artisan RGE pour les aides à la rénovation ?',
+      question: 'Êtes-vous un artisan RGE pour les aides à la rénovation ?',
       answer:
-        "Oui. 3B Charpente est qualifiée RGE (reconnu garant de l'environnement) par Qualibat pour l'isolation des murs et des toitures par l'extérieur, l'isolation par l'intérieur des murs, rampants et plafonds, les fenêtres de toit, ainsi que les fenêtres, volets et portes donnant sur l'extérieur. Cette qualification ouvre l'accès aux aides publiques à la rénovation énergétique, sous conditions. Parlons de votre situation lors de notre rencontre.",
+        "Oui. 3B Charpente est qualifiée RGE (reconnu garant de l'environnement) par Qualibat pour l'isolation des murs et des toitures, par l'extérieur comme par l'intérieur, les fenêtres de toit et les menuiseries extérieures. Cette qualification ouvre l'accès aux aides publiques à la rénovation énergétique, sous conditions : parlons-en lors de notre rencontre.",
     },
     {
       key: 'accueil-q4',
       topic: 'recup',
-      question: "Qu'est-ce que 3B Récup' ?",
+      question: "Qu'est-ce que 3B Récup' ?",
       answer:
-        "3B Récup' est l'initiative de 3B Charpente dédiée au réemploi des matériaux et à la déconstruction sélective. Nous déposons sur site les éléments de structure bois (charpente, solivage, murs à ossature bois), la couverture, l'isolation et les parements. Le bois est trié, nettoyé et usiné dans nos ateliers, puis réemployé sur nos chantiers. Nous travaillons avec des architectes, des entreprises, des collectivités et des particuliers.",
+        "L'activité de 3B Charpente dédiée à la déconstruction sélective et au réemploi. Nous déposons la charpente, le solivage, les murs à ossature bois, la couverture, l'isolation et les parements. Le bois est trié, nettoyé et usiné à l'atelier, puis réemployé sur nos chantiers. Pour les architectes, entreprises, collectivités et particuliers.",
     },
     {
       key: 'accueil-q5',
       topic: 'general',
-      question: 'Combien de temps durent les travaux ?',
+      question: 'Combien de temps durent les travaux ?',
       answer:
-        "Le délai varie selon la complexité et la taille du projet : une charpente neuve, une surélévation ou une isolation complète ne demandent pas la même préparation. Nous vous fournissons un calendrier estimatif dès notre première rencontre. À titre d'exemple, l'escalier quart tournant présenté dans nos réalisations a été monté en deux jours, finitions comprises, après sa préparation à l'atelier.",
+        "Cela dépend de la taille et de la complexité du projet : nous vous donnons un calendrier estimatif dès la première rencontre. À titre d'exemple, l'escalier quart tournant de nos réalisations a été monté en deux jours, finitions comprises, après sa préparation à l'atelier.",
     },
     {
       key: 'accueil-q6',
       topic: 'contact',
-      question: 'Comment obtenir un devis de charpente ?',
+      question: 'Comment obtenir un devis de charpente ?',
       answer:
-        'Contactez-nous par téléphone au 06 34 67 31 49 ou avec le formulaire de contact. Nous discutons de vos besoins lors d\'une rencontre, puis nous vous proposons un devis détaillé, adapté à votre projet. Chaque projet est unique : nous adaptons nos constructions à vos besoins, à vos préférences esthétiques et fonctionnelles.',
+        "Appelez-nous au 06 34 67 31 49 ou écrivez-nous avec le formulaire de contact. Nous parlons de vos besoins lors d'une rencontre, puis nous vous proposons un devis détaillé, adapté à votre projet.",
     },
   ],
 

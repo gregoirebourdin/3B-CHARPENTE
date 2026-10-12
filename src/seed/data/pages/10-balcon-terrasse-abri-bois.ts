@@ -4,8 +4,6 @@
  */
 import type { SeedService } from '../../types'
 
-const md = (...paragraphs: string[]) => paragraphs.join('\n\n')
-
 const HERO_PHOTO =
   'renovation-et-isolation-d-un-chalet-a-vallouise/10. Terrasse en mélèze et ses assemblages traditionnels.JPG'
 const CHAMPCELLA = 'construction-d-une-terrasse-couverte-a-champcella'
@@ -19,8 +17,7 @@ export const service: SeedService = {
   filterKey: 'balcons-terrasses-abris',
   order: 9,
   icon: 'balcony',
-  cardText:
-    "Balcons, terrasses, garde-corps et abris, pensés pour la montagne et l'âme de votre maison.",
+  cardText: 'Balcons, terrasses, garde-corps et abris en mélèze, assemblés comme une charpente.',
   cardLinkLabel: 'Voir balcons et terrasses',
   image: HERO_PHOTO,
   schema: {
@@ -40,51 +37,99 @@ export const service: SeedService = {
     variant: 'photo',
     kicker: 'Balcons · Terrasses · Abris',
     title: 'Balcons, terrasses et **abris en bois** dans les **Hautes-Alpes**',
-    text: "Un balcon à créer ou à agrandir, une terrasse à couvrir, un abri pour la voiture ou le jardin ? 3B Charpente, charpentier à L'Argentière-la-Bessée depuis 2007, conçoit et construit vos ouvrages extérieurs **sur mesure**, avec des **assemblages de charpentier** et du **bois des Hautes-Alpes**, le plus souvent du mélèze.",
+    text: 'Un balcon à créer, une terrasse à couvrir, un abri pour la voiture ou le jardin ? Nous les construisons **sur mesure**, avec des **assemblages de charpentier** et du **bois des Hautes-Alpes**, le plus souvent du mélèze.',
     primaryCta: { label: 'Demander mon devis', href: '/contact/' },
     secondaryCta: {
       label: 'Voir nos réalisations',
       href: '/balcon-terrasse-abri-bois/#realisations',
     },
-    proofs: [{ label: 'Depuis 2007' }, { label: 'Bois des Hautes-Alpes' }],
+    proofs: [
+      { label: 'Depuis 2007', text: "à L'Argentière-la-Bessée", icon: 'calendar' },
+      { label: 'Bois des Hautes-Alpes', text: 'surtout du mélèze', icon: 'tree' },
+      {
+        label: 'Assemblages de charpentier',
+        text: 'tenons et mortaises chevillés',
+        icon: 'hammer',
+      },
+    ],
     images: [HERO_PHOTO],
     caption:
       'Terrasse en mélèze et ses assemblages traditionnels, sur un chalet rénové à Vallouise.',
+    photoTag: 'Vallouise',
+    sheet: [
+      { label: 'Ouvrages', value: 'Balcons, terrasses, garde-corps, abris' },
+      { label: 'Bois', value: 'Mélèze des Hautes-Alpes' },
+      { label: 'Assemblages', value: 'Tenon-mortaise chevillé, tenon passant' },
+    ],
   },
 
-  tldr: "3B Charpente, charpentier installé à L'Argentière-la-Bessée (Hautes-Alpes) depuis 2007, crée sur mesure des balcons, des terrasses couvertes ou ouvertes, des garde-corps, des abris voiture (carports) et des abris de jardin en bois. Nous travaillons le plus souvent le mélèze, avec des assemblages traditionnels comme le tenon-mortaise chevillé, et dessinons chaque ouvrage pour la maison qui le reçoit.",
+  tldr: "3B Charpente, charpentier à L'Argentière-la-Bessée (Hautes-Alpes) depuis 2007, crée sur mesure des balcons, des terrasses couvertes ou ouvertes, des garde-corps, des abris voiture (carports) et des abris de jardin en bois. Le plus souvent en mélèze, avec des assemblages traditionnels comme le tenon-mortaise chevillé.",
 
   layout: [
-    // 3.3 Balcons et garde-corps
+    // Balcons
     {
       type: 'textImage',
       kicker: 'Balcons et garde-corps',
       title: "Des balcons **sur mesure**, à l'âme de votre maison",
-      text: md(
-        "Un balcon se voit de loin : il fait partie de la façade. Nous concevons des balcons sur mesure, pensés pour s'intégrer à l'environnement de montagne et à l'âme de votre habitation, qu'il s'agisse d'un chalet, d'une maison de pays ou d'une construction récente.",
-        "Un balcon en bois, c'est d'abord une structure : des poteaux ou des portiques qui portent, des solives, un plancher, puis un garde-corps. À La Roche-de-Rame, le balcon repose sur des portiques porteurs en mélèze, avec une balustrade en mélèze. À Gresse-en-Vercors, nous avons créé un balcon terrasse, dessiné avant d'être construit. À La Salle-les-Alpes, la réhabilitation d'une ancienne forge comprenait un balcon extérieur.",
-        "**Les garde-corps** peuvent être tout bois, bois et métal, ou en bois de réemploi. À Prelles, une terrasse en mélèze a reçu un garde-corps bois-métal. À L'Argentière-la-Bessée, une maison rénovée a reçu un garde-corps en bois de réemploi. Hauteur et espacements obéissent à des règles de sécurité (norme NF P01-012), à intégrer dès le dessin.",
-        'Un escalier pour accéder au balcon ? [Voir nos escaliers bois sur mesure](/escalier-bois-sur-mesure/)',
-      ),
+      text: "Un balcon se voit de loin : **il fait partie de la façade**. Nous le dessinons pour la montagne et pour votre maison, chalet, maison de pays ou construction récente.\n\nC'est d'abord une structure : poteaux ou portiques, solives, plancher, puis garde-corps.",
+      points: [
+        'À La Roche-de-Rame : portiques porteurs et balustrade en mélèze',
+        "À Gresse-en-Vercors : un balcon terrasse, dessiné avant d'être construit",
+        'À La Salle-les-Alpes : un balcon extérieur pour une ancienne forge réhabilitée',
+      ],
       images: [
         'creation-d-un-balcon-a-la-roche-de-rame/portiques porteurs et balustrade en mélèze.JPG',
         'creation-d-un-balcon-terrasse-a-gresse-en-vercors/de face.JPG',
       ],
       imagePosition: 'right',
       caption: 'Portiques porteurs et balustrade en mélèze, balcon créé à La Roche-de-Rame.',
+      links: [
+        {
+          label: 'Un escalier pour y accéder ? Nos escaliers sur mesure',
+          href: '/escalier-bois-sur-mesure/',
+        },
+      ],
     },
-
-    // 3.4 Terrasses en bois
+    // Garde-corps
+    {
+      type: 'cards',
+      variant: 'icon',
+      columns: 3,
+      tone: 'light',
+      kicker: 'Garde-corps',
+      title: 'Des garde-corps **tout bois, bois-métal ou de réemploi**',
+      intro:
+        'Hauteur et espacements obéissent à des règles de sécurité (norme NF P01-012) : nous les intégrons dès le dessin.',
+      items: [
+        {
+          title: 'Tout bois',
+          icon: 'tree',
+          text: 'Une balustrade en mélèze, comme sur le balcon de La Roche-de-Rame.',
+        },
+        {
+          title: 'Bois et métal',
+          icon: 'shield',
+          text: 'À Prelles, sur une terrasse en mélèze de pays.',
+        },
+        {
+          title: 'Bois de réemploi',
+          icon: 'recycle',
+          text: "À L'Argentière-la-Bessée, sur une maison rénovée.",
+        },
+      ],
+    },
+    // Terrasses
     {
       type: 'textImage',
       kicker: 'Terrasses bois',
       title: 'Terrasses en bois, **couvertes ou à ciel ouvert**',
-      text: md(
-        "Une terrasse en bois prolonge la maison vers l'extérieur. Couverte, elle protège de la neige et du soleil et devient une pièce de plus aux beaux jours. À ciel ouvert, elle profite pleinement de la vue.",
-        'À Champcella, nous avons construit une terrasse couverte avec son local technique ; dans le prolongement de la toiture, un abri protège aussi la voiture. La charpente montre des assemblages à tenon passant, et le plancher est en mélèze de pays.',
-        "À Vallouise, le balcon d'un chalet des années 1980 a été agrandi en terrasse et étanché, avec des assemblages traditionnels en mélèze et un escalier d'accès. À Prelles, la rénovation d'une maison en mélèze de pays comprenait la création d'une terrasse en mélèze et de son garde-corps bois-métal.",
-        "Une terrasse qui couvre une pièce ou un local doit être étanchée, pas seulement posée : c'est un point à prévoir dès l'étude.",
-      ),
+      text: 'Couverte, elle protège de la neige et du soleil, et devient **une pièce de plus** aux beaux jours. À ciel ouvert, elle profite pleinement de la vue.',
+      points: [
+        'À Champcella : terrasse couverte et local technique, tenons passants, plancher en mélèze de pays',
+        "À Vallouise : le balcon d'un chalet des années 1980 agrandi en terrasse, avec escalier d'accès",
+        'À Prelles : une terrasse en mélèze et son garde-corps bois-métal',
+        "Au-dessus d'une pièce ou d'un local, une terrasse s'étanche : à prévoir dès l'étude",
+      ],
       images: [
         `${CHAMPCELLA}/terrasse couverte et local technique.JPG`,
         'renovation-et-isolation-d-un-chalet-a-vallouise/09. Vue de la terrasse.JPG',
@@ -92,94 +137,102 @@ export const service: SeedService = {
       imagePosition: 'left',
       caption: 'Terrasse couverte et local technique à Champcella.',
     },
-
-    // 3.5 Carports et abris de jardin
+    // Carports et abris de jardin
     {
       type: 'cards',
       variant: 'photo',
       columns: 2,
       tone: 'light',
       kicker: 'Abris voiture et abris de jardin',
-      title: 'Carport et abri de jardin : **une vraie charpente**',
+      title: 'Carport et abri de jardin : **une vraie charpente**',
       intro:
-        "Un carport, ou abri voiture, est une toiture posée sur des poteaux, sans murs, qui protège la voiture de la neige et du givre. En montagne, il porte la neige tout l'hiver : sa charpente se dimensionne selon la charge de neige du lieu, qui augmente avec l'altitude.",
+        "Un carport est une toiture sur poteaux, sans murs. En montagne, il porte la neige tout l'hiver : sa charpente se dimensionne selon la charge de neige du lieu.",
       items: [
         {
           title: 'Abri voiture (carport)',
           icon: 'roof',
           image: 'abris-voiture-a-l-argentiere-la-bessee/poinçon et entrait cintré.JPG',
-          text: "À L'Argentière-la-Bessée, l'abri voiture que nous avons construit montre le travail du charpentier : un poinçon (la pièce verticale au centre de la ferme), un entrait cintré (la pièce horizontale du bas, ici courbe) et des assemblages à tenons et mortaises chevillés. À Champcella, l'abri voiture prolonge la toiture de la terrasse couverte.",
+          text: "À L'Argentière-la-Bessée : poinçon, entrait cintré, tenons et mortaises chevillés. À Champcella, l'abri prolonge le toit de la terrasse.",
         },
         {
           title: 'Abri de jardin',
           icon: 'leaf',
           image: 'creation-d-un-abris-de-jardin-a-pelvoux/réalisation terminé.jpg',
-          text: "À Pelvoux, nous avons créé un abri de jardin en bois, levé comme une petite charpente. Ranger les outils, le bois de chauffage ou les vélos : l'abri se dessine selon l'usage, la place disponible et la neige du secteur.",
+          text: "À Pelvoux, levé comme une petite charpente. Outils, bois de chauffage, vélos : il se dessine selon l'usage et la place.",
         },
       ],
     },
     {
-      type: 'richText',
-      boxed: true,
+      type: 'callout',
+      kind: 'tip',
       tone: 'light',
-      content: md(
-        'Selon sa surface et votre commune, un abri voiture ou un abri de jardin demande une déclaration préalable ou un permis de construire. Renseignez-vous en mairie avant de lancer le projet.',
-        '[Notre savoir-faire en charpente traditionnelle](/charpente-bois/)',
-      ),
+      title: 'Avant de construire un abri',
+      text: 'Selon sa surface et votre commune, un abri voiture ou de jardin demande une déclaration préalable ou un permis de construire. Renseignez-vous en mairie avant de lancer le projet.',
+      link: { label: 'Notre savoir-faire en charpente traditionnelle', href: '/charpente-bois/' },
     },
-
-    // 3.6 Bois local et assemblages (section sombre « forêt »)
+    // Bois local et assemblages
     {
       type: 'manifesto',
       layout: 'split',
       kicker: 'Bois local, savoir-faire de charpentier',
       title: 'Du **mélèze des Hautes-Alpes**, assemblé comme une charpente',
-      text: md(
-        "Notre bois est principalement du mélèze et du sapin provenant des Hautes-Alpes, sciés par notre partenaire local, la Scierie Savoldelli. Pour les ouvrages extérieurs, le mélèze revient sur la plupart de nos chantiers : c'est une essence de montagne réputée pour sa bonne durabilité naturelle dehors. Laissé brut, il prend avec le temps une teinte grise argentée.",
-        "Jean-Michel Tardy, fondateur de 3B Charpente, a passé son CAP chez les Compagnons du Devoir, puis fait son Tour de France. Les assemblages traditionnels font partie du métier. Le tenon-mortaise chevillé : le tenon, taillé au bout d'une pièce, entre dans la mortaise creusée dans l'autre, et une cheville en bois traverse le tout. Le tenon passant : le tenon traverse la pièce et reste visible. Ces assemblages donnent aux ouvrages leur solidité et leur caractère.",
-        'Ce qui fait durer un ouvrage extérieur :',
-        [
-          "- des pieds de poteaux décollés du sol, pour que le bois ne reste pas dans l'eau ;",
-          "- des pièces dessinées pour que l'eau s'écoule et que le bois sèche vite ;",
-          '- un plancher ventilé par-dessous ;',
-          '- une couverture ou des débords qui protègent les pièces de structure.',
-        ].join('\n'),
-      ),
+      text: 'Surtout du **mélèze et du sapin des Hautes-Alpes**, sciés par notre partenaire local, la Scierie Savoldelli. Dehors, le mélèze revient sur la plupart de nos chantiers : durable par nature, il grise en argent avec le temps.',
+      items: [
+        {
+          title: 'Tenon-mortaise chevillé',
+          text: "Le tenon, taillé au bout d'une pièce, entre dans la mortaise de l'autre ; une cheville en bois traverse le tout.",
+        },
+        { title: 'Tenon passant', text: 'Le tenon traverse la pièce et reste visible.' },
+      ],
+      emphasis:
+        'Jean-Michel Tardy a passé son CAP chez les Compagnons du Devoir, puis fait son Tour de France : les assemblages, c’est le métier.',
       image: `${CHAMPCELLA}/tenon passant.JPG`,
     },
-
-    // 3.7 Méthode
+    {
+      type: 'list',
+      style: 'checks',
+      kicker: 'Durabilité',
+      title: 'Ce qui fait **durer** un ouvrage extérieur',
+      text: 'Des détails de charpentier, pensés dès le dessin.',
+      items: [
+        { text: "Des pieds de poteaux décollés du sol : le bois ne reste pas dans l'eau" },
+        { text: "Des pièces dessinées pour que l'eau s'écoule et que le bois sèche vite" },
+        { text: 'Un plancher ventilé par-dessous' },
+        { text: 'Une couverture ou des débords qui protègent la structure' },
+      ],
+    },
+    // Méthode
     {
       type: 'steps',
       variant: 'tabs',
+      tone: 'light',
       kicker: 'Notre méthode',
       title: 'Du dessin **au levage**',
       steps: [
         {
           title: 'Visite et prise de cotes',
-          text: "Nous venons voir la maison, la façade, l'accès et l'exposition. Vous nous dites l'usage prévu : profiter de la vue, abriter la voiture, ranger le bois…",
+          text: "Façade, accès, exposition, et l'usage prévu : profiter de la vue, abriter la voiture, ranger le bois…",
         },
         {
           title: 'Dessin et devis',
-          text: "Nous dessinons l'ouvrage et vous proposons une esthétique, comme pour le balcon terrasse de Gresse-en-Vercors. Vous recevez un devis détaillé et un calendrier estimatif.",
+          text: 'Nous dessinons l’ouvrage, comme le balcon terrasse de Gresse-en-Vercors. Devis détaillé et calendrier estimatif.',
           image: 'creation-d-un-balcon-terrasse-a-gresse-en-vercors/dessin.jpg',
         },
         {
           title: 'Préparation',
-          text: 'Une fois le dessin validé, les pièces sont préparées : taille, assemblages, et parfois un assemblage à blanc pour tout vérifier avant le chantier.',
+          text: 'Taille et assemblages, parfois un assemblage à blanc pour tout vérifier avant le chantier.',
         },
         {
           title: 'Levage et pose',
-          text: 'Sur place, nous levons la structure, puis nous posons le plancher, le garde-corps ou la couverture.',
+          text: 'La structure est levée sur place, puis viennent le plancher, le garde-corps ou la couverture.',
         },
         {
           title: 'Finitions',
-          text: "Escalier d'accès, habillages, raccords avec la maison : l'ouvrage est prêt à servir.",
+          text: "Escalier d'accès, habillages, raccords avec la maison : l'ouvrage est prêt à servir.",
         },
       ],
     },
-
-    // 3.8 Réalisations
+    // Réalisations
     {
       type: 'projects',
       mode: 'manual',
@@ -196,7 +249,7 @@ export const service: SeedService = {
         {
           project: 'construction-d-une-terrasse-couverte-a-champcella',
           title: "Construction d'une terrasse couverte à Champcella",
-          text: 'Assemblages à tenon passant, plancher en mélèze de pays, local technique, abri voiture dans le prolongement de la toiture.',
+          text: 'Tenons passants, mélèze de pays, local technique et abri voiture.',
         },
         {
           project: 'abris-voiture-a-l-argentiere-la-bessee',
@@ -222,24 +275,19 @@ export const service: SeedService = {
       ],
       cta: { label: 'Toutes nos réalisations', href: '/realisations/' },
     },
-
-    // 3.9 3B Récup'
+    // 3B Récup'
     {
       type: 'cta',
-      variant: 'card',
-      badge: '3B Récup’',
-      kicker: "3B Récup'",
-      title: 'Un garde-corps **en bois de réemploi** ?',
-      text: "Le bois de déconstruction peut aussi avoir une seconde vie dehors. Sur une maison rénovée à L'Argentière-la-Bessée, nous avons posé un garde-corps en bois de réemploi et un bardage en vieux bois. Avec 3B Récup', notre initiative dédiée au réemploi, ce bois est trié, nettoyé et usiné dans nos ateliers avant d'être reposé.",
+      variant: 'slim',
+      icon: 'recycle',
+      title: 'Un garde-corps **en bois de réemploi** ?',
+      text: "Avec 3B Récup', le bois de déconstruction est trié, nettoyé et usiné à l'atelier, puis reposé dehors : garde-corps, bardage. Voir le [bois de réemploi](/3b-recup/bois-de-reemploi/).",
       primary: { label: "Découvrir 3B Récup'", href: '/3b-recup/' },
-      secondary: { label: 'Le bois de réemploi', href: '/3b-recup/bois-de-reemploi/' },
-      image:
-        'renovation-d-une-maison-d-habitation-a-l-argentiere-la-bessee/08Garde corps en bois de réemploi.JPG',
     },
-
-    // 3.10 FAQ
+    // FAQ
     {
       type: 'faq',
+      tone: 'light',
       kicker: 'Questions fréquentes',
       title: 'Vos questions sur **les ouvrages extérieurs**',
       faqs: [
@@ -251,26 +299,21 @@ export const service: SeedService = {
         'balcon-terrasse-abri-bois-q6',
       ],
     },
-
-    // Prestations proches (pied de contenu, section 5 de la fiche)
+    // Prestations proches
     {
       type: 'servicesGrid',
       mode: 'manual',
       variant: 'compact',
       title: 'Prestations proches',
-      services: ['escalier-bois-sur-mesure', 'charpente-bois'],
+      services: ['escalier-bois-sur-mesure', 'charpente-bois', 'extension-surelevation-bois'],
     },
-
-    // 3.11 Appel à l'action final
+    // Appel à l'action final
     {
       type: 'cta',
       variant: 'card',
       kicker: 'Votre projet',
-      title: 'Prêt à transformer **votre extérieur** ?',
-      text: md(
-        'Chaque projet est unique, et chaque projet chez 3B Charpente débute par une étude sur mesure. Balcon, terrasse, garde-corps ou abri : parlez-nous de votre maison, nous venons la voir et nous vous proposons un devis détaillé.',
-        "*« Construire durablement, c'est construire pour l'avenir. »*",
-      ),
+      title: 'Prêt à transformer **votre extérieur** ?',
+      text: 'Balcon, terrasse, garde-corps ou abri : nous venons voir votre maison, puis nous vous proposons un devis détaillé.',
       primary: { label: 'Demander mon devis', href: '/contact/' },
       secondary: { label: 'Appeler le {telephone}', href: 'tel' },
       showAddress: true,
@@ -281,44 +324,44 @@ export const service: SeedService = {
     {
       key: 'balcon-terrasse-abri-bois-q1',
       topic: 'exterieur',
-      question: 'Quel bois choisir pour une terrasse en montagne ?',
+      question: 'Quel bois choisir pour une terrasse en montagne ?',
       answer:
-        "Pour nos terrasses et balcons, nous utilisons le plus souvent du mélèze : une essence de montagne réputée pour sa durabilité naturelle en extérieur, et disponible près de chez nous. Notre bois provient principalement des Hautes-Alpes et est scié par notre partenaire local. Laissé brut, le mélèze grise avec le temps ; un saturateur permet de garder plus longtemps sa teinte d'origine.",
+        "Le mélèze, le plus souvent : une essence de montagne réputée pour sa durabilité naturelle dehors, qui pousse près de chez nous. Notre bois vient surtout des Hautes-Alpes, scié par notre partenaire local. Laissé brut, le mélèze grise avec le temps ; un saturateur garde plus longtemps sa teinte d'origine.",
     },
     {
       key: 'balcon-terrasse-abri-bois-q2',
       topic: 'exterieur',
-      question: 'Faut-il un permis pour construire un carport en bois ?',
+      question: 'Faut-il un permis pour construire un carport en bois ?',
       answer:
-        "Cela dépend de la surface et des règles de votre commune. Un carport crée de l'emprise au sol : selon sa taille, une déclaration préalable ou un permis de construire est demandé, et le plan local d'urbanisme peut fixer des règles d'aspect ou d'implantation. Renseignez-vous en mairie dès le début du projet, avant de fixer les dimensions de l'abri.",
+        "Cela dépend de la surface et de votre commune. Un carport crée de l'emprise au sol : selon sa taille, une déclaration préalable ou un permis de construire est demandé, et le plan local d'urbanisme peut fixer l'aspect ou l'implantation. Renseignez-vous en mairie avant de fixer les dimensions.",
     },
     {
       key: 'balcon-terrasse-abri-bois-q3',
       topic: 'exterieur',
-      question: 'Quelle hauteur pour un garde-corps de balcon en bois ?',
+      question: 'Quelle hauteur pour un garde-corps de balcon en bois ?',
       answer:
-        "En France, la norme NF P01-012 fixe les dimensions des garde-corps. En règle générale, la hauteur de protection est d'au moins 1 mètre au-dessus du plancher du balcon, et les espacements doivent empêcher un enfant de passer au travers ou d'escalader. Ces règles s'intègrent dès le dessin, que le garde-corps soit en bois, en bois-métal ou en bois de réemploi.",
+        "En règle générale, au moins 1 mètre au-dessus du plancher du balcon, selon la norme NF P01-012. Les espacements doivent empêcher un enfant de passer au travers ou d'escalader. Ces règles s'intègrent dès le dessin, en bois, bois-métal ou bois de réemploi.",
     },
     {
       key: 'balcon-terrasse-abri-bois-q4',
       topic: 'exterieur',
-      question: 'Pouvez-vous agrandir un balcon existant ?',
+      question: 'Pouvez-vous agrandir un balcon existant ?',
       answer:
-        "Oui. Sur un chalet des années 1980 à Vallouise, nous avons agrandi le balcon en terrasse, avec un plancher en mélèze, des assemblages traditionnels et un escalier d'accès ; la terrasse a été étanchée. Avant d'agrandir, il faut vérifier la structure existante et ses appuis : un balcon plus grand porte plus de poids, notamment la neige en hiver.",
+        "Oui. À Vallouise, nous avons agrandi en terrasse le balcon d'un chalet des années 1980 : plancher en mélèze, assemblages traditionnels, escalier d'accès, terrasse étanchée. Avant d'agrandir, on vérifie la structure et ses appuis : un balcon plus grand porte plus de poids, neige comprise.",
     },
     {
       key: 'balcon-terrasse-abri-bois-q5',
       topic: 'exterieur',
-      question: 'Construisez-vous des abris de jardin en bois ?',
+      question: 'Construisez-vous des abris de jardin en bois ?',
       answer:
-        "Oui. À Pelvoux, nous avons créé un abri de jardin en bois, levé comme une petite charpente. Nous construisons aussi des abris voiture, comme à L'Argentière-la-Bessée, avec poinçon, entrait cintré et assemblages à tenons et mortaises chevillés. Chaque abri se dessine sur mesure, selon l'usage, la place disponible et la neige du secteur.",
+        "Oui. À Pelvoux, nous avons créé un abri de jardin levé comme une petite charpente. Nous construisons aussi des abris voiture, comme à L'Argentière-la-Bessée, avec poinçon, entrait cintré et tenons-mortaises chevillés. Chaque abri se dessine selon l'usage, la place et la neige du secteur.",
     },
     {
       key: 'balcon-terrasse-abri-bois-q6',
       topic: 'exterieur',
-      question: 'Combien de temps faut-il pour construire un balcon ou une terrasse ?',
+      question: 'Combien de temps faut-il pour construire un balcon ou une terrasse ?',
       answer:
-        'Le délai peut varier selon la complexité et la taille du projet, la saison et les éventuelles démarches en mairie. Nous vous fournirons un calendrier estimatif lors de notre première rencontre. En montagne, la saison compte : pour une terrasse prête aux beaux jours, mieux vaut nous en parler tôt.',
+        'Le délai varie selon la taille du projet, la saison et les démarches en mairie : nous vous donnons un calendrier estimatif dès la première rencontre. En montagne, la saison compte : pour une terrasse prête aux beaux jours, parlez-nous-en tôt.',
     },
   ],
 
