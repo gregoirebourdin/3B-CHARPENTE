@@ -19,10 +19,10 @@ export function proxy(request: NextRequest) {
   if (!target.endsWith('/')) target = `${target}/`
 
   if (target !== pathname) {
-    const url = request.nextUrl.clone()
-    url.pathname = target
-    url.search = search
-    return NextResponse.redirect(url, 301)
+    // A plain URL, not a clone of nextUrl: Next.js would strip the trailing
+    // slash again when printing it (trailingSlash is off for the admin's sake),
+    // and the page would redirect to itself.
+    return NextResponse.redirect(new URL(`${target}${search}`, request.nextUrl.origin), 301)
   }
 
   const response = NextResponse.next()

@@ -36,8 +36,9 @@ export const Media: CollectionConfig = {
     useAsTitle: 'alt',
     defaultColumns: ['filename', 'alt', 'caption', 'kind', 'updatedAt'],
     listSearchableFields: ['alt', 'caption', 'filename'],
+    components: { views: { list: { Component: '@/payload/admin/views/list/PhotoLibraryView#PhotoLibraryView' } } },
     description:
-      'Toutes les photos du site. Pour remplacer une photo partout, ouvrez-la et déposez la nouvelle version : les pages qui l’utilisent suivent.',
+      'Toutes les photos du site. Pour remplacer une photo partout : ouvrez-la, cliquez sur la croix à droite du fichier et déposez la nouvelle. Les pages qui l’utilisent suivent.',
   },
   access: { read: anyone, create: isTeam, update: isTeam, delete: isTeam },
   upload: {

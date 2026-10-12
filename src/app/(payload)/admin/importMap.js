@@ -11,6 +11,7 @@ import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0
 import { ParagraphFeatureClient as ParagraphFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { EmailCell as EmailCell_206c2b7370dc2af2d6b41dcc7c87a1ac } from '@/payload/admin/components/ContactCell'
 import { ReplyActions as ReplyActions_206c2b7370dc2af2d6b41dcc7c87a1ac } from '@/payload/admin/components/ContactCell'
+import { BlockRowLabel as BlockRowLabel_957edb9058d331c66bc65bc7c33dff47 } from '@/payload/admin/components/BlockRowLabel'
 import { ExplorerNotice as ExplorerNotice_6037e6e625d7e068ef472f1710f335b4 } from '@/payload/admin/components/Notice'
 import { ProofsNotice as ProofsNotice_6037e6e625d7e068ef472f1710f335b4 } from '@/payload/admin/components/Notice'
 import { ReviewsNotice as ReviewsNotice_6037e6e625d7e068ef472f1710f335b4 } from '@/payload/admin/components/Notice'
@@ -22,6 +23,7 @@ import { MetaTitleComponent as MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c08
 import { MetaDescriptionComponent as MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { ContentListView as ContentListView_d351058d3534fe5573a96dce1ffca315 } from '@/payload/admin/views/list/ContentListView'
+import { PhotoLibraryView as PhotoLibraryView_c64f82810f06f622896fcbe0a97e7440 } from '@/payload/admin/views/list/PhotoLibraryView'
 import { AdminNav as AdminNav_05184afed72cf43bcceaeb537700561f } from '@/payload/admin/nav/AdminNav'
 import { Icon as Icon_5b495d5fece06267c23afa6fda6451ee } from '@/payload/admin/components/Brand'
 import { Logo as Logo_5b495d5fece06267c23afa6fda6451ee } from '@/payload/admin/components/Brand'
@@ -50,6 +52,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#ParagraphFeatureClient": ParagraphFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/payload/admin/components/ContactCell#EmailCell": EmailCell_206c2b7370dc2af2d6b41dcc7c87a1ac,
   "@/payload/admin/components/ContactCell#ReplyActions": ReplyActions_206c2b7370dc2af2d6b41dcc7c87a1ac,
+  "@/payload/admin/components/BlockRowLabel#BlockRowLabel": BlockRowLabel_957edb9058d331c66bc65bc7c33dff47,
   "@/payload/admin/components/Notice#ExplorerNotice": ExplorerNotice_6037e6e625d7e068ef472f1710f335b4,
   "@/payload/admin/components/Notice#ProofsNotice": ProofsNotice_6037e6e625d7e068ef472f1710f335b4,
   "@/payload/admin/components/Notice#ReviewsNotice": ReviewsNotice_6037e6e625d7e068ef472f1710f335b4,
@@ -61,6 +64,7 @@ export const importMap = {
   "@payloadcms/plugin-seo/client#MetaDescriptionComponent": MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@/payload/admin/views/list/ContentListView#ContentListView": ContentListView_d351058d3534fe5573a96dce1ffca315,
+  "@/payload/admin/views/list/PhotoLibraryView#PhotoLibraryView": PhotoLibraryView_c64f82810f06f622896fcbe0a97e7440,
   "@/payload/admin/nav/AdminNav#AdminNav": AdminNav_05184afed72cf43bcceaeb537700561f,
   "@/payload/admin/components/Brand#Icon": Icon_5b495d5fece06267c23afa6fda6451ee,
   "@/payload/admin/components/Brand#Logo": Logo_5b495d5fece06267c23afa6fda6451ee,

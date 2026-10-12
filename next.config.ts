@@ -45,7 +45,7 @@ const nextConfig: NextConfig = {
   skipTrailingSlashRedirect: true,
   images: {
     formats: ['image/avif', 'image/webp'],
-    deviceSizes: [480, 640, 960, 1200, 1440, 1920],
+    deviceSizes: [480, 640, 768, 960, 1200, 1440, 1920],
     imageSizes: [64, 128, 256, 384],
     qualities: [70, 75, 82],
     minimumCacheTTL: 60 * 60 * 24 * 365,
@@ -66,4 +66,19 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default withPayload(nextConfig, { devBundleServerPackages: false })
+const config = withPayload(nextConfig, { devBundleServerPackages: false })
+const payloadHeaders = config.headers!
+
+/**
+ * Payload asks every page for the visitor's colour scheme (Accept-CH +
+ * Critical-CH). Critical-CH makes Chrome send the first request twice, about
+ * 600 ms lost on a phone, and Vary splits the CDN cache. Only the admin uses
+ * the hint (the public site follows prefers-color-scheme in CSS), so it stays
+ * there.
+ */
+config.headers = async () =>
+  (await payloadHeaders()).map((rule) =>
+    rule.source === '/:path*' && rule.headers.some((header) => header.key === 'Critical-CH') ? { ...rule, source: '/admin/:path*' } : rule,
+  )
+
+export default config

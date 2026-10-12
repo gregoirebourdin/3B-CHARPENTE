@@ -54,8 +54,18 @@
   }
 }
 
+/* Phones: two columns (a 20-photo chantier stays a short scroll), the first photo full width. */
 @media (max-width: 560px) {
   .grid {
-    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5) var(--space-3);
+  }
+
+  .grid:not([data-count='1']) > .item:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .caption {
+    margin-top: var(--space-2);
+    font-size: 0.8125rem;
   }
 }

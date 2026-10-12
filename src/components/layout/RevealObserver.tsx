@@ -4,23 +4,23 @@ import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 
 /**
- * Fade-up on first display of each block ([data-reveal]). The class that
- * hides blocks is only added by the inline script of the layout, after JS is
- * known to run and only if the visitor accepts motion: without JavaScript,
- * everything is visible.
+ * Fade-up of the blocks ([data-reveal]) as they come into view. Only blocks
+ * still below the screen once the page is running are hidden: what is
+ * already on screen never waits for JavaScript, and without JavaScript (or
+ * with reduced motion) everything is simply visible.
  */
 export function RevealObserver() {
   const pathname = usePathname()
 
   useEffect(() => {
-    const root = document.documentElement
-    if (!root.classList.contains('js-reveal')) return
-    const show = (element: Element) => element.setAttribute('data-revealed', '')
-    const elements = Array.from(document.querySelectorAll('[data-reveal]:not([data-revealed])'))
-    if (!('IntersectionObserver' in window)) {
-      elements.forEach(show)
-      return
-    }
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const show = (element: Element) => element.removeAttribute('data-reveal-pending')
+    const below = Array.from(document.querySelectorAll('[data-reveal]')).filter(
+      (element) => element.getBoundingClientRect().top > window.innerHeight,
+    )
+    if (!below.length) return
+    below.forEach((element) => element.setAttribute('data-reveal-pending', ''))
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -32,12 +32,13 @@ export function RevealObserver() {
       },
       { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
     )
-    elements.forEach((element) => observer.observe(element))
-    const revealAll = () => document.querySelectorAll('[data-reveal]').forEach(show)
-    window.addEventListener('beforeprint', revealAll)
+    below.forEach((element) => observer.observe(element))
+    const showAll = () => below.forEach(show)
+    window.addEventListener('beforeprint', showAll)
     return () => {
       observer.disconnect()
-      window.removeEventListener('beforeprint', revealAll)
+      window.removeEventListener('beforeprint', showAll)
+      showAll()
     }
   }, [pathname])
 

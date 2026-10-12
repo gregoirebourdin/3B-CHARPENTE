@@ -29,7 +29,7 @@ export const heroField: Field = {
       ],
       admin: {
         description:
-          'Carte du secteur : les communes rattachées à cette page (collection « Communes ») et deux de leurs chantiers, posés sur le relief.',
+          'Changer de disposition ne fait rien perdre : textes et photos restent. « Carte du secteur » montre les communes rattachées à cette page et deux de leurs chantiers.',
       },
     },
     {

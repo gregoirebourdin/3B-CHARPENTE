@@ -164,7 +164,7 @@ export function howTo(name: string, path: string, steps: { title: string; text: 
       '@type': 'HowToStep',
       position: index + 1,
       name: step.title,
-      text: richTextToPlain(step.text as never) || step.title,
+      text: richTextToPlain(step.text as never, { skipLinkParagraphs: true }) || step.title,
     })),
   }
 }

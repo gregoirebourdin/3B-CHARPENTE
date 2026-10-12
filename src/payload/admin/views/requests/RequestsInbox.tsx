@@ -42,6 +42,28 @@ const STATUS: Record<InboxRequest['status'], { label: string; variant: 'new' | '
 const IMAGE = /\.(jpe?g|png|webp|avif|gif|heic)(\?|$)/i
 const SKIP_FACTS = ['nom', 'prénom', 'e-mail', 'email', 'téléphone', 'commune']
 
+/**
+ * The form speaks to the visitor (« Votre message », « Vous êtes »); the
+ * inbox speaks about the visitor. Questions (« Avez-vous des plans ? ») read
+ * well as they are.
+ */
+const AS_ADMIN: [RegExp, string][] = [
+  [/^vous êtes\b.*/i, 'Profil'],
+  [/^votre message\b.*/i, 'Message'],
+  [/^votre projet\b.*/i, 'Projet'],
+  [/^vos /i, ''],
+  [/^votre /i, ''],
+]
+const adminLabel = (label: string) => {
+  const plain = label.replace(/\s*\([^)]*\)\s*$/, '').trim()
+  for (const [pattern, replacement] of AS_ADMIN) {
+    if (!pattern.test(plain)) continue
+    const result = plain.replace(pattern, replacement).trim()
+    return result.charAt(0).toUpperCase() + result.slice(1)
+  }
+  return plain
+}
+
 const tel = (phone: string) => `tel:${phone.replace(/[^\d+]/g, '').replace(/^0(\d{9})$/, '+33$1')}`
 
 async function patch(id: number, data: Partial<Pick<InboxRequest, 'status' | 'notes'>>) {
@@ -271,7 +293,7 @@ function RequestDetail({
     day: 'numeric',
     month: 'long',
     year: 'numeric',
-    hour: '2-digit',
+    hour: 'numeric',
     minute: '2-digit',
     timeZone: 'Europe/Paris',
   })
@@ -318,7 +340,7 @@ function RequestDetail({
         <div className="tw:grid tw:content-start tw:gap-5">
           {message ? (
             <figure className="tw:m-0 tw:grid tw:gap-2">
-              <figcaption className="tw:text-sm tw:font-semibold tw:text-stone-text">{message.label}</figcaption>
+              <figcaption className="tw:text-sm tw:font-semibold tw:text-stone-text">{adminLabel(message.label)}</figcaption>
               <blockquote className="tw:m-0 tw:rounded-r-xs tw:border-0 tw:border-l-[3px] tw:border-solid tw:border-sage tw:bg-surface tw:px-4 tw:py-3.5 tw:text-base tw:leading-relaxed tw:whitespace-pre-line tw:break-words">
                 {message.value}
               </blockquote>
@@ -385,7 +407,7 @@ function RequestDetail({
           {request.email ? <Fact label="E-mail" value={<a href={`mailto:${request.email}`} className="tw:font-semibold tw:break-all tw:text-leaf">{request.email}</a>} /> : null}
           {request.commune ? <Fact label="Commune" value={request.commune} /> : null}
           {facts.map((row, index) => (
-            <Fact key={`${row.label}-${index}`} label={row.label} value={row.value} />
+            <Fact key={`${row.label}-${index}`} label={adminLabel(row.label)} value={row.value} />
           ))}
           {request.sourcePage ? <Fact label="Envoyée depuis" value={request.sourcePage} /> : null}
         </dl>

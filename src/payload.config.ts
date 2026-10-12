@@ -30,6 +30,8 @@ import { Analytics, Footer, Header, Proofs, SeoSettings } from './payload/global
 import { SiteTextsGlobal } from './payload/globals/SiteTexts'
 import { revalidateHooks } from './payload/hooks/revalidate'
 import { blobStorage } from './payload/storage/blobStorage'
+import { redirectDestinationField } from './payload/fields/redirectDestination'
+import { hideApiTab } from './payload/utilities/hideApiTab'
 import { orderAdminNav } from './payload/utilities/orderAdminNav'
 import { LINKABLE_COLLECTIONS } from './payload/utilities/routes'
 
@@ -72,6 +74,12 @@ export default buildConfig({
           uploadNewLabel: 'Envoyer : {{label}}',
         },
         general: {
+          // Payload prints "label:" + value; a non-breaking space before the colon is the French rule.
+          created: 'Création\u00a0',
+          lastModified: 'Dernière modification\u00a0',
+          perPage: 'Par page\u00a0: {{limit}}',
+          save: 'Enregistrer',
+          saveChanges: 'Enregistrer les modifications',
           createNew: 'Ajouter',
           createNewLabel: 'Ajouter : {{label}}',
           creatingNewLabel: 'Nouveau : {{label}}',
@@ -80,8 +88,18 @@ export default buildConfig({
           deletedSuccessfully: 'Supprimé.',
         },
         version: {
+          status: 'Statut\u00a0',
+          versionID: 'Numéro',
           draftSavedSuccessfully: 'Brouillon enregistré. Il n’est pas encore sur le site.',
           autosavedSuccessfully: 'Brouillon enregistré automatiquement.',
+        },
+        'plugin-redirects': {
+          fromUrl: 'Ancienne adresse',
+          toUrlType: 'Rediriger vers',
+          internalLink: 'Une page du site',
+          customUrl: 'Une adresse précise',
+          documentToRedirect: 'Page du site',
+          redirectType: 'Type',
         },
       },
     },
@@ -140,27 +158,47 @@ export default buildConfig({
     redirectsPlugin({
       collections: [...LINKABLE_COLLECTIONS],
       redirectTypes: ['301', '302'],
-      redirectTypeFieldOverride: { label: 'Type', defaultValue: '301' },
+      redirectTypeFieldOverride: {
+        label: 'Type',
+        defaultValue: '301',
+        options: [
+          { label: 'Définitive (301), le cas habituel', value: '301' },
+          { label: 'Temporaire (302)', value: '302' },
+        ],
+      },
       overrides: {
         labels: { singular: 'Redirection', plural: 'Redirections' },
         admin: {
           group: 'Référencement',
-          defaultColumns: ['from', 'to', 'type', 'updatedAt'],
+          useAsTitle: 'from',
+          defaultColumns: ['from', 'destination', 'type', 'updatedAt'],
           description:
             'Quand une adresse change, l’ancienne redirige vers la nouvelle (301). Les redirections sont créées automatiquement quand vous modifiez l’adresse d’une page publiée.',
         },
         access: { read: () => true, create: isTeam, update: isTeam, delete: isTeam },
         hooks: revalidateHooks,
         fields: ({ defaultFields }) =>
-          defaultFields.map((field) =>
-            'name' in field && field.name === 'from'
-              ? ({
-                  ...field,
-                  label: 'Ancienne adresse',
-                  admin: { description: 'Le chemin seul, ex. : /galerie/abris-voiture' },
-                } as Field)
-              : field,
-          ),
+          defaultFields.map((field) => {
+            if (!('name' in field)) return field
+            if (field.name === 'from') {
+              return { ...field, label: 'Ancienne adresse', admin: { description: 'Le chemin seul, ex. : /galerie/abris-voiture' } } as Field
+            }
+            if (field.name === 'to' && field.type === 'group') {
+              return {
+                ...field,
+                fields: field.fields.map((sub) =>
+                  'name' in sub && sub.name === 'url'
+                    ? ({
+                        ...sub,
+                        label: 'Nouvelle adresse',
+                        admin: { ...sub.admin, description: 'Ex. : /contact/ ou /mentions-legales/#confidentialite' },
+                      } as Field)
+                    : sub,
+                ),
+              } as Field
+            }
+            return field
+          }).concat(redirectDestinationField),
       },
     }),
     formBuilderPlugin(formBuilderConfig),
@@ -178,5 +216,6 @@ export default buildConfig({
       'Suivi',
       'Administration',
     ]),
+    hideApiTab,
   ],
 })

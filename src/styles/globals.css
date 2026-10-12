@@ -251,17 +251,17 @@ main {
 }
 
 /* ---------- Reveal on scroll ----------
- * Content is always visible in the HTML. Only when JavaScript runs and the
- * visitor accepts motion does the class "js-reveal" on <html> enable the
- * fade-up, and an IntersectionObserver marks blocks as they enter the screen.
+ * Content is always visible in the HTML. Once the page runs, RevealObserver
+ * hides only the blocks still below the screen (data-reveal-pending) and
+ * fades each one in as it arrives. Hiding is instant, showing is animated.
  */
 @media (prefers-reduced-motion: no-preference) {
-  .js-reveal [data-reveal]:not([data-revealed]) {
-    opacity: 0.001;
+  [data-reveal][data-reveal-pending] {
+    opacity: 0;
     transform: translateY(var(--reveal-distance));
   }
 
-  .js-reveal [data-reveal] {
+  [data-reveal]:not([data-reveal-pending]) {
     transition:
       opacity var(--dur-reveal) var(--ease-out),
       transform var(--dur-reveal) var(--ease-out);

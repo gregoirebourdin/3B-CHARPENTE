@@ -12,18 +12,25 @@ export type RichTextValue = { root?: LexicalNode } | null | undefined
 
 const BLOCK_TYPES = new Set(['paragraph', 'heading', 'listitem', 'quote', 'list'])
 
-function collect(node: LexicalNode | undefined, out: string[]): void {
+/** A paragraph made only of a link (« Le bois de réemploi → »): navigation, not content. */
+const isLinkParagraph = (node: LexicalNode) =>
+  node.type === 'paragraph' &&
+  Boolean(node.children?.length) &&
+  node.children!.every((child) => child.type === 'link' || child.type === 'autolink' || (typeof child.text === 'string' && !child.text.trim()))
+
+function collect(node: LexicalNode | undefined, out: string[], skipLinks = false): void {
   if (!node) return
+  if (skipLinks && isLinkParagraph(node)) return
   if (typeof node.text === 'string') out.push(node.text)
   if (node.type === 'linebreak') out.push('\n')
-  node.children?.forEach((child) => collect(child, out))
+  node.children?.forEach((child) => collect(child, out, skipLinks))
   if (node.type && BLOCK_TYPES.has(node.type)) out.push('\n')
 }
 
-export function richTextToPlain(value: RichTextValue): string {
+export function richTextToPlain(value: RichTextValue, options: { skipLinkParagraphs?: boolean } = {}): string {
   if (!value?.root) return ''
   const out: string[] = []
-  collect(value.root, out)
+  collect(value.root, out, options.skipLinkParagraphs ?? false)
   return out
     .join('')
     .replace(/[ \t]+\n/g, '\n')

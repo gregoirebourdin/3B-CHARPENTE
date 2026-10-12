@@ -1,7 +1,6 @@
 import '@/styles/globals.css'
 
 import type { Metadata, Viewport } from 'next'
-import Script from 'next/script'
 import type { ReactNode } from 'react'
 
 import { Analytics } from '@/components/layout/Analytics'
@@ -47,9 +46,6 @@ export const viewport: Viewport = {
   ],
 }
 
-/** Set before first paint: enables JS-only enhancements without any flash. */
-const BOOT = `(function(d){d.classList.add('js');if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver'in window)d.classList.add('js-reveal')})(document.documentElement)`
-
 export default async function SiteLayout({ children }: { children: ReactNode }) {
   const [company, settings, communes, analytics, draft] = await Promise.all([
     getCompany(),
@@ -62,9 +58,6 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
   return (
     <html lang="fr" className={`${nohemi.variable} ${inter.variable}`} suppressHydrationWarning>
       <body>
-        <Script id="boot" strategy="beforeInteractive">
-          {BOOT}
-        </Script>
         <a href="#contenu" className="skip-link">
           Aller au contenu
         </a>
@@ -73,7 +66,8 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
         <SiteFooter />
         <RevealObserver />
         <Analytics
-          provider={analytics.provider}
+          // Vercel Web Analytics only exists on Vercel: elsewhere (local build) its script would be a 404.
+          provider={analytics.provider === 'vercel' && !process.env.VERCEL ? 'none' : analytics.provider}
           plausibleDomain={analytics.plausibleDomain}
           umamiWebsiteId={analytics.umamiWebsiteId}
           umamiScriptUrl={analytics.umamiScriptUrl}

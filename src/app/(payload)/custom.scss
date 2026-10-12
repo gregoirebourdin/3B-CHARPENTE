@@ -715,3 +715,21 @@ html[data-theme='dark'] .tb-brand-logo__dark {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* Section header in the page builder: number, kind, then the section's own title. */
+.tb-block-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  max-width: 100%;
+
+  &__title {
+    min-width: 0;
+    overflow: hidden;
+    color: var(--c-ink);
+    font-weight: 550;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

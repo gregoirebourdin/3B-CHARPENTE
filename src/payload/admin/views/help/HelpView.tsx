@@ -97,7 +97,9 @@ const GUIDES: Guide[] = [
       <>
         Dans le menu, ouvrez <strong>Photos</strong> et cherchez la photo par son nom ou sa description.
       </>,
-      <>Ouvrez-la et déposez la nouvelle version à la place de l’ancienne.</>,
+      <>
+        Ouvrez-la, cliquez sur la <strong>croix</strong> à droite du fichier, puis déposez la nouvelle photo.
+      </>,
       <>Vérifiez la description de la photo : elle sert aux personnes aveugles et à Google.</>,
       <>
         Cliquez sur <strong>Enregistrer</strong>. Les pages qui utilisent cette photo suivent.

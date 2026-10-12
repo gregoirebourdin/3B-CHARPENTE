@@ -52,9 +52,17 @@ const DB_NAMES: Record<string, string> = {
 }
 
 // Prefixed by the parent table (pages, services, articles…) so collections never share a table.
+// Each section is labelled with its own title in the admin (BlockRowLabel), not « Sans titre ».
 const withDbName = (block: Block): Block => {
   const short = DB_NAMES[block.slug] ?? block.slug
-  return { ...block, dbName: ({ tableName }) => (tableName ? `${tableName}_${short}` : short) }
+  return {
+    ...block,
+    dbName: ({ tableName }) => (tableName ? `${tableName}_${short}` : short),
+    admin: {
+      ...block.admin,
+      components: { ...block.admin?.components, Label: '@/payload/admin/components/BlockRowLabel#BlockRowLabel' },
+    },
+  }
 }
 
 /**

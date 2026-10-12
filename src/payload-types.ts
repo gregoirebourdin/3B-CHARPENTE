@@ -441,7 +441,7 @@ export interface Page {
   breadcrumbLabel?: string | null;
   hero: {
     /**
-     * Carte du secteur : les communes rattachées à cette page (collection « Communes ») et deux de leurs chantiers, posés sur le relief.
+     * Changer de disposition ne fait rien perdre : textes et photos restent. « Carte du secteur » montre les communes rattachées à cette page et deux de leurs chantiers.
      */
     variant?: ('collage' | 'photo' | 'map' | 'simple') | null;
     tone?: ('cream' | 'forest') | null;
@@ -743,7 +743,7 @@ export interface Service {
   };
   hero: {
     /**
-     * Carte du secteur : les communes rattachées à cette page (collection « Communes ») et deux de leurs chantiers, posés sur le relief.
+     * Changer de disposition ne fait rien perdre : textes et photos restent. « Carte du secteur » montre les communes rattachées à cette page et deux de leurs chantiers.
      */
     variant?: ('collage' | 'photo' | 'map' | 'simple') | null;
     tone?: ('cream' | 'forest') | null;
@@ -951,7 +951,7 @@ export interface Service {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * Toutes les photos du site. Pour remplacer une photo partout, ouvrez-la et déposez la nouvelle version : les pages qui l’utilisent suivent.
+ * Toutes les photos du site. Pour remplacer une photo partout : ouvrez-la, cliquez sur la croix à droite du fichier et déposez la nouvelle. Les pages qui l’utilisent suivent.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
@@ -2807,9 +2807,16 @@ export interface Redirect {
           relationTo: 'articles';
           value: number | Article;
         } | null);
+    /**
+     * Ex. : /contact/ ou /mentions-legales/#confidentialite
+     */
     url?: string | null;
   };
   type: '301' | '302';
+  /**
+   * Calculée à partir du choix « Rediriger vers ».
+   */
+  destination?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -4217,6 +4224,7 @@ export interface RedirectsSelect<T extends boolean = true> {
         url?: T;
       };
   type?: T;
+  destination?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -1,6 +1,5 @@
 'use client'
 
-import { uploadPresigned } from '@vercel/blob/client'
 import { usePathname } from 'next/navigation'
 import { useEffect, useId, useMemo, useRef, useState, useSyncExternalStore, type FormEvent, type ReactNode } from 'react'
 
@@ -122,6 +121,8 @@ export function ContactFormClient({
       setFiles((current) => [...current, { id, name: file.name, status: 'uploading' }])
       try {
         const safeName = file.name.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\w.-]+/g, '-')
+        // The upload library (~27 kB) only loads when a visitor actually attaches a file.
+        const { uploadPresigned } = await import('@vercel/blob/client')
         const blob = await uploadPresigned(`demandes/${safeName}`, file, {
           access: 'public',
           contentType: file.type || undefined,

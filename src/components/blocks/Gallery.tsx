@@ -35,7 +35,12 @@ export function PhotoGrid({ items, id }: { items: GalleryItem[]; id: string }) {
                 >
                   <Media
                     media={image}
-                    sizes={items.length === 1 ? '(min-width: 1100px) 980px, 92vw' : '(min-width: 1100px) 380px, (min-width: 700px) 45vw, 92vw'}
+                    sizes={
+                      items.length === 1
+                        ? '(min-width: 1100px) 980px, 92vw'
+                        : // On phones the first photo spans both columns (Gallery.module.css).
+                          `(min-width: 1100px) 380px, (min-width: 561px) 45vw, ${index === 0 ? '92vw' : '46vw'}`
+                    }
                   />
                   <span className="visually-hidden">Agrandir la photo</span>
                 </a>

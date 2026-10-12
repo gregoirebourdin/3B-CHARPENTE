@@ -137,7 +137,7 @@ export async function DashboardView({ payload, user }: Props) {
             collection: 'validation-points',
             where: { and: [{ status: { equals: 'open' } }, { priority: { equals: 'high' } }] },
             sort: 'createdAt',
-            limit: 2,
+            limit: 6,
             depth: 0,
             ...scoped,
             select: { question: true, page: true } as never,
@@ -154,6 +154,8 @@ export async function DashboardView({ payload, user }: Props) {
     recentChanges(payload, user),
   ])
   const [projects = 0, services = 0, articles = 0, photos = 0] = counts
+  // On a computer the card is as tall as the right column: points to confirm fill what the requests leave.
+  const shownPoints = points.slice(0, Math.max(2, 8 - 2 * Math.max(requests.length, 1)))
   const rawName = ((user as { name?: string | null } | null)?.name ?? '').trim()
   const firstName = GENERIC_NAMES.has(rawName.toLowerCase()) ? '' : rawName.split(' ')[0]
   const stats = [
@@ -251,10 +253,10 @@ export async function DashboardView({ payload, user }: Props) {
               />
             </div>
           )}
-          {points.length ? (
+          {shownPoints.length ? (
             <ul className="tw:m-0 tw:list-none tw:p-0">
-              {points.map((point) => (
-                <li key={point.id} className="tw:border-0 tw:border-b tw:border-solid tw:border-line">
+              {shownPoints.map((point, index) => (
+                <li key={point.id} className={cn('tw:border-0 tw:border-b tw:border-solid tw:border-line', index > 1 && 'tw:max-desk:hidden')}>
                   <Link
                     href={`/admin/collections/validation-points/${point.id}`}
                     className={cn(
